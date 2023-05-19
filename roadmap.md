@@ -1,7 +1,15 @@
 # Roadmap
 
+# Roadmap
+
+## Feature Roadmaps
+- [Login/Sign up Feature](docs/login_signup_roadmap.md)
+- [Objective Management Feature](docs/objective_management_roadmap.md)
+- [AI Integration Feature](docs/ai_integration_roadmap.md)
+- [Notifications Feature](docs/notifications_roadmap.md)
+
 ## Phase 1: Foundation
-- [ ] Set up Symfony project structure and dependencies
+- [x] Set up Symfony project structure and dependencies
 - [ ] Implement user authentication and authorization
 - [ ] Design and create database schema
 - [ ] Create basic CRUD functionality for objectives
