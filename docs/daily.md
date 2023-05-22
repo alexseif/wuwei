@@ -21,3 +21,27 @@
 - 9:00 pm - 10:00 pm: **Ayurveda**: Vata period - Wind down with relaxation techniques or gentle yoga
 - 10:00 pm - 6:00 am: **Egyptian**: Time of Rest - Ensure a restful sleep for rejuvenation
 
+---
+# Daily Schedule
+
+## Morning (6:00 AM - 12:00 PM)
+- **6:00 AM - 8:00 AM**: Wake up, morning rituals, and self-care
+- **8:00 AM - 9:00 AM**: Breakfast and nourishment
+- **9:00 AM - 12:00 PM**: Solid work and focused tasks
+
+## Afternoon (12:00 PM - 6:00 PM)
+- **12:00 PM - 1:00 PM**: Lunch and rejuvenation
+- **1:00 PM - 3:00 PM**: Collaborative work and meetings
+- **3:00 PM - 6:00 PM**: Creative tasks and skill-building
+
+## Evening (6:00 PM - 10:00 PM)
+- **6:00 PM - 7:00 PM**: Personal time and relaxation
+- **7:00 PM - 8:00 PM**: Dinner and socializing
+- **8:00 PM - 10:00 PM**: Reflective activities, hobbies, and winding down
+
+## Night (10:00 PM - 6:00 AM)
+- **10:00 PM - 11:00 PM**: Preparation for restful sleep
+- **11:00 PM - 6:00 AM**: Rest and rejuvenation
+
+Please note that this daily schedule is a general guideline and can be adjusted to suit your personal preferences, work hours, and lifestyle. Feel free to modify the timings and activities to align with your specific needs and cultural context.
+
