@@ -1,10 +1,10 @@
-# Task Management App Roadmap
+# Task Management Feature Roadmap
 
 ## Phase 1: Project Setup and Foundation
 
-- [ ] Set up Symfony project structure and environment
-- [ ] Create database schema for tasks and categories
-- [ ] Implement user authentication and authorization
+- [x] Set up Symfony project structure and environment
+- [x] Create database schema for tasks and categories
+- [x] Implement user authentication and authorization
 - [ ] Design the user interface wireframes
 
 ## Phase 2: Core Functionality
