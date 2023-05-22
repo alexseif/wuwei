@@ -1,7 +1,7 @@
 # Login/Sign up Feature Roadmap
 
 ## Phase 1: User Authentication
-- [ ] Design and create user authentication system
+- [x] Design and create user authentication system
 - [ ] Implement login functionality
 - [ ] Create user registration and sign-up process
 - [ ] Set up password encryption and security measures
@@ -33,4 +33,3 @@
 - [ ] Document the login and sign-up process
 - [ ] Provide instructions for users to create and manage their accounts
 - [ ] Update the overall project documentation
-
