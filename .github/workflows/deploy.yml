@@ -10,19 +10,5 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.1'
-
-      - name: Install Composer dependencies
-        run: composer install --no-dev --optimize-autoloader
-
-      - name: Clear cache
-        run: php bin/console cache:clear
-
-      - name: Run Doctrine migrations
-        run: php bin/console doctrine:migrations:migrate
+      - name: Deploy to droplet
+          run: ssh devops@139.59.152.188  "cd /var/www/wuwei && git pull origin master && php8.1 /usr/local/bin/composer  install --no-dev --optimize-autoloader && php8.1 bin/console cache:clear --env=prod && php8.1 bin/console doctrine:migrations:migrate --no-interaction"
