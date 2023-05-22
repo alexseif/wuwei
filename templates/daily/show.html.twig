@@ -1,0 +1,20 @@
+{# templates/daily/show.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Daily Schedule</h1>
+
+    <ul>
+        {% for section, items in schedule %}
+            <li>
+                <h2>{{ section }}</h2>
+                <ul>
+                    {% for time, activity in items %}
+                        <li>{{ time }}: {{ activity }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
