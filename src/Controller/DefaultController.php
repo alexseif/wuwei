@@ -3,29 +3,27 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/daily', name: 'app_daily_')]
-class DailyController extends AbstractController
+class DefaultController extends AbstractController
 {
 
-    #[Route('/', name: 'index')]
+    #[Route('/', name: 'app_default')]
     public function index(): Response
     {
-        return $this->render('daily/index.html.twig', [
-          'controller_name' => 'DailyController',
-        ]);
+        return $this->render('default/index.html.twig');
     }
 
-    #[Route('/show', name: 'show')]
-    public function showDaily(): Response
+    #[Route('/daily', name: 'app_daily')]
+    public function daily(): Response
     {
         $dailySchedule = $this->generateDailySchedule();
 
         //        $dailyContent = file_get_contents(__DIR__ . '/../../docs/daily.md');
         //        dump($dailyContent);
-        return $this->render('daily/show.html.twig', [
+        return $this->render('default/daily.html.twig', [
           'schedule' => $dailySchedule,
         ]);
     }
@@ -55,6 +53,16 @@ class DailyController extends AbstractController
             '10:00 pm - 6:00 am' => 'Egyptian: Time of Rest - Ensure a restful sleep for rejuvenation',
           ],
         ];
+    }
+
+
+    #[Route('/weekly', name: 'app_weekly')]
+    public function weekly(): Response
+    {
+        $weeklyContent = file_get_contents(__DIR__ . '/../../docs/weekly.md');
+        return $this->render('default/weekly.html.twig', [
+          'schedule' => $weeklyContent,
+        ]);
     }
 
 }
