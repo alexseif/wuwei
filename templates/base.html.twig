@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
@@ -15,16 +15,17 @@
     {% endblock %}
 </head>
 <body>
-{% block nav %}
-    <div>
-        <a href="{{ path('app_default') }}">Default</a>
-        <a href="{{ path('mobizel_markdown_docs_main_index') }}">Docs</a>
-    </div>
-    <hr/>
-{% endblock %}
-{% block body %}
-    {% block content %}
+<header class="bg-dark">
+    {% block nav %}
+        {% include '_navbar.html.twig' %}
     {% endblock %}
+</header>
+{% block page %}
+    <div class="container">
+        {% block body %}
+        {% endblock %}
+    </div>
+
 {% endblock %}
 </body>
 </html>
