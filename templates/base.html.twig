@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
@@ -18,12 +18,14 @@
 <header class="bg-dark">
     {% block nav %}
         {% include '_navbar.html.twig' %}
-        <hr/>
     {% endblock %}
 </header>
-{% block body %}
-    {% block content %}
-    {% endblock %}
+{% block page %}
+    <div class="container">
+        {% block body %}
+        {% endblock %}
+    </div>
+
 {% endblock %}
 </body>
 </html>

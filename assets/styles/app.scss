@@ -1,11 +1,19 @@
-
+// Required
+@import "bootstrap/scss/functions";
 @import "variables";
+// Required
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/root";
 @import '~bootstrap/scss/bootstrap';
 //@import "~bootstrap-dark/src/bootstrap-dark";
 
 // Import Font Awesome CSS
 @import '~@fortawesome/fontawesome-free/css/all.css';
 
-body {
-    color: #fff;
+header{
+  border-bottom: 1px solid #fff;
+  margin-bottom: 1.5rem;
 }
