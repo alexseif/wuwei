@@ -15,13 +15,12 @@
     {% endblock %}
 </head>
 <body>
-{% block nav %}
-    <div>
-        <a href="{{ path('app_default') }}">Default</a>
-        <a href="{{ path('mobizel_markdown_docs_main_index') }}">Docs</a>
-    </div>
-    <hr/>
-{% endblock %}
+<header class="bg-dark">
+    {% block nav %}
+        {% include '_navbar.html.twig' %}
+        <hr/>
+    {% endblock %}
+</header>
 {% block body %}
     {% block content %}
     {% endblock %}
