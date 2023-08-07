@@ -25,6 +25,7 @@ public function findAllWithItems(){
         return $this->createQueryBuilder('il')
           ->select('il, i')
           ->innerJoin('il.items', 'i')
+          ->where('il.id <> 4')
           ->getQuery()
           ->getResult();
 }

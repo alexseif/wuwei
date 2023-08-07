@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="row">
+    <div class="row align-items-stretch">
         <div class="col">
             {% for itemList in itemLists %}
                 <div>
@@ -18,7 +18,7 @@
             {% endfor %}
         </div>
         <div class="col">
-            <div class="card">
+            <div class="card h-100">
                 {% if lastDay %}
                     <div class="card-header"><h2>{{ lastDay.name }}</h2></div>
                     <div class="card-body">
@@ -29,7 +29,7 @@
                         </ul>
                     </div>
                 {% endif %}
-                <div class="card-footer">
+                <div class="card-footer d-flex justify-content-between">
                     <a href="{{ path('create_daily') }}">Generate new day</a>
                     <a href="{{ path('choose_items', {'id' : lastDay.id}) }}">Migrate to this day</a>
                 </div>
