@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ItemRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+// TODO: document items
 #[ORM\Entity(repositoryClass: ItemRepository::class)]
 class Item
 {
@@ -20,6 +21,9 @@ class Item
     #[ORM\ManyToOne(inversedBy: 'items')]
     #[ORM\JoinColumn(nullable: false)]
     private ?ItemList $list = null;
+
+    #[ORM\ManyToOne(inversedBy: 'items')]
+    private ?Daily $daily = null;
 
     public function getId(): ?int
     {
@@ -53,6 +57,18 @@ class Item
     public function __toString(): string
     {
         return $this->name;
+    }
+
+    public function getDaily(): ?Daily
+    {
+        return $this->daily;
+    }
+
+    public function setDaily(?Daily $daily): static
+    {
+        $this->daily = $daily;
+
+        return $this;
     }
 
 

@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+{# templates/daily/choose_items.html.twig #}
+
+{% block title %}
+    Choose Items to Migrate to {{ daily.name }}
+{% endblock %}
+
+{% block body %}
+    {# TODO: make into a form #}
+    <form action="{{ path('migrate_items', { 'id': daily.id }) }}" method="post">
+        <h1>Previous Daily Items: {{ daily.name }}</h1>
+        <ul>
+            {% for item in previousItems %}
+                <li>
+                    <label>
+                        <input type="checkbox" name="items[]" value="{{ item.id }}">
+                        {{ item.name }}
+                    </label>
+                </li>
+            {% endfor %}
+        </ul>
+        <button type="submit">Migrate Selected Items</button>
+        <a href="{{ path('app_daily_show', {'id' : daily.id}) }}">back to daily</a>
+    </form>
+{% endblock %}

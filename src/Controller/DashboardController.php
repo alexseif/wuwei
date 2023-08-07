@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\DailyRepository;
 use App\Repository\ItemListRepository;
 use App\Repository\ItemRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -9,18 +10,23 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class DefaultController extends AbstractController
+class DashboardController extends AbstractController
 {
 
     #[Route('/', name: 'app_home')]
-    public function Home(
+    public function home(
       ItemRepository $itemRepository,
-      ItemListRepository $itemListRepository
+      ItemListRepository $itemListRepository,
+      DailyRepository $dailyRepository
     ): Response {
         $itemLists = $itemListRepository->findAllWithItems();
+        $lastDay = $dailyRepository->getLastDaily();
         return $this->render(
-          'default/index.html.twig',
-          ['itemLists' => $itemLists]
+          'dashboard/dashboard.html.twig',
+          [
+            'itemLists' => $itemLists,
+            'lastDay' => $lastDay,
+          ]
         );
     }
 
