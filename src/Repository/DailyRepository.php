@@ -10,6 +10,7 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * @extends ServiceEntityRepository<Daily>
  *
+ * @method Daily|null find($id, $lockMode = null, $lockVersion = null)
  * @method Daily|null findOneBy(array $criteria, array $orderBy = null)
  * @method Daily[]    findAll()
  * @method Daily[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
@@ -27,26 +28,6 @@ class DailyRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('d')
           ->select('d', 'i')
           ->leftJoin('d.items', 'i');
-    }
-
-    /**
-     * Overriding default function find to always innerjoin Items
-     *
-     * @param $id
-     * @param $lockMode
-     * @param $lockVersion
-     *
-     * @return \App\Entity\Daily|null
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     */
-    public function find($id, $lockMode = null, $lockVersion = null): ?Daily
-    {
-        $queryBuilder = $this->select();
-        $queryBuilder
-          ->where('d.id = :id')
-          ->setParameter('id', $id);
-
-        return $queryBuilder->getQuery()->getOneOrNullResult();
     }
 
     public function getLastDaily(): ?Daily

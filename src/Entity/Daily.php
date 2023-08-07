@@ -17,11 +17,11 @@ class Daily
     #[ORM\Column]
     private ?int $id = null;
 
-//    TODO: Consider date field
+    //TODO: Consider date field
     #[ORM\Column(length: 255, unique: true)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'daily', targetEntity: Item::class)]
+    #[ORM\OneToMany(mappedBy: 'daily', targetEntity: Item::class, cascade: ["remove"], fetch: "EAGER")]
     private Collection $items;
 
     public function __construct()
