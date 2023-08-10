@@ -28,7 +28,7 @@ class DailyController extends AbstractController
         ]);
     }
 
-    #[Route('/create_daily', name: 'create_daily')]
+    #[Route('/create_daily', name: 'app_create_daily')]
     public function createDaily(DailyService $dailyService): Response
     {
         $daily = $dailyService->createDailyWithMigration();
@@ -39,7 +39,8 @@ class DailyController extends AbstractController
         );
     }
 
-    #[Route('/choose_items/{id}', name: 'choose_items')]
+    #[Route('/
+    choose_items/{id}', name: 'app_choose_items')]
     public function chooseItems(
       Request $request,
       Daily $daily,
@@ -53,7 +54,7 @@ class DailyController extends AbstractController
         ]);
     }
 
-    #[Route('/migrate_items/{id}', name: 'migrate_items', methods: ['POST'])]
+    #[Route('/migrate_items/{id}', name: 'app_migrate_items', methods: ['POST'])]
     public function migrateItems(
       Request $request,
       Daily $daily,
