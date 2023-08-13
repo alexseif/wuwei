@@ -39,8 +39,7 @@ class DailyController extends AbstractController
         );
     }
 
-    #[Route('/
-    choose_items/{id}', name: 'app_choose_items')]
+    #[Route('/choose_items/{id}', name: 'app_choose_items')]
     public function chooseItems(
       Request $request,
       Daily $daily,
