@@ -12,7 +12,9 @@
                     <div class="card-header"><h2>{{ itemList.name }}</h2></div>
                     <div class="list-group">
                         {% for item in itemList.items %}
-                            <div class="list-group-item">{{ item.name }}</div>
+                            <div class="list-group-item">
+                                {% include 'item/_item.html.twig' %}
+                            </div>
                         {% endfor %}
                     </div>
                 </div>
@@ -31,7 +33,7 @@
                                     <input class="form-check-input" type="checkbox" value="{{ item.id }}"
                                            id="item_{{ item.id }}" name="item[]">
                                     <label class="form-check-label" for="item_{{ item.id }}">
-                                        {{ item.name }}
+                                        {% include 'item/_item.html.twig' %}
                                     </label>
                                 </div>
                             </div>
