@@ -28,9 +28,8 @@
             <h1>Add Item to {{ daily.name }}</h1>
             {{ form_start(form) }}
             {{ form_row(form.name) }}
-            {# TODO: Hide #}
-            {{ form_row(form.list) }}
-            <button type="submit">Add Item</button>
+            {{ form_row(form.list, {'attr': {'class' : 'd-none'}, 'label_attr' : {'class' : 'd-none'}}) }}
+            <button type="submit" class="btn btn-outline-light">Add Item</button>
             {{ form_end(form) }}
         </div>
     </div>
