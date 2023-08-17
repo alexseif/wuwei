@@ -1,0 +1,7 @@
+<div class="form-check daily-item">
+    <input class="form-check-input" type="checkbox" value="{{ item.id }}"
+           id="item_{{ item.id }}" name="item[]">
+    <label class="form-check-label" for="item_{{ item.id }}">
+        {% include 'item/_item.html.twig' %}
+    </label>
+</div>

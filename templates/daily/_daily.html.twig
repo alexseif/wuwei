@@ -1,0 +1,18 @@
+<div class="card h-100 daily-card">
+    {% if daily %}
+        <div class="card-header"><h2>{{ daily.name }}</h2></div>
+        <div class="list-group">
+            {% for item in daily.items %}
+                <div class="list-group-item">
+                    {% include 'daily/_item.html.twig' %}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <div class="card-footer d-flex justify-content-between">
+        <a href="{{ path('app_create_daily') }}" class="btn btn-outline-light">Generate new day</a>
+        <a href="{{ path('app_choose_items', {'id' : daily.id}) }}" class="btn btn-outline-light">
+            Migrate to this day
+        </a>
+    </div>
+</div>

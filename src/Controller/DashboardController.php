@@ -23,7 +23,7 @@ class DashboardController extends AbstractController
           'dashboard/dashboard.html.twig',
           [
             'itemLists' => $itemListRepository->findAllWithItems(),
-            'lastDay' => $dailyRepository->getLastDaily(),
+            'daily' => $dailyRepository->getLastDaily(),
           ]
         );
     }
