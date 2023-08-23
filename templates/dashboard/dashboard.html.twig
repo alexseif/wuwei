@@ -1,9 +1,5 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}
-    Welcome to WuWei
-{% endblock %}
-
+{% block title %} Welcome to WuWei {% endblock %}
 {% block body %}
     <div class="row align-items-stretch">
         <div class="col">
@@ -14,16 +10,15 @@
                         {% for item in itemList.items %}
                             <div class="list-group-item">
                                 {% include 'item/_item.html.twig' %}
-                            </div>
+                            </div><!-- .list-group-item -->
                         {% endfor %}
-                    </div>
-                </div>
+                    </div><!-- .list-group -->
+                </div><!-- .card -->
                 <hr/>
             {% endfor %}
-        </div>
+        </div><!-- .col -->
         <div class="col">
-            {% include 'daily/_daily.html.twig'%}
-        </div>
-    </div>
-
+            {% include 'daily/_daily.html.twig' %}
+        </div><!-- .col -->
+    </div><!-- .row -->
 {% endblock %}
