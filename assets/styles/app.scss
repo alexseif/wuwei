@@ -1,3 +1,4 @@
+// assets/css/app.scss
 // Required
 @import "bootstrap/scss/functions";
 @import "variables";
@@ -8,6 +9,7 @@
 @import "bootstrap/scss/mixins";
 @import "bootstrap/scss/root";
 @import '~bootstrap/scss/bootstrap';
+//@import "bootstrap/dist/css/bootstrap-grid.rtl.min.css";
 //@import "~bootstrap-dark/src/bootstrap-dark";
 
 // Import Font Awesome CSS

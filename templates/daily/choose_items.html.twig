@@ -7,18 +7,21 @@
 
 {% block body %}
     {# TODO: make into a form #}
-    <form action="{{ path('migrate_items', { 'id': daily.id }) }}" method="post">
+    <form action="{{ path('app_migrate_items', { 'id': daily.id }) }}" method="post">
         <h1>Previous Daily Items: {{ daily.name }}</h1>
-        <ul>
-            {% for item in previousItems %}
-                <li>
-                    <label>
-                        <input type="checkbox" name="items[]" value="{{ item.id }}">
-                        {{ item.name }}
-                    </label>
-                </li>
-            {% endfor %}
-        </ul>
+        <div class="w-50">
+            <div class="list-group mb-3">
+                {% for item in previousItems %}
+                    <div class="list-group-item">
+                        <div class="form-check">
+                            <label for="item_{{ item.id }}" class="form-check-label required">{{ item.name }}</label>
+                            <input type="checkbox" class="form-check-input" id="item_{{ item.id }}" name="items[]"
+                                   value="{{ item.id }}">
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
         <button type="submit">Migrate Selected Items</button>
         <a href="{{ path('app_daily_show', {'id' : daily.id}) }}">back to daily</a>
     </form>

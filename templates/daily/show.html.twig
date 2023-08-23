@@ -28,15 +28,14 @@
             <h1>Add Item to {{ daily.name }}</h1>
             {{ form_start(form) }}
             {{ form_row(form.name) }}
-            {# TODO: Hide #}
-            {{ form_row(form.list) }}
-            <button type="submit">Add Item</button>
+            {{ form_row(form.list, {'attr': {'class' : 'd-none'}, 'label_attr' : {'class' : 'd-none'}}) }}
+            <button type="submit" class="btn btn-outline-light">Add Item</button>
             {{ form_end(form) }}
         </div>
     </div>
 
     <div>
-        <a href="{{ path('choose_items', {'id': daily.id}) }}">Choose Items</a>
+        <a href="{{ path('app_choose_items', {'id': daily.id}) }}">Choose Items</a>
         <a href="{{ path('app_daily_index') }}">back to list</a>
         <a href="{{ path('app_daily_edit', {'id': daily.id}) }}">edit</a>
     </div>

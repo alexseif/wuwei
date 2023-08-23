@@ -50,9 +50,6 @@ class DailyService
 
             $this->entityManager->persist($daily);
             $this->entityManager->flush();
-        } else {
-            // TODO: some action here
-            dump("something needs to be done");
         }
 
         return $daily;
