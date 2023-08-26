@@ -1,0 +1,21 @@
+{% extends '@MobizelMarkdownDocs/base.html.twig' %}
+{% block body %}
+    {% include '@MobizelMarkdownDocs/layout/navbar.html.twig' %}
+
+    {% include '_navbar.html.twig' %}
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+                <div class="sidebar-sticky pt-3">
+                    {% include '@MobizelMarkdownDocs/layout/sidebar_menu.html.twig' %}
+                </div>
+            </nav>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 px-lg-5">
+                <div class="content">
+                    {% block page_content %}{% endblock %}
+                </div>
+            </main>
+        </div>
+    </div>
+{% endblock %}
