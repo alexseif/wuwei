@@ -15,7 +15,12 @@
 // Import Font Awesome CSS
 @import '~@fortawesome/fontawesome-free/css/all.css';
 
-header{
+header {
   border-bottom: 1px solid #fff;
   margin-bottom: 1.5rem;
+}
+
+.progress-stacked,
+.progress {
+  height: 40px;
 }

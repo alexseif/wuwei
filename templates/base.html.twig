@@ -17,17 +17,18 @@
     {% endblock %}
 </head>
 <body>
-<header class="bg-dark">
-    {% block nav %}
-        {% include '_navbar.html.twig' %}
-    {% endblock %}
-</header>
 {% block page %}
-    <div class="container">
-        {% block body %}
+    <header class="bg-dark">
+        {% block nav %}
+            {% include '_navbar.html.twig' %}
         {% endblock %}
-    </div>
-
+    </header>
+    {% block container %}
+        <div class="container">
+            {% block body %}
+            {% endblock %}
+        </div>
+    {% endblock %}
 {% endblock %}
 </body>
 </html>
