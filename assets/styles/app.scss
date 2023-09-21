@@ -20,6 +20,19 @@ header {
   margin-bottom: 1.5rem;
 }
 
+#flower{
+  position: relative;
+  img{
+    position: absolute;
+    width: 4rem;
+    height: auto;
+    left: 0;
+    top: 4rem;
+    opacity: 0.6;
+    // -webkit-transform: scaleX(-1);
+    // transform: scaleX(-1);
+  }
+}
 .progress-stacked,
 .progress {
   height: 40px;
