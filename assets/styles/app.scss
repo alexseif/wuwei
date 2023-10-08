@@ -16,13 +16,14 @@
 @import '~@fortawesome/fontawesome-free/css/all.css';
 
 header {
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   margin-bottom: 1.5rem;
 }
 
-#flower{
+#flower {
   position: relative;
-  img{
+
+  img {
     position: absolute;
     width: 4rem;
     height: auto;
@@ -33,6 +34,7 @@ header {
     // transform: scaleX(-1);
   }
 }
+
 .progress-stacked,
 .progress {
   height: 40px;
