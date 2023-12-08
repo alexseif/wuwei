@@ -18,12 +18,14 @@
 </head>
 <body>
 <div id="flower">
-    <img src="imgs/flower.png" alt="flower for beauty and grace in what you do" />
+    <img src="imgs/flower.png" alt="flower for beauty and grace in what you do"/>
 </div>
 {% block page %}
     <header class="bg-dark">
         {% block nav %}
-            {% include '_navbar.html.twig' %}
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                {% include '_navbar.html.twig' %}
+            {% endif %}
         {% endblock %}
     </header>
     {% block container %}
