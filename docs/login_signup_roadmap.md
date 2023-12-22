@@ -2,9 +2,9 @@
 
 ## Phase 1: User Authentication
 - [x] Design and create user authentication system
-- [ ] Implement login functionality
-- [ ] Create user registration and sign-up process
-- [ ] Set up password encryption and security measures
+- [x] Implement login functionality
+- [x] Create user registration and sign-up process
+- [x] Set up password encryption and security measures
 
 ## Phase 2: User Profile
 - [ ] Create user profile management functionality
