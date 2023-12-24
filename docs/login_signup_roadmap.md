@@ -7,8 +7,8 @@
 - [x] Set up password encryption and security measures
 
 ## Phase 2: User Profile
-- [ ] Create user profile management functionality
-- [ ] Allow users to update their profile information
+- [x] Create user profile management functionality
+- [x] Allow users to update their profile information
 - [ ] Implement password reset and account recovery options
 - [ ] Enable users to customize their preferences
 
