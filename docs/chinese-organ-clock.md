@@ -1,4 +1,4 @@
-# Chinese Clock
+# Chinese Organ Clock
 
 The Chinese clock, also known as the Body Clock or Meridian Clock, is a traditional concept in Chinese medicine that
 associates different organs and energetic pathways with specific times of the day. According to this system, each
