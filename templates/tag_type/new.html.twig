@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New TagType{% endblock %}
+
+{% block body %}
+    <h1>Create new TagType</h1>
+
+    {{ include('tag_type/_form.html.twig') }}
+
+    <a href="{{ path('app_tag_type_index') }}">back to list</a>
+{% endblock %}
