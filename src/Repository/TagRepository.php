@@ -16,33 +16,29 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class TagRepository extends ServiceEntityRepository
 {
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Tag::class);
     }
 
-//    /**
-//     * @return Tag[] Returns an array of Tag objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('t')
-//            ->andWhere('t.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('t.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * Search for tags based on a given criteria.
+     *
+     * @param string $searchTerm The term to search for in tag names
+     * @param int $limit Maximum number of results to return
+     *
+     * @return Tag[] Returns an array of Tag objects matching the search criteria
+     */
+    public function searchForTag(string $searchTerm, int $limit = 10): array
+    {
+        return $this->createQueryBuilder('t')
+          ->andWhere('t.name LIKE :searchTerm')
+          ->setParameter('searchTerm', '%' . $searchTerm . '%')
+          ->orderBy('t.name', 'ASC')
+          ->setMaxResults($limit)
+          ->getQuery()
+          ->getResult();
+    }
 
-//    public function findOneBySomeField($value): ?Tag
-//    {
-//        return $this->createQueryBuilder('t')
-//            ->andWhere('t.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

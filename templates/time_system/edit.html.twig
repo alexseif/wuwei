@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit TimeSystem{% endblock %}
+
+{% block body %}
+    <h1>Edit TimeSystem</h1>
+
+    {{ include('time_system/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_time_system_index') }}">back to list</a>
+
+    {{ include('time_system/_delete_form.html.twig') }}
+{% endblock %}

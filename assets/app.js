@@ -19,35 +19,48 @@ import './item';
 
 //TODO: Revise the future need for this and classify it
 document.addEventListener('DOMContentLoaded', function () {
-    var modeSwitch = document.querySelector('.mode-switch');
+    const modeSwitch = document.querySelector('.mode-switch');
+    if (modeSwitch) {
+        modeSwitch.addEventListener('click', function () {
+            document.documentElement.classList.toggle('dark');
+            modeSwitch.classList.toggle('active');
+        });
+    }
 
-    modeSwitch.addEventListener('click', function () {                     document.documentElement.classList.toggle('dark');
-        modeSwitch.classList.toggle('active');
-    });
+    const listView = document.querySelector('.list-view');
+    const gridView = document.querySelector('.grid-view');
+    const projectsList = document.querySelector('.project-boxes');
 
-    var listView = document.querySelector('.list-view');
-    var gridView = document.querySelector('.grid-view');
-    var projectsList = document.querySelector('.project-boxes');
+    if (listView) {
+        listView.addEventListener('click', function () {
+            gridView.classList.remove('active');
+            listView.classList.add('active');
+            projectsList.classList.remove('jsGridView');
+            projectsList.classList.add('jsListView');
+        });
+    }
 
-    listView.addEventListener('click', function () {
-        gridView.classList.remove('active');
-        listView.classList.add('active');
-        projectsList.classList.remove('jsGridView');
-        projectsList.classList.add('jsListView');
-    });
+    if (gridView) {
+        gridView.addEventListener('click', function () {
+            gridView.classList.add('active');
+            listView.classList.remove('active');
+            projectsList.classList.remove('jsListView');
+            projectsList.classList.add('jsGridView');
+        });
+    }
 
-    gridView.addEventListener('click', function () {
-        gridView.classList.add('active');
-        listView.classList.remove('active');
-        projectsList.classList.remove('jsListView');
-        projectsList.classList.add('jsGridView');
-    });
+    const messageBtn = document.querySelector('.messages-btn');
+    if (messageBtn) {
+        messageBtn.addEventListener('click', function () {
+            document.querySelector('.messages-section').classList.add('show');
+        });
+    }
 
-    document.querySelector('.messages-btn').addEventListener('click', function () {
-        document.querySelector('.messages-section').classList.add('show');
-    });
+    const messageClose = document.querySelector('.messages-close');
+    if (messageClose) {
+        messageClose.addEventListener('click', function () {
+            document.querySelector('.messages-section').classList.remove('show');
+        });
+    }
 
-    document.querySelector('.messages-close').addEventListener('click', function() {
-        document.querySelector('.messages-section').classList.remove('show');
-    });
 });
