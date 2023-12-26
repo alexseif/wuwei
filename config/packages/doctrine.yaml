@@ -59,12 +59,3 @@ when@prod:
       result_cache_driver:
         type: pool
         pool: doctrine.result_cache_pool
-
-    # Framework cache configuration
-    framework:
-      cache:
-        pools:
-          doctrine.result_cache_pool:
-            adapter: cache.app
-          doctrine.system_cache_pool:
-            adapter: cache.system
