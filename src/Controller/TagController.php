@@ -64,11 +64,15 @@ class TagController extends AbstractController
         $tags = $tagRepository->searchForTag($input);
 
         // Format the response as expected by select2
-        $formattedTags = [];
+        $data = [];
         foreach ($tags as $tag) {
-            $formattedTags[] = $tag->getName();
+            $data[] = [
+              'id' => $tag->getId(),
+              'text' => $tag->getName(),
+            ];
         }
-        return new JsonResponse($formattedTags);
+
+        return new JsonResponse($data);
     }
 
     #[Route('/{id}', name: 'app_tag_show', methods: ['GET'])]

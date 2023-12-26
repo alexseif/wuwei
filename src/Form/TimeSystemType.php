@@ -29,8 +29,10 @@ class TimeSystemType extends AbstractType
         $builder
           ->add('name')
           ->add('from_time')
-          ->add('to_time');
-        //          ->add('tags');
+          ->add('to_time')
+          ->add('tags', TagAutocompleteField::class, [
+            'multiple' => true,
+          ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -12,6 +12,7 @@
                 <th>Name</th>
                 <th>From_time</th>
                 <th>To_time</th>
+                <th>Tags</th>
                 <th>CreatedAt</th>
                 <th>UpdatedAt</th>
                 <th>actions</th>
@@ -24,6 +25,7 @@
                 <td>{{ time_system.name }}</td>
                 <td>{{ time_system.fromTime ? time_system.fromTime|date('H:i:s') : '' }}</td>
                 <td>{{ time_system.toTime ? time_system.toTime|date('H:i:s') : '' }}</td>
+                <td>{{ time_system.tags|join(', ') }}</td>
                 <td>{{ time_system.createdAt ? time_system.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ time_system.updatedAt ? time_system.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
