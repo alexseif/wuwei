@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}{{ block('cardTitle')|striptags }}{% endblock %} | myApp</title>
+    <title>{% block title %}{{ block('h1')|striptags }}{% endblock %} | myApp</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
     <link rel="icon"
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
@@ -18,7 +18,7 @@
 </head>
 <body>
 <div id="flower">
-    <img src="imgs/flower.png" alt="flower for beauty and grace in what you do"/>
+    <img src="/imgs/flower.png" alt="flower for beauty and grace in what you do"/>
 </div>
 {% block page %}
     <header class="bg-dark">
@@ -30,9 +30,17 @@
     </header>
     {% block container %}
         <div class="container">
-            {% block body %}
-            {% endblock %}
-        </div>
+            <div class="card">
+                {% block card_header %}
+                    <div class="card-header d-flex align-items-center justify-content-between">
+                        <h1 class="card-title">{% block h1 %}{% endblock %}</h1>
+                        <div class="card-actions btn-toolbar">{% block card_actions %}{% endblock %}</div>
+                    </div><!-- .card-header -->
+                {% endblock %}
+                {% block body %} {% endblock %}
+                {% block card_footer %}{% endblock %}
+            </div><!-- .card -->
+        </div><!-- .container -->
     {% endblock %}
 {% endblock %}
 </body>

@@ -1,24 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}TagType index{% endblock %}
-
+{% block h1 %}Tag Types{% endblock %}
+{% block card_actions %}
+    <a href="{{ path('app_tag_type_new') }}" class="btn btn-outline-light">Create new</a>
+{% endblock %}
 {% block body %}
-    <h1>TagType index</h1>
-
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Name</th>
+            <th>CreatedAt</th>
+            <th>UpdatedAt</th>
+            <th>actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for tag_type in tag_types %}
             <tr>
-                <td>{{ tag_type.id }}</td>
                 <td>{{ tag_type.name }}</td>
                 <td>{{ tag_type.createdAt ? tag_type.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ tag_type.updatedAt ? tag_type.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
@@ -35,5 +33,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_tag_type_new') }}">Create new</a>
 {% endblock %}

@@ -1,22 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}TimeSystem index{% endblock %}
-
+{% block h1 %}Time System{% endblock %}
+{% block card_actions %}
+    <a href="{{ path('app_time_system_new') }}" class="btn btn-outline-light">Create new</a>
+{% endblock %}
 {% block body %}
-    <h1>TimeSystem index</h1>
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>From_time</th>
-                <th>To_time</th>
-                <th>Tags</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>From_time</th>
+            <th>To_time</th>
+            <th>Tags</th>
+            <th>CreatedAt</th>
+            <th>UpdatedAt</th>
+            <th>actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for time_system in time_systems %}
@@ -41,5 +42,4 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_time_system_new') }}">Create new</a>
 {% endblock %}
