@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Item index{% endblock %}
-
+{% block h1 %}Item{% endblock %}
+{% block card_actions %}
+    <a href="{{ path('app_item_new') }}" class="btn btn-outline-light">Create new</a>
+{% endblock %}
 {% block body %}
-    <h1>Item index</h1>
-
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for item in items %}
@@ -30,6 +30,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_item_new') }}">Create new</a>
 {% endblock %}

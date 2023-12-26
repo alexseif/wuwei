@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Daily index{% endblock %}
-
+{% block h1 %}Daily{% endblock %}
+{% block card_actions %}
+    <a href="{{ path('app_daily_new') }}" class="btn btn-outline-light">Create new</a>
+{% endblock %}
 {% block body %}
-    <h1>Daily index</h1>
-
     <table class="table">
         <thead>
         <tr>
@@ -30,6 +30,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_daily_new') }}">Create new</a>
 {% endblock %}

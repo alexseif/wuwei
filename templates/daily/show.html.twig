@@ -1,10 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {# {% block title %}Daily{% endblock %} #}
-{% block title %} Daily: #{{ daily.id }} {{ daily.name }} {% endblock %}
+{% block h1 %} Daily: #{{ daily.id }} {{ daily.name }} {% endblock %}
 
+{% block card_actions %}
+    <a href="{{ path('app_daily_index') }}" class="btn btn-link">back</a>
+    <a href="{{ path('app_choose_items', {'id': daily.id}) }}" class="btn btn-outline-info">Choose Items</a>
+    <a href="{{ path('app_daily_edit', {'id': daily.id}) }}" class="btn btn-outline-light">edit</a>
+    {{ include('daily/_delete_form.html.twig') }}
+{% endblock %}
 {% block body %}
-    <h1>Daily: #{{ daily.id }} {{ daily.name }}</h1>
     <div class="row">
         <div class="col">
             <table class="table">
@@ -33,16 +38,4 @@
             {{ form_end(form) }}
         </div>
     </div>
-
-    <div>
-        <a href="{{ path('app_choose_items', {'id': daily.id}) }}">Choose Items</a>
-        <a href="{{ path('app_daily_index') }}">back to list</a>
-        <a href="{{ path('app_daily_edit', {'id': daily.id}) }}">edit</a>
-    </div>
-
-    <div class="float-end">
-        {{ include('daily/_delete_form.html.twig') }}
-    </div>
-
-
 {% endblock %}
