@@ -28,6 +28,16 @@
             {% endif %}
         {% endblock %}
     </header>
+    <div class="float-end" style="max-width: 15rem;">
+        <div class="list-group">
+            {% set ts = time_system_service.getCurrent() %}
+            {% for tsd in ts %}
+                <div class="list-group-item">
+                    {{ tsd.name }}
+                </div>
+            {% endfor %}
+        </div><!-- .list-group -->
+    </div><!-- .float-end -->
     {% block container %}
         <div class="container">
             <div class="card">

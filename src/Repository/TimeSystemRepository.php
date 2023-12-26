@@ -16,33 +16,18 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class TimeSystemRepository extends ServiceEntityRepository
 {
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, TimeSystem::class);
     }
 
-//    /**
-//     * @return TimeSystem[] Returns an array of TimeSystem objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('t')
-//            ->andWhere('t.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('t.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function getCurrent()
+    {
+        return $this->createQueryBuilder('ts')
+          ->where('CURRENT_TIMESTAMP() BETWEEN ts.from_time AND ts.to_time')
+          ->getQuery()
+          ->getResult();
+    }
 
-//    public function findOneBySomeField($value): ?TimeSystem
-//    {
-//        return $this->createQueryBuilder('t')
-//            ->andWhere('t.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }
