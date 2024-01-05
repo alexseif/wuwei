@@ -1,0 +1,44 @@
+{{ form_start(form) }}
+<div class="card-body">
+    <div class="row">
+        <div class="col-8">{{ form_row(form.name) }}</div>
+        <div class="col">{{ form_row(form.type) }}</div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            {{ form_row(form.description) }}
+            <div class="row">
+                <div class="col">{{ form_row(form.eta) }}</div>
+                <div class="col">{{ form_row(form.dueAt) }}</div>
+                <div class="col">{{ form_row(form.completedAt) }}</div>
+            </div>
+            <div class="float-end">
+                {{ form_row(form.completed, {'label_attr': {'class': 'checkbox-switch' }}) }}
+            </div>
+        </div>
+        <div class="col">
+            <div class="row">
+                <div class="col">
+                    {{ form_row(form.priority) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.urgency) }}
+                </div>
+            </div>
+
+            {{ form_row(form.tags) }}
+            <div class="row">
+                <div class="col">
+                    {{ form_row(form.est) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.duration) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card-footer d-flex justify-content-end">
+    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+</div>
+{{ form_end(form) }}
