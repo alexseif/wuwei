@@ -10,8 +10,6 @@
         <tr>
             <th>Name</th>
             <th>Type</th>
-            <th>CreatedAt</th>
-            <th>UpdatedAt</th>
             <th>actions</th>
         </tr>
         </thead>
@@ -20,8 +18,6 @@
             <tr>
                 <td>{{ tag.name }}</td>
                 <td>{{ tag.tagType }}</td>
-                <td>{{ tag.createdAt ? tag.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ tag.updatedAt ? tag.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('app_tag_show', {'id': tag.id}) }}">show</a>
                     <a href="{{ path('app_tag_edit', {'id': tag.id}) }}">edit</a>
