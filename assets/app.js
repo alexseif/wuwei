@@ -11,12 +11,17 @@ import './styles/app.scss';
 import $ from 'jquery';
 
 require('bootstrap');
+import select2 from 'select2';
+import 'select2/dist/css/select2.min.css'
+import 'select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.min.css'
+// import flatpickr from "flatpickr";
+// import 'flatpickr/dist/flatpickr.min.css';
 
 // start the Stimulus application
 import './bootstrap';
 import './item';
 
-
+$.fn.select2.defaults.set("theme", "bootstrap-5");
 
 //TODO: Revise the future need for this and classify it
 document.addEventListener('DOMContentLoaded', function () {
@@ -64,4 +69,15 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // $('.datepicker').flatpickr({
+    //     enableTime: true,
+    //     dateFormat: "Y-m-d H:i",
+    //     time_24hr: true,
+    //     altInput:true,
+    //     altFormat: 'd/m/Y H:i'
+    //
+    // });
+});
+$(() => {
+    $('.select2').select2();
 });

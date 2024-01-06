@@ -14,12 +14,13 @@
         <thead>
         <tr>
             <th>Name</th>
+            <th>Type</th>
             <th>Priority</th>
             <th>Urgency</th>
+            <th>est</th>
+            <th>eta</th>
+            <th>Due</th>
             <th>Duration</th>
-            <th>Est</th>
-            <th>Eta</th>
-            <th>DueAt</th>
             <th>actions</th>
         </tr>
         </thead>
@@ -31,12 +32,13 @@
                     class="{{ task.completed ? 'completed' : '' }}"
             >
                 <td>{{ task.name }}</td>
+                <td>{{ task.type }}</td>
                 <td>{{ task.priority }}</td>
                 <td>{{ task.urgency }}</td>
-                <td>{{ task.duration }}</td>
                 <td>{{ task.est }}</td>
                 <td>{{ task.eta ? task.eta|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ task.dueAt ? task.dueAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ task.duration }}</td>
                 <td>
                     <a href="{{ path('app_task_show', {'id': task.id}) }}">show</a>
                     <a href="{{ path('app_task_edit', {'id': task.id}) }}">edit</a>

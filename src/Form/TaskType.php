@@ -2,13 +2,15 @@
 
 namespace App\Form;
 
+use App\Entity\Tag;
 use App\Entity\Task;
+use App\Repository\TagRepository;
+use Doctrine\ORM\QueryBuilder;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -42,7 +44,18 @@ class TaskType extends AbstractType
             'expanded' => true,
             'label_attr' => ['class' => 'radio-inline'],
           ])
-          ->add('type')
+          ->add('type', EntityType::class, [
+            'class' => Tag::class,
+            'query_builder' => function (TagRepository $tagRepository
+            ): QueryBuilder {
+                return $tagRepository->createQueryBuilder('t')
+                  ->leftJoin('t.tagType', 'tt')
+                  ->where('tt.name = :tag_type')
+                  ->setParameter('tag_type', 'Task Type');
+            },
+            'placeholder' => 'Task Type',
+            'attr' => ['class' => 'select2'],
+          ])
           ->add('est')
           ->add('duration')
           ->add('eta', DateTimeType::class, [
@@ -52,20 +65,6 @@ class TaskType extends AbstractType
             'required' => false,
             'attr' => [
               'class' => 'datepicker',
-              'data-provide' => 'datepicker',
-              'data-date-format' => 'yyyy-MM-dd',
-            ],
-          ])
-          ->add('completed')
-          ->add('completedAt', DateTimeType::class, [
-            'date_widget' => 'single_text',
-            'time_widget' => 'single_text',
-            'date_format' => 'yyyy-MM-dd',
-            'required' => false,
-            'attr' => [
-              'class' => 'datepicker',
-              'data-provide' => 'datepicker',
-              'data-date-format' => 'yyyy-MM-dd',
             ],
           ])
           ->add('dueAt', DateTimeType::class, [
@@ -79,6 +78,18 @@ class TaskType extends AbstractType
               'data-date-format' => 'yyyy-MM-dd',
             ],
           ])
+          ->add('completedAt', DateTimeType::class, [
+            'date_widget' => 'single_text',
+            'time_widget' => 'single_text',
+            'date_format' => 'yyyy-MM-dd',
+            'required' => false,
+            'attr' => [
+              'class' => 'datepicker',
+              'data-provide' => 'datepicker',
+              'data-date-format' => 'yyyy-MM-dd',
+            ],
+          ])
+          ->add('completed')
           ->add('tags', TagAutocompleteField::class, [
             'required' => false,
             'multiple' => true,
