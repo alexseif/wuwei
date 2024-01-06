@@ -26,6 +26,9 @@ class TaskType extends AbstractType
           ->add('name')
           ->add('description', TextareaType::class, [
             'required' => false,
+            'attr' => [
+              'tabindex' => -1,
+            ],
           ])
           ->add('priority', ChoiceType::class, [
             'choices' => [
