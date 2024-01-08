@@ -103,7 +103,28 @@
             {% endfor %}
         </div><!-- .col -->
         <div class="col">
-            <div class="card h-100 daily-card">
+            <div class="card goals-card">
+                {% if goals %}
+                    <div class="card-header">
+                        <h2>Goals</h2>
+                    </div>
+                    <div class="list-group">
+                        {% for goal in goals %}
+                            <div class="list-group-item">
+                                <div class="form-check goal-item">
+                                    <input class="form-check-input" type="checkbox" value="{{ goal.id }}"
+                                           id="goal_{{ goal.id }}" name="goal[]">
+                                    <label class="form-check-label" for="goal_{{ goal.id }}">
+                                        <span class="goal"
+                                              data-href="{{ path('app_goal_show', {'id': goal.id}) }}">{{ goal.name }}</span>
+                                    </label>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="card daily-card">
                 {% if tasks %}
                     <div class="card-header">
                         <h2>1000 ToDo's</h2>
@@ -123,14 +144,6 @@
                         {% endfor %}
                     </div>
                 {% endif %}
-                <div class="card-footer d-flex justify-content-between">
-                    <a href="{{ path('app_create_daily') }}" class="btn btn-outline-light">Generate new day</a>
-                    {% if daily %}
-                        <a href="{{ path('app_choose_items', {'id' : daily.id}) }}" class="btn btn-outline-light">
-                            Migrate to this day
-                        </a>
-                    {% endif %}
-                </div>
             </div>
             {% include 'daily/_daily.html.twig' %}
         </div><!-- .col -->

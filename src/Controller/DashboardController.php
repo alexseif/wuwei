@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\DailyRepository;
+use App\Repository\GoalRepository;
 use App\Repository\ItemListRepository;
 use App\Repository\ItemRepository;
 use App\Repository\TaskRepository;
@@ -21,7 +22,8 @@ class DashboardController extends AbstractController
       ItemListRepository $itemListRepository,
       DailyRepository $dailyRepository,
       TimeSystemService $timeSystemService,
-      TaskRepository $taskRepository
+      TaskRepository $taskRepository,
+      GoalRepository $goalRepository
     ): Response {
         $current = $timeSystemService->getCurrent();
         return $this->render(
@@ -30,6 +32,7 @@ class DashboardController extends AbstractController
             'itemLists' => $itemListRepository->findAllWithItems(),
             'daily' => $dailyRepository->getLastDaily(),
             'tasks' => $taskRepository->findAll(),
+            'goals' => $goalRepository->findAll(),
           ]
         );
     }
