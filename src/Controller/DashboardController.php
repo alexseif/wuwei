@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Repository\DailyRepository;
 use App\Repository\ItemListRepository;
 use App\Repository\ItemRepository;
+use App\Repository\TaskRepository;
 use App\Service\TimeSystemService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Finder;
@@ -19,7 +20,8 @@ class DashboardController extends AbstractController
       ItemRepository $itemRepository,
       ItemListRepository $itemListRepository,
       DailyRepository $dailyRepository,
-      TimeSystemService $timeSystemService
+      TimeSystemService $timeSystemService,
+      TaskRepository $taskRepository
     ): Response {
         $current = $timeSystemService->getCurrent();
         return $this->render(
@@ -27,6 +29,7 @@ class DashboardController extends AbstractController
           [
             'itemLists' => $itemListRepository->findAllWithItems(),
             'daily' => $dailyRepository->getLastDaily(),
+            'tasks' => $taskRepository->findAll(),
           ]
         );
     }

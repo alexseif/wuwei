@@ -20,6 +20,7 @@ import 'select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.min.css'
 // start the Stimulus application
 import './bootstrap';
 import './item';
+import './tasks';
 
 $.fn.select2.defaults.set("theme", "bootstrap-5");
 

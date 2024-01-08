@@ -103,6 +103,35 @@
             {% endfor %}
         </div><!-- .col -->
         <div class="col">
+            <div class="card h-100 daily-card">
+                {% if tasks %}
+                    <div class="card-header">
+                        <h2>1000 ToDo's</h2>
+                    </div>
+                    <div class="list-group">
+                        {% for task in tasks %}
+                            <div class="list-group-item">
+                                <div class="form-check task-item">
+                                    <input class="form-check-input" type="checkbox" value="{{ task.id }}"
+                                           id="task_{{ task.id }}" name="task[]">
+                                    <label class="form-check-label" for="task_{{ task.id }}">
+                                        <span class="task"
+                                              data-href="{{ path('app_task_show', {'id': task.id}) }}">{{ task.name }}</span>
+                                    </label>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="card-footer d-flex justify-content-between">
+                    <a href="{{ path('app_create_daily') }}" class="btn btn-outline-light">Generate new day</a>
+                    {% if daily %}
+                        <a href="{{ path('app_choose_items', {'id' : daily.id}) }}" class="btn btn-outline-light">
+                            Migrate to this day
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
             {% include 'daily/_daily.html.twig' %}
         </div><!-- .col -->
     </div><!-- .row -->
