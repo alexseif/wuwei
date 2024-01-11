@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}Client: {{ client.name }}{% endblock %}
+{% block card_actions %}
+    <a href="{{ path('app_client_index') }}" class="btn btn-link">back</a>
+    <a href="{{ path('app_client_edit', {'id': client.id}) }}" class="btn btn-outline-light">edit</a>
+    {{ include('client/_delete_form.html.twig') }}
+{% endblock %}
+{% block body %}
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Name</th>
+            <td>{{ client.name }}</td>
+        </tr>
+        <tr>
+            <th>tags</th>
+            <td>{{ client.tags|join(', ') }}</td>
+        </tr>
+        <tr>
+            <th>CreatedAt</th>
+            <td>{{ client.createdAt ? client.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <th>UpdatedAt</th>
+            <td>{{ client.updatedAt ? client.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock %}
