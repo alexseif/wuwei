@@ -3,8 +3,8 @@
 namespace App\Form;
 
 use App\Entity\TimeSystem;
+use App\Form\Field\TagAutocompleteField;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -30,9 +30,7 @@ class TimeSystemType extends AbstractType
           ->add('name')
           ->add('from_time')
           ->add('to_time')
-          ->add('tags', TagAutocompleteField::class, [
-            'multiple' => true,
-          ]);
+          ->add('tags', TagAutocompleteField::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

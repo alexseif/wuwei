@@ -4,10 +4,12 @@ namespace App\Form;
 
 use App\Entity\Tag;
 use App\Entity\Task;
+use App\Form\Field\TagAutocompleteField;
 use App\Repository\TagRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -89,11 +91,10 @@ class TaskType extends AbstractType
               'data-date-format' => 'yyyy-MM-dd',
             ],
           ])
-          ->add('completed')
-          ->add('tags', TagAutocompleteField::class, [
-            'required' => false,
-            'multiple' => true,
+          ->add('completed', CheckboxType::class, [
+            'label_attr' => ['class' => 'checkbox-switch'],
           ])
+          ->add('tags', TagAutocompleteField::class)
           ->add('position', HiddenType::class);
     }
 
