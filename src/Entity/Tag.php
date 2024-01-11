@@ -28,6 +28,9 @@ class Tag
     #[ORM\OneToMany(mappedBy: 'type', targetEntity: Task::class)]
     private Collection $tasks;
 
+    #[ORM\OneToOne(mappedBy: 'AccountTag', targetEntity: Account::class)]
+    private ?Account $account = null;
+
     public function __construct()
     {
         $this->tasks = new ArrayCollection();
@@ -93,6 +96,18 @@ class Tag
                 $task->setType(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAccount(): ?Account
+    {
+        return $this->account;
+    }
+
+    public function setAccount(?Account $account): static
+    {
+        $this->account = $account;
 
         return $this;
     }
