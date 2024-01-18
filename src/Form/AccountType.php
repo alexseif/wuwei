@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Account;
 use App\Entity\Client;
 use App\Entity\Tag;
+use App\Form\Field\EnabledField;
 use App\Form\Field\StatusField;
 use App\Form\Field\TagAutocompleteField;
 use App\Repository\TagRepository;
@@ -46,13 +47,7 @@ class AccountType extends AbstractType
           )
           ->add('status', StatusField::class)
           ->add('tags', TagAutocompleteField::class)
-          ->add(
-            'enabled',
-            CheckboxType::class,
-            [
-              'label_attr' => ['class' => 'checkbox-switch'],
-            ]
-          );
+          ->add('enabled', EnabledField::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
