@@ -1,0 +1,14 @@
+<div class="card goals-card">
+    {% if goals %}
+        <div class="card-header">
+            <h2>Goals</h2>
+        </div>
+        <div class="list-group goals">
+            {% for goal in goals %}
+                <div class="list-group-item goal" data-href="{{ path('app_goal_show', {'id': goal.id}) }}">
+                    {{ goal.name }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div><!-- .goals-card -->

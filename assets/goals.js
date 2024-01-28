@@ -1,9 +1,8 @@
-//assets/item.js
+//assets/goal.js
 import functions from './functions';
-var items = document.querySelectorAll('.item');
+var goals = document.querySelectorAll('.goal');
 
 // Attach event listener to each item
-items.forEach(function(item) {
+goals.forEach(function (item) {
     item.addEventListener('dblclick', functions.openElementInNewTab);
 });
-

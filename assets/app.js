@@ -18,9 +18,13 @@ import 'select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.min.css'
 // import 'flatpickr/dist/flatpickr.min.css';
 
 // start the Stimulus application
+
 import './bootstrap';
+import functions from './functions';
 import './item';
+import './goals';
 import './tasks';
+
 
 $.fn.select2.defaults.set("theme", "bootstrap-5");
 
