@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg">
-    <div class="container">
+<nav class="navbar navbar-expand-lg fixed-bottom ">
+    <div class="container bg-body-tertiary">
         <a class="navbar-brand" href="{{ path('app_dashboard') }}">WuWei</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -9,30 +9,68 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ path('app_dashboard') }}">Home</a>
+                    <a class="nav-link active" aria-current="page" href="{{ path('app_dashboard') }}">
+                        <span class="fa fa-home"></span> Home
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ path('app_item_index') }}">Items</a>
+                    <a class="nav-link" aria-current="page" href="{{ path('app_task_index') }}">
+                        <span class="fa fa-tasks"></span> Tasks
+                    </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ path('app_item_list_index') }}">Item
-                        Lists</a>
+                    <a class="nav-link" aria-current="page" href="{{ path('app_goal_index') }}">
+                        <span class="fa fa-bullseye"></span> Goals
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-expanded="false">
+                        <span class="fa fa-briefcase"></span> Business
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ path('app_client_index') }}">
+                                <span class="fa fa-user-tie"></span> Clients
+                            </a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_account_index') }}">
+                                <span class="fa fa-file-invoice"></span> Accounts
+                            </a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-expanded="false">
+                        <span class="fa fa-tags"></span> Tags
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ path('app_tag_type_index') }}">
+                                <span class="fa fa-folder-tree"></span> Tag Types
+                            </a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_tag_index') }}">
+                                <span class="fa fa-tags"></span> Tags
+                            </a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_tag_new') }}">
+                                <span class="fa fa-plus"></span> Tag
+                            </a></li>
+                    </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ path('app_daily_index') }}">Dailies</a>
+                    <a class="nav-link" aria-current="page" href="{{ path('app_time_system_index') }}">
+                        <span class="fa fa-lungs"></span> Time Systems
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-expanded="false">Items</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ path('app_item_list_index') }}">Items Lists</a></li>
+                        <li><a class="dropdown-item" href="{{ path('app_item_index') }}">Items</a></li>
+                    </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ path('app_time_system_index') }}">Time Systems</a>
+                    <a class="nav-link" aria-current="page" href="{{ path('app_daily_index') }}">Dailies</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ path('app_tag_index') }}">Tags</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ path('app_tag_type_index') }}">Tag Types</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " aria-current="page" href="{{ path('app_task_index') }}">Tasks</a>
-                </li>
+
             </ul>
             <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

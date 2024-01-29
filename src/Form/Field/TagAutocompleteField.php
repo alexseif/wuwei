@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form;
+namespace App\Form\Field;
 
 use App\Entity\Tag;
 use App\Repository\TagRepository;
@@ -12,16 +12,19 @@ use Symfony\UX\Autocomplete\Form\ParentEntityAutocompleteType;
 #[AsEntityAutocompleteField]
 class TagAutocompleteField extends AbstractType
 {
+
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'class' => Tag::class,
-            'placeholder' => 'Choose a Tag',
+          'class' => Tag::class,
+          'placeholder' => 'Choose a Tag',
             // 'choice_label' => 'name',
 
-            'query_builder' => function (TagRepository $tagRepository) {
-                return $tagRepository->createQueryBuilder('tag');
-            },
+          'query_builder' => function (TagRepository $tagRepository) {
+              return $tagRepository->createQueryBuilder('tag');
+          },
+          'required' => false,
+          'multiple' => true,
             // 'security' => 'ROLE_SOMETHING',
         ]);
     }
@@ -30,4 +33,5 @@ class TagAutocompleteField extends AbstractType
     {
         return ParentEntityAutocompleteType::class;
     }
+
 }

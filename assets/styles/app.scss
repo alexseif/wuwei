@@ -15,6 +15,37 @@
 // Import Font Awesome CSS
 @import '~@fortawesome/fontawesome-free/css/all.css';
 
+body {
+  padding-bottom: 6rem;
+}
+
+.fixed-sidebars {
+  position: relative;
+
+  .fixed-sidebar {
+    //position: fixed;
+    font-family: monospace;
+    top: 10rem;
+    max-width: 15rem;
+    margin: 0 auto;
+    text-align: center;
+
+    @include media-breakpoint-up(lg) {
+      position: fixed;
+      text-align: revert;
+    }
+  }
+
+  .fixed-sidebar-left {
+    left: 0;
+  }
+
+  .fixed-sidebar-right {
+    right: 0;
+  }
+
+}
+
 header {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   margin-bottom: 1.5rem;
@@ -38,4 +69,8 @@ header {
 .progress-stacked,
 .progress {
   height: 40px;
+}
+
+.form-check-label {
+  max-width: 100%;
 }

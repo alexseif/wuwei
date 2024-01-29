@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}Client: {{ client.name }}{% endblock %}
+{% block card_actions %}
+    <a href="{{ path('app_client_index') }}" class="btn btn-link">back</a>
+    <a href="{{ path('app_client_edit', {'id': client.id}) }}" class="btn btn-outline-light">edit</a>
+    {{ include('client/_delete_form.html.twig') }}
+{% endblock %}
+{% block body %}
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th>Name</th>
+                    <td>{{ client.name }}</td>
+                </tr>
+                <tr>
+                    <th>tags</th>
+                    <td>
+                        {% for tag in client.tags %}
+                            <span class="badge">{{ tag }}</span>
+                        {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>CreatedAt</th>
+                    <td>{{ client.createdAt ? client.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>UpdatedAt</th>
+                    <td>{{ client.updatedAt ? client.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <h1 class="card-title">Accounts</h1>
+                    <div class="card-actions btn-toolbar">
+                        <a href="{{ path('app_account_new', {'clientId': client.id}) }}" class="btn btn-outline-light">Create
+                            Account</a>
+                    </div>
+                </div><!-- .card-header -->
+                {{ include('account/_table.html.twig', {'accounts': client.accounts}) }}
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

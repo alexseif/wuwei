@@ -17,9 +17,7 @@
     {% endblock %}
 </head>
 <body>
-<div id="flower">
-    <img src="/imgs/flower.png" alt="flower for beauty and grace in what you do"/>
-</div>
+{% include('_sidebars.html.twig') %}
 {% block page %}
     <header class="bg-dark">
         {% block nav %}
@@ -28,18 +26,6 @@
             {% endif %}
         {% endblock %}
     </header>
-    <div class="d-flex justify-content-end" style="position:relative;">
-        <div style="max-width: 15rem;position: absolute;">
-            <div class="list-group">
-                {% set ts = time_system_service.getCurrent() %}
-                {% for tsd in ts %}
-                    <div class="list-group-item">
-                        {{ tsd.name }}
-                    </div>
-                {% endfor %}
-            </div><!-- .list-group -->
-        </div><!-- .float-end -->
-    </div>
     {% block container %}
         <div class="container">
             <div class="card">

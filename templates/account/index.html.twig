@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}Accounts{% endblock %}
+{% block card_actions %}
+    <a href="{{ path('app_account_new') }}" class="btn btn-outline-light">Create new</a>
+{% endblock %}
+{% block body %}
+    {% include('account/_table.html.twig') %}
+{% endblock %}

@@ -1,16 +1,9 @@
 //assets/item.js
+import functions from './functions';
 var items = document.querySelectorAll('.item');
 
 // Attach event listener to each item
 items.forEach(function(item) {
-    item.addEventListener('dblclick', openLinkInNewTab);
+    item.addEventListener('dblclick', functions.openElementInNewTab);
 });
 
-function openLinkInNewTab(element) {
-    console.log(element);
-    var href = element.target.getAttribute("data-href");
-    console.log(href);
-    if (href) {
-        window.open(href, "_blank");
-    }
-}

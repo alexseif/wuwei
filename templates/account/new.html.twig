@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Account{% endblock %}
+{% block card_actions %}
+    <a href="{{ path('app_account_index') }}" class="btn btn-link">back</a>
+{% endblock %}
+{% block body %}
+    {{ include('account/_form.html.twig') }}
+{% endblock %}

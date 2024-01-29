@@ -5,7 +5,18 @@
         <div class="col">{{ form_row(form.type) }}</div>
     </div>
     <div class="row">
-        <div class="col order-last">
+        <div class="col-8">
+            {{ form_row(form.description) }}
+            <div class="row">
+                <div class="col">{{ form_row(form.dueAt) }}</div>
+                <div class="col">{{ form_row(form.eta) }}</div>
+                <div class="col">{{ form_row(form.completedAt) }}</div>
+            </div>
+            <div class="float-end">
+                {{ form_row(form.completed) }}
+            </div>
+        </div>
+        <div class="col">
             <div class="row">
                 <div class="col">
                     {{ form_row(form.priority) }}
@@ -23,17 +34,6 @@
                 </div>
             </div>
             {{ form_row(form.tags) }}
-        </div>
-        <div class="col-8 order-first">
-            {{ form_row(form.description) }}
-            <div class="row">
-                <div class="col">{{ form_row(form.eta) }}</div>
-                <div class="col">{{ form_row(form.dueAt) }}</div>
-                <div class="col">{{ form_row(form.completedAt) }}</div>
-            </div>
-            <div class="float-end">
-                {{ form_row(form.completed, {'label_attr': {'class': 'checkbox-switch' }}) }}
-            </div>
         </div>
     </div>
 </div>

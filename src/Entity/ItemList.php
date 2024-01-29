@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ItemListRepository::class)]
 class ItemList
 {
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -42,6 +43,7 @@ class ItemList
 
         return $this;
     }
+
     /**
      * @return Collection<int, Item>
      */
@@ -74,7 +76,7 @@ class ItemList
 
     public function __toString(): string
     {
-     return $this->name;
+        return $this->name;
     }
 
 }
