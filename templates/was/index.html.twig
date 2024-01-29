@@ -1,0 +1,183 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}
+    مزادات سيارات -
+    Web Application Sepecification
+{% endblock %}
+
+{% block body %}
+    <div class="card-body">
+        <section>
+            <h2>Overview</h2>
+            <p>
+                The Car Marketplace Qatar web application is a platform for car auctions, maintenance services, and a
+                marketplace. It features maintenance requests, a marketplace for selling cars, live bidding for car
+                auctions,
+                provision of car parts, car rentals, and registration for car showrooms. The application supports
+                multilingual
+                interfaces, seamless integration with mobile applications, and multiple payment methods. Standard web
+                application features include user authentication, search functionality, notification system, user
+                profiles,
+                security measures, and customer support.
+            </p>
+        </section>
+        <section>
+            <h2>Technology Stack</h2>
+            <ul>
+                <li><strong>Framework:</strong> Symfony</li>
+                <li><strong>Database:</strong> MySQL</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Targeted Audience</h2>
+            <ul>
+                <li>Qatar</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Features</h2>
+
+            <ol>
+                <li>
+                    <strong>Maintenance:</strong>
+                    It will provide maintenance services requests, scheduling, a location to meet and type of service
+                    required and license plate number
+                </li>
+                <li>
+                    <strong>Marketplace:</strong>
+                    The application will offer a platform for selling cars by the users and approved by the admins for
+                    publication
+                </li>
+                <li>
+                    <strong>Auction: </strong>
+                    The application will facilitate live bidding for car auctions.
+                    <ol>
+                        <li>Auctions are managed by the admins</li>
+                        <li>Bidders need to pay an insurance deposit, designated by the admins before bidding</li>
+                        <li>Admins designate the starting bid the targeted price and the budding step value</li>
+                        <li>Each car will have an inspection report pdf before the auction</li>
+                    </ol>
+                </li>
+                <li>
+                    <strong>Provision car parts:</strong> members can request car parts based on their car license
+                    number.
+                    <ol>
+                        <li> User will add his car license number and select from generic parts</li>
+                        <li> Admins will search vendors and provide different prices based on car part and it's origin
+                        </li>
+                        <li> User will select the car parts he desires and where to deliver them</li>
+                    </ol>
+                </li>
+                <li>
+                    <strong>Car rentals:</strong> just like selling cars but rentals
+                </li>
+                <li>
+                    <strong>Car showrooms:</strong> car showrooms can also register and provide cars for sale or rental
+                </li>
+            </ol>
+        </section>
+        <section>
+
+            <h2>Language Support</h2>
+
+            <p>The application will support multilingual interfaces, initially available in two languages.</p>
+        </section>
+        <section>
+            <h2>Standard Web Application Features</h2>
+
+            <table class="table-bordered">
+                <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>User Authentication</td>
+                    <td>Users can create accounts and log in to access personalized features.</td>
+                </tr>
+                <tr>
+                    <td>Search Functionality</td>
+                    <td>Users can search for cars, auctions, or services within the platform.</td>
+                </tr>
+                <tr>
+                    <td>Notification System</td>
+                    <td>The application will inform users about updates on their auctions, maintenance requests, and
+                        marketplace activities.
+                    </td>
+                </tr>
+                <tr>
+                    <td>User Profiles</td>
+                    <td>Users can create and manage personal profiles to store their preferences and history.</td>
+                </tr>
+                <tr>
+                    <td>Security</td>
+                    <td>The application will implement robust security measures to protect user data and transactions.
+                    </td>
+                </tr>
+                <tr>
+                    <td>Customer Support</td>
+                    <td>Users can reach out for assistance or to report issues through a built-in customer support
+                        feature.
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+        <section>
+            <h2>Specific Features</h2>
+            <table class="table-bordered">
+                <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Description</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Maintenance</td>
+                    <td> Provision of maintenance services requests, scheduling, a location to meet and type of service
+                        required and license plate number.
+                    </td>
+                </tr>
+                <tr>
+                    <td>Marketplace</td>
+                    <td> A platform for selling cars by the users, approved by the admins for publication.</td>
+
+                </tr>
+                <tr>
+                    <td>Auction</td>
+                    <td> Facilitating live bidding for car auctions, managed by the admins.</td>
+                </tr>
+                <tr>
+                    <td>Car Parts Provision</td>
+                    <td> Members can request car parts based on their car license number.</td>
+                </tr>
+                <tr>
+                    <td>Car Rentals</td>
+                    <td> Offering car rental services.</td>
+                </tr>
+                <tr>
+                    <td>Car Showrooms</td>
+                    <td> Car showrooms can also register and provide cars for sale or rental.</td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+        <section>
+            <p>
+                Please note that the platform will support multiple payment methods, including Credit Cards, Apple Pay,
+                and Google Pay. The application will also support multilingual interfaces, initially available in two
+                languages, and will have seamless integration with its mobile applications to ensure a consistent user
+                experience across platforms.
+            </p>
+        </section>
+        <section class="d-print-none">
+            <a href="https://www.notion.so/Development-Specs-ab024b2bdf29446fbe37d746287e662c?pvs=21">Development
+                Specs</a>
+            <a href="https://www.notion.so/Pricing-Estimate-5b820724fc4644b081cfb0f35edebf44?pvs=21">Pricing
+                Estimate</a>
+        </section>
+    </div>
+{% endblock %}

@@ -19,7 +19,7 @@
 <body>
 {% include('_sidebars.html.twig') %}
 {% block page %}
-    <header class="bg-dark">
+    <header class="bg-dark d-print-none">
         {% block nav %}
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 {% include '_navbar.html.twig' %}
