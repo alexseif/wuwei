@@ -81,43 +81,19 @@
     {#    <div class="row align-items-stretch"> #}
     {#        <div class="col"> #}
     <div class="card-group">
-    {% include('goal/_goals.html.twig') %}
-    {% for itemList in itemLists %}
-        <div class="card" {{ ("شعار المرحلة" == itemList.name)? "dir='rtl'" : "" }}>
-            <div class="card-header"><h2>{{ itemList.name }}</h2></div>
-            <div class="list-group">
-                {% for item in itemList.items %}
-                    <div class="list-group-item">
-                        {% include 'item/_item.html.twig' %}
-                    </div><!-- .list-group-item -->
-                {% endfor %}
-            </div><!-- .list-group -->
-        </div><!-- .card -->
-    {% endfor %}
+        {% include('goal/_goals.html.twig') %}
+        {% for itemList in itemLists %}
+            <div class="card" {{ ("شعار المرحلة" == itemList.name)? "dir='rtl'" : "" }}>
+                <div class="card-header"><h2>{{ itemList.name }}</h2></div>
+                <div class="list-group">
+                    {% for item in itemList.items %}
+                        <div class="list-group-item">
+                            {% include 'item/_item.html.twig' %}
+                        </div><!-- .list-group-item -->
+                    {% endfor %}
+                </div><!-- .list-group -->
+            </div><!-- .card -->
+        {% endfor %}
     </div>
-    {#        </div><!-- .col --> #}
-    {#        <div class="col"> #}
-    <div class="card daily-card">
-        {% if tasks %}
-            <div class="card-header">
-                <h2>1000 ToDo's</h2>
-            </div>
-            <div class="list-group">
-                {% for task in tasks %}
-                    <div class="list-group-item">
-                        <div class="form-check task-item">
-                            <input class="form-check-input" type="checkbox" value="{{ task.id }}"
-                                   id="task_{{ task.id }}" name="task[]">
-                            <label class="form-check-label" for="task_{{ task.id }}">
-                                        <span class="task"
-                                              data-href="{{ path('app_task_show', {'id': task.id}) }}">{{ task.name }}</span>
-                            </label>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        {% endif %}
-    </div>
-    {#        </div><!-- .col --> #}
-    {#    </div><!-- .row --> #}
+    {% include 'task/_tasks_list.html.twig' with {'tasks': tasks, 'tasksListTitle':'1000 ToDo\'s', 'tasksListId' : 'daily-tasks'} %}
 {% endblock %}

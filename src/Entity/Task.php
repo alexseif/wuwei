@@ -84,10 +84,8 @@ class Task
     public function __construct()
     {
         $this->tags = new ArrayCollection();
-        $this->order = 0;
         $this->priority = Task::NORMAL_PRIORITY;
         $this->urgency = Task::NORMAL_URGENCY;
-        $this->workLoggable = true;
         $this->priorityName = [
           -1 => 'Low',
           0 => 'Normal',

@@ -96,6 +96,7 @@ class TaskType extends AbstractType
           ])
           ->add('completed', CheckboxType::class, [
             'label_attr' => ['class' => 'checkbox-switch'],
+            'required' => false,
           ])
           ->add('tags', TagAutocompleteField::class)
           ->add('position', HiddenType::class);

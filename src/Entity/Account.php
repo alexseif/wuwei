@@ -23,7 +23,7 @@ class Account
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(cascade: ['persist', 'remove'], inversedBy: 'account')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Tag $AccountTag = null;
 
