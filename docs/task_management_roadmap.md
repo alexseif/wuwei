@@ -9,7 +9,7 @@
 
 ## Phase 2: Core Functionality
 
-- [ ] Implement task creation, updating, and deletion
+- [x] Implement task creation, updating, and deletion
 - [ ] Categorize tasks as personal or professional
 - [ ] Set task deadlines and priorities
 - [ ] Track task progress and completion status
