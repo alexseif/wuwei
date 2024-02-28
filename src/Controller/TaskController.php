@@ -33,6 +33,11 @@ class TaskController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //Account Tag
+            $accountTag = $form->get('account')->getData();
+            if ($accountTag && !$task->getTags()->contains($accountTag)) {
+                $task->addTag($accountTag);
+            }
             $entityManager->persist($task);
             $entityManager->flush();
 
@@ -63,10 +68,17 @@ class TaskController extends AbstractController
       Task $task,
       EntityManagerInterface $entityManager
     ): Response {
+        //TODO: Load account tag
         $form = $this->createForm(TaskType::class, $task);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //Account Tag
+            $accountTag = $form->get('account')->getData();
+            if ($accountTag && !$task->getTags()->contains($accountTag)) {
+                $task->addTag($accountTag);
+            }
+
             $entityManager->flush();
 
             return $this->redirectToRoute(

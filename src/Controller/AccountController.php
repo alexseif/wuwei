@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Account;
 use App\Entity\Client;
+use App\Entity\Tag;
+use App\Entity\TagType;
 use App\Form\AccountType;
 use App\Repository\AccountRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -39,10 +41,22 @@ class AccountController extends AbstractController
         if ($client) {
             $account->setClient($client);
         }
+
         $form = $this->createForm(AccountType::class, $account);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //Account Tag
+            $accountTagType = $entityManager->getRepository(TagType::class)
+              ->findOneBy(
+                ['name' => 'Account Tag']
+              );
+            $accountTag = new Tag();
+            $accountTag->setTagType($accountTagType);
+            $accountTag->setName($account->getName());
+            $account->setAccountTag($accountTag);
+            //TODO: updating an account tag
+
             $entityManager->persist($account);
             $entityManager->flush();
 

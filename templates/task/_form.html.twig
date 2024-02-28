@@ -1,22 +1,30 @@
 {{ form_start(form) }}
 <div class="card-body">
     <div class="row">
-        <div class="col-8">{{ form_row(form.name) }}</div>
-        <div class="col">{{ form_row(form.type) }}</div>
-    </div>
-    <div class="row">
-        <div class="col-8">
+        <div class="col-7">
+            {{ form_row(form.name) }}
             {{ form_row(form.description) }}
             <div class="row">
-                <div class="col">{{ form_row(form.dueAt) }}</div>
-                <div class="col">{{ form_row(form.eta) }}</div>
-                <div class="col">{{ form_row(form.completedAt) }}</div>
-            </div>
-            <div class="float-end">
-                {{ form_row(form.completed) }}
+                <div class="col">
+                    {{ form_row(form.dueAt) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.eta) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.completedAt) }}
+                </div>
             </div>
         </div>
         <div class="col">
+            <div class="row">
+                <div class="col">
+                    {{ form_row(form.type) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.account) }}
+                </div>
+            </div>
             <div class="row">
                 <div class="col">
                     {{ form_row(form.priority) }}
@@ -35,8 +43,9 @@
             </div>
             {{ form_row(form.tags) }}
         </div>
-    </div>
-</div>
+        {{ form_row(form.completed) }}
+    </div><!-- .row -->
+</div><!-- .card-body -->
 <div class="card-footer d-flex justify-content-end">
     <button class="btn btn-success">{{ button_label|default('Save') }}</button>
 </div>

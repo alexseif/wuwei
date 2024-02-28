@@ -61,21 +61,37 @@ class TaskType extends AbstractType
             'placeholder' => 'Task Type',
             'attr' => ['class' => 'select2'],
           ])
+          ->add('account', EntityType::class, [
+            'mapped' => false,
+            'required' => false,
+            'class' => Tag::class,
+            'query_builder' => function (TagRepository $tagRepository
+            ): QueryBuilder {
+                return $tagRepository->createQueryBuilder('t')
+                  ->leftJoin('t.tagType', 'tt')
+                  ->where('tt.name = :tag_type')
+                  ->setParameter('tag_type', 'Account Tag');
+            },
+            'placeholder' => 'Account',
+            'attr' => ['class' => 'select2'],
+          ])
           ->add('est')
           ->add('duration')
           ->add('eta', DateTimeType::class, [
-            'date_widget' => 'single_text',
-            'time_widget' => 'single_text',
-            'date_format' => 'yyyy-MM-dd',
+            'widget' => 'single_text',
+              //            'date_widget' => 'single_text',
+              //            'time_widget' => 'single_text',
+              //            'date_format' => 'yyyy-MM-dd',
             'required' => false,
             'attr' => [
               'class' => 'datepicker',
             ],
           ])
           ->add('dueAt', DateTimeType::class, [
-            'date_widget' => 'single_text',
-            'time_widget' => 'single_text',
-            'date_format' => 'yyyy-MM-dd',
+            'widget' => 'single_text',
+              //            'date_widget' => 'single_text',
+              //            'time_widget' => 'single_text',
+              //            'date_format' => 'yyyy-MM-dd',
             'required' => false,
             'attr' => [
               'class' => 'datepicker',
@@ -84,9 +100,10 @@ class TaskType extends AbstractType
             ],
           ])
           ->add('completedAt', DateTimeType::class, [
-            'date_widget' => 'single_text',
-            'time_widget' => 'single_text',
-            'date_format' => 'yyyy-MM-dd',
+            'widget' => 'single_text',
+              //            'date_widget' => 'single_text',
+              //            'time_widget' => 'single_text',
+              //            'date_format' => 'yyyy-MM-dd',
             'required' => false,
             'attr' => [
               'class' => 'datepicker',

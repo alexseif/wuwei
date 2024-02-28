@@ -30,21 +30,6 @@ class AccountType extends AbstractType
             'placeholder' => 'Account Client',
             'attr' => ['class' => 'select2'],
           ])
-          ->add(
-            'AccountTag', EntityType::class,
-            [
-              'class' => Tag::class,
-              'query_builder' => function (TagRepository $tagRepository
-              ): QueryBuilder {
-                  return $tagRepository->createQueryBuilder('t')
-                    ->leftJoin('t.tagType', 'tt')
-                    ->where('tt.name = :tag_type')
-                    ->setParameter('tag_type', 'Account');
-              },
-              'placeholder' => 'Account Tag',
-              'attr' => ['class' => 'select2'],
-            ]
-          )
           ->add('status', StatusField::class)
           ->add('tags', TagAutocompleteField::class)
           ->add('enabled', EnabledField::class);
