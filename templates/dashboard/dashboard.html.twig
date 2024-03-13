@@ -95,5 +95,5 @@
             </div><!-- .card -->
         {% endfor %}
     </div>
-    {% include 'task/_tasks_list.html.twig' with {'tasks': tasks, 'tasksListTitle':'1000 ToDo\'s', 'tasksListId' : 'daily-tasks'} %}
+    {% include 'task/_tasks_list.html.twig' with {'tasks': tasks, 'taskList': taskList } %}
 {% endblock %}

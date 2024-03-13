@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Tag;
 use App\Repository\DailyRepository;
 use App\Repository\GoalRepository;
 use App\Repository\ItemListRepository;
@@ -26,11 +27,14 @@ class DashboardController extends AbstractController
       GoalRepository $goalRepository
     ): Response {
         $current = $timeSystemService->getCurrent();
+        $taskList = new Tag();
+        $taskList->setName("1000 ToDo\'s");
         return $this->render(
           'dashboard/dashboard.html.twig',
           [
             'itemLists' => $itemListRepository->findAllWithItems(),
             'daily' => $dailyRepository->getLastDaily(),
+            'taskList' => $taskList,
             'tasks' => $taskRepository->findAll(),
             'goals' => $goalRepository->findAll(),
           ]

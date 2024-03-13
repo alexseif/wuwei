@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Tag;
 use App\Entity\TagType;
 use App\Entity\Task;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -25,6 +26,15 @@ class TaskRepository extends ServiceEntityRepository
         parent::__construct($registry, Task::class);
     }
 
+    public function findByTag(Tag $tag)
+    {
+        return $this->createQueryBuilder('task')
+          ->join('task.tags', 'tag')
+          ->where('tag = :tag')
+          ->setParameter(':tag', $tag)
+          ->getQuery()
+          ->getResult();
+    }
     //    /**
     //     * @return Task[] Returns an array of Task objects
     //     */

@@ -1,12 +1,12 @@
 {% if tasks %}
     <div class="card daily-card">
         <div class="card-header">
-            <h2>{{ tasksListTitle }}</h2>
+            <h2>{{ taskList.name }}</h2>
         </div>
-        <div class="accordion accordion-flush tasks-list" id="{{ tasksListId }}">
+        <div class="accordion accordion-flush tasks-list" id="{{ taskList.id }}">
             <div class="list-group">
                 {% for task in tasks %}
-                    {% include 'task/_task.html.twig' with {'task': task, 'tasksListId': tasksListId} %}
+                    {% include 'task/_task.html.twig' with {'task': task, 'tasksListId': taskList.id} %}
                 {% endfor %}
             </div>
         </div>

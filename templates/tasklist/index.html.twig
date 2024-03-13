@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}Task lists{% endblock %}
+{% block card_actions %}
+    <a href="{{ path('app_tasklist_new') }}" class="btn btn-outline-light">Create new</a>
+{% endblock %}
+{% block body %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for tasklist in tasklists %}
+            <tr>
+                <td>{{ tasklist.name }}</td>
+                <td>
+                    <a href="{{ path('app_tasklist_show', {'id': tasklist.id}) }}">show</a>
+                    <a href="{{ path('app_tasklist_edit', {'id': tasklist.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

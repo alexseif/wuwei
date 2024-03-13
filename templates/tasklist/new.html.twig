@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}New Task List{% endblock %}
+{% block card_actions %}
+    <a href="{{ path('app_tasklist_index') }}">back</a>
+{% endblock %}
+{% block body %}
+    {{ include('tasklist/_form.html.twig') }}
+{% endblock %}

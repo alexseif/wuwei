@@ -102,7 +102,7 @@ class TagController extends AbstractController
             );
         }
 
-        return $this->renderForm('tag/edit.html.twig', [
+        return $this->renderForm('task_list/edit.html.twig', [
           'tag' => $tag,
           'form' => $form,
         ]);
