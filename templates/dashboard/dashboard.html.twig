@@ -1,6 +1,16 @@
 {% extends 'base.html.twig' %}
 {% block h1 %} Welcome to WuWei {% endblock %}
 {% block body %}
+    <div class="card-body">
+        <div class="btn-group btn-group-lg">
+            {% for section in sections %}
+                        <a href="{{ path('app_tag_type_show', {'id' : section.id }) }}" role="button"
+                           class="btn btn-outline-primary">
+                            {{ section.name }}
+                        </a>
+            {% endfor %}
+        </div>
+    </div>
     <div class="row align-items-stretch d-none">
         <div class="col">
             <div class="card">
@@ -95,5 +105,5 @@
             </div><!-- .card -->
         {% endfor %}
     </div>
-    {% include 'task/_tasks_list.html.twig'  %}
+    {% include 'task/_tasks_list.html.twig' %}
 {% endblock %}

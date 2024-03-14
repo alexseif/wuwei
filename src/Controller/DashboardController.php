@@ -7,6 +7,7 @@ use App\Repository\DailyRepository;
 use App\Repository\GoalRepository;
 use App\Repository\ItemListRepository;
 use App\Repository\ItemRepository;
+use App\Repository\TagTypeRepository;
 use App\Repository\TaskRepository;
 use App\Service\TimeSystemService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,7 +25,8 @@ class DashboardController extends AbstractController
       DailyRepository $dailyRepository,
       TimeSystemService $timeSystemService,
       TaskRepository $taskRepository,
-      GoalRepository $goalRepository
+      GoalRepository $goalRepository,
+      TagTypeRepository $tagTypeRepository
     ): Response {
         $current = $timeSystemService->getCurrent();
         $taskList = new Tag();
@@ -32,6 +34,7 @@ class DashboardController extends AbstractController
         return $this->render(
           'dashboard/dashboard.html.twig',
           [
+            'sections' => $tagTypeRepository->findAll(),
             'itemLists' => $itemListRepository->findAllWithItems(),
             'daily' => $dailyRepository->getLastDaily(),
             'tasklist' => $taskList,
