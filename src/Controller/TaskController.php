@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Tag;
 use App\Entity\Task;
 use App\Form\TaskType;
 use App\Repository\TaskRepository;
@@ -23,12 +24,16 @@ class TaskController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_task_new', methods: ['GET', 'POST'])]
+    #[Route('/new/{tasklist}', name: 'app_task_new', methods: ['GET', 'POST'])]
     public function new(
       Request $request,
-      EntityManagerInterface $entityManager
+      EntityManagerInterface $entityManager,
+      Tag $tasklist = null
     ): Response {
         $task = new Task();
+        if ($tasklist) {
+            $task->addTag($tasklist);
+        }
         $form = $this->createForm(TaskType::class, $task);
         $form->handleRequest($request);
 
@@ -40,12 +45,19 @@ class TaskController extends AbstractController
             }
             $entityManager->persist($task);
             $entityManager->flush();
-
-            return $this->redirectToRoute(
+            $response = $this->redirectToRoute(
               'app_task_index',
               [],
               Response::HTTP_SEE_OTHER
             );
+            if ($tasklist) {
+                $response = $this->redirectToRoute(
+                  'app_tasklist_show',
+                  ['id' => $tasklist->getId()],
+                  Response::HTTP_SEE_OTHER
+                );
+            }
+            return $response;
         }
 
         return $this->renderForm('task/new.html.twig', [

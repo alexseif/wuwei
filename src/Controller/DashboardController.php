@@ -34,7 +34,7 @@ class DashboardController extends AbstractController
           [
             'itemLists' => $itemListRepository->findAllWithItems(),
             'daily' => $dailyRepository->getLastDaily(),
-            'taskList' => $taskList,
+            'tasklist' => $taskList,
             'tasks' => $taskRepository->findAll(),
             'goals' => $goalRepository->findAll(),
           ]

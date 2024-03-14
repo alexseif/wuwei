@@ -5,6 +5,8 @@
     <a href="{{ path('app_task_new') }}" class="btn btn-outline-light">Create new</a>
 {% endblock %}
 {% block body %}
+    {% include 'task/_tasks_list_accordion.html.twig' %}
+
     <table class="table">
         <thead>
         <tr>

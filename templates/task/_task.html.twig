@@ -14,7 +14,7 @@
 
             </button>
         </div>
-        <div id="task-{{ task.id }}" class="accordion-collapse collapse" data-bs-parent="#{{ tasksListId }}">
+        <div id="task-{{ task.id }}" class="accordion-collapse collapse" data-bs-parent="#{{ tasklist.id|default('tasklist') }}">
             <div class="card-body">
                 <div class="row">
                     <div class="col">

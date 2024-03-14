@@ -43,35 +43,37 @@ class TaskListController extends AbstractController
         $taskListTagType = $tagTypeRepository->findOneBy(
           ['name' => 'Task List']
         );
-        $tag = new Tag();
-        $tag->setTagType($taskListTagType);
-        $form = $this->createForm(TasklistType::class, $tag);
+        $tasklist = new Tag();
+        $tasklist->setTagType($taskListTagType);
+        $form = $this->createForm(TasklistType::class, $tasklist);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($tag);
+            $entityManager->persist($tasklist);
             $entityManager->flush();
 
             return $this->redirectToRoute(
-              'app_tasklist_index',
-              [],
+              'app_tasklist_show',
+              ['id' => $tasklist->getId()],
               Response::HTTP_SEE_OTHER
             );
         }
 
         return $this->renderForm('tasklist/new.html.twig', [
-          'tag' => $tag,
+          'tag' => $tasklist,
           'form' => $form,
         ]);
     }
 
-    #[Route('/{id}', name: 'app_tasklist_show')]
-    public function show(Tag $tag, TaskRepository $taskRepository): Response
-    {
-        $tasks = $taskRepository->findByTag($tag);
+    #[Route('/{id}', name: 'app_tasklist_show', methods: ['GET'])]
+    public function show(
+      Tag $tasklist,
+      TaskRepository $taskRepository
+    ): Response {
+        $tasks = $taskRepository->findByTag($tasklist);
         return $this->render('tasklist/show.html.twig', [
-          'tasklist' => $tag,
+          'tasklist' => $tasklist,
           'tasks' => $tasks,
         ]);
     }
@@ -105,12 +107,17 @@ class TaskListController extends AbstractController
     public function delete(
       Request $request,
       Tag $tasklist,
-      EntityManagerInterface $entityManager
+      EntityManagerInterface $entityManager,
+      TaskRepository $taskRepository
     ): Response {
         if ($this->isCsrfTokenValid(
           'delete' . $tasklist->getId(),
           $request->request->get('_token')
         )) {
+            $tasks = $taskRepository->findByTag($tasklist);
+            foreach ($tasks as $task) {
+                $entityManager->remove($task);
+            }
             $entityManager->remove($tasklist);
             $entityManager->flush();
         }
