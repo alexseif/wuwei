@@ -44,5 +44,31 @@ class DashboardController extends AbstractController
         );
     }
 
+    #[Route('/dev', name: 'app_dashboard_dev')]
+    public function dev(
+      ItemRepository $itemRepository,
+      ItemListRepository $itemListRepository,
+      DailyRepository $dailyRepository,
+      TimeSystemService $timeSystemService,
+      TaskRepository $taskRepository,
+      GoalRepository $goalRepository,
+      TagTypeRepository $tagTypeRepository
+    ): Response {
+        $current = $timeSystemService->getCurrent();
+        $taskList = new Tag();
+        $taskList->setName("1000 ToDo\'s");
+        return $this->render(
+          'dashboard/dev_dashboard.html.twig',
+          [
+            'sections' => $tagTypeRepository->findAll(),
+            'itemLists' => $itemListRepository->findAllWithItems(),
+            'daily' => $dailyRepository->getLastDaily(),
+            'tasklist' => $taskList,
+            'tasks' => $taskRepository->findAll(),
+            'goals' => $goalRepository->findAll(),
+          ]
+        );
+    }
+
 
 }
