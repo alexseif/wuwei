@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Tag;
+use App\Form\Field\TagAutocompleteField;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,7 +17,9 @@ class TagType extends AbstractType
     ): void {
         $builder
           ->add('name')
-          ->add('tagType');
+          ->add('tagType')
+          ->add('tags', TagAutocompleteField::class)
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

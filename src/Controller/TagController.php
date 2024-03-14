@@ -24,12 +24,16 @@ class TagController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_tag_new', methods: ['GET', 'POST'])]
+    #[Route('/new/{tagType}', name: 'app_tag_new', methods: ['GET', 'POST'])]
     public function new(
       Request $request,
-      EntityManagerInterface $entityManager
+      EntityManagerInterface $entityManager,
+      \App\Entity\TagType $tagType = null
     ): Response {
         $tag = new Tag();
+        if ($tagType) {
+            $tag->setTagType($tagType);
+        }
         $form = $this->createForm(TagType::class, $tag);
         $form->handleRequest($request);
 
@@ -37,11 +41,19 @@ class TagController extends AbstractController
             $entityManager->persist($tag);
             $entityManager->flush();
 
-            return $this->redirectToRoute(
+            $response = $this->redirectToRoute(
               'app_tag_index',
               [],
               Response::HTTP_SEE_OTHER
             );
+            if ($tagType) {
+                $response = $this->redirectToRoute(
+                  'app_tag_type_show',
+                  ['id' => $tagType->getId()],
+                  Response::HTTP_SEE_OTHER
+                );
+            }
+            return $response;
         }
 
         return $this->renderForm('tag/new.html.twig', [
@@ -49,6 +61,7 @@ class TagController extends AbstractController
           'form' => $form,
         ]);
     }
+
 
     #[Route('/autocomplete', name: 'app_tag_autocomplete')]
     public function autocomplete(
@@ -102,7 +115,7 @@ class TagController extends AbstractController
             );
         }
 
-        return $this->renderForm('task_list/edit.html.twig', [
+        return $this->renderForm('tag/edit.html.twig', [
           'tag' => $tag,
           'form' => $form,
         ]);

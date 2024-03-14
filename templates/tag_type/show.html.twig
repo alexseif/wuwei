@@ -1,32 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block h1 %}Tag Type: {{ tag_type.name }}{% endblock %}
+{% block h1 %}Tag Type: #{{ tag_type.id }} {{ tag_type.name }}{% endblock %}
 {% block card_actions %}
     <a href="{{ path('app_tag_type_index') }}" class="btn btn-link">back</a>
     <a href="{{ path('app_tag_type_edit', {'id': tag_type.id}) }}" class="btn btn-outline-light">edit</a>
     {{ include('tag_type/_delete_form.html.twig') }}
 {% endblock %}
 {% block body %}
-
-    <table class="table">
-        <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ tag_type.id }}</td>
-        </tr>
-        <tr>
-            <th>Name</th>
-            <td>{{ tag_type.name }}</td>
-        </tr>
-        <tr>
-            <th>CreatedAt</th>
-            <td>{{ tag_type.createdAt ? tag_type.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-        </tr>
-        <tr>
-            <th>UpdatedAt</th>
-            <td>{{ tag_type.updatedAt ? tag_type.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-        </tr>
-        </tbody>
-    </table>
-
+    <div class="card-body">
+        {% include'tag/_tags.html.twig' %}
+    </div>
+    <div class="card-footer">
+        <span title="Created At" class="badge">
+            {{ tag_type.createdAt ? tag_type.createdAt|date('Y-m-d H:i:s') : '' }}</span>
+        <span title="Updated At" class="badge">
+            {{ tag_type.updatedAt ? tag_type.updatedAt|date('Y-m-d H:i:s') : '' }}</span>
+        <a href="{{ path('app_tag_new', {'tagType': tag_type.id}) }}" class="btn btn-outline-light float-end">
+            Create New Tag
+        </a>
+    </div>
 {% endblock %}

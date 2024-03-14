@@ -23,6 +23,24 @@ class TagRepository extends ServiceEntityRepository
     }
 
     /**
+     * Find tags by tag
+     *
+     * @param \App\Entity\Tag $tag
+     *
+     * @return float|int|mixed|string
+     */
+    public function findWithChildren(Tag $tag)
+    {
+        return $this->createQueryBuilder('tag')
+          ->join('tag.tags', 'tags')
+          ->where('tag.id = :tag')
+          ->setParameter(':tag', $tag)
+          ->getQuery()
+          ->getResult();
+    }
+
+
+    /**
      * Search for tags based on a given criteria.
      *
      * @param string $searchTerm The term to search for in tag names

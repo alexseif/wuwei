@@ -1,0 +1,8 @@
+<div class="btn-group btn-group-lg">
+    {% for section in sections %}
+        <a href="{{ path('app_tag_type_show', {'id' : section.id }) }}" role="button"
+           class="btn btn-outline-primary">
+            {{ section.name }}
+        </a>
+    {% endfor %}
+</div>

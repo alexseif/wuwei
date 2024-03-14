@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Traits\TaggableTrait;
 use App\Repository\TagRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -13,6 +14,7 @@ class Tag
 {
 
     use TimestampableEntity;
+    use TaggableTrait;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -33,6 +35,7 @@ class Tag
 
     public function __construct()
     {
+        $this->tags = new ArrayCollection();
         $this->tasks = new ArrayCollection();
     }
 
