@@ -26,6 +26,12 @@ class TaskRepository extends ServiceEntityRepository
         parent::__construct($registry, Task::class);
     }
 
+    /**
+     * Find tasks by tag
+     * @param \App\Entity\Tag $tag
+     *
+     * @return float|int|mixed|string
+     */
     public function findByTag(Tag $tag)
     {
         return $this->createQueryBuilder('task')
