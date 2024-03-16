@@ -1,4 +1,5 @@
 // assets/css/app.scss
+// assets/css/app.scss
 // Required
 @import "bootstrap/scss/functions";
 @import "variables";
@@ -31,10 +32,9 @@ header {
 
   img {
     position: absolute;
-    width: 4rem;
+    width: 3rem;
     height: auto;
     left: 0;
-    top: 4rem;
     opacity: 0.6;
     // -webkit-transform: scaleX(-1);
     // transform: scaleX(-1);

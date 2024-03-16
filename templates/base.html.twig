@@ -17,7 +17,9 @@
     {% endblock %}
 </head>
 <body>
-{% include('_sidebars.html.twig') %}
+{% block sidebar %}
+    {% include('_sidebars.html.twig') %}
+{% endblock %}
 {% block page %}
     <header class="bg-dark">
         {% block nav %}
