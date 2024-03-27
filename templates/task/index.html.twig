@@ -2,51 +2,21 @@
 
 {% block h1 %}Tasks{% endblock %}
 {% block card_actions %}
-    <a href="{{ path('app_task_new') }}" class="btn btn-outline-light">Create new</a>
+
+        <a href="{{ path('app_task_index', {'viewType': 'table'}) }}" class="btn btn-outline-light">Table</a>
+        <a href="{{ path('app_task_index', {'viewType': 'accordion'}) }}" class="btn btn-outline-light">Accordion</a>
+        <a href="{{ path('app_task_index', {'viewType': 'cards'}) }}" class="btn btn-outline-light">Card</a>
+        <a href="{{ path('app_task_new') }}" class="btn btn-outline-light">Create new</a>
 {% endblock %}
 {% block body %}
-    {% include 'task/_tasks_list_accordion.html.twig' %}
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Priority</th>
-            <th>Urgency</th>
-            <th>est</th>
-            <th>eta</th>
-            <th>Due</th>
-            <th>Duration</th>
-            <th>actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for task in tasks %}
-            <tr
-                    data-id="{{ task.id }}"
-                    data-position="{{ task.position }}"
-                    class="{{ task.completed ? 'completed' : '' }}"
-            >
-                <td>{{ task.name }}</td>
-                <td>{{ task.type }}</td>
-                <td>{{ task.priority }}</td>
-                <td>{{ task.urgency }}</td>
-                <td>{{ task.est }}</td>
-                <td>{{ task.eta ? task.eta|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ task.dueAt ? task.dueAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ task.duration }}</td>
-                <td>
-                    <a href="{{ path('app_task_show', {'id': task.id}) }}">show</a>
-                    <a href="{{ path('app_task_edit', {'id': task.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="15">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    {#    {% include 'task/_tasks_list_accordion.html.twig' %} #}
 
+    {% if viewType == 'table' %}
+        {% include 'task/_tasks_list_table.html.twig' %}
+    {% elseif viewType == 'cards' %}
+        {% include 'task/_tasks_list_card.html.twig' %}
+    {% else %}
+        {% include 'task/_tasks_list_accordion.html.twig' %}
+    {% endif %}
 {% endblock %}

@@ -16,10 +16,13 @@ use Symfony\Component\Routing\Annotation\Route;
 class TaskController extends AbstractController
 {
 
-    #[Route('/', name: 'app_task_index', methods: ['GET'])]
-    public function index(TaskRepository $taskRepository): Response
-    {
+    #[Route('/{viewType?}', name: 'app_task_index', methods: ['GET'], defaults: ['viewType' => 'accordion'])]
+    public function index(
+      TaskRepository $taskRepository,
+      string $viewType = 'accordion'
+    ): Response {
         return $this->render('task/index.html.twig', [
+          'viewType' => $viewType,
           'tasks' => $taskRepository->findAll(),
         ]);
     }

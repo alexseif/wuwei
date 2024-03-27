@@ -1,50 +1,49 @@
-<div class="list-group-item">
-    <div class="card card-task status-{{ (task.urgency)? 'warning' : (task.priority>0)? 'danger': (task.priority<0)?'default':'info' }}
+<div class="card card-task status-{{ (task.urgency)? 'warning' : (task.priority>0)? 'danger': (task.priority<0)?'default':'info' }}
 {{ (task.completed) ? 'text-muted completed' : '' }}">
-        <div class="card-header accordion-header d-flex">
-            <div class="form-check task-item flex-fill">
-                <input class="form-check-input" type="checkbox" value="{{ task.id }}"
-                       id="task_{{ task.id }}" name="task[]" {{ task.completed ? 'checked' }}>
-                <label class="form-check-label" for="task_{{ task.id }}">
-                    <span class="task_name" data-href="{{ path('app_task_show', {'id': task.id}) }}">{{ task.name }}</span>
-                </label>
-            </div><!-- .form-check -->
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#task-{{ task.id }}" aria-expanded="false" aria-controls="task-{{ task.id }}">
+    <div class="card-header accordion-header d-flex">
+        <div class="form-check task-item flex-fill">
+            <input class="form-check-input" type="checkbox" value="{{ task.id }}"
+                   id="task_{{ task.id }}" name="task[]" {{ task.completed ? 'checked' }}>
+            <label class="form-check-label" for="task_{{ task.id }}">
+                <span class="task_name" data-href="{{ path('app_task_show', {'id': task.id}) }}">{{ task.name }}</span>
+            </label>
+        </div><!-- .form-check -->
+        <button class="accordion-button collapsed w-25" type="button" data-bs-toggle="collapse"
+                data-bs-target="#task-{{ task.id }}" aria-expanded="false" aria-controls="task-{{ task.id }}">
 
-            </button>
-        </div>
-        <div id="task-{{ task.id }}" class="accordion-collapse collapse" data-bs-parent="#{{ tasklist.id|default('tasklist') }}">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col">
-                        <div>Type: {{ task.type }}</div>
-                        <div>Tags: {{ task.tags|join(',') }}</div>
-                        <div>Description: <p>{{ task.description }}</p></div>
+        </button>
+    </div>
+    <div id="task-{{ task.id }}" class="accordion-collapse collapse"
+         data-bs-parent="#{{ tasklist.id|default('tasklist') }}">
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <div>Type: {{ task.type }}</div>
+                    <div>Tags: {{ task.tags|join(',') }}</div>
+                    <div>Description: <p>{{ task.description }}</p></div>
 
-                    </div>
-                    <div class="col">
-                        <div>EST: {{ task.est }}</div>
-                        <div>ETA: {{ task.eta }}</div>
-                        <div>Due: {{ task.dueAt }}</div>
-                        <div>Dur: {{ task.duration }}</div>
-                    </div>
-                    <div class="col">
-                        <div>Completed: {{ task.completed }}</div>
-                        <div>CompletedAt: {{ (task.completedAt)?task.completedAt|date }}</div>
-                        <div>CreatedAt: {{ task.createdAt|date }}</div>
-                        <div>UpdatedAt: {{ task.updatedAt|date }}</div>
-                    </div>
                 </div>
-
-            </div>
-            <div class="card-footer d-flex justify-content-end">
-                <div class="btn-toolbar">
-                    <a href="{{ path('app_task_edit', {'id': task.id}) }}" class="btn btn-outline-primary">Edit</a>
-                    <a href="{{ path('app_task_show', {'id': task.id}) }}" class="btn btn-outline-info">Show</a>
-                    {{ include('task/_delete_form.html.twig') }}
+                <div class="col">
+                    <div>EST: {{ task.est }}</div>
+                    <div>ETA: {{ task.eta }}</div>
+                    <div>Due: {{ task.dueAt }}</div>
+                    <div>Dur: {{ task.duration }}</div>
+                </div>
+                <div class="col">
+                    <div>Completed: {{ task.completed }}</div>
+                    <div>CompletedAt: {{ (task.completedAt)?task.completedAt|date }}</div>
+                    <div>CreatedAt: {{ task.createdAt|date }}</div>
+                    <div>UpdatedAt: {{ task.updatedAt|date }}</div>
                 </div>
             </div>
+
         </div>
-    </div><!-- .accordion-item -->
-</div><!-- .list-group-item -->
+        <div class="card-footer d-flex justify-content-end">
+            <div class="btn-toolbar">
+                <a href="{{ path('app_task_edit', {'id': task.id}) }}" class="btn btn-outline-primary">Edit</a>
+                <a href="{{ path('app_task_show', {'id': task.id}) }}" class="btn btn-outline-info">Show</a>
+                {{ include('task/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+</div><!-- .accordion-item -->
