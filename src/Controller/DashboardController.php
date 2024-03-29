@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Tag;
-use App\Repository\DailyRepository;
 use App\Repository\GoalRepository;
 use App\Repository\ItemListRepository;
 use App\Repository\ItemRepository;
@@ -22,7 +21,6 @@ class DashboardController extends AbstractController
     public function home(
       ItemRepository $itemRepository,
       ItemListRepository $itemListRepository,
-      DailyRepository $dailyRepository,
       TimeSystemService $timeSystemService,
       TaskRepository $taskRepository,
       GoalRepository $goalRepository,
@@ -36,7 +34,6 @@ class DashboardController extends AbstractController
           [
             'sections' => $tagTypeRepository->findAll(),
             'itemLists' => $itemListRepository->findAllWithItems(),
-            'daily' => $dailyRepository->getLastDaily(),
             'tasklist' => $taskList,
             'tasks' => $taskRepository->findAll(),
             'goals' => $goalRepository->findAll(),
@@ -48,7 +45,6 @@ class DashboardController extends AbstractController
     public function dev(
       ItemRepository $itemRepository,
       ItemListRepository $itemListRepository,
-      DailyRepository $dailyRepository,
       TimeSystemService $timeSystemService,
       TaskRepository $taskRepository,
       GoalRepository $goalRepository,
@@ -62,7 +58,6 @@ class DashboardController extends AbstractController
           [
             'sections' => $tagTypeRepository->findAll(),
             'itemLists' => $itemListRepository->findAllWithItems(),
-            'daily' => $dailyRepository->getLastDaily(),
             'tasklist' => $taskList,
             'tasks' => $taskRepository->findAll(),
             'goals' => $goalRepository->findAll(),

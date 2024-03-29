@@ -22,8 +22,7 @@ class Item
     #[ORM\JoinColumn(nullable: false)]
     private ?ItemList $list = null;
 
-    #[ORM\ManyToOne(inversedBy: 'items')]
-    private ?Daily $daily = null;
+
 
     public function getId(): ?int
     {
@@ -59,17 +58,7 @@ class Item
         return $this->name;
     }
 
-    public function getDaily(): ?Daily
-    {
-        return $this->daily;
-    }
 
-    public function setDaily(?Daily $daily): static
-    {
-        $this->daily = $daily;
-
-        return $this;
-    }
 
 
 }
