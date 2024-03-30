@@ -5,28 +5,18 @@
     <a href="{{ path('app_tasklist_new') }}" class="btn btn-outline-light">Create new</a>
 {% endblock %}
 {% block body %}
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>actions</th>
-        </tr>
-        </thead>
-        <tbody>
+    <div class="row">
         {% for tasklist in tasklists %}
-            <tr>
-                <td>{{ tasklist.name }}</td>
-                <td>
-                    <a href="{{ path('app_tasklist_show', {'id': tasklist.id}) }}">show</a>
-                    <a href="{{ path('app_tasklist_edit', {'id': tasklist.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
+            <div class="col-4 text-center">
+                <a href="{{ path('app_tasklist_show', {'id': tasklist.id}) }}" class="btn btn-outline-light rounded-0 btn-lg my-2 p-4 w-100">
+{#                    <div class="d-flex">#}
+                        {{ tasklist.name }}
+{#                        <div class="btn-toolbar ms-auto">#}
+{#                            <a href="{{ path('app_tasklist_edit', {'id': tasklist.id}) }}" class="btn btn-secondary">edit</a>#}
+{#                        </div>#}
+{#                    </div>#}
+                </a>
+            </div>
         {% endfor %}
-        </tbody>
-    </table>
-
+    </div>
 {% endblock %}
