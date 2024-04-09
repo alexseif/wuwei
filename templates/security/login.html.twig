@@ -1,45 +1,56 @@
 {% extends 'base.html.twig' %}
+{% block container %}
+    <div class="container">
+        <div class="d-flex justify-content-center align-items-center mt-5 pt-5">
+            <div class="card">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <h1 class="card-title text-center w-100 text-uppercase">{% block h1 %}Wuwei{% endblock %}</h1>
+                    <div class="card-actions btn-toolbar">
+                        {% if app.user %}
+                            You are logged in as {{ app.user.userIdentifier }}, <a
+                                href="{{ path('app_logout') }}">Logout</a>
+                        {% endif %}
+                    </div>
+                </div><!-- .card-header -->
 
-{% block h1 %}Log in!{% endblock %}
-{% block card_actions %}
-    {% if app.user %}
-        You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-    {% endif %}
-{% endblock %}
-{% block body %}
-    <form method="post">
-        <div class="card-body">
-            {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
-<div class="mb-3">
-         <label class="form-label" for="inputEmail">Email</label>
-            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control"
-                   autocomplete="email" required autofocus>
-</div>
-            <div class="mb-3">
-            <label class="form-label" for="inputPassword">Password</label>
-            <input type="password" name="password" id="inputPassword" class="form-control"
-                   autocomplete="current-password"
-                   required>
-            </div>
-            <input type="hidden" name="_csrf_token"
-                   value="{{ csrf_token('authenticate') }}"
-            >
+                <form method="post">
+                    <div class="card-body">
+                        {% if error %}
+                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+                        <div class="mb-3">
+                            <label class="form-label" for="inputEmail">Email</label>
+                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail"
+                                   class="form-control"
+                                   autocomplete="email" required autofocus>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="inputPassword">Password</label>
+                            <input type="password" name="password" id="inputPassword" class="form-control"
+                                   autocomplete="current-password"
+                                   required>
+                        </div>
+                        <input type="hidden" name="_csrf_token"
+                               value="{{ csrf_token('authenticate') }}"
+                        >
+                    </div>
+                    <div class="card-footer">
+                        <label class="form-label">
+                            <input type="checkbox" name="_remember_me" checked>
+                            Keep me logged in
+                        </label>
+                        <div class="d-flex justify-content-between">
+                            <button class="btn btn-success" type="submit">
+                                Sign in
+                            </button>
+
+                            <a href="{{ path('app_forgot_password_request') }}">Reset your forgotten password :D</a>
+                        </div>
+                    </div>
+                </form>
+
+            </div><!-- .card -->
+
         </div>
-        <div class="card-footer">
-            <label class="form-label">
-                <input type="checkbox" name="_remember_me" checked>
-                Keep me logged in
-            </label>
-            <div class="d-flex justify-content-between">
-                <button class="btn btn-success" type="submit">
-                    Sign in
-                </button>
-
-                <a href="{{ path('app_forgot_password_request') }}">Reset your forgotten password :D</a>
-            </div>
-        </div>
-    </form>
-
+    </div><!-- .container -->
 {% endblock %}

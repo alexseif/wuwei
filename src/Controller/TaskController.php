@@ -16,8 +16,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class TaskController extends AbstractController
 {
 
-    #[Route('/{viewType?}', name: 'app_task_index', methods: ['GET'], defaults: ['viewType' => 'accordion'])]
+    #[Route('/', name: 'app_task_index', methods: ['GET'])]
     public function index(
+      TaskRepository $taskRepository,
+      string $viewType = 'accordion'
+    ): Response {
+        return $this->render('task/index.html.twig', [
+          'viewType' => $viewType,
+          'tasks' => $taskRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/view/{viewType?}', name: 'app_task_index_view', methods: ['GET'], defaults: ['viewType' => 'accordion'])]
+    public function view(
       TaskRepository $taskRepository,
       string $viewType = 'accordion'
     ): Response {

@@ -3,10 +3,10 @@
 {% block h1 %}Tasks{% endblock %}
 {% block card_actions %}
 
-        <a href="{{ path('app_task_index', {'viewType': 'table'}) }}" class="btn btn-outline-light">Table</a>
-        <a href="{{ path('app_task_index', {'viewType': 'accordion'}) }}" class="btn btn-outline-light">Accordion</a>
-        <a href="{{ path('app_task_index', {'viewType': 'cards'}) }}" class="btn btn-outline-light">Card</a>
-        <a href="{{ path('app_task_new') }}" class="btn btn-outline-light">Create new</a>
+    <a href="{{ path('app_task_index_view', {'viewType': 'table'}) }}" class="btn btn-outline-light">Table</a>
+    <a href="{{ path('app_task_index_view', {'viewType': 'accordion'}) }}" class="btn btn-outline-light">Accordion</a>
+    <a href="{{ path('app_task_index_view', {'viewType': 'cards'}) }}" class="btn btn-outline-light">Card</a>
+    <a href="{{ path('app_task_new') }}" class="btn btn-outline-light">Create new</a>
 {% endblock %}
 {% block body %}
 
