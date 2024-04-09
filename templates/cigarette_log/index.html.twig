@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}Cigarette Log{% endblock %}
+{% block card_actions %}
+{% endblock %}
+{% block body %}
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Day</th>
+            <th>Count</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for cigarette_count in cigarette_counts %}
+            <tr>
+                <td>{{ cigarette_count.day }}</td>
+                <td>{{ cigarette_count.count }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>CreatedAt</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for cigarette_log in cigarette_logs %}
+            <tr>
+                <td>{{ cigarette_log.id }}</td>
+                <td>{{ cigarette_log.createdAt ? cigarette_log.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_cigarette_log_show', {'id': cigarette_log.id}) }}" class="text-info">
+                        <span class="fa fa-eye"></span>
+                    </a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+{% block card_footer %}
+    <div class="card-footer text-center">
+        <a href="{{ path('app_cigarette_log_new') }}" class="btn btn-outline-light">+ Cigarette</a>
+    </div>
+{% endblock %}
