@@ -10,8 +10,8 @@
 
 }
 
-.completed{
-  .task_name{
+.completed {
+  .task_name {
     text-decoration: line-through;
   }
 }
@@ -27,5 +27,30 @@
 @each $status, $value in $theme-colors {
   .status-#{$status} {
     @include status-variant($value);
+  }
+}
+
+#eisenhower {
+  overflow-y: scroll;
+
+  > .card:not(:last-child) {
+    width: 33%;
+  }
+
+  > .card {
+    .list-group {
+      overflow-y: scroll;
+    }
+    max-height: 40vh;
+  }
+}
+
+.task-eisenhower-list {
+  min-height: 5rem;
+
+  &#task-pool {
+    li.list-group-item {
+      width: 25%;
+    }
   }
 }

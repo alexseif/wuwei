@@ -9,7 +9,9 @@ import './bootstrap.js';
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.scss';
 import $ from 'jquery';
-
+//import jquery ui for draggable and sortable
+import 'jquery-ui/ui/widgets/draggable';
+import 'jquery-ui/ui/widgets/sortable';
 require('bootstrap');
 import select2 from 'select2';
 import 'select2/dist/css/select2.min.css'

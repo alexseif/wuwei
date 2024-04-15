@@ -1,5 +1,6 @@
-<div class="card card-task status-{{ (task.urgency)? 'warning' : (task.priority>0)? 'danger': (task.priority<0)?'default':'info' }}
-{{ (task.completed) ? 'text-muted completed' : '' }}">
+<div class="card card-task task status-{{ (task.urgency and task.priority)? 'danger' : (task.urgency)? 'warning': (task.priority)?'primary':'default' }}
+{{ (task.completed) ? 'text-muted completed' : '' }}" data-task-id="{{ task.id }}"
+     data-priority="{{ task.priority }}" data-urgency="{{ task.urgency }}">
     <div class="card-header accordion-header d-flex">
         <div class="form-check task-item flex-fill">
             <input class="form-check-input" type="checkbox" value="{{ task.id }}"
