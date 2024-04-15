@@ -1,0 +1,36 @@
+<div class="d-flex flex-wrap" id="eisenhower" data-url="{{ path('app_task_eisenhower', { 'id': 0 }) }}">
+    <div class="card status-danger flex-fill">
+        <div class="card-header">
+            <h5 class="card-title">Urgent & Important</h5>
+        </div>
+        <ul class="list-group task-eisenhower-list" id="important-urgent"
+            data-priority="1" data-urgency="1"></ul>
+    </div>
+    <div class="card status-warning flex-fill">
+        <div class="card-header">
+            <h5 class="card-title">Urgent</h5>
+        </div>
+        <ul class="list-group task-eisenhower-list" id="not-important-urgent"
+            data-priority="0" data-urgency="1"></ul>
+    </div>
+    <div class="card status-primary flex-fill">
+        <div class="card-header">
+            <h5 class="card-title">Important</h5>
+        </div>
+        <ul class="list-group task-eisenhower-list" id="important-not-urgent"
+            data-priority="1" data-urgency="0"></ul>
+    </div>
+    <div class="card flex-fill">
+        <div class="card-header">
+            <h5 class="card-title">Normal</h5>
+        </div>
+        <ul class="list-group task-eisenhower-list" id="not-important-not-urgent"
+            data-priority="0" data-urgency="0">
+            {% for task in tasks %}
+                <li class="list-group-item">
+                    {% include 'task/_task.html.twig' %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

@@ -120,6 +120,32 @@ class TaskController extends AbstractController
         ]);
     }
 
+    #[Route('/{id}/eisenhower', name: 'app_task_eisenhower', methods: [
+      'GET',
+      'POST',
+    ])]
+    public function eisenhower(
+      Request $request,
+      Task $task,
+      EntityManagerInterface $entityManager
+    ): Response {
+        //Check if request is ajax
+        if (!$request->isXmlHttpRequest()) {
+            return $this->redirectToRoute(
+              'app_task_index',
+              [],
+              Response::HTTP_SEE_OTHER
+            );
+        }
+        //Get task from jquery draggable ajax request
+        // update priority and urgency
+        $task->setPriority($request->get('priority'));
+        $task->setUrgency($request->get('urgency'));
+        $entityManager->flush();
+        //Return response to jquery draggable ajax request
+        return new Response('success');
+    }
+
     #[Route('/{id}', name: 'app_task_delete', methods: ['POST'])]
     public function delete(
       Request $request,
