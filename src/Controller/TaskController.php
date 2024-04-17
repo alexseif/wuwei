@@ -23,7 +23,13 @@ class TaskController extends AbstractController
     ): Response {
         return $this->render('task/index.html.twig', [
           'viewType' => $viewType,
-          'tasks' => $taskRepository->findAll(),
+          'tasks' => $taskRepository->findBy([],
+            [
+              'position' => 'ASC',
+              'priority' => 'DESC',
+              'urgency' => 'DESC',
+              'createdAt' => 'DESC',
+            ]),
         ]);
     }
 
@@ -34,7 +40,14 @@ class TaskController extends AbstractController
     ): Response {
         return $this->render('task/index.html.twig', [
           'viewType' => $viewType,
-          'tasks' => $taskRepository->findAll(),
+          'tasks' => $taskRepository->findBy([],
+            [
+              'position' => 'ASC',
+              'priority' => 'DESC',
+              'urgency' => 'DESC',
+              'createdAt' => 'DESC',
+            ]),
+
         ]);
     }
 
