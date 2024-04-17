@@ -9,6 +9,7 @@
                 <span class="task_name" data-href="{{ path('app_task_show', {'id': task.id}) }}">{{ task.name }}</span>
             </label>
         </div><!-- .form-check -->
+        <span class="badge">{{ task.tags|join }}</span>
         <button class="accordion-button collapsed w-25" type="button" data-bs-toggle="collapse"
                 data-bs-target="#task-{{ task.id }}" aria-expanded="false" aria-controls="task-{{ task.id }}">
 
