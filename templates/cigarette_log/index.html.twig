@@ -2,6 +2,7 @@
 
 {% block h1 %}Cigarette Log{% endblock %}
 {% block card_actions %}
+    <a href="{{ path('app_cigarette_log_new') }}" class="btn btn-outline-light">+ Cigarette</a>
 {% endblock %}
 {% block body %}
 
@@ -52,9 +53,4 @@
         </tbody>
     </table>
 
-{% endblock %}
-{% block card_footer %}
-    <div class="card-footer text-center">
-        <a href="{{ path('app_cigarette_log_new') }}" class="btn btn-outline-light">+ Cigarette</a>
-    </div>
 {% endblock %}
