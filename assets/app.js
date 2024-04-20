@@ -13,7 +13,6 @@ import $ from 'jquery';
 import 'jquery-ui/ui/widgets/draggable';
 import 'jquery-ui/ui/widgets/sortable';
 require('bootstrap');
-import select2 from 'select2';
 import 'select2/dist/css/select2.min.css'
 import 'select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.min.css'
 // import flatpickr from "flatpickr";
@@ -22,11 +21,10 @@ import 'select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.min.css'
 // start the Stimulus application
 
 import './bootstrap';
-import functions from './functions';
 import './item';
 import './goals';
 import './tasks';
-
+import './cigaretteLog';
 
 $.fn.select2.defaults.set("theme", "bootstrap-5");
 

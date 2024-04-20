@@ -17,11 +17,23 @@ class CigaretteLogController extends AbstractController
     #[Route('/', name: 'app_cigarette_log_index', methods: ['GET'])]
     public function index(CigaretteLogRepository $cigaretteLogRepository
     ): Response {
+        $lastFiveDaysLogsGroupedByDay = $cigaretteLogRepository->findByLastFiveDaysGroupedByDay(
+        );
+
         return $this->render('cigarette_log/index.html.twig', [
           'cigarette_logs' => $cigaretteLogRepository->findBy([],
             ['createdAt' => 'DESC']),
           'cigarette_counts' => $cigaretteLogRepository->countByDay(),
+          'last_five_days_logs_grouped_by_day' => $lastFiveDaysLogsGroupedByDay,
+          'now' => new \DateTime(), // Add this line
         ]);
+    }
+
+    #[Route('/data', name: 'app_cigarette_log_data', methods: ['GET'])]
+    public function data(CigaretteLogRepository $cigaretteLogRepository
+    ): Response {
+        $cigarette_counts = $cigaretteLogRepository->countByDay();
+        return $this->json($cigarette_counts);
     }
 
     #[Route('/new', name: 'app_cigarette_log_new', methods: ['GET', 'POST'])]
