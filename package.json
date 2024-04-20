@@ -28,7 +28,10 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.4.2",
         "@ibm/plex": "^6.3.0",
+        "axios": "^1.6.8",
         "bootstrap": "^5.3.1",
+        "chart.js": "^4.4.2",
+        "chartjs-plugin-datalabels": "^2.2.0",
         "chosen": "^0.0.2",
         "css-loader": "^6.8.1",
         "draggable": "^4.2.0",

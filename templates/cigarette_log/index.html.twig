@@ -5,52 +5,126 @@
     <a href="{{ path('app_cigarette_log_new') }}" class="btn btn-outline-light">+ Cigarette</a>
 {% endblock %}
 {% block body %}
+    {% set difference = cigarette_difference() %}
+    {% if difference > 0 %}
+        <div class="alert alert-danger" role="alert">
+            You have smoked {{ difference }} more cigarettes than the same time period yesterday.
+        </div>
+    {% elseif difference < 0 %}
+        <div class="alert alert-success" role="alert">
+            You have smoked {{ -difference }} less cigarettes than the same time period yesterday. Keep it up!
+        </div>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            You have smoked the same amount of cigarettes as the same time period yesterday.
+        </div>
+    {% endif %}
+    {# Graph with the cigarette count per day  #}
+    <div class="container">
+        <div class="row">
+            <div class="col-9">
+                <canvas id="cigaretteCountChart"></canvas>
+            </div>
+            <div class="col">
+
+                {# Table with the cigarette count per day #}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Count</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for cigarette_count in cigarette_counts %}
+                        <tr>
+                            <td>{{ cigarette_count.day }}</td>
+                            <td>{{ cigarette_count.count }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="4">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
     <table class="table">
         <thead>
         <tr>
-            <th>Day</th>
-            <th>Count</th>
+            {% for i in 4..0 %}
+                <th>{{ (now|date_modify('-' ~ i ~ ' days'))|date('Y-m-d') }}</th>
+            {% endfor %}
         </tr>
         </thead>
         <tbody>
-        {% for cigarette_count in cigarette_counts %}
+        {% set rows = [] %}
+        {% for log in last_five_days_logs_grouped_by_day %}
+            {% set day = log.day|date('Y-m-d') %}
+            {% if rows[day] is not defined %}
+                {% set rows = rows|merge({(day): []}) %}
+            {% endif %}
+            {% set rows = rows|merge({(day): rows[day]|merge([log.timestamp|date('H:i:s')])}) %}
+        {% endfor %}
+        {% for i in 0..23 %}
             <tr>
-                <td>{{ cigarette_count.day }}</td>
-                <td>{{ cigarette_count.count }}</td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
+                {% for j in 4..0 %}
+                    {% set day = (now|date_modify('-' ~ j ~ ' days'))|date('Y-m-d') %}
+                    <td>
+                        {{ rows[day][i]|default('') }}
+                    </td>
+                {% endfor %}
             </tr>
         {% endfor %}
         </tbody>
     </table>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>CreatedAt</th>
-            <th>actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for cigarette_log in cigarette_logs %}
-            <tr>
-                <td>{{ cigarette_log.id }}</td>
-                <td>{{ cigarette_log.createdAt ? cigarette_log.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_cigarette_log_show', {'id': cigarette_log.id}) }}" class="text-info">
-                        <span class="fa fa-eye"></span>
-                    </a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    {# Collapsable accordion for this table   #}
+    <div class="accordion" id="cigaretteLog">
+        <div class="card">
+            <div class="card-header" id="cigaretteLogHeading">
+                <h2 class="mb-0">
+                    <button class="btn btn-link" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#cigaretteLogDetails"
+                            aria-expanded="true" aria-controls="collapseOne">
+                        Show Cigarette Logs
+                    </button>
+                </h2>
+            </div>
+            <div id="cigaretteLogDetails" class="collapse" aria-labelledby="cigaretteLogHeading"
+                 data-bs-parent="#cigaretteLog">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>CreatedAt</th>
+                        <th>actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for cigarette_log in cigarette_logs %}
+                        <tr>
+                            <td>{{ cigarette_log.id }}</td>
+                            <td>{{ cigarette_log.createdAt ? cigarette_log.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>
+                                <a href="{{ path('app_cigarette_log_show', {'id': cigarette_log.id}) }}"
+                                   class="text-info">
+                                    <span class="fa fa-eye"></span>
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="4">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
