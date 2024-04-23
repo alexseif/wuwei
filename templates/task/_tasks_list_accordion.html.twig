@@ -1,9 +1,0 @@
-<div class="accordion accordion-flush tasks-list" id="{{ tasklist.id|default('tasklist') }}">
-    <div class="list-group">
-        {% for task in tasks %}
-            <div class="list-group-item">
-                {% include 'task/_task.html.twig' %}
-            </div>
-        {% endfor %}
-    </div>
-</div>
