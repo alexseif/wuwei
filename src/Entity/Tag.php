@@ -27,8 +27,6 @@ class Tag
     #[ORM\ManyToOne(inversedBy: 'tags')]
     private ?TagType $tagType = null;
 
-    #[ORM\OneToMany(mappedBy: 'type', targetEntity: Task::class)]
-    private Collection $tasks;
 
     #[ORM\OneToOne(mappedBy: 'AccountTag', targetEntity: Account::class)]
     private ?Account $account = null;
@@ -36,7 +34,6 @@ class Tag
     public function __construct()
     {
         $this->tags = new ArrayCollection();
-        $this->tasks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -71,36 +68,6 @@ class Tag
     public function __toString(): string
     {
         return $this->getName();
-    }
-
-    /**
-     * @return Collection<int, Task>
-     */
-    public function getTasks(): Collection
-    {
-        return $this->tasks;
-    }
-
-    public function addTask(Task $task): static
-    {
-        if (!$this->tasks->contains($task)) {
-            $this->tasks->add($task);
-            $task->setType($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTask(Task $task): static
-    {
-        if ($this->tasks->removeElement($task)) {
-            // set the owning side to null (unless already changed)
-            if ($task->getType() === $this) {
-                $task->setType(null);
-            }
-        }
-
-        return $this;
     }
 
     public function getAccount(): ?Account

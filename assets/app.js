@@ -23,7 +23,6 @@ import 'select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.min.css'
 import './bootstrap';
 import './item';
 import './goals';
-import './tasks';
 import './cigaretteLog';
 
 $.fn.select2.defaults.set("theme", "bootstrap-5");
