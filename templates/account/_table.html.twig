@@ -2,8 +2,7 @@
     <thead>
     <tr>
         <th>Name</th>
-        <th>Account Tag</th>
-        <th>Tags</th>
+        <th>Client</th>
         <th>Status</th>
         <th>Enabled</th>
         <th>actions</th>
@@ -13,8 +12,7 @@
     {% for account in accounts %}
         <tr>
             <td>{{ account.name }}</td>
-            <td>{{ account.accountTag }}</td>
-            <td>{{ account.tags|join(', ') }}</td>
+            <td>{{ account.client }}</td>
             <td>{{ account.status }}</td>
             <td>{{ account.enabled ? 'Yes' : 'No' }}</td>
             <td>
