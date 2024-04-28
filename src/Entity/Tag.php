@@ -28,9 +28,6 @@ class Tag
     private ?TagType $tagType = null;
 
 
-    #[ORM\OneToOne(mappedBy: 'AccountTag', targetEntity: Account::class)]
-    private ?Account $account = null;
-
     public function __construct()
     {
         $this->tags = new ArrayCollection();
@@ -70,16 +67,6 @@ class Tag
         return $this->getName();
     }
 
-    public function getAccount(): ?Account
-    {
-        return $this->account;
-    }
 
-    public function setAccount(?Account $account): static
-    {
-        $this->account = $account;
-
-        return $this;
-    }
 
 }
