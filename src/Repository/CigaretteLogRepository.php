@@ -20,6 +20,7 @@ class CigaretteLogRepository extends ServiceEntityRepository
 
         return $qb->select('DATE(c.createdAt) as day, COUNT(c) as count')
           ->groupBy('day')
+          ->orderBy('day', 'DESC')
           ->getQuery()
           ->getResult();
     }
