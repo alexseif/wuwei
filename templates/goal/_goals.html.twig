@@ -1,14 +1,12 @@
 {% if goals %}
-<div class="card goals-card">
-        <div class="card-header">
-            <h2>Goals</h2>
-        </div>
-        <div class="list-group goals">
-            {% for goal in goals %}
-                <div class="list-group-item goal" data-href="{{ path('app_goal_show', {'id': goal.id}) }}">
-                    {{ goal.name }}
+    <h2 class="">Goals</h2>
+    <div class="goals d-flex flex-wrap">
+        {% for goal in goals %}
+            <div class="card goal flex-fill" data-href="{{ path('app_goal_show', {'id': goal.id}) }}">
+                <div class="card-body">
+                    <h3 class="card-title">{{ goal.name }}</h3>
                 </div>
-            {% endfor %}
-        </div>
-</div><!-- .goals-card -->
+            </div>
+        {% endfor %}
+    </div>
 {% endif %}

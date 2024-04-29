@@ -3,22 +3,9 @@
 {% block body %}
     {% include 'tag_type/_sections.html.twig' %}
     {% include 'progressbars/_progressbars.html.twig' %}
-    {#    <div class="row align-items-stretch"> #}
-    {#        <div class="col"> #}
-    <div class="card-group">
+    <div class="card-body">
         {% include('goal/_goals.html.twig') %}
-        {% for itemList in itemLists %}
-            <div class="card" {{ ("شعار المرحلة" == itemList.name)? "dir='rtl'" : "" }}>
-                <div class="card-header"><h2>{{ itemList.name }}</h2></div>
-                <div class="list-group">
-                    {% for item in itemList.items %}
-                        <div class="list-group-item">
-                            {% include 'item/_item.html.twig' %}
-                        </div><!-- .list-group-item -->
-                    {% endfor %}
-                </div><!-- .list-group -->
-            </div><!-- .card -->
-        {% endfor %}
+        <hr/>
+        {% include('item_list/_item_lists.html.twig') %}
     </div>
-    {% include 'task/_tasks_list.html.twig' %}
 {% endblock %}
