@@ -26,28 +26,38 @@
                 <canvas id="cigaretteCountChart"></canvas>
             </div>
             <div class="col">
-
-                {# Table with the cigarette count per day #}
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Day</th>
-                        <th>Count</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for cigarette_count in cigarette_counts %}
+                <div style="max-height: 500px; overflow-y: auto;">
+                    {# Table with the cigarette count per day #}
+                    <table class="table">
+                        <thead>
                         <tr>
-                            <td>{{ cigarette_count.day }}</td>
-                            <td>{{ cigarette_count.count }}</td>
+                            <th>Day</th>
+                            <th>Count</th>
                         </tr>
-                    {% else %}
-                        <tr>
-                            <td colspan="4">no records found</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        {% for cigarette_count in cigarette_counts %}
+                            <tr>
+                                <td>{{ cigarette_count.day }}</td>
+                                <td>{{ cigarette_count.count }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="4">no records found</td>
+                            </tr>
+                        {% endfor %}{% for cigarette_count in cigarette_counts %}
+                            <tr>
+                                <td>{{ cigarette_count.day }}</td>
+                                <td>{{ cigarette_count.count }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="4">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
