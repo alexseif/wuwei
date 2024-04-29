@@ -8,7 +8,7 @@ Chart.register(ChartDataLabels);
 document.addEventListener('DOMContentLoaded', function () {
     axios.get('/cigarette_log/data')
         .then(function (response) {
-            var cigarette_counts = response.data;
+            var cigarette_counts = response.data.reverse();
 
             // Initialize percentageDifference of the first data point
             if (cigarette_counts.length > 0) {
