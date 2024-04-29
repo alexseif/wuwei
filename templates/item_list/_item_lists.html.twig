@@ -1,12 +1,17 @@
+<h2>Items</h2>
 {% for itemList in itemLists %}
-    <div class="card" {{ ("شعار المرحلة" == itemList.name)? "dir='rtl'" : "" }}>
-        <div class="card-header"><h2>{{ itemList.name }}</h2></div>
-        <div class="list-group">
+    <div class="" {{ ("شعار المرحلة" == itemList.name)? "dir='rtl'" : "" }}>
+        <h3>{{ itemList.name }}</h3>
+        <div class="items d-flex flex-wrap">
             {% for item in itemList.items %}
-                <div class="list-group-item">
-                    {% include 'item/_item.html.twig' %}
+                <div class="card goal flex-fill mb-3">
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            {% include 'item/_item.html.twig' %}
+                        </h4>
+                    </div>
                 </div><!-- .list-group-item -->
             {% endfor %}
-        </div><!-- .list-group -->
-    </div><!-- .card -->
+        </div>
+    </div>
 {% endfor %}

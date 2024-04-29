@@ -1,11 +1,9 @@
 {% extends 'base.html.twig' %}
 {% block h1 %}Welcome to WuWei{% endblock %}
 {% block body %}
-    {#    <div class="row align-items-stretch"> #}
-    {#        <div class="col"> #}
-    {% include 'progressbars/_progressbars.html.twig' %}
-    <div class="card-group">
+    <div class="card-body">
         {% include('goal/_goals.html.twig') %}
+        <hr/>
         {% include('item_list/_item_lists.html.twig') %}
     </div>
 {% endblock %}
