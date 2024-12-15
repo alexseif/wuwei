@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}TaskLists index
+{% endblock %}
+{% block card_actions %}
+	<div>
+		<a href="{{ path('app_task_lists_new') }}">Create new</a>
+	</div>
+{% endblock %}
+{% block body %}
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Status</th>
+				<th>CreatedAt</th>
+				<th>UpdatedAt</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for task_list in task_lists %}
+				<tr>
+					<td>{{ task_list.id }}</td>
+					<td>{{ task_list.name }}</td>
+					<td>{{ task_list.status }}</td>
+					<td>{{ task_list.createdAt ? task_list.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+					<td>{{ task_list.updatedAt ? task_list.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+					<td>
+						<a href="{{ path('app_task_lists_show', {'id': task_list.id}) }}">show</a>
+						<a href="{{ path('app_task_lists_edit', {'id': task_list.id}) }}">edit</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="6">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}
