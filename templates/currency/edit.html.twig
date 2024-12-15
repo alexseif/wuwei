@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}Edit Currency
+{% endblock %}
+{% block card_actions %}
+	<div>
+		<a href="{{ path('app_currency_index') }}">back to list</a>
+		{{ include('currency/_delete_form.html.twig') }}
+	</div>
+{% endblock %}
+{% block body %}
+	{{ include('currency/_form.html.twig', {'button_label': 'Update'}) }}
+{% endblock %}

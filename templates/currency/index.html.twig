@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}Currency index
+{% endblock %}
+{% block card_actions %}
+	<div>
+		<a href="{{ path('app_currency_new') }}">Create new</a>
+	</div>
+{% endblock %}
+{% block body %}
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Code</th>
+				<th>Name</th>
+				<th>EGP</th>
+				<th>CreatedAt</th>
+				<th>UpdatedAt</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for currency in currencies %}
+				<tr>
+					<td>{{ currency.id }}</td>
+					<td>{{ currency.code }}</td>
+					<td>{{ currency.name }}</td>
+					<td>{{ currency.EGP }}</td>
+					<td>{{ currency.createdAt ? currency.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+					<td>{{ currency.updatedAt ? currency.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+					<td>
+						<a href="{{ path('app_currency_show', {'id': currency.id}) }}">show</a>
+						<a href="{{ path('app_currency_edit', {'id': currency.id}) }}">edit</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="7">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}
