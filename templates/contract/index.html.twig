@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}Contract index
+{% endblock %}
+{% block card_actions %}
+	<div>
+		<a href="{{ path('app_contract_new') }}">Create new</a>
+	</div>
+{% endblock %}
+{% block body %}
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>HoursPerDay</th>
+				<th>StartedAt</th>
+				<th>IsCompleted</th>
+				<th>CompletedAt</th>
+				<th>BilledOn</th>
+				<th>CreatedAt</th>
+				<th>UpdatedAt</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for contract in contracts %}
+				<tr>
+					<td>{{ contract.id }}</td>
+					<td>{{ contract.name }}</td>
+					<td>{{ contract.hoursPerDay }}</td>
+					<td>{{ contract.startedAt ? contract.startedAt|date('Y-m-d') : '' }}</td>
+					<td>{{ contract.isCompleted ? 'Yes' : 'No' }}</td>
+					<td>{{ contract.completedAt ? contract.completedAt|date('Y-m-d H:i:s') : '' }}</td>
+					<td>{{ contract.billedOn }}</td>
+					<td>{{ contract.createdAt ? contract.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+					<td>{{ contract.updatedAt ? contract.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+					<td>
+						<a href="{{ path('app_contract_show', {'id': contract.id}) }}">show</a>
+						<a href="{{ path('app_contract_edit', {'id': contract.id}) }}">edit</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="10">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}
