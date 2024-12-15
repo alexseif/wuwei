@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DashboardTaskLists index
+{% endblock %}
+{% block card_actions %}
+	<div>
+		<a href="{{ path('app_dashboard_task_lists_new') }}">Create new</a>
+	</div>
+{% endblock %}
+{% block body %}
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>CreatedAt</th>
+				<th>UpdatedAt</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for dashboard_task_list in dashboard_task_lists %}
+				<tr>
+					<td>{{ dashboard_task_list.id }}</td>
+					<td>{{ dashboard_task_list.createdAt ? dashboard_task_list.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+					<td>{{ dashboard_task_list.updatedAt ? dashboard_task_list.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+					<td>
+						<a href="{{ path('app_dashboard_task_lists_show', {'id': dashboard_task_list.id}) }}">show</a>
+						<a href="{{ path('app_dashboard_task_lists_edit', {'id': dashboard_task_list.id}) }}">edit</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="4">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

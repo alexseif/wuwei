@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New DashboardTaskLists
+{% endblock %}
+{% block card_actions %}
+	<div>
+		<a href="{{ path('app_dashboard_task_lists_index') }}">back to list</a>
+	</div>
+{% endblock %}
+{% block body %}
+	{{ include('dashboard_task_lists/_form.html.twig') }}
+{% endblock %}

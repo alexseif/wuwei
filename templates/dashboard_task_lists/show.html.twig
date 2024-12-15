@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}DashboardTaskLists
+{% endblock %}
+{% block card_actions %}
+	<div>
+		<a href="{{ path('app_dashboard_task_lists_index') }}">back to list</a>
+		<a href="{{ path('app_dashboard_task_lists_edit', {'id': dashboard_task_list.id}) }}">edit</a>
+		{{ include('dashboard_task_lists/_delete_form.html.twig') }}
+	</div>
+{% endblock %}
+{% block body %}
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ dashboard_task_list.id }}</td>
+			</tr>
+			<tr>
+				<th>CreatedAt</th>
+				<td>{{ dashboard_task_list.createdAt ? dashboard_task_list.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+			</tr>
+			<tr>
+				<th>UpdatedAt</th>
+				<td>{{ dashboard_task_list.updatedAt ? dashboard_task_list.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+			</tr>
+		</tbody>
+	</table>
+{% endblock %}
