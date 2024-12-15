@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}CostOfLife index
+{% endblock %}
+{% block card_actions %}
+	<div>
+		<a href="{{ path('app_cost_of_life_new') }}">Create new</a>
+	</div>
+{% endblock %}
+{% block body %}
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Value</th>
+				<th>CreatedAt</th>
+				<th>UpdatedAt</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for cost_of_life in cost_of_lives %}
+				<tr>
+					<td>{{ cost_of_life.id }}</td>
+					<td>{{ cost_of_life.name }}</td>
+					<td>{{ cost_of_life.value }}</td>
+					<td>{{ cost_of_life.createdAt ? cost_of_life.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+					<td>{{ cost_of_life.updatedAt ? cost_of_life.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+					<td>
+						<a href="{{ path('app_cost_of_life_show', {'id': cost_of_life.id}) }}">show</a>
+						<a href="{{ path('app_cost_of_life_edit', {'id': cost_of_life.id}) }}">edit</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="6">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}
