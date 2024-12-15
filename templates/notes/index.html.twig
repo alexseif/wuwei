@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}Notes index
+{% endblock %}
+{% block card_actions %}
+	<div>
+		<a href="{{ path('app_notes_new') }}">Create new</a>
+	</div>
+{% endblock %}
+{% block body %}
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Note</th>
+				<th>Type</th>
+				<th>CreatedAt</th>
+				<th>UpdatedAt</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for note in notes %}
+				<tr>
+					<td>{{ note.id }}</td>
+					<td>{{ note.note }}</td>
+					<td>{{ note.type }}</td>
+					<td>{{ note.createdAt ? note.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+					<td>{{ note.updatedAt ? note.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+					<td>
+						<a href="{{ path('app_notes_show', {'id': note.id}) }}">show</a>
+						<a href="{{ path('app_notes_edit', {'id': note.id}) }}">edit</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="6">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}Notes
+{% endblock %}
+{% block card_actions %}
+	<div>
+		<a href="{{ path('app_notes_index') }}">back to list</a>
+		<a href="{{ path('app_notes_edit', {'id': note.id}) }}">edit</a>
+		{{ include('notes/_delete_form.html.twig') }}
+	</div>
+{% endblock %}
+{% block body %}
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ note.id }}</td>
+			</tr>
+			<tr>
+				<th>Note</th>
+				<td>{{ note.note }}</td>
+			</tr>
+			<tr>
+				<th>Type</th>
+				<td>{{ note.type }}</td>
+			</tr>
+			<tr>
+				<th>CreatedAt</th>
+				<td>{{ note.createdAt ? note.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+			</tr>
+			<tr>
+				<th>UpdatedAt</th>
+				<td>{{ note.updatedAt ? note.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+			</tr>
+		</tbody>
+	</table>
+{% endblock %}
