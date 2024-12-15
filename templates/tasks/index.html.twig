@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}Tasks index
+{% endblock %}
+{% block card_actions%}
+	<div>
+		<a href="{{ path('app_tasks_new') }}">Create new</a>
+	</div>
+{% endblock %}
+{% block body %}
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Task</th>
+				<th>Order</th>
+				<th>Priority</th>
+				<th>Urgency</th>
+				<th>Duration</th>
+				<th>Est</th>
+				<th>Eta</th>
+				<th>Completed</th>
+				<th>CompletedAt</th>
+				<th>WorkLoggable</th>
+				<th>CreatedAt</th>
+				<th>UpdatedAt</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for task in tasks %}
+				<tr>
+					<td>{{ task.id }}</td>
+					<td>{{ task.task }}</td>
+					<td>{{ task.order }}</td>
+					<td>{{ task.priority }}</td>
+					<td>{{ task.urgency }}</td>
+					<td>{{ task.duration }}</td>
+					<td>{{ task.est }}</td>
+					<td>{{ task.eta ? task.eta|date('Y-m-d H:i:s') : '' }}</td>
+					<td>{{ task.completed ? 'Yes' : 'No' }}</td>
+					<td>{{ task.completedAt ? task.completedAt|date('Y-m-d H:i:s') : '' }}</td>
+					<td>{{ task.workLoggable ? 'Yes' : 'No' }}</td>
+					<td>{{ task.createdAt ? task.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+					<td>{{ task.updatedAt ? task.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+					<td>
+						<a href="{{ path('app_tasks_show', {'id': task.id}) }}">show</a>
+						<a href="{{ path('app_tasks_edit', {'id': task.id}) }}">edit</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="14">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}
