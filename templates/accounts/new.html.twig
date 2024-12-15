@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}New Accounts
+{% endblock %}
+{% block card_actions %}
+	<div>
+		<a href="{{ path('app_accounts_index') }}">back to list</a>
+	</div>
+{% endblock %}
+{% block body %}
+	{{ include('accounts/_form.html.twig') }}
+{% endblock %}
