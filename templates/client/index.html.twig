@@ -3,7 +3,7 @@
 {% block h1 %}Clients
 {% endblock %}
 {% block card_actions %}
-	{{ create_new_link(path('app_client_new')) }}
+	<twig:Link:Create link="{{ path('app_client_new') }}"/>
 {% endblock %}
 {% block body %}
 	<table class="table">
@@ -23,7 +23,9 @@
 				<tr>
 					<td>{{ client.id }}</td>
 					<td>{{ client.name }}</td>
-					<td>{{ badge_enabled(client.enabled) }}</td>
+					<td>
+						<twig:Badge:Enabled enabled="{{ client.enabled }}"/>
+					</td>
 					<td>
 						{% for name,option in client.billingOption %}
 							{{name}}:
@@ -33,8 +35,8 @@
 					<td>{{ client.createdAt ? client.createdAt|date('Y-m-d H:i:s') : '' }}</td>
 					<td>{{ client.updatedAt ? client.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
 					<td>
-						{{ edit_link(path('app_client_edit', {'id': client.id})) }}
-						{{ show_link(path('app_client_show', {'id': client.id})) }}
+						<twig:Link:Show link="{{ path('app_client_show', {'id': client.id}) }}" />
+						<twig:Link:Edit link="{{ path('app_client_edit', {'id': client.id}) }}" />
 					</td>
 				</tr>
 			{% else %}

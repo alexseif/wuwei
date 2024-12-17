@@ -1,6 +1,0 @@
-{% set trueText = trueText|default('Yes') %}
-{% set falseText = falseText|default('No') %}
-{% set trueClass = trueClass|default('bg-success') %}
-{% set falseClass = falseClass|default('bg-secondary') %}
-
-<span class="badge {{ enabled ? trueClass : falseClass}}">{{ enabled ? trueText : falseText}}</span>

@@ -15,21 +15,23 @@
 			<tr>
 				<td>{{ account.id }}</td>
 				<td>{{ account.name }}</td>
-				<td>{{ show_link(path('app_client_show', {'id': account.client.id}), account.client.name, 'btn btn-link') }} </td>
 				<td>
-					{{ badge_conceal(account.conceal)}}
+					<twig:Link link="{{ path('app_client_show', {'id': account.client.id}) }}" text="{{ account.client.name }}"/>
+				</td>
+				<td>
+					<twig:Badge:Conceal conceal="{{ account.conceal }}"/>
 				</td>
 				<td>{{ account.createdAt ? account.createdAt|date('Y-m-d H:i:s') : '' }}</td>
 				<td>{{ account.updatedAt ? account.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
 				<td>
-					{{ show_link(path('app_accounts_show', {'id': account.id}))}}
-					{{ edit_link(path('app_accounts_edit', {'id': account.id}))}}
+					<twig:Link:Show link="{{ path('app_accounts_show', {'id': account.id}) }}"/>
+					<twig:Link:Edit link="{{ path('app_accounts_edit', {'id': account.id}) }}"/>
 				</td>
 			</tr>
 		{% else %}
 			<tr>
-				<td colspan="6">no records found</td>
+				<td colspan=" 6">no records found</td>
 			</tr>
-		{% endfor %}
+		</td>
 	</tbody>
-</table>
+</tr>{% endfor %}</tbody></table>

@@ -4,8 +4,8 @@
 	{{ account.name }}
 {% endblock %}
 {% block card_actions %}
-	{{ back_link(path('app_accounts_index'))}}
-	{{ edit_link(path('app_accounts_edit', {'id': account.id}))}}
+	<twig:Link:Back link="{{ path('app_accounts_index') }}"/>
+	<twig:Link:Edit link="{{ path('app_accounts_edit', {'id': account.id}) }}"/>
 	{{ include('accounts/_delete_form.html.twig') }}
 {% endblock %}
 {% block body %}
@@ -21,7 +21,9 @@
 			</tr>
 			<tr>
 				<th>Conceal</th>
-				<td>{{ badge_conceal(account.conceal) }}</td>
+				<td>
+					<twig:Badge:Conceal conceal="{{ account.conceal }}"/>
+				</td>
 			</tr>
 			<tr>
 				<th>CreatedAt</th>

@@ -4,8 +4,8 @@
 	{{ client.name }}
 {% endblock %}
 {% block card_actions %}
-	{{ back_link(path('app_client_index')) }}
-	{{ edit_link(path('app_client_edit', {'id': client.id})) }}
+	<twig:Link:Back link="{{ path('app_client_index') }}"/>
+	<twig:Link:Edit link="{{ path('app_client_edit', {'id': client.id}) }}"/>
 	{{ include('client/_delete_form.html.twig') }}
 {% endblock %}
 {% block body %}
@@ -21,7 +21,9 @@
 			</tr>
 			<tr>
 				<th>Enabled</th>
-				<td>{{ badge_enabled(client.enabled) }}</td>
+				<td>
+					<twig:Badge:Enabled enabled="{{ client.enabled }}"/>
+				</td>
 			</tr>
 			<tr>
 				<th>BillingOption</th>
@@ -43,7 +45,7 @@
 		</tbody>
 	</table>
 
-<hr/>
+	<hr/>
 	<h2>Accounts</h2>
 	{% include 'accounts/_table.html.twig' with {'accounts': client.accounts} %}
 
