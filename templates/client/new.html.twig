@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block h1 %}New Client{% endblock %}
+{% block h1 %}New Client
+{% endblock %}
 {% block card_actions %}
-    <a href="{{ path('app_client_index') }}" class="btn btn-link">back</a>
+	{{ back_link(path('app_client_index'))}}
 {% endblock %}
 {% block body %}
-    {{ include('client/_form.html.twig') }}
+	{{ include('client/_form.html.twig') }}
 {% endblock %}

@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block h1 %}Client:
-				#{{ client.id }}
+{% block h1 %}Client: #{{ client.id }}
 	{{ client.name }}
 {% endblock %}
 {% block card_actions %}
@@ -34,10 +33,6 @@
 				</td>
 			</tr>
 			<tr>
-				<th>Status</th>
-				<td>{{ client.status }}</td>
-			</tr>
-			<tr>
 				<th>CreatedAt</th>
 				<td>{{ client.createdAt ? client.createdAt|date('Y-m-d H:i:s') : '' }}</td>
 			</tr>
@@ -47,4 +42,9 @@
 			</tr>
 		</tbody>
 	</table>
+
+<hr/>
+	<h2>Accounts</h2>
+	{% include 'accounts/_table.html.twig' with {'accounts': client.accounts} %}
+
 {% endblock %}

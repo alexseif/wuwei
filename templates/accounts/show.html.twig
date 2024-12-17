@@ -1,15 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block h1 %}Accounts
+{% block h1 %}Account: #{{ account.id }}
+	{{ account.name }}
 {% endblock %}
 {% block card_actions %}
-	<div>
-		<a href="{{ path('app_accounts_index') }}">back to list</a>
-
-		<a href="{{ path('app_accounts_edit', {'id': account.id}) }}">edit</a>
-
-		{{ include('accounts/_delete_form.html.twig') }}
-	</div>
+	{{ back_link(path('app_accounts_index'))}}
+	{{ edit_link(path('app_accounts_edit', {'id': account.id}))}}
+	{{ include('accounts/_delete_form.html.twig') }}
 {% endblock %}
 {% block body %}
 	<table class="table">
@@ -24,7 +21,7 @@
 			</tr>
 			<tr>
 				<th>Conceal</th>
-				<td>{{ account.conceal ? 'Yes' : 'No' }}</td>
+				<td>{{ badge_conceal(account.conceal) }}</td>
 			</tr>
 			<tr>
 				<th>CreatedAt</th>

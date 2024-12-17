@@ -16,12 +16,7 @@ class TaskListsType extends AbstractType
         $builder
             ->add('name')
             ->add('status')
-            ->add('createdAt', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('updatedAt', null, [
-                'widget' => 'single_text',
-            ])
+            
             ->add('account', EntityType::class, [
                 'class' => Accounts::class,
                 'choice_label' => 'id',

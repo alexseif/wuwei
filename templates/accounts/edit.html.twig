@@ -3,10 +3,8 @@
 {% block h1 %}Edit Accounts
 {% endblock %}
 {% block card_actions %}
-	<div>
-		<a href="{{ path('app_accounts_index') }}" class="btn btn-link">back</a>
-		{{ include('accounts/_delete_form.html.twig') }}
-	</div>
+	{{ back_link(path('app_accounts_index'))}}
+	{{ include('accounts/_delete_form.html.twig') }}
 {% endblock %}
 {% block body %}
 	{{ include('accounts/_form.html.twig', {'button_label': 'Update'}) }}

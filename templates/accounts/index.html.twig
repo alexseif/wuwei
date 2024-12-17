@@ -1,44 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block h1 %}Accounts index
+{% block h1 %}Accounts
 {% endblock %}
 {% block card_actions %}
-	<div>
-		<a href="{{ path('app_accounts_new') }}">Create new</a>
-	</div>
+	{{ create_new_link(path('app_accounts_new'))}}
 {% endblock %}
 {% block body %}
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>Name</th>
-				<th>Conceal</th>
-				<th>CreatedAt</th>
-				<th>UpdatedAt</th>
-				<th>actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for account in accounts %}
-				<tr>
-					<td>{{ account.id }}</td>
-					<td>{{ account.name }}</td>
-					<td>{{ account.conceal ? 'Yes' : 'No' }}</td>
-					<td>{{ account.createdAt ? account.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-					<td>{{ account.updatedAt ? account.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-					<td>
-						<a href="{{ path('app_accounts_show', {'id': account.id}) }}">show</a>
-						<a href="{{ path('app_accounts_edit', {'id': account.id}) }}">edit</a>
-					</td>
-				</tr>
-			{% else %}
-				<tr>
-					<td colspan="6">no records found</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
-
-
+	{% include 'accounts/_table.html.twig' %}
 {% endblock %}

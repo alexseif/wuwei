@@ -24,12 +24,7 @@ class ContractType extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('billedOn')
-            ->add('createdAt', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('updatedAt', null, [
-                'widget' => 'single_text',
-            ])
+            
             ->add('client', EntityType::class, [
                 'class' => Client::class,
                 'choice_label' => 'id',

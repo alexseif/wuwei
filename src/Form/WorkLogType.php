@@ -18,12 +18,7 @@ class WorkLogType extends AbstractType
             ->add('duration')
             ->add('pricePerUnit')
             ->add('total')
-            ->add('createdAt', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('updatedAt', null, [
-                'widget' => 'single_text',
-            ])
+            
             ->add('task', EntityType::class, [
                 'class' => Tasks::class,
                 'choice_label' => 'id',

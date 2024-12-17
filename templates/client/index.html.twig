@@ -12,7 +12,6 @@
 				<th>Id</th>
 				<th>Name</th>
 				<th>Enabled</th>
-				<th>Status</th>
 				<th>BillingOption</th>
 				<th>CreatedAt</th>
 				<th>UpdatedAt</th>
@@ -24,8 +23,7 @@
 				<tr>
 					<td>{{ client.id }}</td>
 					<td>{{ client.name }}</td>
-					<td>{{ client.enabled ? 'Yes' : 'No' }}</td>
-					<td>{{ client.status }}</td>
+					<td>{{ badge_enabled(client.enabled) }}</td>
 					<td>
 						{% for name,option in client.billingOption %}
 							{{name}}:

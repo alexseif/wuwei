@@ -17,12 +17,7 @@ class DaysType extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('complete')
-            ->add('createdAt', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('updatedAt', null, [
-                'widget' => 'single_text',
-            ])
+            
         ;
     }
 

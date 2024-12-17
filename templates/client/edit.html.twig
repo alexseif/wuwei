@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block h1 %}Edit Client{% endblock %}
+{% block h1 %}Edit Client
+{% endblock %}
 {% block card_actions %}
-    <a href="{{ path('app_client_index') }}" class="btn btn-link">back to list</a>
-    {{ include('client/_delete_form.html.twig') }}
+	{{ back_link(path('app_client_index'))}}
+	{{ include('client/_delete_form.html.twig') }}
 {% endblock %}
 
 {% block body %}
-    {{ include('client/_form.html.twig', {'button_label': 'Update'}) }}
+	{{ include('client/_form.html.twig', {'button_label': 'Update'}) }}
 {% endblock %}

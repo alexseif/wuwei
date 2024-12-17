@@ -30,12 +30,7 @@ class TasksType extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('workLoggable')
-            ->add('createdAt', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('updatedAt', null, [
-                'widget' => 'single_text',
-            ])
+            
             ->add('taskList', EntityType::class, [
                 'class' => TaskLists::class,
                 'choice_label' => 'id',

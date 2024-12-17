@@ -23,6 +23,7 @@ class AppExtension extends AbstractExtension
             new TwigFunction('show_link', [$this, 'showLink'], ['is_safe' => ['html']]),
             new TwigFunction('back_link', [$this, 'backLink'], ['is_safe' => ['html']]),
             new TwigFunction('badge_enabled', [$this, 'badgeEnabled'], ['is_safe' => ['html']]),
+            new TwigFunction('badge_conceal', [$this, 'badgeConceal'], ['is_safe' => ['html']]),
         ];
     }
 
@@ -54,10 +55,26 @@ class AppExtension extends AbstractExtension
         return $this->renderLink($link, $linkText, $linkClass);
     }
 
+
+
+
     public function badgeEnabled(bool $enabled): string
     {
-        return $this->twig->render('components/badge_enabled.html.twig', [
-            'enabled' => $enabled
+        return $this->twig->render('components/badge_bool.html.twig', [
+            'enabled' => $enabled,
+            'true_text' => 'Enabled',
+            'false_text' => 'Disabled',
+
+        ]);
+    }
+    public function badgeConceal(bool $conceal): string
+    {
+        return $this->twig->render('components/badge_bool.html.twig', [
+            'enabled' => $conceal,
+            'trueText' => 'Conceal',
+            'falseText' => 'Reveal',
+            'trueClass' => 'bg-secondary',
+            'falseClass' => 'bg-success'
         ]);
     }
 }

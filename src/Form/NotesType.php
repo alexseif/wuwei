@@ -14,12 +14,7 @@ class NotesType extends AbstractType
         $builder
             ->add('note')
             ->add('type')
-            ->add('createdAt', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('updatedAt', null, [
-                'widget' => 'single_text',
-            ])
+            
         ;
     }
 

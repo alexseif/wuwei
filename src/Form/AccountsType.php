@@ -16,15 +16,10 @@ class AccountsType extends AbstractType
         $builder
             ->add('name')
             ->add('conceal')
-            ->add('createdAt', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('updatedAt', null, [
-                'widget' => 'single_text',
-            ])
+
             ->add('client', EntityType::class, [
                 'class' => Client::class,
-                'choice_label' => 'id',
+                'choice_label' => 'name',
             ])
         ;
     }

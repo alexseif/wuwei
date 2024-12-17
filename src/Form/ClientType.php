@@ -13,15 +13,8 @@ class ClientType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('billingOption')
-            ->add('createdAt', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('updatedAt', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('status')
             ->add('enabled')
+            ->add('billingOption', BillingOptionsType::class)
         ;
     }
 

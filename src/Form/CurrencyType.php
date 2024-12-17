@@ -15,12 +15,7 @@ class CurrencyType extends AbstractType
             ->add('code')
             ->add('name')
             ->add('EGP')
-            ->add('createdAt', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('updatedAt', null, [
-                'widget' => 'single_text',
-            ])
+            
         ;
     }
 

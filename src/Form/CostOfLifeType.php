@@ -16,12 +16,7 @@ class CostOfLifeType extends AbstractType
         $builder
             ->add('name')
             ->add('value')
-            ->add('createdAt', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('updatedAt', null, [
-                'widget' => 'single_text',
-            ])
+            
             ->add('currency', EntityType::class, [
                 'class' => Currency::class,
                 'choice_label' => 'id',

@@ -19,12 +19,7 @@ class AccountTransactionsType extends AbstractType
             ->add('issuedAt', null, [
                 'widget' => 'single_text',
             ])
-            ->add('createdAt', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('updatedAt', null, [
-                'widget' => 'single_text',
-            ])
+            
             ->add('account', EntityType::class, [
                 'class' => Accounts::class,
                 'choice_label' => 'id',

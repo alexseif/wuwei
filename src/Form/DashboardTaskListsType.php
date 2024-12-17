@@ -14,12 +14,7 @@ class DashboardTaskListsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('createdAt', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('updatedAt', null, [
-                'widget' => 'single_text',
-            ])
+            
             ->add('taskList', EntityType::class, [
                 'class' => TaskLists::class,
                 'choice_label' => 'id',

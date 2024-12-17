@@ -3,9 +3,7 @@
 {% block h1 %}New Accounts
 {% endblock %}
 {% block card_actions %}
-	<div>
-		<a href="{{ path('app_accounts_index') }}">back to list</a>
-	</div>
+	{{ back_link(path('app_accounts_index')) }}
 {% endblock %}
 {% block body %}
 	{{ include('accounts/_form.html.twig') }}
