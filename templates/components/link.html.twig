@@ -1,0 +1,5 @@
+{# Default values for class and text if not provided #}
+{% set linkClass = linkClass|default('btn btn-outline-light') %}
+{% set linkText = linkText|default('Create new') %}
+
+<a href="{{ link }}" class="{{ linkClass }}">{{ linkText }}</a>
