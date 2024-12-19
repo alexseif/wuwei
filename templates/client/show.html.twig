@@ -1,52 +1,37 @@
 {% extends 'base.html.twig' %}
+{% block card_header %}
+	<div class="card-header d-flex align-items-center justify-content-between">
+		<h1 class="card-title me-5">
+			Client: #{{ client.id }}
+			{{ client.name }}
+		</h1>
+		<div class="card-content d-flex flex-grow-1">
+			<twig:Badge:Enabled enabled="{{ client.enabled }}"/>
+			{% for name,option in client.billingOption %}
+				<span
+					class="badge" title="{{name}}">
+					{# {{name}}: #}
+					{{ option }}</span>
+			{% endfor %}
+		</div>
+		<div class="card-actions btn-toolbar ms-5">
+			<twig:Link:Back link="{{ path('app_client_index') }}"/>
+			<twig:Link:Edit link="{{ path('app_client_edit', {'id': client.id}) }}"/>
+			{{ include('client/_delete_form.html.twig') }}
+		</div>
+	</div>
+	<!-- .card-header -->
+{% endblock %}
 
-{% block h1 %}Client: #{{ client.id }}
-	{{ client.name }}
-{% endblock %}
-{% block card_actions %}
-	<twig:Link:Back link="{{ path('app_client_index') }}"/>
-	<twig:Link:Edit link="{{ path('app_client_edit', {'id': client.id}) }}"/>
-	{{ include('client/_delete_form.html.twig') }}
-{% endblock %}
+
 {% block body %}
-	<table class="table">
-		<tbody>
-			<tr>
-				<th>Id</th>
-				<td>{{ client.id }}</td>
-			</tr>
-			<tr>
-				<th>Name</th>
-				<td>{{ client.name }}</td>
-			</tr>
-			<tr>
-				<th>Enabled</th>
-				<td>
-					<twig:Badge:Enabled enabled="{{ client.enabled }}"/>
-				</td>
-			</tr>
-			<tr>
-				<th>BillingOption</th>
-				<td>
-					{% for name,option in client.billingOption %}
-						{{name}}:
-						{{ option }}<br/>
-					{% endfor %}
-				</td>
-			</tr>
-			<tr>
-				<th>CreatedAt</th>
-				<td>{{ client.createdAt ? client.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-			</tr>
-			<tr>
-				<th>UpdatedAt</th>
-				<td>{{ client.updatedAt ? client.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-			</tr>
-		</tbody>
-	</table>
-
-	<hr/>
-	<h2>Accounts</h2>
-	{% include 'accounts/_table.html.twig' with {'accounts': client.accounts} %}
-
-{% endblock %}
+	<div class="card-body">
+		<h2>Accounts</h2>
+		{% include 'accounts/_table.html.twig' with {'accounts': client.accounts} %}
+	</div>
+	<div class="card-footer text-end">
+		<span title="Created At" class="badge">
+			{{ client.createdAt ? client.createdAt|date('Y-m-d H:i:s') : '' }}
+		</span>
+		<span title="Updated At" class="badge">{{ client.updatedAt ? client.updatedAt|date('Y-m-d H:i:s') : '' }}</span>
+	{% endblock %}
