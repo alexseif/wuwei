@@ -35,4 +35,7 @@
 			</tr>
 		</tbody>
 	</table>
+	<hr/>
+	<h2>Accounts</h2>
+	{% include 'task_lists/_table.html.twig' with {'task_lists': account.taskLists} %}
 {% endblock %}

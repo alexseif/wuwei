@@ -19,7 +19,7 @@ class TaskListsType extends AbstractType
             
             ->add('account', EntityType::class, [
                 'class' => Accounts::class,
-                'choice_label' => 'id',
+                'choice_label' => 'name',
             ])
         ;
     }
