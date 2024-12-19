@@ -3,13 +3,10 @@
 		<tr>
 			<th>Id</th>
 			<th>Task</th>
-			<th>Order</th>
-			<th>Priority</th>
-			<th>Urgency</th>
-			<th>Duration</th>
-			<th>Est</th>
+			<th>TaskList</th>
 			<th>Eta</th>
-			<th>Completed</th>
+			<th>Est</th>
+			<th>Dur.</th>
 			<th>CompletedAt</th>
 			<th>WorkLoggable</th>
 			<th>CreatedAt</th>
@@ -19,23 +16,26 @@
 	</thead>
 	<tbody>
 		{% for task in tasks %}
-			<tr>
+			<tr class="{{ task.completed ? 'task-completed' : '' }}">
 				<td>{{ task.id }}</td>
-				<td>{{ task.task }}</td>
-				<td>{{ task.order }}</td>
-				<td>{{ task.priority }}</td>
-				<td>{{ task.urgency }}</td>
-				<td>{{ task.duration }}</td>
-				<td>{{ task.est }}</td>
+				<td>
+					{{ task.task }}
+					{{ include('components/Badge/Priority.html.twig', {'priority': task.priority}) }}
+					{{ include('components/Badge/Urgency.html.twig', {'urgency': task.urgency}) }}
+				</td>
+				<td>
+					{{ include('components/Link.html.twig', {'link': path('app_task_lists_show', {'id':task.taskList.id}), 'text': task.taskList.name, 'attrs': {'title':'TaskList'} }) }}
+				</td>
 				<td>{{ task.eta ? task.eta|date('Y-m-d H:i:s') : '' }}</td>
-				<td>{{ task.completed ? 'Yes' : 'No' }}</td>
+				<td>{{ task.est }}</td>
+				<td>{{ task.duration }}</td>
 				<td>{{ task.completedAt ? task.completedAt|date('Y-m-d H:i:s') : '' }}</td>
 				<td>{{ task.workLoggable ? 'Yes' : 'No' }}</td>
 				<td>{{ task.createdAt ? task.createdAt|date('Y-m-d H:i:s') : '' }}</td>
 				<td>{{ task.updatedAt ? task.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
 				<td>
-					<a href="{{ path('app_tasks_show', {'id': task.id}) }}">show</a>
-					<a href="{{ path('app_tasks_edit', {'id': task.id}) }}">edit</a>
+					{{ include('components/Link/Show.html.twig', {'link': path('app_tasks_show', {'id': task.id}) }) }}
+					{{ include('components/Link/Edit.html.twig', {'link': path('app_tasks_edit', {'id': task.id}) }) }}
 				</td>
 			</tr>
 		{% else %}

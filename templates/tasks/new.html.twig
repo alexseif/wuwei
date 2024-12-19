@@ -3,9 +3,7 @@
 {% block h1 %}New Tasks
 {% endblock %}
 {% block card_actions %}
-	<div>
-		<a href="{{ path('app_tasks_index') }}">back to list</a>
-	</div>
+	{{ include('components/Link/Back.html.twig', {'link': path('app_tasks_index') }) }}
 {% endblock %}
 {% block body %}
 	{{ include('tasks/_form.html.twig') }}

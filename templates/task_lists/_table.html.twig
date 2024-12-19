@@ -3,6 +3,7 @@
 		<tr>
 			<th>Id</th>
 			<th>Name</th>
+			<th>Account</th>
 			<th>Status</th>
 			<th>CreatedAt</th>
 			<th>UpdatedAt</th>
@@ -13,7 +14,16 @@
 		{% for task_list in task_lists %}
 			<tr>
 				<td>{{ task_list.id }}</td>
-				<td>{{ task_list.name }}</td>
+				<td>
+					{{ task_list.name }}
+				</td>
+				<td>
+					{{ (task_list.account is not null) ? include('components/Link.html.twig', {
+						'link': path('app_accounts_show', {'id': task_list.account.id}), 
+					'text': task_list.account.name, 
+					'attrs': {'title':'Account'}
+					}) : '' }}
+				</td>
 				<td>{{ task_list.status }}</td>
 				<td>{{ task_list.createdAt ? task_list.createdAt|date('Y-m-d H:i:s') : '' }}</td>
 				<td>{{ task_list.updatedAt ? task_list.updatedAt|date('Y-m-d H:i:s') : '' }}</td>

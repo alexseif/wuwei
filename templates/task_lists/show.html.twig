@@ -7,6 +7,8 @@
 		</h1>
 		<div class="card-content d-flex flex-grow-1">
 			{{ include('components/Badge.html.twig', {'attrs': {'title': 'Status'},'text':  task_list.status }) }}
+			{{ include('components/Link.html.twig', {'link': path('app_accounts_show', {'id':task_list.account.id}), 'text': task_list.account.name, 'class': 'btn badge bg-info','attrs': {'title':'Account'} }) }}
+			{{ include('components/Link.html.twig', {'link': path('app_client_show', {'id':task_list.account.client.id}), 'text': task_list.account.client.name, 'class': 'btn badge bg-info','attrs': {'title':'Client'} }) }}
 		</div>
 		<div class="card-actions btn-toolbar ms-5">
 			{{ include('components/Link/Back.html.twig', {'link': path('app_task_lists_index')}) }}
@@ -24,9 +26,7 @@
 		{% include 'tasks/_table.html.twig' with {'tasks': task_list.tasks} %}
 	</div>
 	<div class="card-footer text-end">
-		<span title="Created At" class="badge">
-			{{ task_list.createdAt ? task_list.createdAt|date('Y-m-d H:i:s') : '' }}
-		</span>
-		<span title="Updated At" class="badge">{{ task_list.updatedAt ? task_list.updatedAt|date('Y-m-d H:i:s') : '' }}</span>
+		{{ include('components/Badge.html.twig', {'text': task_list.createdAt ? task_list.createdAt|date('Y-m-d H:i:s') : '', 'attrs': {'title': 'Created At'} }) }}
+		{{ include('components/Badge.html.twig', {'text': task_list.updatedAt ? task_list.updatedAt|date('Y-m-d H:i:s') : '', 'attrs': {'title': 'Updated At'} }) }}
 	</div>
 {% endblock %}

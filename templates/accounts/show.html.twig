@@ -6,28 +6,24 @@
 			{{ account.name }}
 		</h1>
 		<div class="card-content d-flex flex-grow-1">
-			<twig:Badge:Conceal conceal="{{ account.conceal }}"/>
-
-		</div>
-		<div class="card-actions btn-toolbar ms-5">
-			<twig:Link:Back link="{{ path('app_accounts_index') }}"/>
-			<twig:Link:Edit link="{{ path('app_accounts_edit', {'id': account.id}) }}"/>
-			{{ include('accounts/_delete_form.html.twig') }}
-		</div>
-	</div>
-	<!-- .card-header -->
-{% endblock %}
-
-
-{% block body %}
-	<div class="card-body">
-		<h2>Task Lists</h2>
-		{% include 'task_lists/_table.html.twig' with {'task_lists': account.taskLists} %}
-	</div>
-	<div class="card-footer text-end">
-		<span title="Created At" class="badge">
-			{{ account.createdAt ? account.createdAt|date('Y-m-d H:i:s') : '' }}
+			{{ include('components/Badge/Conceal.html.twig', {'conceal': account.conceal }) }}
+			{{ include('components/Link.html.twig', {'link': path('app_client_show', {'id': account.client.id}), 'text': account.client.name, 'class': 'btn badge bg-info','attrs': {'title':'Client'} }) }}
 		</span>
-		<span title="Updated At" class="badge">{{ account.updatedAt ? account.updatedAt|date('Y-m-d H:i:s') : '' }}</span>
+
+
 	</div>
-{% endblock %}
+	<div class="card-actions btn-toolbar ms-5">
+		{{ include('components/Link/Back.html.twig', {'link': path('app_accounts_index') }) }}
+		{{ include('components/Link/Edit.html.twig', {'link': path('app_accounts_edit', {'id': account.id}) }) }}
+		{{ include('accounts/_delete_form.html.twig') }}
+	</div>
+</div>
+<!-- .card-header -->{% endblock %}{% block body %}
+<div class="card-body">
+	<h2>Task Lists</h2>
+	{% include 'task_lists/_table.html.twig' with {'task_lists': account.taskLists} %}
+</div>
+<div class="card-footer text-end">
+	{{ include('components/Badge.html.twig', {'text': account.createdAt ? account.createdAt|date('Y-m-d H:i:s') : '', 'attrs': {'title': 'Created At'} }) }}
+	{{ include('components/Badge.html.twig', {'text': account.updatedAt ? account.updatedAt|date('Y-m-d H:i:s') : '', 'attrs': {'title': 'Updated At'} }) }}
+</div>{% endblock %}

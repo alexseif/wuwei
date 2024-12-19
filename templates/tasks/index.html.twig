@@ -3,9 +3,7 @@
 {% block h1 %}Tasks index
 {% endblock %}
 {% block card_actions%}
-	<div>
-		<a href="{{ path('app_tasks_new') }}">Create new</a>
-	</div>
+	{{ include('components/Link/New.html.twig', {'link': path('app_tasks_new'),  }) }}
 {% endblock %}
 {% block body %}
 	{% include 'tasks/_table.html.twig' %}

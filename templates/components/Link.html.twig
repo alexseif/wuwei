@@ -1,1 +1,4 @@
-<a href="{{ link }}" class="{{ class|default('btn btn-outline-light') }}">{{ text }}</a>
+<a href="{{ link|default('#') }}" class="{{ class|default('btn btn-outline-light') }}" {% for attr, value in attrs|default({} ) %} {{ attr }}="{{ value }}" {% endfor %}>
+	{{ text|default('') }}
+	{{ content|default('')|raw }}
+</a>
