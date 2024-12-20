@@ -3,9 +3,7 @@
 {% block h1 %}New Holiday
 {% endblock %}
 {% block card_actions %}
-	<div>
-		<a href="{{ path('app_holiday_index') }}">back to list</a>
-	</div>
+	{{ include('components/Link/Back.html.twig', {'name': 'holiday'}) }}
 {% endblock %}
 {% block body %}
 	{{ include('holiday/_form.html.twig') }}

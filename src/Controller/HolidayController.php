@@ -71,7 +71,7 @@ final class HolidayController extends AbstractController
     #[Route('/{id}', name: 'app_holiday_delete', methods: ['POST'])]
     public function delete(Request $request, Holiday $holiday, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$holiday->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $holiday->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($holiday);
             $entityManager->flush();
         }

@@ -3,15 +3,12 @@
 {% block h1 %}Holiday index
 {% endblock %}
 {% block card_actions %}
-	<div>
-		<a href="{{ path('app_holiday_new') }}">Create new</a>
-	</div>
+	{{ include('components/Link/New.html.twig', {'name': 'holiday'}) }}
 {% endblock %}
 {% block body %}
 	<table class="table">
 		<thead>
 			<tr>
-				<th>Id</th>
 				<th>Name</th>
 				<th>Type</th>
 				<th>Date</th>
@@ -21,18 +18,18 @@
 		<tbody>
 			{% for holiday in holidays %}
 				<tr>
-					<td>{{ holiday.id }}</td>
-					<td>{{ holiday.name }}</td>
+					<td>
+						{{ include('components/Link/Entity.html.twig', {'name': 'holiday', 'entity': holiday}) }}
+					</td>
 					<td>{{ holiday.type }}</td>
 					<td>{{ holiday.date ? holiday.date|date('Y-m-d') : '' }}</td>
 					<td>
-						<a href="{{ path('app_holiday_show', {'id': holiday.id}) }}">show</a>
-						<a href="{{ path('app_holiday_edit', {'id': holiday.id}) }}">edit</a>
+						{{ include('components/Link/Edit.html.twig', {'name': 'holiday', 'id': holiday.id}) }}
 					</td>
 				</tr>
 			{% else %}
 				<tr>
-					<td colspan="5">no records found</td>
+					<td colspan="4">no records found</td>
 				</tr>
 			{% endfor %}
 		</tbody>
