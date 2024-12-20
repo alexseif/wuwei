@@ -3,10 +3,8 @@
 {% block h1 %}Edit CostOfLife
 {% endblock %}
 {% block card_actions %}
-	<div>
-		<a href="{{ path('app_cost_of_life_index') }}">back to list</a>
-		{{ include('cost_of_life/_delete_form.html.twig') }}
-	</div>
+	{{ include('components/Link/Back.html.twig', {'name': 'cost_of_life'}) }}
+	{{ include('cost_of_life/_delete_form.html.twig') }}
 {% endblock %}
 {% block body %}
 	{{ include('cost_of_life/_form.html.twig', {'button_label': 'Update'}) }}

@@ -3,9 +3,7 @@
 {% block h1 %}New CostOfLife
 {% endblock %}
 {% block card_actions %}
-	<div>
-		<a href="{{ path('app_cost_of_life_index') }}">back to list</a>
-	</div>
+	{{ include('components/Link/Back.html.twig', {'name': 'cost_of_life'}) }}
 {% endblock %}
 {% block body %}
 	{{ include('cost_of_life/_form.html.twig') }}

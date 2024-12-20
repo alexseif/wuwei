@@ -1,36 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block h1 %}CostOfLife index
+{% block h1 %}Cost Of Life
 {% endblock %}
 {% block card_actions %}
-	<div>
-		<a href="{{ path('app_cost_of_life_new') }}">Create new</a>
-	</div>
+	{{ include('components/Link/New.html.twig', {'name': 'cost_of_life'}) }}
 {% endblock %}
 {% block body %}
 	<table class="table">
 		<thead>
 			<tr>
-				<th>Id</th>
 				<th>Name</th>
 				<th>Value</th>
-				<th>CreatedAt</th>
-				<th>UpdatedAt</th>
+				<th>Timestamps</th>
 				<th>actions</th>
 			</tr>
 		</thead>
 		<tbody>
 			{% for cost_of_life in cost_of_lives %}
 				<tr>
-					<td>{{ cost_of_life.id }}</td>
-					<td>{{ cost_of_life.name }}</td>
-					<td>{{ cost_of_life.value }}</td>
-					<td>{{ cost_of_life.createdAt ? cost_of_life.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-					<td>{{ cost_of_life.updatedAt ? cost_of_life.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
 					<td>
-						<a href="{{ path('app_cost_of_life_show', {'id': cost_of_life.id}) }}">show</a>
-						<a href="{{ path('app_cost_of_life_edit', {'id': cost_of_life.id}) }}">edit</a>
+						{{ include('components/Link/Entity.html.twig', {'name': 'cost_of_life', 'entity': cost_of_life}) }}
 					</td>
+					<td>{{ (cost_of_life.value/100)|format_currency(cost_of_life.currency.code) }}</td>
+					<td>{{ include('components/Badge/Timestamps.html.twig', {'entity': cost_of_life}) }}</td>
+					<td>
+						{{ include('components/Link/Edit.html.twig', {'name': 'cost_of_life', 'id': cost_of_life.id}) }}</td>
 				</tr>
 			{% else %}
 				<tr>

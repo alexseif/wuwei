@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Currency;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,8 +15,12 @@ class CurrencyType extends AbstractType
         $builder
             ->add('code')
             ->add('name')
-            ->add('EGP')
-            
+            ->add('EGP', MoneyType::class, [
+                'currency' => 'EGP',
+                'divisor' => 100,
+                'scale' => 3,
+                'label' => 'EGP',
+            ])
         ;
     }
 
