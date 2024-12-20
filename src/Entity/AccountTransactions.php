@@ -49,6 +49,9 @@ class AccountTransactions
 
         return $this;
     }
+    public function getName(){
+        return $this->amount;
+    }
 
     public function getNote(): ?string
     {

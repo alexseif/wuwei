@@ -8,7 +8,7 @@
 {% endblock %}
 {% block body %}
     {% include 'tag/_tags.html.twig' with {'tags': tag.tags} %}
-    <div class="card-footer">
+    <div class="card-footer text-end">
         <span class="badge" title="{{ 'Created At'|trans }}">
             {{ tag.createdAt ? tag.createdAt|date('Y-m-d H:i:s') : '' }}</span>
         <span class="badge" title="{{ 'Updated At'|trans }}">

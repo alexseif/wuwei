@@ -1,4 +1,5 @@
 <div>
+	{{ (entity.issuedAt is defined) ?include('components/Badge.html.twig', {'text': entity.issuedAt ? entity.issuedAt|date('Y-m-d') : '', 'attrs': {'title': 'Issued At'}}) }}
 	{{ include('components/Badge.html.twig', {'text': entity.createdAt ? entity.createdAt|date('Y-m-d H:i:s') : '', 'attrs': {'title': 'Created At'}}) }}
 	{{ include('components/Badge.html.twig', {'text': entity.updatedAt ? entity.updatedAt|date('Y-m-d H:i:s') : '', 'attrs': {'title': 'Updated At'}}) }}
 	{{ (entity.completedAt is defined) ? include('components/Badge.html.twig', {'text': entity.completedAt ? entity.completedAt|date('Y-m-d H:i:s') : '', 'attrs': {'title': 'Completed At'}}) : '' }}

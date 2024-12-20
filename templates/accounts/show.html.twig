@@ -9,8 +9,6 @@
 			<div>{{ include('components/Badge/Conceal.html.twig', {'conceal': account.conceal }) }}</div>
 			{{ include('components/Link/Entity.html.twig', {'name': 'client', 'entity': account.client}) }}
 		</span>
-
-
 	</div>
 	<div class="card-actions btn-toolbar ms-5">
 		{{ include('components/Link/Back.html.twig', {'name': 'accounts' }) }}
@@ -22,6 +20,10 @@
 <div class="card-body">
 	<h2>Task Lists</h2>
 	{% include 'task_lists/_table.html.twig' with {'task_lists': account.taskLists} %}
+</div>
+<div class="card-body">
+	<h2>Transactions</h2>
+	{% include 'account_transactions/_table.html.twig' with {'account_transactions': transactions} %}
 </div>
 <div class="card-footer text-end">
 	{{ include('components/Badge/Timestamps.html.twig', {'entity': account}) }}

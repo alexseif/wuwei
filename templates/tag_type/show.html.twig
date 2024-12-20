@@ -10,7 +10,7 @@
     <div class="card-body">
         {% include'tag/_tags.html.twig' %}
     </div>
-    <div class="card-footer">
+    <div class="card-footer text-end">
         <span title="Created At" class="badge">
             {{ tag_type.createdAt ? tag_type.createdAt|date('Y-m-d H:i:s') : '' }}</span>
         <span title="Updated At" class="badge">

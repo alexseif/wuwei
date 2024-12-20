@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Accounts;
 use App\Form\AccountsType;
 use App\Repository\AccountsRepository;
+use App\Repository\AccountTransactionsRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,10 +45,14 @@ final class AccountsController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_accounts_show', methods: ['GET'])]
-    public function show(Accounts $account): Response
+    public function show(Accounts $account, AccountTransactionsRepository $accountTransactionsRepository, PaginatorInterface $paginator): Response
     {
+
+        $transactions  = $paginator->paginate($accountTransactionsRepository->getPaginatorQuery(['at.account' => $account]), 1);
+
         return $this->render('accounts/show.html.twig', [
             'account' => $account,
+            'transactions' => $transactions,
         ]);
     }
 
@@ -71,7 +77,7 @@ final class AccountsController extends AbstractController
     #[Route('/{id}', name: 'app_accounts_delete', methods: ['POST'])]
     public function delete(Request $request, Accounts $account, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$account->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $account->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($account);
             $entityManager->flush();
         }

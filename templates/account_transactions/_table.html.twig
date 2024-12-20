@@ -1,0 +1,32 @@
+<table class="table">
+	<thead>
+		<tr>
+			<th>{{ knp_pagination_sortable(account_transactions, 'Amount', 'at.id') }}</th>
+			<th>{{ knp_pagination_sortable(account_transactions, 'Account', 'a.id') }}</th>
+			<th>{{ knp_pagination_sortable(account_transactions, 'Client', 'c.id') }}</th>
+			<th>Note</th>
+			<th>Timestamps</th>
+			<th>actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for account_transaction in account_transactions %}
+			<tr>
+				<td>
+					{{ include('components/Link/Entity.html.twig', {'name': 'transactions', 'entity': account_transaction}) }}</td>
+				<td>{{ (account_transaction.account)? include('components/Link/Entity.html.twig', {'name': 'accounts', 'entity': account_transaction.account}) }}</td>
+				<td>{{ (account_transaction.account)? include('components/Link/Entity.html.twig', {'name': 'client', 'entity': account_transaction.account.client}) }}</td>
+				<td>{{ account_transaction.note }}</td>
+				<td>
+					{{ include('components/Badge/Timestamps.html.twig', {'entity': account_transaction}) }}
+				</td>
+				<td>
+					{{ include('components/Link/Edit.html.twig', {'name': 'transactions', 'id': account_transaction.id}) }}</td>
+			</tr>
+		{% else %}
+			<tr>
+				<td colspan="6">no records found</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>

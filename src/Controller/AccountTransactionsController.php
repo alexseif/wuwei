@@ -6,6 +6,7 @@ use App\Entity\AccountTransactions;
 use App\Form\AccountTransactionsType;
 use App\Repository\AccountTransactionsRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,10 +16,17 @@ use Symfony\Component\Routing\Attribute\Route;
 final class AccountTransactionsController extends AbstractController
 {
     #[Route(name: 'app_transactions_index', methods: ['GET'])]
-    public function index(AccountTransactionsRepository $accountTransactionsRepository): Response
-    {
+    public function index(
+        Request $request,
+        AccountTransactionsRepository $accountTransactionsRepository,
+        PaginatorInterface $paginator
+    ): Response {
+        $pagination = $paginator->paginate(
+            $accountTransactionsRepository->getPaginatorQuery(),
+            $request->query->getInt('page', 1)
+        );
         return $this->render('account_transactions/index.html.twig', [
-            'account_transactions' => $accountTransactionsRepository->findAll(),
+            'account_transactions' => $pagination,
         ]);
     }
 

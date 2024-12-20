@@ -10,7 +10,7 @@
 {% block body %}
     {% include 'task/_tasks_list_accordion.html.twig' %}
 
-    <div class="card-footer">
+    <div class="card-footer text-end">
         <span class="badge" title="Created At">
             {{ tasklist.createdAt ? tasklist.createdAt|date('Y-m-d H:i:s') : '' }}
         </span>
