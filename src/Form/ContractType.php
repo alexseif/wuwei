@@ -6,6 +6,8 @@ use App\Entity\Client;
 use App\Entity\Contract;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -15,20 +17,28 @@ class ContractType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('hoursPerDay')
-            ->add('startedAt', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('isCompleted')
-            ->add('completedAt', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('billedOn')
-            
             ->add('client', EntityType::class, [
                 'class' => Client::class,
-                'choice_label' => 'id',
+                'choice_label' => 'name',
             ])
+            ->add('hoursPerDay')
+            ->add('startedAt', DateTimeType::class, [
+                'date_widget' => 'single_text',
+                'time_widget' => 'single_text',
+                'date_format' => 'yyyy-MM-dd',
+            ])
+            ->add('billedOn', NumberType::class, [
+                'required' => false,
+                'attr' => ['min' => 1, 'max' => 30],
+            ])
+            ->add('isCompleted')
+            ->add('completedAt', DateTimeType::class, [
+                'date_widget' => 'single_text',
+                'time_widget' => 'single_text',
+                'date_format' => 'yyyy-MM-dd',
+                'required' => false,
+            ])
+
         ;
     }
 

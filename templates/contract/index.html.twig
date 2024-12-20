@@ -1,48 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block h1 %}Contract index
+{% block h1 %}{{ contracts|length }} Contracts
 {% endblock %}
 {% block card_actions %}
-	<div>
-		<a href="{{ path('app_contract_new') }}">Create new</a>
-	</div>
+	{{ include('components/Link/New.html.twig', {'name': 'contract'}) }}
 {% endblock %}
 {% block body %}
 	<table class="table">
 		<thead>
 			<tr>
-				<th>Id</th>
 				<th>Name</th>
 				<th>HoursPerDay</th>
-				<th>StartedAt</th>
 				<th>IsCompleted</th>
-				<th>CompletedAt</th>
 				<th>BilledOn</th>
-				<th>CreatedAt</th>
-				<th>UpdatedAt</th>
+				<th>Timestamps</th>
 				<th>actions</th>
 			</tr>
 		</thead>
 		<tbody>
 			{% for contract in contracts %}
-				<tr>
-					<td>{{ contract.id }}</td>
-					<td>{{ contract.name }}</td>
-					<td>{{ contract.hoursPerDay }}</td>
-					<td>{{ contract.startedAt ? contract.startedAt|date('Y-m-d') : '' }}</td>
-					<td>{{ contract.isCompleted ? 'Yes' : 'No' }}</td>
-					<td>{{ contract.completedAt ? contract.completedAt|date('Y-m-d H:i:s') : '' }}</td>
-					<td>{{ contract.billedOn }}</td>
-					<td>{{ contract.createdAt ? contract.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-					<td>{{ contract.updatedAt ? contract.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+				<tr class="{{ contract.isCompleted ? 'completed' : '' }}">
 					<td>
-						<a href="{{ path('app_contract_show', {'id': contract.id}) }}">show</a>
-						<a href="{{ path('app_contract_edit', {'id': contract.id}) }}">edit</a>
+						{{ include('components/Link/Entity.html.twig', {'name': 'contract', 'entity': contract}) }}
 					</td>
+					<td>{{ contract.hoursPerDay }}</td>
+					<td>{{ contract.isCompleted ? 'Yes' : 'No' }}</td>
+					<td>{{ contract.billedOn }}</td>
+					<td>{{ include('components/Badge/Timestamps.html.twig', {'entity': contract}) }}</td>
+					<td>
+						{{ include('components/Link/Edit.html.twig', {'name': 'contract', 'id': contract.id}) }}</td>
 				</tr>
 			{% else %}
 				<tr>
-					<td colspan="10">no records found</td>
+					<td colspan="6">no records found</td>
 				</tr>
 			{% endfor %}
 		</tbody>

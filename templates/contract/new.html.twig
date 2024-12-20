@@ -3,9 +3,7 @@
 {% block h1 %}New Contract
 {% endblock %}
 {% block card_actions %}
-	<div>
-		<a href="{{ path('app_contract_index') }}">back to list</a>
-	</div>
+	{{ include('components/Link/Back.html.twig', {'name': 'contract'}) }}
 {% endblock %}
 {% block body %}
 	{{ include('contract/_form.html.twig') }}
