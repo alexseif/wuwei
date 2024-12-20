@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block h1 %}Notes index
+{% block h1 %}
+	{{ notes|length }}
+	Notes
 {% endblock %}
 {% block card_actions %}
-	<div>
-		<a href="{{ path('app_notes_new') }}">Create new</a>
-	</div>
+	{{ include('components/Link/New.html.twig', {'name': 'notes'}) }}
 {% endblock %}
 {% block body %}
 	<table class="table">
@@ -13,23 +13,22 @@
 			<tr>
 				<th>Id</th>
 				<th>Note</th>
-				<th>Type</th>
-				<th>CreatedAt</th>
-				<th>UpdatedAt</th>
+				<th>Timestamps</th>
 				<th>actions</th>
 			</tr>
 		</thead>
 		<tbody>
 			{% for note in notes %}
 				<tr>
-					<td>{{ note.id }}</td>
-					<td>{{ note.note }}</td>
-					<td>{{ note.type }}</td>
-					<td>{{ note.createdAt ? note.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-					<td>{{ note.updatedAt ? note.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
 					<td>
-						<a href="{{ path('app_notes_show', {'id': note.id}) }}">show</a>
-						<a href="{{ path('app_notes_edit', {'id': note.id}) }}">edit</a>
+						{{ include('components/Link/Entity.html.twig', {'name': 'notes', 'entity': note}) }}
+					</td>
+					<td>{{ note.note }}</td>
+					<td>
+						{{ include('components/Badge/Timestamps.html.twig', {'entity': note}) }}
+					</td>
+					<td>
+						{{ include('components/Link/Edit.html.twig', {'name': 'notes', 'id': note.id}) }}
 					</td>
 				</tr>
 			{% else %}

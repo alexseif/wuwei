@@ -21,7 +21,7 @@ class Notes
     private ?string $note = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $type = null;
+    private ?string $type = 'general';
 
     public function getId(): ?int
     {
@@ -39,7 +39,10 @@ class Notes
 
         return $this;
     }
-
+    public function getName()
+    {
+        return $this->getId();
+    }
     public function getType(): ?string
     {
         return $this->type;

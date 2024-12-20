@@ -13,8 +13,6 @@ class NotesType extends AbstractType
     {
         $builder
             ->add('note')
-            ->add('type')
-            
         ;
     }
 

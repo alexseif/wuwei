@@ -71,7 +71,7 @@ final class NotesController extends AbstractController
     #[Route('/{id}', name: 'app_notes_delete', methods: ['POST'])]
     public function delete(Request $request, Notes $note, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$note->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $note->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($note);
             $entityManager->flush();
         }

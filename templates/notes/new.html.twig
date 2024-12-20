@@ -3,9 +3,7 @@
 {% block h1 %}New Notes
 {% endblock %}
 {% block card_actions %}
-	<div>
-		<a href="{{ path('app_notes_index') }}">back to list</a>
-	</div>
+	{{ include('components/Link/Back.html.twig', {'name': 'notes'}) }}
 {% endblock %}
 {% block body %}
 	{{ include('notes/_form.html.twig') }}
