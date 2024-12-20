@@ -1,41 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block h1 %}Objective index{% endblock %}
+{% block h1 %}
+	{{ objectives|length }}
+	Objectives
+{% endblock %}
 {% block card_actions %}
-<div>
-<a href="{{ path('app_objective_new') }}">Create new</a>
-</div>
+	{{ include('components/Link/New.html.twig', {'name': 'objective'}) }}
 {% endblock %}
 {% block body %}
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for objective in objectives %}
-            <tr>
-                <td>{{ objective.id }}</td>
-                <td>{{ objective.name }}</td>
-                <td>{{ objective.description }}</td>
-                <td>{{ objective.createdAt ? objective.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ objective.updatedAt ? objective.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_objective_show', {'id': objective.id}) }}">show</a>
-                    <a href="{{ path('app_objective_edit', {'id': objective.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Timestamps</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for objective in objectives %}
+				<tr>
+					<td>
+						{{ include('components/Link/Entity.html.twig', {'name': 'objective', 'entity': objective}) }}
+					</td>
+					<td>{{ objective.description }}</td>
+					<td>
+						{{ include('components/Badge/Timestamps.html.twig', {'entity': objective}) }}
+					</td>
+					<td>
+						{{ include('components/Link/Edit.html.twig', {'name': 'objective', 'id': objective.id}) }}
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="4">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 {% endblock %}
