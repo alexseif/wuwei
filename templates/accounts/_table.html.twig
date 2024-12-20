@@ -15,19 +15,15 @@
 					{{ include('components/Link/Entity.html.twig', {'name': 'accounts', 'entity': account}) }}</td>
 				<td>
 					{{ include('components/Link/Entity.html.twig', {'name': 'client', 'entity': account.client}) }}</td>
-				</td>
-				<td>
-					<twig:Badge:Conceal conceal="{{ account.conceal }}"/>
-				</td>
-				<td>{{ include('components/Badge/Timestamps.html.twig', {'entity': account}) }}</td>
-				<td>
-					{{ include('components/Link/Edit.html.twig', {'link': path('app_accounts_edit', {'id': account.id})}) }}
-				</td>
-			</tr>
-		{% else %}
-			<tr>
-				<td colspan=" 6">no records found</td>
 			</tr>
 		</td>
+		<td>{{ include('components/Badge/Conceal.html.twig', {'conceal': account.conceal}) }}</td>
+		<td>{{ include('components/Badge/Timestamps.html.twig', {'entity': account}) }}</td>
+		<td>
+			{{ include('components/Link/Edit.html.twig', {'name': 'accounts', 'id': account.id}) }}
+		</td>
 	</tbody>
-</tr>{% endfor %}</tbody></table>
+</tr>{% else %}
+<tr>
+	<td colspan=" 6">no records found</td>
+</tr></td></tbody></tr>{% endfor %}</tbody></table>

@@ -11,7 +11,7 @@
 	</thead>
 	<tbody>
 		{% for task_list in task_lists %}
-			<tr>
+			<tr class='{{ task_list.status }}'>
 				<td>
 					{{ include('components/Link/Entity.html.twig', {'name': 'task_lists', 'entity': task_list}) }}
 				</td>
@@ -30,8 +30,7 @@
 				<td>{{ task_list.status }}</td>
 				<td>{{ include('components/Badge/Timestamps.html.twig', {'entity': task_list}) }}</td>
 				<td>
-					<twig:Link:Show link="{{ path('app_task_lists_show', {'id': task_list.id}) }}"/>
-					<twig:Link:Edit link="{{ path('app_task_lists_edit', {'id': task_list.id}) }}"/>
+					{{ include('components/Link/Edit.html.twig', {'name':'task_lists', 'id': task_list.id}) }}
 				</td>
 			</tr>
 		{% else %}

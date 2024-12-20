@@ -3,7 +3,7 @@
 {% block h1 %}Edit TaskLists
 {% endblock %}
 {% block card_actions %}
-	<twig:Link:Back link="{{ path('app_task_lists_index')}}"/>
+	{{ include('components/Link/Back.html.twig', {'name': 'task_lists'}) }}
 	{{ include('task_lists/_delete_form.html.twig') }}
 {% endblock %}
 {% block body %}

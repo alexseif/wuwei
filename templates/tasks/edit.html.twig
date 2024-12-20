@@ -3,7 +3,7 @@
 {% block h1 %}Edit Tasks
 {% endblock %}
 {% block card_actions %}
-		{{ include('components/Link/Back.html.twig', {'link': path('app_tasks_index')}) }}
+		{{ include('components/Link/Back.html.twig', {'name': 'tasks'}) }}
 		{{ include('tasks/_delete_form.html.twig') }}
 {% endblock %}
 {% block body %}

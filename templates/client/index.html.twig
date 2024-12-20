@@ -5,7 +5,7 @@
 	Clients
 {% endblock %}
 {% block card_actions %}
-	<twig:Link:Create link="{{ path('app_client_new') }}"/>
+	{{ include('components/Link/New.html.twig', {'name': 'client'}) }}
 {% endblock %}
 {% block body %}
 	<table class="table">
@@ -34,7 +34,7 @@
 					</td>
 					<td>{{ include('components/Badge/Timestamps.html.twig', {'entity': client}) }}</td>
 					<td>
-						{{ include('components/Link/Edit.html.twig', {'link': path('app_client_edit', {'id': client.id})}) }}
+						{{ include('components/Link/Edit.html.twig', {'name': 'client', 'id': client.id}) }}
 					</td>
 				</tr>
 			{% else %}

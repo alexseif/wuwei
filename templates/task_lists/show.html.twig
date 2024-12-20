@@ -11,8 +11,8 @@
 			{{ include('components/Link/Entity.html.twig', {'name': 'client', 'entity': task_list.account.client}) }}
 		</div>
 		<div class="card-actions btn-toolbar ms-5">
-			{{ include('components/Link/Back.html.twig', {'link': path('app_task_lists_index')}) }}
-			{{ include('components/Link/Edit.html.twig', {'link': path('app_task_lists_edit', {'id': task_list.id}) }) }}
+			{{ include('components/Link/Back.html.twig', {'name': 'task_lists'}) }}
+			{{ include('components/Link/Edit.html.twig', {'name': 'task_lists', 'id': task_list.id}) }}
 			{{ include('task_lists/_delete_form.html.twig') }}
 		</div>
 	</div>

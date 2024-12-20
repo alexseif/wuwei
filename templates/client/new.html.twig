@@ -3,7 +3,7 @@
 {% block h1 %}New Client
 {% endblock %}
 {% block card_actions %}
-	<twig:Link:Back link="{{ path('app_client_index') }}" />
+	{{ include('components/Link/Back.html.twig', {'name': 'client'}) }}
 {% endblock %}
 {% block body %}
 	{{ include('client/_form.html.twig') }}

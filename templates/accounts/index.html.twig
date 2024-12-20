@@ -3,7 +3,7 @@
 {% block h1 %}Accounts
 {% endblock %}
 {% block card_actions %}
-	<twig:Link:Create link="{{ path('app_accounts_new') }}"/>
+	{{ include('components/Link/New.html.twig', {'name':'accounts'}) }}
 {% endblock %}
 {% block body %}
 	{% include 'accounts/_table.html.twig' %}

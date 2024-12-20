@@ -3,7 +3,7 @@
 {% block h1 %}TaskLists
 {% endblock %}
 {% block card_actions %}
-	<twig:Link:Create link="{{ path('app_task_lists_new') }}"/>
+	{{ include('components/Link/New.html.twig', {'name': 'task_lists'}) }}
 {% endblock %}
 {% block body %}
 	{% include('task_lists/_table.html.twig') %}

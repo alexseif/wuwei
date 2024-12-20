@@ -3,7 +3,7 @@
 {% block h1 %}Edit Accounts
 {% endblock %}
 {% block card_actions %}
-	<twig:Link:Back link="{{ path('app_accounts_index') }}" />
+	{{ include('components/Link/Back.html.twig', {'name': 'accounts'}) }}
 	{{ include('accounts/_delete_form.html.twig') }}
 {% endblock %}
 {% block body %}

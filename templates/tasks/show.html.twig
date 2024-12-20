@@ -1,69 +1,55 @@
 {% extends 'base.html.twig' %}
 
-{% block h1 %}Tasks
+{% block h1 %}Task:
+	{{ task.name }}
 {% endblock %}
 {% block card_actions %}
-	<div>
-		<a href="{{ path('app_tasks_index') }}">back to list</a>
-		<a href="{{ path('app_tasks_edit', {'id': task.id}) }}">edit</a>
-		{{ include('tasks/_delete_form.html.twig') }}
-	</div>
+	{{ include('components/Link/Back.html.twig', {'name': 'tasks'}) }}
+	{{ include('components/Link/Edit.html.twig', {'name': 'tasks', 'id': task.id}) }}
+	{{ include('tasks/_delete_form.html.twig') }}
 {% endblock %}
 {% block body %}
-	<table class="table">
-		<tbody>
-			<tr>
-				<th>Id</th>
-				<td>{{ task.id }}</td>
-			</tr>
-			<tr>
-				<th>Task</th>
-				<td>{{ task.task }}</td>
-			</tr>
-			<tr>
-				<th>Order</th>
-				<td>{{ task.order }}</td>
-			</tr>
-			<tr>
-				<th>Priority</th>
-				<td>{{ task.priority }}</td>
-			</tr>
-			<tr>
-				<th>Urgency</th>
-				<td>{{ task.urgency }}</td>
-			</tr>
-			<tr>
-				<th>Duration</th>
-				<td>{{ task.duration }}</td>
-			</tr>
-			<tr>
-				<th>Est</th>
-				<td>{{ task.est }}</td>
-			</tr>
-			<tr>
-				<th>Eta</th>
-				<td>{{ task.eta ? task.eta|date('Y-m-d H:i:s') : '' }}</td>
-			</tr>
-			<tr>
-				<th>Completed</th>
-				<td>{{ task.completed ? 'Yes' : 'No' }}</td>
-			</tr>
-			<tr>
-				<th>CompletedAt</th>
-				<td>{{ task.completedAt ? task.completedAt|date('Y-m-d H:i:s') : '' }}</td>
-			</tr>
-			<tr>
-				<th>WorkLoggable</th>
-				<td>{{ task.workLoggable ? 'Yes' : 'No' }}</td>
-			</tr>
-			<tr>
-				<th>CreatedAt</th>
-				<td>{{ task.createdAt ? task.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-			</tr>
-			<tr>
-				<th>UpdatedAt</th>
-				<td>{{ task.updatedAt ? task.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-			</tr>
-		</tbody>
-	</table>
+	<div class="card-body">
+		<table class="table">
+			<tbody>
+				<tr>
+					<th>Order</th>
+					<td>{{ task.order }}</td>
+				</tr>
+				<tr>
+					<th>Priority - Urgency</th>
+					<td>{{ include('components/Badge/Priority.html.twig', {'priority': task.priority}) }}
+					{{ include('components/Badge/Urgency.html.twig', {'urgency': task.urgency}) }}</td>
+				</tr>
+				<tr>
+					<th>Duration</th>
+					<td>{{ task.duration }}</td>
+				</tr>
+				<tr>
+					<th>Est</th>
+					<td>{{ task.est }}</td>
+				</tr>
+				<tr>
+					<th>Eta</th>
+					<td>{{ task.eta ? task.eta|date('Y-m-d H:i:s') : '' }}</td>
+				</tr>
+				<tr>
+					<th>Completed</th>
+					<td>{{ task.completed ? 'Yes' : 'No' }}</td>
+				</tr>
+				<tr>
+					<th>CompletedAt</th>
+					<td>{{ task.completedAt ? task.completedAt|date('Y-m-d H:i:s') : '' }}</td>
+				</tr>
+				<tr>
+					<th>WorkLoggable</th>
+					<td>{{ task.workLoggable ? 'Yes' : 'No' }}</td>
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+	<div class="card-footer">
+		{{ include('components/Badge/Timestamps.html.twig', {'entity': task}) }}
+	</div>
 {% endblock %}

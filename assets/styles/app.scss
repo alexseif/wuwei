@@ -49,7 +49,8 @@ header {
 
 .table {
   tbody {
-    tr.disabled {
+    tr.disabled,
+    tr.archive {
       border-left: gray 2px solid;
       border-right: gray 2px solid;
 

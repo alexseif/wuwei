@@ -13,8 +13,8 @@
 
 	</div>
 	<div class="card-actions btn-toolbar ms-5">
-		{{ include('components/Link/Back.html.twig', {'link': path('app_accounts_index') }) }}
-		{{ include('components/Link/Edit.html.twig', {'link': path('app_accounts_edit', {'id': account.id}) }) }}
+		{{ include('components/Link/Back.html.twig', {'name': 'accounts' }) }}
+		{{ include('components/Link/Edit.html.twig', {'name': 'accounts', 'id': account.id }) }}
 		{{ include('accounts/_delete_form.html.twig') }}
 	</div>
 </div>
@@ -25,5 +25,4 @@
 </div>
 <div class="card-footer text-end">
 	{{ include('components/Badge/Timestamps.html.twig', {'entity': account}) }}
-
 </div>{% endblock %}

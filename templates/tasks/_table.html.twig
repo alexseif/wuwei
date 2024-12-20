@@ -40,12 +40,12 @@
 					{{ include('components/Badge/Timestamps.html.twig', {'entity': task}) }}
 				</td>
 				<td>
-					{{ include('components/Link/Edit.html.twig', {'link': path('app_tasks_edit', {'id': task.id}) }) }}
+					{{ include('components/Link/Edit.html.twig', {'name': 'tasks', 'id': task.id }) }}
 				</td>
 			</tr>
 		{% else %}
 			<tr>
-				<td colspan="9">no records found</td>
+				<td colspan="11">no records found</td>
 			</tr>
 		{% endfor %}
 	</tbody>

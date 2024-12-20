@@ -3,7 +3,7 @@
 {% block h1 %}New Accounts
 {% endblock %}
 {% block card_actions %}
-	<twig:Link:Back link="{{ path('app_accounts_index') }}"/>
+	{{ include('components/Link/Back.html.twig', {'name': 'accounts'}) }}
 {% endblock %}
 {% block body %}
 	{{ include('accounts/_form.html.twig') }}
