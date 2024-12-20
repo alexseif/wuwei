@@ -30,6 +30,7 @@
         "@ibm/plex": "^6.3.0",
         "axios": "^1.6.8",
         "bootstrap": "^5.3.1",
+        "bootstrap-icons": "^1.11.3",
         "chart.js": "^4.4.2",
         "chartjs-plugin-datalabels": "^2.2.0",
         "chosen": "^0.0.2",

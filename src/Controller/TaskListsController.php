@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\TaskLists;
 use App\Form\TaskListsType;
 use App\Repository\TaskListsRepository;
+use App\Repository\TasksRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,10 +45,12 @@ final class TaskListsController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_task_lists_show', methods: ['GET'])]
-    public function show(TaskLists $taskList): Response
+    public function show(TaskLists $taskList, TasksRepository $tasksRepository, PaginatorInterface $paginator): Response
     {
+        $tasks  = $paginator->paginate($tasksRepository->getPaginatorQuery(['t.taskList' => $taskList]), 1);
         return $this->render('task_lists/show.html.twig', [
             'task_list' => $taskList,
+            'tasks' => $tasks,
         ]);
     }
 
@@ -71,7 +75,7 @@ final class TaskListsController extends AbstractController
     #[Route('/{id}', name: 'app_task_lists_delete', methods: ['POST'])]
     public function delete(Request $request, TaskLists $taskList, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$taskList->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $taskList->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($taskList);
             $entityManager->flush();
         }

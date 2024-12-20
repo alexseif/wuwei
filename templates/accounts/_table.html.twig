@@ -12,16 +12,17 @@
 		{% for account in accounts %}
 			<tr class="{{ account.conceal ? 'disabled' : 'enabled' }}">
 				<td>
-					{{ include('components/Link/Entity.html.twig', {'name': 'accounts', 'entity': account}) }}</td>
+					{{ include('components/Link/Entity.html.twig', {'name': 'accounts', 'entity': account}) }}
+				</td>
 				<td>
-					{{ include('components/Link/Entity.html.twig', {'name': 'client', 'entity': account.client}) }}</td>
+					{{ include('components/Link/Entity.html.twig', {'name': 'client', 'entity': account.client}) }}
+				</td>
+				<td>{{ include('components/Badge/Conceal.html.twig', {'conceal': account.conceal}) }}</td>
+				<td>{{ include('components/Badge/Timestamps.html.twig', {'entity': account}) }}</td>
+				<td>
+					{{ include('components/Link/Edit.html.twig', {'name': 'accounts', 'id': account.id}) }}</td>
 			</tr>
-		</td>
-		<td>{{ include('components/Badge/Conceal.html.twig', {'conceal': account.conceal}) }}</td>
-		<td>{{ include('components/Badge/Timestamps.html.twig', {'entity': account}) }}</td>
-		<td>
-			{{ include('components/Link/Edit.html.twig', {'name': 'accounts', 'id': account.id}) }}
-		</td>
+		</tbody>
 	</tbody>
 </tr>{% else %}
 <tr>

@@ -23,7 +23,7 @@
 {% block body %}
 	<div class="card-body">
 		<h2>Tasks</h2>
-		{% include 'tasks/_table.html.twig' with {'tasks': task_list.tasks} %}
+		{% include 'tasks/_table.html.twig' with {'tasks': tasks} %}
 	</div>
 	<div class="card-footer text-end">
 		{{ include('components/Badge/Timestamps.html.twig', {'entity': task_list}) }}

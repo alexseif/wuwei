@@ -16,6 +16,26 @@ class TasksRepository extends ServiceEntityRepository
         parent::__construct($registry, Tasks::class);
     }
 
+    public function getPaginatorQuery(?array $criteria = [])
+    {
+        $query = $this->createQueryBuilder('t')
+            ->select('t, tl, a, c, s')
+            ->leftJoin('t.taskList', 'tl')
+            ->leftJoin('tl.account', 'a')
+            ->leftJoin('a.client', 'c')
+            ->leftJoin('t.schedule', 's');
+
+        foreach ($criteria as $key => $value) {
+            $parameterName = str_replace('.', '', $key);
+            if ($value) {
+                $query->where("$key = :$parameterName")
+                    ->setParameter($parameterName, $value);
+            }
+        }
+
+        return $query->getQuery();
+    }
+
     //    /**
     //     * @return Tasks[] Returns an array of Tasks objects
     //     */

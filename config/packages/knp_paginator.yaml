@@ -1,0 +1,7 @@
+knp_paginator:
+  default_options:
+    default_limit: 100
+  template:
+    pagination: "@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig"
+    sortable: "@KnpPaginator/Pagination/bootstrap_v5_bi_sortable_link.html.twig" # sort link template
+    filtration: "@KnpPaginator/Pagination/bootstrap_v5_filteration.html.twig" # filters template

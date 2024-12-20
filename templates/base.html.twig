@@ -15,6 +15,7 @@
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
+    {{ (pagination is defined) ? knp_pagination_rel_links(pagination) }}
 </head>
 <body>
 {% block sidebar %}

@@ -1,14 +1,13 @@
 <table class="table">
 	<thead>
 		<tr>
-			<th>Task</th>
-			<th>TaskList</th>
-			<th>Account</th>
-			<th>Client</th>
+			<th>{{ knp_pagination_sortable(tasks, 'Task', 't.id') }}</th>
+			<th>{{ knp_pagination_sortable(tasks, 'TaskList', 'tl.id') }}</th>
+			<th>{{ knp_pagination_sortable(tasks, 'Account', 'a.id') }}</th>
+			<th>{{ knp_pagination_sortable(tasks, 'Client', 'c.id') }}</th>
 			<th>Eta</th>
 			<th>Est</th>
 			<th>Dur.</th>
-			<th>CompletedAt</th>
 			<th>WorkLoggable</th>
 			<th>Timestamps</th>
 			<th>actions</th>
@@ -34,7 +33,6 @@
 				<td>{{ task.eta ? task.eta|date('Y-m-d H:i:s') : '' }}</td>
 				<td>{{ task.est }}</td>
 				<td>{{ task.duration }}</td>
-				<td>{{ task.completedAt ? task.completedAt|date('Y-m-d H:i:s') : '' }}</td>
 				<td>{{ task.workLoggable ? 'Yes' : 'No' }}</td>
 				<td>
 					{{ include('components/Badge/Timestamps.html.twig', {'entity': task}) }}

@@ -3,10 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\TaskListsRepository;
+use App\Repository\TasksRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Knp\Component\Pager\PaginatorInterface;
 
 #[ORM\Entity(repositoryClass: TaskListsRepository::class)]
 class TaskLists
