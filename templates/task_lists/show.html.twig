@@ -6,9 +6,9 @@
 			{{ task_list.name }}
 		</h1>
 		<div class="card-content d-flex flex-grow-1">
-			{{ include('components/Badge.html.twig', {'attrs': {'title': 'Status'},'text':  task_list.status }) }}
-			{{ include('components/Link.html.twig', {'link': path('app_accounts_show', {'id':task_list.account.id}), 'text': task_list.account.name, 'class': 'btn badge bg-info','attrs': {'title':'Account'} }) }}
-			{{ include('components/Link.html.twig', {'link': path('app_client_show', {'id':task_list.account.client.id}), 'text': task_list.account.client.name, 'class': 'btn badge bg-info','attrs': {'title':'Client'} }) }}
+			<div>{{ include('components/Badge.html.twig', {'attrs': {'title': 'Status'},'text':  task_list.status }) }}</div>
+			{{ include('components/Link/Entity.html.twig', {'name': 'accounts', 'entity': task_list.account}) }}
+			{{ include('components/Link/Entity.html.twig', {'name': 'client', 'entity': task_list.account.client}) }}
 		</div>
 		<div class="card-actions btn-toolbar ms-5">
 			{{ include('components/Link/Back.html.twig', {'link': path('app_task_lists_index')}) }}
@@ -22,11 +22,10 @@
 
 {% block body %}
 	<div class="card-body">
-		<h2>Task Lists</h2>
+		<h2>Tasks</h2>
 		{% include 'tasks/_table.html.twig' with {'tasks': task_list.tasks} %}
 	</div>
 	<div class="card-footer text-end">
-		{{ include('components/Badge.html.twig', {'text': task_list.createdAt ? task_list.createdAt|date('Y-m-d H:i:s') : '', 'attrs': {'title': 'Created At'} }) }}
-		{{ include('components/Badge.html.twig', {'text': task_list.updatedAt ? task_list.updatedAt|date('Y-m-d H:i:s') : '', 'attrs': {'title': 'Updated At'} }) }}
+		{{ include('components/Badge/Timestamps.html.twig', {'entity': task_list}) }}
 	</div>
 {% endblock %}

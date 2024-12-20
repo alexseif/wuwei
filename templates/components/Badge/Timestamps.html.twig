@@ -1,0 +1,4 @@
+<div>
+	{{ include('components/Badge.html.twig', {'text': entity.createdAt ? entity.createdAt|date('Y-m-d H:i:s') : '', 'attrs': {'title': 'Created At'}}) }}
+	{{ include('components/Badge.html.twig', {'text': entity.updatedAt ? entity.updatedAt|date('Y-m-d H:i:s') : '', 'attrs': {'title': 'Updated At'}}) }}
+</div>

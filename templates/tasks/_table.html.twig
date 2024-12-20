@@ -1,46 +1,51 @@
 <table class="table">
 	<thead>
 		<tr>
-			<th>Id</th>
 			<th>Task</th>
 			<th>TaskList</th>
+			<th>Account</th>
+			<th>Client</th>
 			<th>Eta</th>
 			<th>Est</th>
 			<th>Dur.</th>
 			<th>CompletedAt</th>
 			<th>WorkLoggable</th>
-			<th>CreatedAt</th>
-			<th>UpdatedAt</th>
+			<th>Timestamps</th>
 			<th>actions</th>
 		</tr>
 	</thead>
 	<tbody>
 		{% for task in tasks %}
-			<tr class="{{ task.completed ? 'task-completed' : '' }}">
-				<td>{{ task.id }}</td>
+			<tr class="{{ task.completed ? 'completed' : '' }}">
 				<td>
-					{{ task.task }}
+					{{ include('components/Link/Entity.html.twig', {'name': 'tasks', 'entity': task}) }}
 					{{ include('components/Badge/Priority.html.twig', {'priority': task.priority}) }}
 					{{ include('components/Badge/Urgency.html.twig', {'urgency': task.urgency}) }}
 				</td>
 				<td>
-					{{ include('components/Link.html.twig', {'link': path('app_task_lists_show', {'id':task.taskList.id}), 'text': task.taskList.name, 'attrs': {'title':'TaskList'} }) }}
+					{{ include('components/Link/Entity.html.twig', {'name': 'task_lists', 'entity': task.taskList}) }}
+				</td>
+				<td>
+					{{ include('components/Link/Entity.html.twig', {'name': 'accounts', 'entity': task.taskList.account}) }}
+				</td>
+				<td>
+					{{ include('components/Link/Entity.html.twig', {'name': 'client', 'entity': task.taskList.account.client}) }}
 				</td>
 				<td>{{ task.eta ? task.eta|date('Y-m-d H:i:s') : '' }}</td>
 				<td>{{ task.est }}</td>
 				<td>{{ task.duration }}</td>
 				<td>{{ task.completedAt ? task.completedAt|date('Y-m-d H:i:s') : '' }}</td>
 				<td>{{ task.workLoggable ? 'Yes' : 'No' }}</td>
-				<td>{{ task.createdAt ? task.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-				<td>{{ task.updatedAt ? task.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
 				<td>
-					{{ include('components/Link/Show.html.twig', {'link': path('app_tasks_show', {'id': task.id}) }) }}
+					{{ include('components/Badge/Timestamps.html.twig', {'entity': task}) }}
+				</td>
+				<td>
 					{{ include('components/Link/Edit.html.twig', {'link': path('app_tasks_edit', {'id': task.id}) }) }}
 				</td>
 			</tr>
 		{% else %}
 			<tr>
-				<td colspan="14">no records found</td>
+				<td colspan="9">no records found</td>
 			</tr>
 		{% endfor %}
 	</tbody>

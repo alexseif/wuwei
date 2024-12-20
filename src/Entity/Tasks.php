@@ -99,6 +99,10 @@ class Tasks
     {
         return $this->task;
     }
+    public function getName(): ?string
+    {
+        return $this->getTask();
+    }
 
     public function setTask(string $task): static
     {

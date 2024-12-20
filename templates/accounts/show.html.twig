@@ -6,8 +6,8 @@
 			{{ account.name }}
 		</h1>
 		<div class="card-content d-flex flex-grow-1">
-			{{ include('components/Badge/Conceal.html.twig', {'conceal': account.conceal }) }}
-			{{ include('components/Link.html.twig', {'link': path('app_client_show', {'id': account.client.id}), 'text': account.client.name, 'class': 'btn badge bg-info','attrs': {'title':'Client'} }) }}
+			<div>{{ include('components/Badge/Conceal.html.twig', {'conceal': account.conceal }) }}</div>
+			{{ include('components/Link/Entity.html.twig', {'name': 'client', 'entity': account.client}) }}
 		</span>
 
 
@@ -24,6 +24,6 @@
 	{% include 'task_lists/_table.html.twig' with {'task_lists': account.taskLists} %}
 </div>
 <div class="card-footer text-end">
-	{{ include('components/Badge.html.twig', {'text': account.createdAt ? account.createdAt|date('Y-m-d H:i:s') : '', 'attrs': {'title': 'Created At'} }) }}
-	{{ include('components/Badge.html.twig', {'text': account.updatedAt ? account.updatedAt|date('Y-m-d H:i:s') : '', 'attrs': {'title': 'Updated At'} }) }}
+	{{ include('components/Badge/Timestamps.html.twig', {'entity': account}) }}
+
 </div>{% endblock %}

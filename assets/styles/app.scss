@@ -44,6 +44,28 @@ header {
 .progress {
   height: 40px;
 }
-.task-completed{
-  text-decoration: line-through;
+
+
+
+.table {
+  tbody {
+    tr.disabled {
+      border-left: gray 2px solid;
+      border-right: gray 2px solid;
+
+      td {
+        color: gray;
+      }
+    }
+
+    tr.completed {
+      td {
+        text-decoration: line-through;
+
+        a {
+          text-decoration: line-through;
+        }
+      }
+    }
+  }
 }

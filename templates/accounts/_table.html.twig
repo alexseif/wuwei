@@ -1,31 +1,27 @@
 <table class="table">
 	<thead>
 		<tr>
-			<th>Id</th>
 			<th>Name</th>
 			<th>Client</th>
 			<th>Conceal</th>
-			<th>CreatedAt</th>
-			<th>UpdatedAt</th>
+			<th>Timestamps</th>
 			<th>actions</th>
 		</tr>
 	</thead>
 	<tbody>
 		{% for account in accounts %}
-			<tr>
-				<td>{{ account.id }}</td>
-				<td>{{ account.name }}</td>
+			<tr class="{{ account.conceal ? 'disabled' : 'enabled' }}">
 				<td>
-					<twig:Link link="{{ path('app_client_show', {'id': account.client.id}) }}" text="{{ account.client.name }}"/>
+					{{ include('components/Link/Entity.html.twig', {'name': 'accounts', 'entity': account}) }}</td>
+				<td>
+					{{ include('components/Link/Entity.html.twig', {'name': 'client', 'entity': account.client}) }}</td>
 				</td>
 				<td>
 					<twig:Badge:Conceal conceal="{{ account.conceal }}"/>
 				</td>
-				<td>{{ account.createdAt ? account.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-				<td>{{ account.updatedAt ? account.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+				<td>{{ include('components/Badge/Timestamps.html.twig', {'entity': account}) }}</td>
 				<td>
-					<twig:Link:Show link="{{ path('app_accounts_show', {'id': account.id}) }}"/>
-					<twig:Link:Edit link="{{ path('app_accounts_edit', {'id': account.id}) }}"/>
+					{{ include('components/Link/Edit.html.twig', {'link': path('app_accounts_edit', {'id': account.id})}) }}
 				</td>
 			</tr>
 		{% else %}
