@@ -71,7 +71,7 @@ final class DaysController extends AbstractController
     #[Route('/{id}', name: 'app_days_delete', methods: ['POST'])]
     public function delete(Request $request, Days $day, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$day->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $day->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($day);
             $entityManager->flush();
         }

@@ -14,12 +14,11 @@ class DashboardTaskListsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            
+
             ->add('taskList', EntityType::class, [
                 'class' => TaskLists::class,
-                'choice_label' => 'id',
-            ])
-        ;
+                'choice_label' => 'name',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

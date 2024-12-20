@@ -3,10 +3,8 @@
 {% block h1 %}Edit Days
 {% endblock %}
 {% block card_actions %}
-	<div>
-		<a href="{{ path('app_days_index') }}">back to list</a>
-		{{ include('days/_delete_form.html.twig') }}
-	</div>
+	{{ include('components/Link/Back.html.twig', {'name': 'days'}) }}
+	{{ include('days/_delete_form.html.twig') }}
 {% endblock %}
 {% block body %}
 	{{ include('days/_form.html.twig', {'button_label': 'Update'}) }}

@@ -1,42 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block h1 %}Days index
+{% block h1 %}Days
 {% endblock %}
 {% block card_actions %}
-	<div>
-		<a href="{{ path('app_days_new') }}">Create new</a>
-	</div>
+	{{ include('components/Link/New.html.twig', {'name': 'days'}) }}
+
 {% endblock %}
 {% block body %}
 	<table class="table">
 		<thead>
 			<tr>
-				<th>Id</th>
 				<th>Name</th>
 				<th>Deadline</th>
 				<th>Complete</th>
-				<th>CreatedAt</th>
-				<th>UpdatedAt</th>
+				<th>Timestamps</th>
 				<th>actions</th>
 			</tr>
 		</thead>
 		<tbody>
 			{% for day in days %}
-				<tr>
-					<td>{{ day.id }}</td>
-					<td>{{ day.name }}</td>
-					<td>{{ day.deadline ? day.deadline|date('Y-m-d H:i:s') : '' }}</td>
-					<td>{{ day.complete ? 'Yes' : 'No' }}</td>
-					<td>{{ day.createdAt ? day.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-					<td>{{ day.updatedAt ? day.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+				<tr class="{{ day.complete ? 'completed' : '' }}">
 					<td>
-						<a href="{{ path('app_days_show', {'id': day.id}) }}">show</a>
-						<a href="{{ path('app_days_edit', {'id': day.id}) }}">edit</a>
+						{{ include('components/Link/Entity.html.twig', {'name': 'days', 'entity': day}) }}
+					</td>
+					<td>{{ day.deadline ? day.deadline|date('Y-m-d') : '' }}</td>
+					<td>{{ day.complete ? 'Yes' : 'No' }}</td>
+					<td>{{ include('components/Badge/Timestamps.html.twig', {'entity': day}) }}</td>
+					<td>
+						{{ include('components/Link/Edit.html.twig', {'name': 'days', 'id': day.id}) }}
 					</td>
 				</tr>
 			{% else %}
 				<tr>
-					<td colspan="7">no records found</td>
+					<td colspan="5">no records found</td>
 				</tr>
 			{% endfor %}
 		</tbody>

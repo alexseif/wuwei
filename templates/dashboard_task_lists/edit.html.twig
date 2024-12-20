@@ -3,10 +3,8 @@
 {% block h1 %}Edit DashboardTaskLists
 {% endblock %}
 {% block card_actions %}
-	<div>
-		<a href="{{ path('app_dashboard_task_lists_index') }}">back to list</a>
-		{{ include('dashboard_task_lists/_delete_form.html.twig') }}
-	</div>
+	{{ include('components/Link/Back.html.twig', {'name': 'dashboard_task_lists'}) }}
+	{{ include('dashboard_task_lists/_delete_form.html.twig') }}
 {% endblock %}
 {% block body %}
 	{{ include('dashboard_task_lists/_form.html.twig', {'button_label': 'Update'}) }}

@@ -3,9 +3,7 @@
 {% block h1 %}New DashboardTaskLists
 {% endblock %}
 {% block card_actions %}
-	<div>
-		<a href="{{ path('app_dashboard_task_lists_index') }}">back to list</a>
-	</div>
+	{{ include('components/Link/Back.html.twig', {'name': 'dashboard_task_lists'}) }}
 {% endblock %}
 {% block body %}
 	{{ include('dashboard_task_lists/_form.html.twig') }}
