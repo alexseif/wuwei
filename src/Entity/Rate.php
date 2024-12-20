@@ -25,7 +25,7 @@ class Rate
     private ?Client $client = null;
 
     #[ORM\Column]
-    private ?bool $active = null;
+    private ?bool $active = true;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $note = null;

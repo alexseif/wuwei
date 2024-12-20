@@ -15,13 +15,11 @@ class RateType extends AbstractType
     {
         $builder
             ->add('rate')
-            ->add('active')
-            ->add('note')
-            
             ->add('client', EntityType::class, [
                 'class' => Client::class,
-                'choice_label' => 'id',
+                'choice_label' => 'name',
             ])
+            ->add('note')
         ;
     }
 

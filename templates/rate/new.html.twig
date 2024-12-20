@@ -3,9 +3,7 @@
 {% block h1 %}New Rate
 {% endblock %}
 {% block card_actions %}
-	<div>
-		<a href="{{ path('app_rate_index') }}">back to list</a>
-	</div>
+		{{ include('components/Link/Back.html.twig', {'name': 'rate'}) }}
 {% endblock %}
 {% block body %}
 	{{ include('rate/_form.html.twig') }}

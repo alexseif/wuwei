@@ -3,11 +3,9 @@
 {% block h1 %}Rate
 {% endblock %}
 {% block card_actions %}
-	<div>
-		<a href="{{ path('app_rate_index') }}">back to list</a>
-		<a href="{{ path('app_rate_edit', {'id': rate.id}) }}">edit</a>
-		{{ include('rate/_delete_form.html.twig') }}
-	</div>
+	{{ include('components/Link/Back.html.twig', {'name': 'rate'}) }}
+	{{ include('components/Link/Edit.html.twig', {'name': 'rate', 'id': rate.id}) }}
+	{{ include('rate/_delete_form.html.twig') }}
 {% endblock %}
 {% block body %}
 	<table class="table">

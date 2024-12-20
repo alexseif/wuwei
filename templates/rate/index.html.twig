@@ -1,42 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block h1 %}Rate index
+{% block h1 %}Rates
 {% endblock %}
 {% block card_actions %}
-	<div>
-		<a href="{{ path('app_rate_new') }}">Create new</a>
-	</div>
+	{{ include('components/Link/New.html.twig', {'name': 'rate'}) }}
+
 {% endblock %}
 {% block body %}
 	<table class="table">
 		<thead>
 			<tr>
-				<th>Id</th>
 				<th>Rate</th>
-				<th>Active</th>
 				<th>Note</th>
-				<th>CreatedAt</th>
-				<th>UpdatedAt</th>
+				<th>Timestamps</th>
 				<th>actions</th>
 			</tr>
 		</thead>
 		<tbody>
 			{% for rate in rates %}
 				<tr>
-					<td>{{ rate.id }}</td>
-					<td>{{ rate.rate }}</td>
-					<td>{{ rate.active ? 'Yes' : 'No' }}</td>
+					<td>{{ rate.rate|format_currency('EGP') }}</td>
 					<td>{{ rate.note }}</td>
-					<td>{{ rate.createdAt ? rate.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-					<td>{{ rate.updatedAt ? rate.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
 					<td>
-						<a href="{{ path('app_rate_show', {'id': rate.id}) }}">show</a>
-						<a href="{{ path('app_rate_edit', {'id': rate.id}) }}">edit</a>
+						{{ include('components/Badge/Timestamps.html.twig', {'entity': rate}) }}
+					</td>
+					<td>
+						{{ include('components/Link/Show.html.twig', {'name': 'rate', 'id': rate.id}) }}
+						{{ include('components/Link/Edit.html.twig', {'name': 'rate', 'id': rate.id}) }}
 					</td>
 				</tr>
 			{% else %}
 				<tr>
-					<td colspan="7">no records found</td>
+					<td colspan="4">no records found</td>
 				</tr>
 			{% endfor %}
 		</tbody>

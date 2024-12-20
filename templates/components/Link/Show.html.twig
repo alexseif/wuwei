@@ -1,1 +1,1 @@
-{{ include('components/Link.html.twig', {'text':'Show'}) }}
+{{ include('components/Link.html.twig', {'text':'Show', 'link': path('app_' ~ name ~ '_show', {'id': id})}) }}
