@@ -15,7 +15,15 @@ class TaskListsRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, TaskLists::class);
     }
-
+    public function getActiveTaskLists()
+    {
+        return $this->createQueryBuilder('tl')
+            ->select('tl, a, c')
+            ->leftJoin('tl.account', 'a')
+            ->leftJoin('a.client', 'c')
+            ->where('tl.status <> \'archive\'')
+            ;
+    }
     //    /**
     //     * @return TaskLists[] Returns an array of TaskLists objects
     //     */
