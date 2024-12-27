@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}Time Tracking
+{% endblock %}
+
+{% block body %}
+	<div class="row row-cols-3 g-4">
+		{% for key,widget in widgets %}
+			<div class="col">
+				<div class="card">
+					<div class="card-body">
+						<div class="d-flex justify-content-between align-items-center">
+							<h2 class="card-title">
+								{{ widget.value|default('00:00') }}
+							</h2>
+							<small>{{ widget.title }}</small>
+						</div>
+					</div>
+					{% if widget.valueLastYear %}
+						<div class="card-body">
+							<div class="d-flex justify-content-between align-items-center">
+								<i class="bi {{ widget.trendIcon }} {{ widget.trendColor }}"></i>
+								<span class="small text-muted" title="last year">{{ widget.valueLastYear|default('00:00') }}</span>
+								<span class="badge {{ widget.percentageColor }}">
+									{{ widget.percentage < 0 ? '' : '+' }}{{ widget.percentage|number_format(2) }}%
+								</span>
+							</div>
+						</div>
+					{% endif %}
+				</div>
+				<!-- /.card -->
+			</div>
+			<!-- /.col -->
+		{% endfor %}
+	</div>
+
+
+	<ul class="nav justify-content-center">
+		<li class="nav-item">
+			<a class="nav-link active" aria-current="page" href="#">This Week</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#">Last Week</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#">Last Month</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#">Last Quarter</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#">This Year</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#">All</a>
+		</li>
+	</ul>
+{% endblock %}

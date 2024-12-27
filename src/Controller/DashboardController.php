@@ -10,6 +10,7 @@ use App\Repository\TagTypeRepository;
 use App\Service\TimeSystemService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -24,6 +25,8 @@ class DashboardController extends AbstractController
     GoalRepository $goalRepository,
     TagTypeRepository $tagTypeRepository
   ): Response {
+  
+    return new RedirectResponse($this->generateUrl('app_time_tracking'));
     $current = $timeSystemService->getCurrent();
     return $this->render(
       'dashboard/dashboard.html.twig',
