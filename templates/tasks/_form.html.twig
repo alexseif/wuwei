@@ -1,6 +1,22 @@
 {{ form_start(form) }}
 <div class="card-body">
-	{{ form_widget(form) }}
+	{{ form_row(form.task) }}
+	{{ form_row(form.taskList) }}
+	<div class="row">
+		<div class="col">
+			{{ form_row(form.priority) }}
+			{{ form_row(form.urgency) }}
+		</div>
+		<div class="col">
+			{{ form_row(form.est) }}
+			{{ form_row(form.eta) }}
+		</div>
+		<div class="col">
+			{{ form_row(form.duration) }}
+			{{ form_row(form.completed) }}
+			{{ form_row(form.completedAt) }}
+		</div>
+	</div>
 </div>
 <div class="card-footer text-end">
 	<button class="btn btn-sm btn-success">{{ button_label|default('Save') }}</button>
