@@ -28,6 +28,7 @@ class TasksType extends AbstractType
                     return $taskListsRepository->getActiveTaskLists();
                 },
                 'group_by' => 'account.name',
+                'attr' => ['class' => 'select2'],
             ])
             ->add('est')
             ->add('duration')
