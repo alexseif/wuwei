@@ -1,9 +1,40 @@
 {% extends 'base.html.twig' %}
-{% block h1 %}Welcome to WuWei{% endblock %}
+{% block h1 %}Welcome to WuWei
+{% endblock %}
 {% block body %}
-    <div class="card-body">
-        {% include('goal/_goals.html.twig') %}
-        <hr/>
-        {% include('item_list/_item_lists.html.twig') %}
-    </div>
+	<div class="row row-cols-3 g-4">
+		{% for key,widget in widgets %}
+			<div class="col">
+				<div class="card">
+					<div class="card-body">
+						<div class="d-flex justify-content-between align-items-center">
+							<h2 class="card-title">
+								{{ widget.value|default('00:00') }}
+							</h2>
+							<small>{{ widget.title }}</small>
+						</div>
+					</div>
+					{% if widget.valueLastYear %}
+						<div class="card-body">
+							<div class="d-flex justify-content-between align-items-center">
+								<i class="bi {{ widget.trendIcon }} {{ widget.trendColor }}"></i>
+								<span class="small text-muted" title="last year">{{ widget.valueLastYear|default('00:00') }}</span>
+								<span class="badge {{ widget.percentageColor }}">
+									{{ widget.percentage < 0 ? '' : '+' }}{{ widget.percentage|number_format(2) }}%
+								</span>
+							</div>
+						</div>
+					{% endif %}
+				</div>
+				<!-- /.card -->
+			</div>
+			<!-- /.col -->
+		{% endfor %}
+	</div>
+	<hr/>
+	<div class="card-body">
+		{% include('goal/_goals.html.twig') %}
+		<hr/>
+		{% include('item_list/_item_lists.html.twig') %}
+	</div>
 {% endblock %}
