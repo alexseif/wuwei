@@ -1,35 +1,36 @@
 {% extends 'base.html.twig' %}
 
-{% block h1 %}Goal index{% endblock %}
+{% block h1 %}Goal index
+{% endblock %}
 {% block card_actions %}
-    <a href="{{ path('app_goal_new') }}" class="btn btn-outline-light">Create new</a>
+	{{ include('components/Link/New.html.twig', {'name': 'goal'}) }}
 {% endblock %}
 {% block body %}
-    <div class="card-body ">
-        <div class="row">
-            {% for goal in goals %}
-                <div class="col-4">
-                    <div class="card mb-4">
-                        <div class="card-header d-flex">
-                            <h5 class="card-title">{{ goal.name }}</h5>
-                            <div class="ms-auto">
-                                <a href="{{ path('app_goal_show', {'id': goal.id}) }}" class="btn btn-sm btn-outline-light">show</a>
-                                <a href="{{ path('app_goal_edit', {'id': goal.id}) }}" class="btn btn-sm btn-outline-light">edit</a>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div>{{ goal.tags|join(', ') }}</div>
-                            <div>{{ goal.createdAt ? goal.createdAt|date('Y-m-d H:i:s') : '' }}</div>
-                            <div>{{ goal.updatedAt ? goal.updatedAt|date('Y-m-d H:i:s') : '' }}</div>
-                        </div>
-                    </div>
-                </div>
-            {% else %}
-                <div>
-                    <div>no records found</div>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
+	<div class="card-body ">
+		<div class="row">
+			{% for goal in goals %}
+				<div class="col-4">
+					<div class="card mb-4">
+						<div class="card-header d-flex">
+							<h5 class="card-title">{{ goal.name }}</h5>
+							<div class="ms-auto">
+								<a href="{{ path('app_goal_show', {'id': goal.id}) }}" class="btn btn-sm btn-outline-light">show</a>
+								<a href="{{ path('app_goal_edit', {'id': goal.id}) }}" class="btn btn-sm btn-outline-light">edit</a>
+							</div>
+						</div>
+						<div class="card-body">
+							<div>{{ goal.tags|join(', ') }}</div>
+							<div>{{ goal.createdAt ? goal.createdAt|date('Y-m-d H:i:s') : '' }}</div>
+							<div>{{ goal.updatedAt ? goal.updatedAt|date('Y-m-d H:i:s') : '' }}</div>
+						</div>
+					</div>
+				</div>
+			{% else %}
+				<div>
+					<div>no records found</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
 
 {% endblock %}

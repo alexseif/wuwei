@@ -1,10 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block h1 %}Edit Goal: {{ goal.name }}{% endblock %}
+{% block h1 %}Edit Goal:
+	{{ goal.name }}
+{% endblock %}
 {% block card_actions %}
-    <a href="{{ path('app_goal_index') }}" class="btn btn-link">back</a>
-    {{ include('goal/_delete_form.html.twig') }}
+	{{ include('components/Link/Back.html.twig', {'name': 'goal'}) }}
+	{{ include('goal/_delete_form.html.twig') }}
 {% endblock %}
 {% block body %}
-    {{ include('goal/_form.html.twig', {'button_label': 'Update'}) }}
+	{{ include('goal/_form.html.twig', {'button_label': 'Update'}) }}
 {% endblock %}

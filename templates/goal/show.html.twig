@@ -1,27 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block h1 %}Goal #{{ goal.id }}: {{ goal.name }}{% endblock %}
+{% block h1 %}Goal #{{ goal.id }}:
+	{{ goal.name }}
+{% endblock %}
 {% block card_actions %}
-    <a href="{{ path('app_goal_index') }}" class="btn btn-link">back</a>
-    <a href="{{ path('app_goal_edit', {'id': goal.id}) }}" class="btn btn-outline-light">edit</a>
-    {{ include('goal/_delete_form.html.twig') }}
+	{{ include('components/Link/Back.html.twig', {'name': 'goal'}) }}
+	{{ include('components/Link/Edit.html.twig', {'name': 'goal', 'id': goal.id}) }}
+	{{ include('goal/_delete_form.html.twig') }}
 {% endblock %}
 {% block body %}
-    <table class="table" style="table-layout: fixed;">
-        <tbody>
-        <tr>
-            <th>Tags</th>
-            <td>{{ goal.tags|join(', ') }}</td>
-            <th>
-                CreatedAt <br/>
-                UpdatedAt
-            </th>
-            <td>
-                {{ goal.createdAt ? goal.createdAt|date('Y-m-d H:i:s') : '' }}<br/>
-                {{ goal.updatedAt ? goal.updatedAt|date('Y-m-d H:i:s') : '' }}
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Tags</th>
+				<td>{{ goal.tags|join(', ') }}</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="card-footer text-end">
+		{{ include('components/Badge/Timestamps.html.twig', {'entity': goal}) }}
+	</div>
 {% endblock %}
