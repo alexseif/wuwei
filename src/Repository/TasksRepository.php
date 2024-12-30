@@ -36,7 +36,7 @@ class TasksRepository extends ServiceEntityRepository
             }
         }
         $query
-            ->orderBy('t.completed', 'DESC')
+            ->orderBy('t.completed', 'ASC')
             ->addOrderBy('t.order', 'ASC')
             ->addOrderBy('t.urgency', 'DESC')
             ->addOrderBy('t.priority', 'DESC')

@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/task/lists')]
+#[Route('/tasklists')]
 final class TaskListsController extends AbstractController
 {
     #[Route(name: 'app_task_lists_index', methods: ['GET'])]
@@ -45,9 +45,9 @@ final class TaskListsController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_task_lists_show', methods: ['GET'])]
-    public function show(TaskLists $taskList, TasksRepository $tasksRepository, PaginatorInterface $paginator): Response
+    public function show(Request $request, TaskLists $taskList, TasksRepository $tasksRepository, PaginatorInterface $paginator): Response
     {
-        $tasks  = $paginator->paginate($tasksRepository->getPaginatorQuery(['t.taskList' => $taskList]), 1);
+        $tasks  = $paginator->paginate($tasksRepository->getPaginatorQuery(['t.taskList' => $taskList]), $request->query->getInt('page', 1));
         return $this->render('task_lists/show.html.twig', [
             'task_list' => $taskList,
             'tasks' => $tasks,
