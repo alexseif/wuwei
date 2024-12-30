@@ -1,50 +1,24 @@
-<table class="table">
-	<thead>
-		<tr>
-			<th>{{ knp_pagination_sortable(tasks, 'Task', 't.id') }}</th>
-			<th>{{ knp_pagination_sortable(tasks, 'TaskList', 'tl.id') }}</th>
-			<th>{{ knp_pagination_sortable(tasks, 'Account', 'a.id') }}</th>
-			<th>{{ knp_pagination_sortable(tasks, 'Client', 'c.id') }}</th>
-			<th>Eta</th>
-			<th>Est</th>
-			<th>Dur.</th>
-			<th>WorkLoggable</th>
-			<th>Timestamps</th>
-			<th>actions</th>
-		</tr>
-	</thead>
-	<tbody>
-		{% for task in tasks %}
-			<tr class="{{ task.completed ? 'completed' : '' }}">
-				<td>
-					{{ include('components/Link/Entity.html.twig', {'name': 'tasks', 'entity': task}) }}
-					{{ include('components/Badge/Priority.html.twig', {'priority': task.priority}) }}
-					{{ include('components/Badge/Urgency.html.twig', {'urgency': task.urgency}) }}
-				</td>
-				<td>
-					{{ include('components/Link/Entity.html.twig', {'name': 'task_lists', 'entity': task.taskList}) }}
-				</td>
-				<td>
-					{{ include('components/Link/Entity.html.twig', {'name': 'accounts', 'entity': task.taskList.account}) }}
-				</td>
-				<td>
-					{{ include('components/Link/Entity.html.twig', {'name': 'client', 'entity': task.taskList.account.client}) }}
-				</td>
-				<td>{{ task.eta ? task.eta|date('Y-m-d H:i:s') : '' }}</td>
-				<td>{{ task.est }}</td>
-				<td>{{ task.duration }}</td>
-				<td>{{ task.workLoggable ? 'Yes' : 'No' }}</td>
-				<td>
-					{{ include('components/Badge/Timestamps.html.twig', {'entity': task}) }}
-				</td>
-				<td>
-					{{ include('components/Link/Edit.html.twig', {'name': 'tasks', 'id': task.id }) }}
-				</td>
-			</tr>
-		{% else %}
-			<tr>
-				<td colspan="11">no records found</td>
-			</tr>
-		{% endfor %}
-	</tbody>
-</table>
+<div class="card-body">
+	{{ knp_pagination_sortable(tasks, 'Task', 't.id') }}
+	-
+	{{ knp_pagination_sortable(tasks, 'Urgency', 't.urgency') }}
+	-
+	{{ knp_pagination_sortable(tasks, 'Priority', 't.priority') }}
+	-
+	{{ knp_pagination_sortable(tasks, 'TaskList', 'tl.id') }}
+	-
+	{{ knp_pagination_sortable(tasks, 'Account', 'a.id') }}
+	-
+	{{ knp_pagination_sortable(tasks, 'Client', 'c.id') }}
+	-
+	{{ knp_pagination_sortable(tasks, 'Completed At', 't.completedAt') }}
+</div>
+<div class="list-group tasks">
+	{% for task in tasks %}
+		{{ include('components/Task/Task.html.twig', {'task': task}) }}
+	{% else %}
+		<div class="list-group-item">
+			<span>no records found</span>
+		</div>
+	{% endfor %}
+</div>

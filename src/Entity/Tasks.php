@@ -249,4 +249,23 @@ class Tasks
 
         return $this;
     }
+
+    public function toArray()
+    {
+        return [
+            'id' => $this->id,
+            'task' => $this->task,
+            'order' => $this->order,
+            'priority' => $this->priority,
+            'urgency' => $this->urgency,
+            'duration' => $this->duration,
+            'est' => $this->est,
+            'eta' => ($this->eta) ? $this->eta->format('Y-m-d H:i:s') : '',
+            'completed' => $this->completed,
+            'completedAt' => ($this->completedAt) ? $this->completedAt->format('Y-m-d H:i:s') : '',
+            'taskList' => $this->taskList->getId(),
+            'workLog' => $this->workLog,
+            'workLoggable' => $this->workLoggable,
+        ];
+    }
 }

@@ -2,19 +2,28 @@
 
 {% block h1 %}Tasks
 {% endblock %}
-{% block card_actions%}
+{% block card_actions %}
+	{{ include('components/Link.html.twig', {'text': 'reset', 'link': path('app_tasks_index'), 'class': 'btn btn-link btn-sm'}) }}
 	{{ include('components/Link/New.html.twig', {'name': 'tasks'}) }}
 {% endblock %}
 {% block body %}
-	<div class="card-footer">
-		<div class="navigation d-flex justify-content-between">
-			<div class="count">
-				{{ tasks.getTotalItemCount() }}
-			</div>
-			{{ knp_pagination_render(tasks) }}
+	<ul class="nav nav-tabs" id="taskTab" role="tablist">
+		<li class="nav-item" role="presentation">
+			<a class="nav-link {{ completed ? '' : 'active' }}" id="completed-tab" href="{{ path('app_tasks_index') }}" role="tab" aria-controls="open" aria-selected="{{ completed ? 'false' : 'true' }}">
+				Open
+			</a>
+		</li>
+		<li class="nav-item" role="presentation">
+			<a class="nav-link {{ completed ? 'active' : '' }}" id="not-completed-tab" href="{{ path('app_tasks_index', {'completed': 1}) }}" role="tab" aria-controls="completed" aria-selected="{{ completed ? 'true' : 'false' }}">
+				Completed
+			</a>
+		</li>
+	</ul>
+	<div class="tab-content" id="taskTabContent">
+		<div class="tab-pane fade show active" id="open" role="tabpanel" aria-labelledby="open-tab">
+			{% include 'tasks/_table.html.twig' with {'tasks': tasks} %}
 		</div>
 	</div>
-	{% include 'tasks/_table.html.twig' %}
 	<div class="card-footer">
 		<div class="navigation d-flex justify-content-between">
 			<div class="count">

@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\Paginator;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -23,13 +24,16 @@ final class TasksController extends AbstractController
         TasksRepository $tasksRepository,
         PaginatorInterface $paginator
     ): Response {
+        $completed = $request->query->getBoolean('completed') ?? false;
+        $criteria = ['t.completed' => $completed];
+
         $pagination = $paginator->paginate(
-            $tasksRepository->getPaginatorQuery(),
+            $tasksRepository->getPaginatorQuery($criteria),
             $request->query->getInt('page', 1)
         );
 
         return $this->render('tasks/index.html.twig', [
-            // 'tasks' => $tasks,
+            'completed' => $completed,
             'tasks' => $pagination,
         ]);
     }
@@ -78,6 +82,33 @@ final class TasksController extends AbstractController
             'task' => $task,
             'form' => $form,
         ]);
+    }
+
+    #[Route('/{id}/completed', name: 'app_tasks_completed', methods: ['GET', 'POST'])]
+    public function completed(Request $request, Tasks $task, EntityManagerInterface $entityManager): Response
+    {
+        $completed = $request->getPayload()->getBoolean('completed');
+        $duration = $request->getPayload()->getInt('duration');
+        $task->setCompleted($completed);
+        $task->setDuration($duration);
+        if ($completed) {
+            $task->setCompletedAt(new \DateTime());
+        } else {
+            $task->setCompletedAt(null);
+        }
+        $entityManager->flush();
+
+        return new JsonResponse(['task' => $task->toArray()]);
+    }
+
+    #[Route('/{id}/order', name: 'app_tasks_order', methods: ['GET', 'POST'])]
+    public function order(Request $request, Tasks $task, EntityManagerInterface $entityManager): Response
+    {
+        $order = $request->getPayload()->getInt('updatedOrder');
+        $task->setOrder($order);
+
+        $entityManager->flush();
+        return new JsonResponse(['task' => $task->toArray()]);
     }
 
     #[Route('/{id}', name: 'app_tasks_delete', methods: ['POST'])]

@@ -16,6 +16,7 @@
 // Import Font Awesome CSS
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 @import "fixed-sidebars";
+@import './tasks.scss';
 
 body {
   padding-bottom: 6rem;
@@ -43,33 +44,6 @@ header {
 .progress-stacked,
 .progress {
   height: 40px;
-}
-
-
-
-.table {
-  tbody {
-
-    tr.disabled,
-    tr.archive {
-      border-left: gray 2px solid;
-      border-right: gray 2px solid;
-
-      td {
-        color: gray;
-      }
-    }
-
-    tr.completed {
-      td {
-        text-decoration: line-through;
-
-        a {
-          text-decoration: line-through;
-        }
-      }
-    }
-  }
 }
 
 .select2-container--bootstrap-5 {

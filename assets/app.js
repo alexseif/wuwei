@@ -25,6 +25,7 @@ import './bootstrap';
 import './item';
 import './goals';
 import './cigaretteLog';
+import './tasks.js';
 
 $.fn.select2.defaults.set("theme", "bootstrap-5");
 

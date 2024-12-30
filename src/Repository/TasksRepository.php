@@ -26,11 +26,21 @@ class TasksRepository extends ServiceEntityRepository
 
         foreach ($criteria as $key => $value) {
             $parameterName = str_replace('.', '', $key);
-            if ($value) {
-                $query->where("$key = :$parameterName")
+            if (!is_null($value)) {
+                $query->andWhere("$key = :$parameterName")
                     ->setParameter($parameterName, $value);
+                if ($key === 't.completed') {
+                    $query->orWhere('DATE(t.completedAt) = DATE(:today)')
+                        ->setParameter('today', new \DateTime());
+                }
             }
         }
+        $query
+            ->orderBy('t.completed', 'DESC')
+            ->addOrderBy('t.order', 'ASC')
+            ->addOrderBy('t.urgency', 'DESC')
+            ->addOrderBy('t.priority', 'DESC')
+        ;
 
         return $query->getQuery();
     }

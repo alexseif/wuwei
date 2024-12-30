@@ -1,0 +1,53 @@
+// Tasks
+.tasks {
+    .task {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        span {
+            margin: 0 5px;
+        }
+
+        &.important {
+            border-color: red;
+        }
+
+        &.urgent {
+            border-color: orange;
+        }
+    }
+}
+
+.completed {
+    text-decoration: line-through;
+
+    .name {
+        text-decoration: line-through;
+    }
+}
+
+.table {
+    tbody {
+
+        tr.disabled,
+        tr.archive {
+            border-left: gray 2px solid;
+            border-right: gray 2px solid;
+
+            td {
+                color: gray;
+            }
+        }
+
+        tr.completed {
+            td {
+                text-decoration: line-through;
+
+                a {
+                    text-decoration: line-through;
+                }
+            }
+        }
+    }
+}
