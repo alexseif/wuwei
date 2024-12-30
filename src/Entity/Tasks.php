@@ -54,9 +54,6 @@ class Tasks
     #[ORM\JoinColumn()]
     private ?TaskLists $taskList = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'], targetEntity: Schedule::class, mappedBy: 'task', orphanRemoval: true)]
-    private ?Schedule $schedule = null;
-
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?WorkLog $workLog = null;
 
@@ -149,7 +146,7 @@ class Tasks
     {
         return $this->urgencyName[$this->urgency];
     }
-    
+
     public function setUrgency(int $urgency): static
     {
         $this->urgency = $urgency;
@@ -225,22 +222,6 @@ class Tasks
     public function setTaskList(?TaskLists $taskList): static
     {
         $this->taskList = $taskList;
-
-        return $this;
-    }
-
-    public function getSchedule(): ?Schedule
-    {
-        return $this->schedule;
-    }
-
-    public function setSchedule(?Schedule $schedule): static
-    {
-        if ($schedule->getTask() !== $this) {
-            $schedule->setTask($this);
-        }
-
-        $this->schedule = $schedule;
 
         return $this;
     }
