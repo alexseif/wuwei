@@ -19,11 +19,10 @@ class TasksRepository extends ServiceEntityRepository
     public function getPaginatorQuery(?array $criteria = [])
     {
         $query = $this->createQueryBuilder('t')
-            ->select('t, tl, a, c, s')
+            ->select('t, tl, a, c')
             ->leftJoin('t.taskList', 'tl')
             ->leftJoin('tl.account', 'a')
-            ->leftJoin('a.client', 'c')
-            ->leftJoin('t.schedule', 's');
+            ->leftJoin('a.client', 'c');
 
         foreach ($criteria as $key => $value) {
             $parameterName = str_replace('.', '', $key);
