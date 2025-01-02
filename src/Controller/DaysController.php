@@ -15,10 +15,12 @@ use Symfony\Component\Routing\Attribute\Route;
 final class DaysController extends AbstractController
 {
     #[Route(name: 'app_days_index', methods: ['GET'])]
-    public function index(DaysRepository $daysRepository): Response
+    public function index(Request $request, DaysRepository $daysRepository): Response
     {
+        $complete = $request->query->get('complete') ?? false;
         return $this->render('days/index.html.twig', [
-            'days' => $daysRepository->findAll(),
+            'days' => $daysRepository->findBy(['complete' => $complete], ['deadline' => 'ASC']),
+            'complete' => $complete
         ]);
     }
 

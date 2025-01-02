@@ -25,3 +25,5 @@ services:
   time_system_service:
     class: 'App\Service\TimeSystemService'
 
+  App\Twig\AppExtension:
+    tags: ['twig.extension']
