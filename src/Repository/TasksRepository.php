@@ -35,6 +35,7 @@ class TasksRepository extends ServiceEntityRepository
                 }
             }
         }
+        //TODO: Fix the order by to sort by completed, then Urgency then Priority then Order
         $query
             ->orderBy('t.completed', 'ASC')
             ->addOrderBy('t.order', 'ASC')
