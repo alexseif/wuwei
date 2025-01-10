@@ -15,15 +15,14 @@ $('.task-checkbox').each(function () {
                     'duration': duration
                 },
                 success: function (response) {
+                    $(taskDiv)
+                        .data('duration', response.task.duration)
+                        .data('completed', response.task.completed);
                     if (response.task.completed) {
                         $(taskDiv)
-                            .data('duration', task.duration)
-                            .data('completed', task.completed)
                             .addClass('completed');
                     } else {
                         $(taskDiv)
-                            .data('duration', task.duration)
-                            .data('completed', task.completed)
                             .removeClass('completed');
                     }
                     console.log('Task completed status updated successfully:', response);

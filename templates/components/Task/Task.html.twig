@@ -1,16 +1,19 @@
 <div class="list-group-item task {{ task.completed ? 'completed' : '' }} {{ (task.priority > 0)? 'important' : '' }} {{ (task.urgency > 0)? 'urgent' : '' }}" data-order="{{ task.order }}" data-id="{{ task.id }}" {% for key,value in task.toArray %} data- {{ key }}="{{ value }}" {% endfor %}>
-	<label class="btn">
-		<input type="checkbox" data-id="{{ task.id }}" data-duration="{{ task.duration }}" class="task-checkbox" {{ task.completed ? 'checked' : ''}} value="1"/>
-	</label>
-	<div class="flex-grow-1 w-25">
+	<div>
+		<label class="btn">
+			<input type="checkbox" data-id="{{ task.id }}" data-duration="{{ task.duration }}" class="task-checkbox" {{ task.completed ? 'checked' : ''}} value="1"/>
+		</label>
+	</div>
+	<div class="flex-grow-1 w-50">
 		{{ include('components/Link/Entity.html.twig', {'name': 'tasks', 'entity': task, 'class':'fw-bold btn btn-sm name'}) }}
 	</div>
 	<div>
-		{{ include('components/Badge/Priority.html.twig', {'priority': task.priority}) }}
-		{{ include('components/Badge/Urgency.html.twig', {'urgency': task.urgency}) }}
 		{{ include('components/Link/Entity.html.twig', {'name': 'task_lists', 'entity': task.taskList}) }}
 		{{ include('components/Link/Entity.html.twig', {'name': 'accounts', 'entity': task.taskList.account}) }}
 		{{ include('components/Link/Entity.html.twig', {'name': 'client', 'entity': task.taskList.account.client}) }}
+		{{ include('components/Badge/Priority.html.twig', {'priority': task.priority}) }}
+		{{ include('components/Badge/Urgency.html.twig', {'urgency': task.urgency}) }}
+		<br/>
 		<span>{{ (task.completed) ? task.duration : task.est }}m</span>
 		<span>{{ (task.completed) ? task.completedAt|date : (task.eta ? task.eta|date('Y-m-d H:i:s') : '') }}</span>
 	</div>
