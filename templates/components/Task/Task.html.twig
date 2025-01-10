@@ -3,7 +3,7 @@
 		<input type="checkbox" data-id="{{ task.id }}" data-duration="{{ task.duration }}" class="task-checkbox" {{ task.completed ? 'checked' : ''}} value="1"/>
 	</label>
 	<span class="flex-grow-1">
-		{{ include('components/Link/Entity.html.twig', {'name': 'tasks', 'entity': task, 'class':'fw-bold btn btn-sm'}) }}<br/>
+		{{ include('components/Link/Entity.html.twig', {'name': 'tasks', 'entity': task, 'class':'fw-bold btn btn-sm name'}) }}<br/>
 		{{ include('components/Badge/Priority.html.twig', {'priority': task.priority}) }}
 		{{ include('components/Badge/Urgency.html.twig', {'urgency': task.urgency}) }}
 		{{ include('components/Link/Entity.html.twig', {'name': 'task_lists', 'entity': task.taskList}) }}

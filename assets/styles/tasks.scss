@@ -20,6 +20,7 @@
 }
 
 .completed {
+    background-color: #343a40;
     text-decoration: line-through;
 
     .name {
@@ -41,13 +42,11 @@
         }
 
         tr.completed {
-            td {
+            background-color: #343a40;
+            a.name {
                 text-decoration: line-through;
-
-                a {
-                    text-decoration: line-through;
-                }
             }
+
         }
     }
 }
