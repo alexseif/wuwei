@@ -12,7 +12,7 @@ import $ from 'jquery';
 //import jquery ui for draggable and sortable
 import 'jquery-ui/ui/widgets/draggable';
 import 'jquery-ui/ui/widgets/sortable';
-require('bootstrap');
+var bootstrap = require('bootstrap');
 import 'select2/dist/css/select2.min.css'
 import 'select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.min.css'
 import 'select2';
@@ -86,4 +86,11 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 $(() => {
     $('.select2').select2();
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+    var toastList = toastElList.map(function (toastEl) {
+        return new bootstrap.Toast(toastEl).show()
+    })
 });

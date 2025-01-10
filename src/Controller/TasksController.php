@@ -48,6 +48,7 @@ final class TasksController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($task);
             $entityManager->flush();
+            $this->addFlash('success', 'Task created');
 
             return $this->redirectToRoute('app_tasks_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -74,6 +75,7 @@ final class TasksController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
+            $this->addFlash('success', 'Task updated');
 
             return $this->redirectToRoute('app_tasks_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -117,6 +119,7 @@ final class TasksController extends AbstractController
         if ($this->isCsrfTokenValid('delete' . $task->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($task);
             $entityManager->flush();
+            $this->addFlash('success', 'Task Deleted');
         }
 
         return $this->redirectToRoute('app_tasks_index', [], Response::HTTP_SEE_OTHER);

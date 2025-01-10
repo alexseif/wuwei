@@ -54,7 +54,8 @@ class Tasks
     #[ORM\JoinColumn()]
     private ?TaskLists $taskList = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?WorkLog $workLog = null;
 
     #[ORM\Column]

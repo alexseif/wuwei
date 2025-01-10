@@ -29,7 +29,7 @@ class WorkLog
     private ?float $total = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Tasks $task = null;
 
     public function getId(): ?int
