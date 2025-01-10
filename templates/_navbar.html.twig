@@ -12,11 +12,57 @@
 						Home
 					</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" aria-current="page" href="{{ path('app_goal_index') }}">
-						<span class="fa fa-bullseye"></span>
-						Goals
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+						<span class="fa fa-briefcase"></span>
+						Wuwei
 					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a class="dropdown-item" href="{{ path('app_goal_index') }}">
+								<span class="fa fa-bullseye"></span>
+								Goals
+							</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="{{ path('app_time_system_index') }}">
+								<span class="fa fa-lungs"></span>
+								Time Systems
+							</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="{{ path('app_cigarette_log_index') }}">
+								<span class="fa fa-smoking"></span>
+								Cigarette
+							</a>
+						</li>
+						<li class="dropdown-divider"></li>
+						<li>
+							<a class="dropdown-item" href="{{ path('app_tag_type_index') }}">
+								<span class="fa fa-folder-tree"></span>
+								Tag Types
+							</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="{{ path('app_tag_index') }}">
+								<span class="fa fa-tags"></span>
+								Tags
+							</a>
+						</li>
+						<li class="dropdown-divider"></li>
+						<li>
+							<a class="dropdown-item" href="{{ path('app_item_list_index') }}">
+								<span class="fa fa-tags"></span>
+								Items Lists
+							</a>
+						</li>
+						<li>
+							<a class="dropdown-item" href="{{ path('app_item_index') }}">
+								<span class="fa fa-folder-tree"></span>
+								Items
+							</a>
+						</li>
+					</ul>
 				</li>
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
@@ -42,10 +88,17 @@
 								Task Lists
 							</a>
 						</li>
+						<li class="dropdown-divider"></li>
+
 						<li>
 							<a class="dropdown-item" href="{{ path('app_tasks_index') }}">
 								<span class="fa fa-file-invoice"></span>
 								Tasks
+							</a>
+						</li><li>
+							<a class="dropdown-item" href="{{ path('app_time_tracking') }}">
+								<span class="fa fa-file-invoice"></span>
+								Time Tracking
 							</a>
 						</li>
 						<li class="dropdown-divider"></li>
@@ -119,55 +172,7 @@
 						</li>
 					</ul>
 				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
-						<span class="fa fa-tags"></span>
-						Tags
-					</a>
-					<ul class="dropdown-menu">
-						<li>
-							<a class="dropdown-item" href="{{ path('app_tag_type_index') }}">
-								<span class="fa fa-folder-tree"></span>
-								Tag Types
-							</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="{{ path('app_tag_index') }}">
-								<span class="fa fa-tags"></span>
-								Tags
-							</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="{{ path('app_tag_new') }}">
-								<span class="fa fa-plus"></span>
-								Tag
-							</a>
-						</li>
-					</ul>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" aria-current="page" href="{{ path('app_time_system_index') }}">
-						<span class="fa fa-lungs"></span>
-						Time Systems
-					</a>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Items</a>
-					<ul class="dropdown-menu">
-						<li>
-							<a class="dropdown-item" href="{{ path('app_item_list_index') }}">Items Lists</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="{{ path('app_item_index') }}">Items</a>
-						</li>
-					</ul>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" aria-current="page" href="{{ path('app_cigarette_log_index') }}">
-						<span class="fa fa-smoking"></span>
-						Cigarette
-					</a>
-				</li>
+
 
 			</ul>
 			<form class="d-flex" role="search">

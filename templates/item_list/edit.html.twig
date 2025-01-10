@@ -1,13 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit ItemList{% endblock %}
-
+{% block h1 %}Edit ItemList
+{% endblock %}
+{% block card_actions %}
+	{{ include('components/Link/Back.html.twig', {'name':'item_list'}) }}
+	{{ include('item_list/_delete_form.html.twig') }}
+{% endblock %}
 {% block body %}
-    <h1>Edit ItemList</h1>
-
-    {{ include('item_list/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_item_list_index') }}">back to list</a>
-
-    {{ include('item_list/_delete_form.html.twig') }}
+	{{ include('item_list/_form.html.twig', {'button_label': 'Update'}) }}
 {% endblock %}

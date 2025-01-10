@@ -14,14 +14,15 @@
 						<div class="card-header d-flex">
 							<h5 class="card-title">{{ goal.name }}</h5>
 							<div class="ms-auto">
-								<a href="{{ path('app_goal_show', {'id': goal.id}) }}" class="btn btn-sm btn-outline-light">show</a>
-								<a href="{{ path('app_goal_edit', {'id': goal.id}) }}" class="btn btn-sm btn-outline-light">edit</a>
+								{{ include('components/Link/Show.html.twig', {'name': 'goal', 'id': goal.id}) }}
+								{{ include('components/Link/Edit.html.twig', {'name': 'goal', 'id': goal.id}) }}
 							</div>
 						</div>
 						<div class="card-body">
 							<div>{{ goal.tags|join(', ') }}</div>
-							<div>{{ goal.createdAt ? goal.createdAt|date('Y-m-d H:i:s') : '' }}</div>
-							<div>{{ goal.updatedAt ? goal.updatedAt|date('Y-m-d H:i:s') : '' }}</div>
+						</div>
+						<div class="card-footer text-end">
+							{{ include('components/Badge/Timestamps.html.twig', {'entity': goal}) }}
 						</div>
 					</div>
 				</div>

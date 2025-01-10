@@ -1,8 +1,17 @@
 {{ form_start(form) }}
 <div class="card-body">
-    {{ form_widget(form) }}
+	{{ form_row(form.name) }}
+	<div class="row">
+		<div class="col">
+			{{ form_row(form.from_time) }}
+		</div>
+		<div class="col">
+			{{ form_row(form.to_time) }}
+		</div>
+	</div>
+	{{ form_row(form.tags) }}
 </div>
 <div class="card-footer d-flex justify-content-end">
-    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+	<button class="btn btn-link text-success">{{ button_label|default('Save') }}</button>
 </div>
 {{ form_end(form) }}

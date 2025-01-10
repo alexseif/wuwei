@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block h1 %}New Item{% endblock %}
+{% block h1 %}New Item
+{% endblock %}
 {% block card_actions %}
-    <a href="{{ path('app_item_index') }}" class="btn btn-link">back</a>
+	{{ include('components/Link/Back.html.twig', {'name':'item'}) }}
 {% endblock %}
 {% block body %}
-    {{ include('item/_form.html.twig') }}
+	{{ include('item/_form.html.twig') }}
 {% endblock %}

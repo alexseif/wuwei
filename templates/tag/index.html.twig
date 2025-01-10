@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block h1 %}Tags{% endblock %}
+{% block h1 %}Tags
+{% endblock %}
 {% block card_actions %}
-    <a href="{{ path('app_tag_new') }}" class="btn btn-outline-light">Create new</a>
+	{{ include('components/Link/New.html.twig', {'name':'tag'})}}
 {% endblock %}
 {% block body %}
-    {% include'tag/_tags.html.twig' %}
+	{% include'tag/_tags.html.twig' %}
 {% endblock %}

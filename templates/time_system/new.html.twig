@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block h1 %}New Time System{% endblock %}
+{% block h1 %}New Time System
+{% endblock %}
 {% block card_actions %}
-    <a href="{{ path('app_time_system_index') }}">back</a>
+    {{ include('components/Link/Back.html.twig', {'name': 'time_system'}) }}
 {% endblock %}
 {% block body %}
-    {{ include('time_system/_form.html.twig') }}
+	{{ include('time_system/_form.html.twig') }}
 {% endblock %}

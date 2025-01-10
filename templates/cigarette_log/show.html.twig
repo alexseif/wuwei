@@ -1,26 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block h1 %}Cigarette Log{% endblock %}
+{% block h1 %}Cigarette Log
+{% endblock %}
 {% block card_actions %}
-    <a href="{{ path('app_cigarette_log_index') }}" class="btn btn-outline-light">back to list</a>
-    {{ include('cigarette_log/_delete_form.html.twig') }}
+	{{ include('components/Link/Back.html.twig', {'name': 'cigarette_log'}) }}
+	{{ include('cigarette_log/_delete_form.html.twig') }}
 
 {% endblock %}
 {% block body %}
-    <table class="table">
-        <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ cigarette_log.id }}</td>
-        </tr>
-        <tr>
-            <th>CreatedAt</th>
-            <td>{{ cigarette_log.createdAt ? cigarette_log.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-        </tr>
-        <tr>
-            <th>UpdatedAt</th>
-            <td>{{ cigarette_log.updatedAt ? cigarette_log.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-        </tr>
-        </tbody>
-    </table>
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ cigarette_log.id }}</td>
+			</tr>
+			<tr>
+				<th>CreatedAt</th>
+				<td>{{ cigarette_log.createdAt ? cigarette_log.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+			</tr>
+			<tr>
+				<th>UpdatedAt</th>
+				<td>{{ cigarette_log.updatedAt ? cigarette_log.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+			</tr>
+		</tbody>
+	</table>
 {% endblock %}

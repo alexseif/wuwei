@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block h1 %}Edit Time System: {{ time_system.name }}{% endblock %}
+{% block h1 %}Edit Time System:
+	{{ time_system.name }}
+{% endblock %}
 {% block card_actions %}
-    <a href="{{ path('app_time_system_index') }}" class="btn btn-link">back</a>
-    {{ include('time_system/_delete_form.html.twig') }}
+	{{ include('components/Link/Back.html.twig', {'name': 'time_system'}) }}
+	{{ include('time_system/_delete_form.html.twig') }}
 {% endblock %}
 {% block body %}
-    {{ include('time_system/_form.html.twig', {'button_label': 'Update'}) }}
-
+	{{ include('time_system/_form.html.twig', {'button_label': 'Update'}) }}
 {% endblock %}

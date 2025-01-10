@@ -1,11 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New ItemList{% endblock %}
-
+{% block h1 %}New ItemList
+{% endblock %}
+{% block card_actions %}
+	{{ include('components/Link/Back.html.twig', {'name':'item_list'}) }}
+{% endblock %}
 {% block body %}
-    <h1>Create new ItemList</h1>
-
-    {{ include('item_list/_form.html.twig') }}
-
-    <a href="{{ path('app_item_list_index') }}">back to list</a>
+	{{ include('item_list/_form.html.twig') }}
 {% endblock %}

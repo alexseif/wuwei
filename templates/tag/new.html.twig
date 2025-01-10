@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block h1 %}New Tag{% endblock %}
+{% block h1 %}New Tag
+{% endblock %}
 {% block card_actions %}
-    <a href="{{ path('app_tag_index') }}">back</a>
+	{{ include('components/Link/Back.html.twig', {'name':'tag'})}}
 {% endblock %}
 {% block body %}
-    {{ include('tag/_form.html.twig') }}
+	{{ include('tag/_form.html.twig') }}
 {% endblock %}

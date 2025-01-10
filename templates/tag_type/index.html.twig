@@ -1,32 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block h1 %}Tag Types{% endblock %}
+{% block h1 %}Tag Types
+{% endblock %}
 {% block card_actions %}
-    <a href="{{ path('app_tag_type_new') }}" class="btn btn-outline-light">Create new</a>
+	{{ include('components/Link/New.html.twig', {'name': 'tag_type'}) }}
 {% endblock %}
 {% block body %}
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for tag_type in tag_types %}
-            <tr>
-                <td>{{ tag_type.name }}</td>
-                <td>
-                    <a href="{{ path('app_tag_type_show', {'id': tag_type.id}) }}">show</a>
-                    <a href="{{ path('app_tag_type_edit', {'id': tag_type.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for tag_type in tag_types %}
+				<tr>
+					<td>{{ tag_type.name }}</td>
+					<td>
+						{{ include('components/Link/Show.html.twig', {'name': 'tag_type', 'id':tag_type.id }) }}
+						{{ include('components/Link/Edit.html.twig', {'name': 'tag_type', 'id':tag_type.id }) }}
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="5">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 
 {% endblock %}

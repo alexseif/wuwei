@@ -1,18 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block h1 %}Tag: #{{ tag.id }} {{ tag.name }}{% endblock %}
+{% block h1 %}Tag: #{{ tag.id }}
+	{{ tag.name }}
+{% endblock %}
 {% block card_actions %}
-    <a href="{{ path('app_tag_index') }}" class="btn btn-link">back</a>
-    <a href="{{ path('app_tag_edit', {'id': tag.id}) }}" class="btn btn-outline-light">edit</a>
-    {{ include('tag/_delete_form.html.twig') }}
+	{{ include('components/Link/Back.html.twig', {'name':'tag'}) }}
+	{{ include('components/Link/Edit.html.twig', {'name':'tag', 'id':tag.id }) }}
+	{{ include('tag/_delete_form.html.twig') }}
 {% endblock %}
 {% block body %}
-    {% include 'tag/_tags.html.twig' with {'tags': tag.tags} %}
-    <div class="card-footer text-end">
-        <span class="badge" title="{{ 'Created At'|trans }}">
-            {{ tag.createdAt ? tag.createdAt|date('Y-m-d H:i:s') : '' }}</span>
-        <span class="badge" title="{{ 'Updated At'|trans }}">
-            {{ tag.updatedAt ? tag.updatedAt|date('Y-m-d H:i:s') : '' }}</span>
-
-    </div>
+	<div class="card-footer text-end">
+		{{ include('components/Badge/Timestamps.html.twig', {'entity': tag}) }}
+	</div>
 {% endblock %}

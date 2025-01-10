@@ -1,36 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block h1 %}Time System{% endblock %}
+{% block h1 %}Time System
+{% endblock %}
 {% block card_actions %}
-    <a href="{{ path('app_time_system_new') }}" class="btn btn-outline-light">Create new</a>
+	{{ include('components/Link/New.html.twig', {'name': 'time_system'}) }}
 {% endblock %}
 {% block body %}
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>From - To</th>
-            <th>Tags</th>
-            <th>actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for time_system in time_systems %}
-            <tr>
-                <td>{{ time_system.fromTime ? time_system.fromTime|date('H:i:s') : '' }}
-                    - {{ time_system.toTime ? time_system.toTime|date('H:i:s') : '' }}</td>
-                <td>{{ time_system.tags|join(', ') }}</td>
-                <td>
-                    <a href="{{ path('app_time_system_show', {'id': time_system.id}) }}">show</a>
-                    <a href="{{ path('app_time_system_edit', {'id': time_system.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>From - To</th>
+				<th>Tags</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for time_system in time_systems %}
+				<tr>
+					<td>{{ time_system.fromTime ? time_system.fromTime|date('H:i:s') : '' }}
+						-
+						{{ time_system.toTime ? time_system.toTime|date('H:i:s') : '' }}</td>
+					<td>{{ time_system.tags|join(', ') }}</td>
+					<td>
+						{{ include('components/Link/Show.html.twig', {'name': 'time_system', 'id': time_system.id }) }}
+						{{ include('components/Link/Edit.html.twig', {'name': 'time_system', 'id': time_system.id }) }}
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="7">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 
 {% endblock %}
