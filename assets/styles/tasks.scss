@@ -5,8 +5,9 @@
         justify-content: space-between;
         flex-wrap: wrap;
 
-        span {
-            margin: 0 5px;
+        .name {
+            font-size: 1.5rem;
+            text-align: start;
         }
 
         &.important {
@@ -43,6 +44,7 @@
 
         tr.completed {
             background-color: #343a40;
+
             a.name {
                 text-decoration: line-through;
             }

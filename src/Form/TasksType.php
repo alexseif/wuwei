@@ -34,7 +34,6 @@ class TasksType extends AbstractType
             ->add('priority', ChoiceType::class, [
                 'label' => false,
                 'choices' => [
-                    'Low' => -1,
                     'Normal' => 0,
                     'Important' => 1,
                 ],

@@ -1,1 +1,1 @@
-{{ include('components/Badge.html.twig', {'class': (priority)?'bg-danger':'bg-secondary','text':  (priority)?'High':'Low', 'attrs': {'title': 'Priority'} }) }}
+{{ include('components/Badge.html.twig', {'class': (priority > 0)?'bg-danger':'bg-secondary','text':  (priority > 0)?'High':'Normal', 'attrs': {'title': 'Priority'} }) }}
