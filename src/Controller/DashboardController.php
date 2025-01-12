@@ -11,8 +11,6 @@ use App\Repository\TaskDurationPerDayRepository;
 use App\Service\DurationReportService;
 use App\Service\TimeSystemService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -61,13 +59,47 @@ class DashboardController extends AbstractController
     }, $reportItems);
     // return new RedirectResponse($this->generateUrl('app_time_tracking'));
     $current = $timeSystemService->getCurrent();
+
+    $habitBuilder = [
+      'start' => new \DateTime('2025-01-12'),
+      'days' => 66,
+      'milestone' => 21,
+      'habits' => [
+        '6 - 8 am Sunrise' => [
+          'Qi Gong / Push ups / Squat',
+          'Breakfast'
+        ],
+        '08 - 10 am Creativity' => [
+          'Creativity work',
+        ],
+        '10 - 12 pm Courage' => [
+          'Courage work',
+        ],
+        '12 - 14 pm Guidance' => [
+          'Guidance work',
+        ],
+        '14 - 16 pm Communication' => [
+          'Communication',
+
+        ],
+        '16 - 18 pm New Beginnings' => [
+          'Meditate / Walk',
+          'Sing',
+        ],
+        '18 - 20 pm Sunset' => [
+          'Review'
+        ],
+      ]
+    ];
+
     return $this->render(
       'dashboard/dashboard.html.twig',
       [
         'sections' => $tagTypeRepository->findAll(),
         'itemLists' => $itemListRepository->findAllWithItems(),
         'goals' => $goalRepository->findAll(),
-        'widgets' => $durationWidgets
+        'widgets' => $durationWidgets,
+        'habit_builder' => $habitBuilder
       ]
     );
   }

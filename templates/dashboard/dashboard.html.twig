@@ -2,6 +2,37 @@
 {% block h1 %}Welcome to WuWei
 {% endblock %}
 {% block body %}
+	<div class="">
+		<table class="table table-stripped">
+			<thead>
+				<tr>
+					<th>Day</th>
+					{% for item, habit_details in habit_builder.habits %}
+						<th>{{ item }}</th>
+					{% endfor %}
+				</tr>
+			</thead>
+			<tbody>
+				{% for day in 1..habit_builder.days %}
+					<tr class="{{ (day == 22) ? 'milestone' : '' }}">
+						<th>{{ habit_builder.start|date_modify( '+'~day~ ' days')|date('Y-m-d') }}</th>
+						{% for item, habit_details in habit_builder.habits %}
+							<td>
+								{% for habit in habit_details %}
+									<div class="form-check form-check-inline">
+										<label class="form-check-label">
+											<input type="checkbox" class="form-check-input"/>
+											{{ habit }}
+										</label>
+									</div>
+								{% endfor %}
+							</td>
+						{% endfor %}
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 	<div class="row row-cols-3 g-4">
 		{% for key,widget in widgets %}
 			<div class="col">
