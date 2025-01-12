@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Tag;
+use App\Repository\DaysRepository;
 use App\Repository\GoalRepository;
 use App\Repository\ItemListRepository;
 use App\Repository\ItemRepository;
 use App\Repository\TagTypeRepository;
 use App\Repository\TaskDurationPerDayRepository;
+use App\Repository\TasksRepository;
 use App\Service\DurationReportService;
 use App\Service\TimeSystemService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,7 +27,9 @@ class DashboardController extends AbstractController
     GoalRepository $goalRepository,
     TagTypeRepository $tagTypeRepository,
     TaskDurationPerDayRepository $taskDurationPerDayRepository,
-    DurationReportService $durationReportService
+    DurationReportService $durationReportService,
+    DaysRepository $daysRepository,
+    TasksRepository $tasksRepository
   ): Response {
     $reportItems = ['today', 'yesterday', 'week', 'month', 'quarter', 'total'];
     $defaultWidget = [
@@ -57,40 +61,10 @@ class DashboardController extends AbstractController
 
       return $widget;
     }, $reportItems);
-    // return new RedirectResponse($this->generateUrl('app_time_tracking'));
-    $current = $timeSystemService->getCurrent();
 
-    $habitBuilder = [
-      'start' => new \DateTime('2025-01-12'),
-      'days' => 66,
-      'milestone' => 21,
-      'habits' => [
-        '6 - 8 am Sunrise' => [
-          'Qi Gong / Push ups / Squat',
-          'Breakfast'
-        ],
-        '08 - 10 am Creativity' => [
-          'Creativity work',
-        ],
-        '10 - 12 pm Courage' => [
-          'Courage work',
-        ],
-        '12 - 14 pm Guidance' => [
-          'Guidance work',
-        ],
-        '14 - 16 pm Communication' => [
-          'Communication',
-
-        ],
-        '16 - 18 pm New Beginnings' => [
-          'Meditate / Walk',
-          'Sing',
-        ],
-        '18 - 20 pm Sunset' => [
-          'Review'
-        ],
-      ]
-    ];
+    $currentTimeSystem = $timeSystemService->getCurrent();
+    $days = $daysRepository->findBy(['complete' => false], ['deadline' => 'ASC'], 3);
+    $tasks = $tasksRepository->getFocusTasks();
 
     return $this->render(
       'dashboard/dashboard.html.twig',
@@ -99,7 +73,9 @@ class DashboardController extends AbstractController
         'itemLists' => $itemListRepository->findAllWithItems(),
         'goals' => $goalRepository->findAll(),
         'widgets' => $durationWidgets,
-        'habit_builder' => $habitBuilder
+        'currentTimeSystem' => $currentTimeSystem,
+        'days' => $days,
+        'tasks' => $tasks
       ]
     );
   }

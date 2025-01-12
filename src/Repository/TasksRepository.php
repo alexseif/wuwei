@@ -45,6 +45,21 @@ class TasksRepository extends ServiceEntityRepository
 
         return $query->getQuery();
     }
+    public function getFocusTasks()
+    {
+        return  $this->createQueryBuilder('t')
+            ->select('t, tl, a, c')
+            ->leftJoin('t.taskList', 'tl')
+            ->leftJoin('tl.account', 'a')
+            ->leftJoin('a.client', 'c')
+            ->where('t.completed = false')
+            ->orderBy('t.urgency', 'DESC')
+            ->addOrderBy('t.priority', 'DESC')
+            ->addOrderBy('t.order', 'ASC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult();
+    }
 
     //    /**
     //     * @return Tasks[] Returns an array of Tasks objects
