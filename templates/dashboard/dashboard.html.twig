@@ -7,21 +7,11 @@
 			{% for timeSystem in currentTimeSystem %}
 				<div class="col">
 					<div class="card">
-						<div class="card-header">
-							<h3 class="card-title">{{ timeSystem.tags[0]}}</h3>
-						</div>
 						<div class="card-body">
-
-							{{ timeSystem.fromTime|date('H:i') }}
-							-
-							{{ timeSystem.toTime|date('H:i') }}
-						</div>
-						<div class="card-footer">
+							{{ include('components/Badge.html.twig', {'text': timeSystem.fromTime|date('H:i') ~ ' - ' ~ timeSystem.toTime|date('H:i')}) }}
 							{% for tag in timeSystem.tags %}
-								{% if loop.index0 != 0 %}
-									<span class="badge text-info">
-										{{ tag }}
-									</span>
+								{{ include('components/Badge.html.twig', {'text': tag}) }}
+								{% if loop.index0 == 0 %}:
 								{% endif %}
 							{% endfor %}
 						</div>
@@ -29,9 +19,9 @@
 				</div>
 			{% endfor %}
 		</div>
+		<hr/>
 		<div class="row">
 			{% for day in days %}
-				{# TODO: Create Component #}
 				<div class="col">
 					{{ include('components/Day/Day.html.twig')}}
 				</div>

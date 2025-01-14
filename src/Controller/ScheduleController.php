@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/schedule')]
 class ScheduleController extends AbstractController
 {
-    #[Route('/', name: 'schedule_index')]
+    #[Route('/', name: 'app_schedule_index')]
     public function index(TasksRepository $tasksRepository): Response
     {
         $tasks = $tasksRepository->getPaginatorResult(['t.completed' => false]);
