@@ -43,7 +43,6 @@ class ScheduleController extends AbstractController
                 $schedule[$dayNumber][] = $task;
                 continue;
             }
-            dump($totalTime);
             if ($task->getEst() == null) {
                 $task->setEst(60);
             }
