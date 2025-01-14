@@ -5,7 +5,7 @@
 		</label>
 	</div>
 	<div class="flex-grow-1 w-50">
-		{{ include('components/Link/Entity.html.twig', {'name': 'tasks', 'entity': task, 'class':'fw-bold btn btn-sm name'}) }}
+		{{ include('components/Link/Entity.html.twig', {'name': 'tasks', 'entity': task, 'class':'fw-bold btn btn-sm name', 'attrs': {'data-bs-toggle':"offcanvas"} }) }}
 	</div>
 	<div>
 		{{ include('components/Link/Entity.html.twig', {'name': 'task_lists', 'entity': task.taskList}) }}
@@ -17,5 +17,5 @@
 		<span>{{ (task.completed) ? task.duration : task.est }}m</span>
 		<span>{{ (task.completed) ? task.completedAt|date : (task.eta ? task.eta|date('Y-m-d H:i:s') : '') }}</span>
 	</div>
-	{{ include('components/Link/Edit.html.twig', {'name': 'tasks', 'id': task.id }) }}
+	{{ include('components/Link/Edit.html.twig', {'name': 'tasks', 'id': task.id, 'attrs':{'data-bs-toggle':"offcanvas"} }) }}
 </div>

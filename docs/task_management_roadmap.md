@@ -11,7 +11,7 @@
 
 - [x] Implement task creation, updating, and deletion
 - [ ] Categorize tasks as personal or professional
-- [ ] Set task deadlines and priorities
+- [x] Set task deadlines and priorities
 - [ ] Track task progress and completion status
 - [ ] Integrate Chinese clock for task scheduling
 - [ ] Integrate Ayurvedic dosha clock for task categorization

@@ -1,4 +1,7 @@
 <a href="{{ link|default('#') }}" class="{{ class|default('btn btn-sm btn-link text-warning') }}" {% for attr, value in attrs|default({} ) %} {{ attr }}="{{ value }}" {% endfor %}>
+	{% if icon|default(null) %}
+		<i class="{{ icon }}"></i>
+	{% endif %}
 	{{ text|default('') }}
 	{{ content|default('')|raw }}
 </a>

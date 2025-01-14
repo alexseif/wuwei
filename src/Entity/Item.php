@@ -57,8 +57,4 @@ class Item
     {
         return $this->name;
     }
-
-
-
-
 }

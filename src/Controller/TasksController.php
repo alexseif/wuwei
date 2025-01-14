@@ -42,9 +42,12 @@ final class TasksController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $task = new Tasks();
-        $form = $this->createForm(TasksType::class, $task);
+        $form = $this->createForm(TasksType::class, $task, [
+            'action' => $this->generateUrl('app_tasks_new')
+        ]);
         $form->handleRequest($request);
 
+        // TODO: Off Canvas new ajax
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($task);
             $entityManager->flush();
@@ -53,15 +56,35 @@ final class TasksController extends AbstractController
             return $this->redirectToRoute('app_tasks_index', [], Response::HTTP_SEE_OTHER);
         }
 
+        if ($request->isXmlHttpRequest()) {
+            $content = $this->renderView('tasks/_form.html.twig', [
+                'task' => $task,
+                'form' => $form->createView(),
+            ]);
+            return new JsonResponse([
+                'content' => $content,
+                'label' => 'New Task'
+            ]);
+        }
+
         return $this->render('tasks/new.html.twig', [
             'task' => $task,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
     #[Route('/{id}', name: 'app_tasks_show', methods: ['GET'])]
-    public function show(Tasks $task): Response
+    public function show(Tasks $task, Request $request): Response
     {
+        if ($request->isXmlHttpRequest()) {
+            $content = $this->renderView('tasks/_show.html.twig', [
+                'task' => $task,
+            ]);
+            return new JsonResponse([
+                'content' => $content,
+                'label' => 'Task: ' . $task->getTask()
+            ]);
+        }
         return $this->render('tasks/show.html.twig', [
             'task' => $task,
         ]);
@@ -70,16 +93,29 @@ final class TasksController extends AbstractController
     #[Route('/{id}/edit', name: 'app_tasks_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Tasks $task, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(TasksType::class, $task);
+        $form = $this->createForm(TasksType::class, $task, [
+            'action' => $this->generateUrl('app_tasks_edit', ['id' => $task->getId()])
+
+        ]);
         $form->handleRequest($request);
 
+        // TODO: Off Canvas edit ajax
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
             $this->addFlash('success', 'Task updated');
 
             return $this->redirectToRoute('app_tasks_index', [], Response::HTTP_SEE_OTHER);
         }
-
+        if ($request->isXmlHttpRequest()) {
+            $content = $this->renderView('tasks/_form.html.twig', [
+                'task' => $task,
+                'form' => $form->createView(),
+            ]);
+            return new JsonResponse([
+                'content' => $content,
+                'label' => 'Edit Task'
+            ]);
+        }
         return $this->render('tasks/edit.html.twig', [
             'task' => $task,
             'form' => $form,

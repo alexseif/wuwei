@@ -1,3 +1,5 @@
+// var bootstrap = require('bootstrap');
+
 $('.task-checkbox').each(function () {
     $(this).on('change', function () {
         var id = $(this).data('id');

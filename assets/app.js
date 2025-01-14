@@ -31,6 +31,7 @@ $.fn.select2.defaults.set("theme", "bootstrap-5");
 
 //TODO: Revise the future need for this and classify it
 document.addEventListener('DOMContentLoaded', function () {
+
     const modeSwitch = document.querySelector('.mode-switch');
     if (modeSwitch) {
         modeSwitch.addEventListener('click', function () {
@@ -38,6 +39,9 @@ document.addEventListener('DOMContentLoaded', function () {
             modeSwitch.classList.toggle('active');
         });
     }
+
+    const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+    const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
 
     const listView = document.querySelector('.list-view');
     const gridView = document.querySelector('.grid-view');
@@ -83,14 +87,37 @@ document.addEventListener('DOMContentLoaded', function () {
     //     altFormat: 'd/m/Y H:i'
     //
     // });
-});
-$(() => {
     $('.select2').select2();
-});
-
-document.addEventListener('DOMContentLoaded', function () {
     var toastElList = [].slice.call(document.querySelectorAll('.toast'))
     var toastList = toastElList.map(function (toastEl) {
         return new bootstrap.Toast(toastEl).show()
-    })
+    });
+
+    //Off Canvas
+    const offcanvas = document.getElementById('offcanvas');
+    const offcanvasBody = document.getElementById('offcanvas-body');
+    const offcanvasLabel = document.getElementById('offcanvasLabel');
+
+    document.querySelectorAll('[data-bs-toggle="offcanvas"]').forEach(function (button) {
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+            fetch(button.href, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.content) {
+                        offcanvasBody.innerHTML = data.content;
+                        offcanvasLabel.innerHTML = data.label ?? 'Offcanvas';
+                        new bootstrap.Offcanvas(offcanvas).show();
+                    } else {
+                        console.error('No HTML content in response');
+                    }
+                })
+                .catch(error => console.error('Error fetching offcanvas content:', error));
+        });
+    });
+
 });

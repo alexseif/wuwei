@@ -16,9 +16,9 @@
 
 ## Phase 1: Foundation
 - [x] Set up Symfony project structure and dependencies
-- [ ] Implement user authentication and authorization
-- [ ] Design and create database schema
-- [ ] Create basic CRUD functionality for objectives
+- [x] Implement user authentication and authorization
+- [x] Design and create database schema
+- [x] Create basic CRUD functionality for objectives
 
 ## Phase 2: Habit Building
 - [ ] Implement habit tracking functionality

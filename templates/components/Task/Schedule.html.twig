@@ -1,0 +1,23 @@
+<div class="task-block task {{ task.completed ? 'completed' : '' }} {{ (task.priority > 0) ? 'important' : '' }} {{ (task.urgency > 0) ? 'urgent' : '' }}" data-order="{{ task.order }}" data-id="{{ task.id }}" style="top: {{ (task.eta|date_modify('-9 hours')|date('H') * 60) + task.eta|date('i') }}px; height: {{ task.est }}px;">
+	<label class="btn">
+		<input type="checkbox" data-id="{{ task.id }}" data-duration="{{ task.duration }}" class="task-checkbox" {{ task.completed ? 'checked' : ''}} value="1"/>
+	</label>
+	<span class="task-title" title="{{ task.taskList.name }}">
+		{{ include('components/Link/Entity.html.twig', {'name': 'tasks', 'entity': task, 'attrs':{'data-bs-toggle':'offcanvas'} }) }}
+	{# TODO: Off Canvas display #}
+		{# <a class="btn btn-link" data-bs-toggle="offcanvas" href="#offcanvas" role="button" aria-controls="offcanvas"> #}
+		{# <i class="bi bi-info-circle"></i> #}
+		{# </a> #}
+
+		{# {{ include('components/Link/Entity.html.twig', {'name': 'task_lists', 'entity': task.taskList}) }} #}
+		{# {{ include('components/Link/Entity.html.twig', {'name': 'accounts', 'entity': task.taskList.account}) }} #}
+		{# {{ include('components/Link/Entity.html.twig', {'name': 'client', 'entity': task.taskList.account.client}) }} #}
+		{# {{ include('components/Badge/Priority.html.twig', {'priority': task.priority}) }} #}
+		{# {{ include('components/Badge/Urgency.html.twig', {'urgency': task.urgency}) }}"> #}
+	</span>
+	<div class="task-time me-2">
+		{{ task.eta|date('H:i') }}
+		-
+		{{ task.eta|date_modify('+' ~ task.est ~ ' mins')|date('H:i') }}
+	</div>
+</div>

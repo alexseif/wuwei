@@ -4,79 +4,27 @@
 {% endblock %}
 
 {% block body %}
-	<div class="calendar">
+	<div class="calendar row">
 		{% for day in 0..2 %}
-			<div class="calendar-day">
-				{% for hour in 0..12 %}
-					<div class="hour-block" style="top: {{ hour * 60 }}px; height: 60px;">
-						{{ hour + 9 }}
-					</div>
-				{% endfor %}
-				{% for task in schedule[day] %}
-					{# {% if task.eta|date('Y-m-d') == (now|date_modify('+' ~ day ~ ' days')|date('Y-m-d')) %} #}
-						<div class="task-block {{ task.completed ? 'completed' : ''}}" style="top: {{ (task.eta|date_modify('-9 hours')|date('H') * 60) + task.eta|date('i') }}px; height: {{ task.est }}px;">
-							<div class="d-flex justify-content-between h-100">
-								<div class="task-time d-flex flex-column justify-content-between flex-wrap h-100 me-2">
-									<div>{{ task.eta|date('H:i') }}
-										-</div>
-									<div>{{ task.eta|date_modify('+' ~ task.est ~ ' mins')|date('H:i') }}</div>
-								</div>
-								<div class="task-title me-2">{{ task.task }}</div>
-								<div class="task-details">
-									{{ include('components/Badge/Priority.html.twig', {'priority':task.priority} ) }}
-									{{ include('components/Badge/Urgency.html.twig', {'urgency':task.urgency} ) }}
-								</div>
-							</div>
+			<div class="col">
+				<div class="calendar-day">
+					{% for task in schedule[day] %}
+						{# {% if task.eta|date('Y-m-d') == (now|date_modify('+' ~ day ~ ' days')|date('Y-m-d')) %} #}
+						{{ include('components/Task/Schedule.html.twig', {'task': task}) }}
+						{# {% endif %} #}
+					{% endfor %}
+					{% for hour in 0..12 %}
+						<div class="hour-block" style="top: {{ hour * 60 }}px; height: 60px;">
+							{{ hour + 9 }}
 						</div>
-					{# {% endif %} #}
-				{% endfor %}
+					{% endfor %}
+				</div>
+				<!-- .calendar-day -->
 			</div>
 		{% else %}
 			<div class="no-tasks">No tasks available.</div>
 		{% endfor %}
 	</div>
+	<!-- .calendar -->
 
-	<style>
-		.calendar {
-			display: flex;
-			justify-content: space-between;
-		}
-		.calendar-day {
-			position: relative;
-			width: 32%;
-			border: 1px solid #ccc;
-			margin-right: 1%;
-		}
-		.hour-block {
-			border-bottom: 1px solid gray;
-			text-align: end;
-		}
-		.task-block {
-			position: absolute;
-			border: 1px solid #000;
-			background-color: #1F1F1F;
-			padding: 10px;
-			box-sizing: border-box;
-		}
-		.task-title {
-			font-weight: bold;
-		}
-		.task-time {
-			font-size: 0.9em;
-			color: #fff;
-		}
-		.task-details {
-			margin-top: 5px;
-			font-size: 0.8em;
-		}
-		.no-tasks {
-			text-align: center;
-			padding: 20px;
-			font-size: 1.2em;
-			color: #fff;
-		}
-        .completed .task-title{
-            text-decoration: line-through;
-        }
-	</style>
 {% endblock %}

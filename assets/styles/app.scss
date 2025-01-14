@@ -46,11 +46,11 @@ $nav-link-font-weight: 600;
 $h3-font-size-mobile: 2.5rem;
 // 5. Navbar configuration
 // $navbar: (
-  // outline // 'brand-height': 5rem,
-  // 'brand-padding-y': 1.875rem,
-  // 'color': map-get($theme-colors, 'white'),
-  // 'dark-color': map-get($theme-colors, 'white'),
-  // 'nav-link-padding-x': 2rem
+// outline // 'brand-height': 5rem,
+// 'brand-padding-y': 1.875rem,
+// 'color': map-get($theme-colors, 'white'),
+// 'dark-color': map-get($theme-colors, 'white'),
+// 'nav-link-padding-x': 2rem
 // );
 @import "bootstrap/scss/maps";
 @import "bootstrap/scss/mixins";
@@ -67,6 +67,7 @@ $h3-font-size-mobile: 2.5rem;
 .btn-link {
   font-weight: bold;
   text-decoration: none;
+  text-align: start;
 
   &:hover {
     text-decoration: underline;
@@ -127,6 +128,62 @@ header {
 }
 
 //Habit Tracker
-.milestone{
+.milestone {
   border: 2px solid white;
+}
+
+// Schedule
+.calendar {
+  // display: flex;
+  // justify-content: space-between;
+
+  .calendar-day {
+    position: relative;
+    // width: 32%;
+    border: 1px solid #ccc;
+    margin-right: 1%;
+  }
+
+  .hour-block {
+    border-bottom: 1px solid gray;
+    text-align: end;
+  }
+
+
+  .task-block {
+    position: absolute;
+    border: 1px solid #000;
+    background-color: #1F1F1F;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .task-title {
+    font-weight: bold;
+  }
+
+  .task-time {
+    font-size: 0.9em;
+    // color: #fff;
+  }
+
+  .task-details {
+    // margin-top: 5px;
+    // font-size: 0.8em;
+    position: absolute;
+    right: 10px;
+    top: 0;
+    width: 30px;
+  }
+
+  .no-tasks {
+    text-align: center;
+    padding: 20px;
+    font-size: 1.2em;
+    color: #fff;
+  }
+
+  .completed .task-title {
+    text-decoration: line-through;
+  }
 }

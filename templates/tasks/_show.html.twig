@@ -1,0 +1,43 @@
+<div class="card-body">
+	<table class="table table-striped">
+		<tbody>
+			<tr>
+				<th>Order</th>
+				<td>{{ task.order }}</td>
+			</tr>
+			<tr>
+				<th>Priority - Urgency</th>
+				<td>{{ include('components/Badge/Priority.html.twig', {'priority': task.priority}) }}
+					{{ include('components/Badge/Urgency.html.twig', {'urgency': task.urgency}) }}</td>
+			</tr>
+			<tr>
+				<th>Duration</th>
+				<td>{{ task.duration }}</td>
+			</tr>
+			<tr>
+				<th>Est</th>
+				<td>{{ task.est }}</td>
+			</tr>
+			<tr>
+				<th>Eta</th>
+				<td>{{ task.eta ? task.eta|date('Y-m-d H:i:s') : '' }}</td>
+			</tr>
+			<tr>
+				<th>Completed</th>
+				<td>{{ task.completed ? 'Yes' : 'No' }}</td>
+			</tr>
+			<tr>
+				<th>CompletedAt</th>
+				<td>{{ task.completedAt ? task.completedAt|date('Y-m-d H:i:s') : '' }}</td>
+			</tr>
+			<tr>
+				<th>WorkLoggable</th>
+				<td>{{ task.workLoggable ? 'Yes' : 'No' }}</td>
+			</tr>
+
+		</tbody>
+	</table>
+</div>
+<div class="card-footer text-end">
+	{{ include('components/Badge/Timestamps.html.twig', {'entity': task}) }}
+</div>
