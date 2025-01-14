@@ -45,6 +45,12 @@ class TasksRepository extends ServiceEntityRepository
 
         return $query->getQuery();
     }
+
+    public function getPaginatorResult(?array $criteria = []): array
+    {
+        return $this->getPaginatorQuery($criteria)->getResult();
+    }
+
     public function getFocusTasks()
     {
         return  $this->createQueryBuilder('t')
