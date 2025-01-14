@@ -37,6 +37,13 @@ class ScheduleController extends AbstractController
         $workBlocks = 0;
         $dayNumber = 0;
         foreach ($tasks as $task) {
+            if ($task->isCompleted()) {
+                $task->setEta($task->getCompletedAt()->modify('-' . $task->getDuration() . ' minutes'));
+                // $totalTime += ($task->getDuration() + $breakTime);
+                $schedule[$dayNumber][] = $task;
+                continue;
+            }
+            dump($totalTime);
             if ($task->getEst() == null) {
                 $task->setEst(60);
             }
@@ -45,8 +52,7 @@ class ScheduleController extends AbstractController
             $startDateTime = clone $now;
             $startDateTime->modify("+{$totalTime} minutes");
 
-            $taskDuration = $task->getEst();
-            $totalTime += $taskDuration;
+            $totalTime += $task->getEst();
 
             if (((int) $totalTime / 45) > $workBlocks) {
                 $workBlocks = (int) $totalTime / 45;
@@ -55,7 +61,7 @@ class ScheduleController extends AbstractController
 
             // Check if the task end time exceeds the end time
             $endDateTime = clone $startDateTime;
-            $endDateTime->modify("+{$taskDuration} minutes");
+            $endDateTime->modify("+{$task->getEst()} minutes");
 
             if ($endDateTime > $endTime) {
                 if ($endDateTime >= $scheduleEnd) {
@@ -69,8 +75,8 @@ class ScheduleController extends AbstractController
                 $dayNumber++;
                 $workBlocks = 0;
                 $endDateTime = clone $startDateTime;
-                $endDateTime->modify("+{$taskDuration} minutes");
-                $totalTime = $taskDuration;
+                $endDateTime->modify("+{$task->getEst()} minutes");
+                $totalTime = $task->getEst();
             }
 
             $task->setEta($startDateTime);

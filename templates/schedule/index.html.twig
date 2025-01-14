@@ -14,7 +14,7 @@
 				{% endfor %}
 				{% for task in schedule[day] %}
 					{# {% if task.eta|date('Y-m-d') == (now|date_modify('+' ~ day ~ ' days')|date('Y-m-d')) %} #}
-						<div class="task-block" style="top: {{ (task.eta|date_modify('-9 hours')|date('H') * 60) + task.eta|date('i') }}px; height: {{ task.est }}px;">
+						<div class="task-block {{ task.completed ? 'completed' : ''}}" style="top: {{ (task.eta|date_modify('-9 hours')|date('H') * 60) + task.eta|date('i') }}px; height: {{ task.est }}px;">
 							<div class="d-flex justify-content-between h-100">
 								<div class="task-time d-flex flex-column justify-content-between flex-wrap h-100 me-2">
 									<div>{{ task.eta|date('H:i') }}
@@ -75,5 +75,8 @@
 			font-size: 1.2em;
 			color: #fff;
 		}
+        .completed .task-title{
+            text-decoration: line-through;
+        }
 	</style>
 {% endblock %}
