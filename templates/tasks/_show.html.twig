@@ -2,6 +2,14 @@
 	<table class="table table-striped">
 		<tbody>
 			<tr>
+				<th></th>
+				<td>
+					{{ include('components/Link/Entity.html.twig', {'name': 'task_lists', 'entity': task.taskList}) }}
+					{{ include('components/Link/Entity.html.twig', {'name': 'accounts', 'entity': task.taskList.account}) }}
+					{{ include('components/Link/Entity.html.twig', {'name': 'client', 'entity': task.taskList.account.client}) }}
+				</td>
+			</tr>
+			<tr>
 				<th>Order</th>
 				<td>{{ task.order }}</td>
 			</tr>
