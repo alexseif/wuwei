@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}Finance
+{% endblock %}
+
+{% block body %}
+	<div class="card">
+		<div class="card-body">
+			<h5 class="card-title">Total Income This Month</h5>
+			<p class="card-text">{{ totalIncome|number_format }}
+				EGP</p>
+			<h5 class="card-title">Total Cost of Life This Month</h5>
+			<p class="card-text">{{ totalCostOfLife|number_format }}
+				EGP</p>
+			<div class="progress">
+				{% set progress = (totalIncome / totalCostOfLife) * 100 %}
+				<div class="progress-bar" role="progressbar" style="width: {{ progress }}%;" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">
+					{{ progress }}%
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -70,9 +70,10 @@ class MenuExtension extends AbstractExtension
             } else {
                 $url = $this->router->generate($item->getPath());
                 $html .= sprintf(
-                    '<li class="nav-item"><a class="nav-link %s" href="%s">%s</a></li>',
+                    '<li class="nav-item"><a class="nav-link %s" href="%s"><span class="%s"></span> %s</a></li>',
                     $isActive ? 'active' : '',
                     $url,
+                    $item->getIcon(),
                     $item->getLabel()
                 );
             }

@@ -34,6 +34,20 @@ class AccountTransactionsRepository extends ServiceEntityRepository
         return $query->getQuery();
     }
 
+    public function getTotalIncomeForCurrentMonth(): int
+    {
+        $startOfMonth = new \DateTime('first day of this month');
+        $endOfMonth = new \DateTime('last day of this month 23:59:59');
+
+        return (int) $this->createQueryBuilder('at')
+            ->select('SUM(at.amount)')
+            ->where('at.issuedAt BETWEEN :start AND :end')
+            ->setParameter('start', $startOfMonth)
+            ->setParameter('end', $endOfMonth)
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     //    /**
     //     * @return AccountTransactions[] Returns an array of AccountTransactions objects
     //     */

@@ -16,6 +16,15 @@ class CostOfLifeRepository extends ServiceEntityRepository
         parent::__construct($registry, CostOfLife::class);
     }
 
+    public function getTotalCostOfLifeForCurrentMonth(): int
+    {
+
+        return (int) $this->createQueryBuilder('col')
+            ->select('SUM(col.value)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     //    /**
     //     * @return CostOfLife[] Returns an array of CostOfLife objects
     //     */
