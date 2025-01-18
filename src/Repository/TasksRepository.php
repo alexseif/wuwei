@@ -65,6 +65,40 @@ class TasksRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function getFocusDayTasks()
+    {
+        return  $this->createQueryBuilder('t')
+            ->select('t, tl, a, c')
+            ->leftJoin('t.taskList', 'tl')
+            ->leftJoin('tl.account', 'a')
+            ->leftJoin('a.client', 'c')
+            ->where('t.completed = false')
+            ->orderBy('t.urgency', 'DESC')
+            ->addOrderBy('t.priority', 'DESC')
+            ->addOrderBy('t.order', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function getCreatedToday()
+    {
+        $today = new \DateTime('today');
+        $today->setTime(0, 0, 0);
+
+        return $this->createQueryBuilder('t')
+            ->select('t, tl, a, c')
+            ->leftJoin('t.taskList', 'tl')
+            ->leftJoin('tl.account', 'a')
+            ->leftJoin('a.client', 'c')
+            ->where('t.createdAt >= :today')
+            ->setParameter('today', $today)
+            ->orderBy('t.urgency', 'DESC')
+            ->addOrderBy('t.priority', 'DESC')
+            ->addOrderBy('t.order', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
     //    /**
     //     * @return Tasks[] Returns an array of Tasks objects
     //     */
