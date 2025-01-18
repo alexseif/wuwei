@@ -1,192 +1,21 @@
 <nav class="navbar navbar-expand-lg fixed-bottom dropup">
-	<div class="container bg-body-tertiary">
-		<a class="navbar-brand" href="{{ path('app_dashboard') }}">WuWei</a>
-		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-				<li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="{{ path('app_dashboard') }}">
-						<span class="fa fa-home"></span>
-						Home
-					</a>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
-						<span class="fa fa-briefcase"></span>
-						Wuwei
-					</a>
-					<ul class="dropdown-menu">
-						<li>
-							<a class="dropdown-item" href="{{ path('app_goal_index') }}">
-								<span class="fa fa-bullseye"></span>
-								Goals
-							</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="{{ path('app_time_system_index') }}">
-								<span class="fa fa-lungs"></span>
-								Time Systems
-							</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="{{ path('app_cigarette_log_index') }}">
-								<span class="fa fa-smoking"></span>
-								Cigarette
-							</a>
-						</li>
-						<li class="dropdown-divider"></li>
-						<li>
-							<a class="dropdown-item" href="{{ path('app_tag_type_index') }}">
-								<span class="fa fa-folder-tree"></span>
-								Tag Types
-							</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="{{ path('app_tag_index') }}">
-								<span class="fa fa-tags"></span>
-								Tags
-							</a>
-						</li>
-						<li class="dropdown-divider"></li>
-						<li>
-							<a class="dropdown-item" href="{{ path('app_item_list_index') }}">
-								<span class="fa fa-tags"></span>
-								Items Lists
-							</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="{{ path('app_item_index') }}">
-								<span class="fa fa-folder-tree"></span>
-								Items
-							</a>
-						</li>
-					</ul>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
-						<span class="fa fa-briefcase"></span>
-						myApp
-					</a>
-					<ul class="dropdown-menu">
-						<li>
-							<a class="dropdown-item" href="{{ path('app_client_index') }}">
-								<span class="fa fa-user-tie"></span>
-								Clients
-							</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="{{ path('app_accounts_index') }}">
-								<span class="fa fa-file-invoice"></span>
-								Accounts
-							</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="{{ path('app_task_lists_index') }}">
-								<span class="fa fa-file-invoice"></span>
-								Task Lists
-							</a>
-						</li>
-						<li class="dropdown-divider"></li>
-
-						<li>
-							<a class="dropdown-item" href="{{ path('app_tasks_index') }}">
-								<span class="fa fa-file-invoice"></span>
-								Tasks
-							</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="{{ path('app_time_tracking') }}">
-								<span class="fa fa-file-invoice"></span>
-								Time Tracking
-							</a>
-						</li>
-						<li class="dropdown-divider"></li>
-						<li>
-							<a class="dropdown-item" href="{{ path('app_transactions_index') }}">
-								<span class="fa fa-file-invoice"></span>
-								Transactions
-							</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="{{ path('app_contract_index') }}">
-								<span class="fa fa-file-invoice"></span>
-								Contract
-							</a>
-						</li>
-						<li class="dropdown-divider"></li>
-						<li>
-							<a class="dropdown-item" href="{{ path('app_cost_of_life_index') }}">
-								<span class="fa fa-file-invoice"></span>
-								Cost Of Life
-							</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="{{ path('app_currency_index') }}">
-								<span class="fa fa-file-invoice"></span>
-								Currency
-							</a>
-						</li>
-						<li class="dropdown-divider"></li>
-						<li>
-							<a class="dropdown-item" href="{{ path('app_dashboard_task_lists_index') }}">
-								<span class="fa fa-file-invoice"></span>
-								Dashboard Tasklists
-							</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="{{ path('app_days_index') }}">
-								<span class="fa fa-file-invoice"></span>
-								Days
-							</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="{{ path('app_holiday_index') }}">
-								<span class="fa fa-file-invoice"></span>
-								Holiday
-							</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="{{ path('app_notes_index') }}">
-								<span class="fa fa-file-invoice"></span>
-								Notes
-							</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="{{ path('app_objective_index') }}">
-								<span class="fa fa-file-invoice"></span>
-								Objectives
-							</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="{{ path('app_rate_index') }}">
-								<span class="fa fa-file-invoice"></span>
-								Rate
-							</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="{{ path('app_work_log_index') }}">
-								<span class="fa fa-file-invoice"></span>
-								Worklog
-							</a>
-						</li>
-					</ul>
-				</li>
-				<li class="nav-item">
-					<a href="{{ path('app_schedule_index') }}" class="nav-link">Schedule</a>
-				</li>
-			</ul>
-			{{ include ('components/Link.html.twig', {'icon': 'bi bi-plus fs-5', 'attrs':{'title': 'New Task', 'id': 'add-task', 'data-bs-toggle':"offcanvas"}, 'link': path('app_tasks_new')}) }}
-			<form class="d-flex" role="search">
-				<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-light" type="submit">Search</button>
-			</form>
-			<div class="navbar-nav d-none d-lg-block">
-				<div class="nav-item text-nowrap">
-					<a class="nav-link px-3 text-secondary" href="{{ path('mobizel_markdown_docs_main_index') }}">Docs</a>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="container bg-body-tertiary">
+        <a class="navbar-brand" href="{{ path('app_dashboard') }}">WuWei</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            {{ render_menu() }}
+            {{ include ('components/Link.html.twig', {'icon': 'bi bi-plus fs-5', 'attrs':{'title': 'New Task', 'id': 'add-task', 'data-bs-toggle':"offcanvas"}, 'link': path('app_tasks_new')}) }}
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light" type="submit">Search</button>
+            </form>
+            <div class="navbar-nav d-none d-lg-block">
+                <div class="nav-item text-nowrap">
+                    <a class="nav-link px-3 text-secondary" href="{{ path('mobizel_markdown_docs_main_index') }}">Docs</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </nav>

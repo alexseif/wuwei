@@ -26,4 +26,10 @@ services:
     class: 'App\Service\TimeSystemService'
 
   App\Twig\AppExtension:
-    tags: ['twig.extension']
+    tags: ["twig.extension"]
+
+  App\Service\MenuManager:
+    public: true
+
+  App\Twig\MenuExtension:
+    tags: ["twig.extension"]
