@@ -4,18 +4,77 @@
 {% endblock %}
 
 {% block body %}
-	<div class="card">
-		<div class="card-body">
-			<h5 class="card-title">Total Income This Month</h5>
-			<p class="card-text">{{ totalIncome|number_format }}
-				EGP</p>
-			<h5 class="card-title">Total Cost of Life This Month</h5>
-			<p class="card-text">{{ totalCostOfLife|number_format }}
-				EGP</p>
-			<div class="progress">
-				{% set progress = (totalIncome / totalCostOfLife) * 100 %}
-				<div class="progress-bar" role="progressbar" style="width: {{ progress }}%;" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">
-					{{ progress }}%
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card mb-3">
+					<div class="card-body">
+						<h5 class="card-title">Total Income This Month</h5>
+						<p class="card-text">{{ totalIncome|number_format }}
+							EGP</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card mb-3">
+					<div class="card-body">
+						<h5 class="card-title">Total Cost of Life This Month</h5>
+						<p class="card-text">{{ totalCostOfLife|number_format }}
+							EGP</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card mb-3">
+					<div class="card-body">
+						<h5 class="card-title">Required Hourly Rate</h5>
+						<p class="card-text">{{ hourlyRate|number_format(2) }}
+							EGP/hour</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="card mb-3">
+					<div class="card-body">
+						<h5 class="card-title">Income vs Cost of Life</h5>
+						<div class="progress">
+							{% set progress = (totalIncome / totalCostOfLife) * 100 %}
+							<div class="progress-bar" role="progressbar" style="width: {{ progress }}%;" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">
+								{{ progress }}%
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card mb-3">
+					<div class="card-body">
+						<h5 class="card-title">Transactions This Month</h5>
+						{# {% include 'account_transactions/_table.html.twig' with {'account_transactions': transactions} %} #}
+						<ul class="list-group">
+							{% for transaction in transactions %}
+								<li class="list-group-item">
+									<div class="d-flex justify-content-between">
+										<strong>{{ transaction.issuedAt|date('Y-m-d') }}</strong>
+										<strong class="mx-5">{{ transaction.account.name }}</strong>
+										{% if transaction.note %}
+											<small class="flex-grow-1">{{ transaction.note }}</small>
+										{% endif %}
+										<span>
+											{{ transaction.amount|number_format }}
+											EGP
+										</span>craft.app.request.getQueryParam("queryStringName")
+										
+									</div>
+								</li>
+
+							{% endfor %}
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>

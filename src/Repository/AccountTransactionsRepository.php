@@ -37,7 +37,9 @@ class AccountTransactionsRepository extends ServiceEntityRepository
     public function getTotalIncomeForCurrentMonth(): int
     {
         $startOfMonth = new \DateTime('first day of this month');
+        // $startOfMonth = new \DateTime('first day of last year');
         $endOfMonth = new \DateTime('last day of this month 23:59:59');
+        // $endOfMonth = new \DateTime('last year 23:59:59');
 
         return (int) $this->createQueryBuilder('at')
             ->select('SUM(at.amount)')
@@ -46,6 +48,22 @@ class AccountTransactionsRepository extends ServiceEntityRepository
             ->setParameter('end', $endOfMonth)
             ->getQuery()
             ->getSingleScalarResult();
+    }
+
+    public function getTransactionsForCurrentMonth(): array
+    {
+        $startOfMonth = new \DateTime('first day of this month');
+        // $startOfMonth = new \DateTime('first day of last year');
+        $endOfMonth = new \DateTime('last day of this month 23:59:59');
+        // $endOfMonth = new \DateTime('last year 23:59:59');
+
+        return $this->createQueryBuilder('at')
+            ->where('at.issuedAt BETWEEN :start AND :end')
+            ->setParameter('start', $startOfMonth)
+            ->setParameter('end', $endOfMonth)
+            ->orderBy('at.issuedAt', 'DESC')
+            ->getQuery()
+            ->getResult();
     }
 
     //    /**
