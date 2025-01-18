@@ -13,9 +13,9 @@ class TaskSystemController extends AbstractController
     #[Route('/', name: 'app_task_system')]
     public function index(TasksRepository $tasksRepository): Response
     {
-        $today = new \DateTime('today');
-        $completedTasks = $tasksRepository->findBy(['completed' => true, 'completedAt' => $today]);
-
+        $completedTasks = $tasksRepository->getCompletedToday();
+        dump($completedTasks);
+        
         $totalDuration = array_reduce($completedTasks, function ($carry, $task) {
             return $carry + $task->getDuration();
         }, 0);

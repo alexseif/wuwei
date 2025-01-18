@@ -99,6 +99,23 @@ class TasksRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+  
+    public function getCompletedToday()
+    {
+        $today = new \DateTime('today');
+        $today->setTime(0, 0, 0);
+
+        return $this->createQueryBuilder('t')
+            ->select('t, tl, a, c')
+            ->leftJoin('t.taskList', 'tl')
+            ->leftJoin('tl.account', 'a')
+            ->leftJoin('a.client', 'c')
+            ->where('t.completed = true')
+            ->where('t.completedAt >= :today')
+            ->setParameter('today', $today)
+            ->getQuery()
+            ->getResult();
+    }
     //    /**
     //     * @return Tasks[] Returns an array of Tasks objects
     //     */
