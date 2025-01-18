@@ -8,11 +8,13 @@
 		{% for day in 0..2 %}
 			<div class="col">
 				<div class="calendar-day">
-					{% for task in schedule[day] %}
-						{# {% if task.eta|date('Y-m-d') == (now|date_modify('+' ~ day ~ ' days')|date('Y-m-d')) %} #}
-						{{ include('components/Task/Schedule.html.twig', {'task': task}) }}
-						{# {% endif %} #}
-					{% endfor %}
+					{% if schedule[day] is defined %}
+						{% for task in schedule[day] %}
+							{# {% if task.eta|date('Y-m-d') == (now|date_modify('+' ~ day ~ ' days')|date('Y-m-d')) %} #}
+							{{ include('components/Task/Schedule.html.twig', {'task': task}) }}
+							{# {% endif %} #}
+						{% endfor %}
+					{% endif %}
 					{% for hour in 0..12 %}
 						<div class="hour-block" style="top: {{ hour * 60 }}px; height: 60px;">
 							{{ hour + 9 }}
