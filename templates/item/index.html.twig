@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block h1 %}Item
+{% block h1 %}{{ items|length }} Items
 {% endblock %}
 {% block card_actions %}
 	{{ include('components/Link/New.html.twig', {'name':'item'}) }}

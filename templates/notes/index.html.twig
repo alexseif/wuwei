@@ -23,7 +23,7 @@
 					<td>
 						{{ include('components/Link/Entity.html.twig', {'name': 'notes', 'entity': note}) }}
 					</td>
-					<td>{{ note.note }}</td>
+					<td>{{ note.note|raw }}</td>
 					<td>
 						{{ include('components/Badge/Timestamps.html.twig', {'entity': note}) }}
 					</td>

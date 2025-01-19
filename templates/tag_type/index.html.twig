@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block h1 %}Tag Types
+{% block h1 %}
+	{{ tag_types|length }}
+	Tag Types
 {% endblock %}
 {% block card_actions %}
 	{{ include('components/Link/New.html.twig', {'name': 'tag_type'}) }}
@@ -16,9 +18,10 @@
 		<tbody>
 			{% for tag_type in tag_types %}
 				<tr>
-					<td>{{ tag_type.name }}</td>
 					<td>
-						{{ include('components/Link/Show.html.twig', {'name': 'tag_type', 'id':tag_type.id }) }}
+						{{ include('components/Link/Entity.html.twig', {'name': 'tag_type', 'entity':tag_type }) }}
+					</td>
+					<td>
 						{{ include('components/Link/Edit.html.twig', {'name': 'tag_type', 'id':tag_type.id }) }}
 					</td>
 				</tr>

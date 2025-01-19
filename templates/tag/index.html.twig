@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block h1 %}Tags
+{% block h1 %}{{ tags|length }} Tags
 {% endblock %}
 {% block card_actions %}
 	{{ include('components/Link/New.html.twig', {'name':'tag'})}}

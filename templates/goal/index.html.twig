@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block h1 %}Goal index
+{% block h1 %}{{ goals|length }} Goals
 {% endblock %}
 {% block card_actions %}
 	{{ include('components/Link/New.html.twig', {'name': 'goal'}) }}

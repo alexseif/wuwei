@@ -9,7 +9,7 @@
 {% endblock %}
 {% block body %}
 	<div class="card-body">
-		<p>{{ note.note }}</p>
+		<p>{{ note.note|raw }}</p>
 	</div>
 	<div class="card-footer text-end">
 		{{ include('components/Badge/Timestamps.html.twig', {'entity': note}) }}

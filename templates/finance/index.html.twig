@@ -2,53 +2,32 @@
 
 {% block h1 %}Finance
 {% endblock %}
-
+{% block card_left %}
+	<div class="d-flex">
+		<div>
+			<span class="badge">{{ hourlyRate|number_format(2) }}
+				EGP/hour</span>
+		</div>
+		<div>
+			<div class="progress">
+				{% set progress = (totalIncome / totalCostOfLife) * 100 %}
+				<div class="progress-bar" role="progressbar" style="width: {{ progress }}%;" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">
+					{{ progress }}%
+				</div>
+			</div>
+			<span class="badge">
+				<span title="Total Income This Month">{{ totalIncome|number_format }}
+					EGP
+				</span>
+				/
+				<span title="Cost of life">{{ totalCostOfLife|number_format }}
+					EGP</span>
+			</span>
+		</div>
+	</div>
+{% endblock %}
 {% block body %}
 	<div class="container">
-		<div class="row">
-			<div class="col-md-6">
-				<div class="card mb-3">
-					<div class="card-body">
-						<h5 class="card-title">Total Income This Month</h5>
-						<p class="card-text">{{ totalIncome|number_format }}
-							EGP</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="card mb-3">
-					<div class="card-body">
-						<h5 class="card-title">Total Cost of Life This Month</h5>
-						<p class="card-text">{{ totalCostOfLife|number_format }}
-							EGP</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-6">
-				<div class="card mb-3">
-					<div class="card-body">
-						<h5 class="card-title">Required Hourly Rate</h5>
-						<p class="card-text">{{ hourlyRate|number_format(2) }}
-							EGP/hour</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="card mb-3">
-					<div class="card-body">
-						<h5 class="card-title">Income vs Cost of Life</h5>
-						<div class="progress">
-							{% set progress = (totalIncome / totalCostOfLife) * 100 %}
-							<div class="progress-bar" role="progressbar" style="width: {{ progress }}%;" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">
-								{{ progress }}%
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="card mb-3">
@@ -68,7 +47,7 @@
 											{{ transaction.amount|number_format }}
 											EGP
 										</span>craft.app.request.getQueryParam("queryStringName")
-										
+
 									</div>
 								</li>
 

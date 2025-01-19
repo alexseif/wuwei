@@ -24,6 +24,7 @@ class MenuManager
                     new MenuItem('app_tag_index', 'bi bi-tags', 'Tags'),
                     new MenuItem(null, '', '', false, [], true), // Divider
                     new MenuItem('app_item_list_index', 'bi bi-list', 'Item List'),
+                    new MenuItem('app_item_index', 'bi bi-view-list', 'Item'),
                 ]
             ),
             new MenuItem(
