@@ -14,7 +14,6 @@ class TaskSystemController extends AbstractController
     public function index(TasksRepository $tasksRepository): Response
     {
         $completedTasks = $tasksRepository->getCompletedToday();
-        dump($completedTasks);
         
         $totalDuration = array_reduce($completedTasks, function ($carry, $task) {
             return $carry + $task->getDuration();
