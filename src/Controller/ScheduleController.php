@@ -17,7 +17,7 @@ class ScheduleController extends AbstractController
         $tasks = $tasksRepository->getPaginatorResult(['t.completed' => false]);
         $schedule = $this->calculateSchedule($tasks);
 
-        return $this->render('schedule/index.html.twig', [
+        return $this->render('schedule/schedule.html.twig', [
             'schedule' => $schedule,
             'now' => new \DateTime()
         ]);
