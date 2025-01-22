@@ -1,4 +1,5 @@
 # Wu Wei
+[![wakatime](https://wakatime.com/badge/github/alexseif/wuwei.svg)](https://wakatime.com/badge/github/alexseif/wuwei)
 
 Wu Wei is a Symfony-based web application designed to help you cultivate wisdom, balance, and discipline in your daily
 life.
