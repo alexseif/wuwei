@@ -16,21 +16,7 @@
 	{{ include('components/Link/New.html.twig', {'name': 'tasks'}) }}
 {% endblock %}
 {% block body %}
-
-	<div class="list-group tasks">
-		{% for task in todayTasks %}
-			{{ include('components/Task/Task.html.twig', { task: task }) }}
-		{% else %}
-			<div class="card-body">
-				<p>No Tasks created today</p>
-			</div>
-		{% endfor %}
-	</div>
-
+	{{ include('components/Task/Tasks.html.twig', { tasks: todayTasks }) }}
 	<hr/>
-	<div class="list-group tasks">
-		{% for task in tasks %}
-			{{ include('components/Task/Task.html.twig', { task: task }) }}
-		{% endfor %}
-	</div>
+	{{ include('components/Task/Tasks.html.twig', { tasks: tasks }) }}
 {% endblock %}

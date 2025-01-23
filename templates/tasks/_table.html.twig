@@ -13,12 +13,4 @@
 	-
 	{{ knp_pagination_sortable(tasks, 'Completed At', 't.completedAt') }}
 </div>
-<div class="list-group tasks">
-	{% for task in tasks %}
-		{{ include('components/Task/Task.html.twig', {'task': task}) }}
-	{% else %}
-		<div class="list-group-item">
-			<span>no records found</span>
-		</div>
-	{% endfor %}
-</div>
+{{ include('components/Task/Tasks.html.twig', {'tasks': tasks}) }}

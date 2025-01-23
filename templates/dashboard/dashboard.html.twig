@@ -27,11 +27,7 @@
 				</div>
 			{% endfor %}
 		</div>
-		<div class="list-group tasks">
-			{% for task in tasks %}
-				{{ include('components/Task/Task.html.twig')}}
-			{% endfor %}
-		</div>
+		{{ include('components/Task/Tasks.html.twig')}}
 	</div>
 	<div class="row row-cols-3 g-4">
 		{% for key,widget in widgets %}
