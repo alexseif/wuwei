@@ -1,51 +1,62 @@
 <div class="card-body">
-	<table class="table table-striped">
+	<table class="table table-striped tasks">
 		<tbody>
 			<tr>
-				<th></th>
-				<td>
+				<td colspan="3">
+					{{ include('components/Badge/Completed.html.twig', {completed: task.completed})}}
+					<span class="badge bg-secondary" title="Work Loggable">
+						{{ task.workLoggable ? 'Work Loggable' : 'NoT Work Loggable' }}
+					</span>
+				</td>
+			</tr>
+			<tr class="task">
+				<td colspan="2">
 					{{ include('components/Link/Entity.html.twig', {'name': 'task_lists', 'entity': task.taskList}) }}
 					{{ include('components/Link/Entity.html.twig', {'name': 'accounts', 'entity': task.taskList.account}) }}
 					{{ include('components/Link/Entity.html.twig', {'name': 'client', 'entity': task.taskList.account.client}) }}
 				</td>
+				<td>
+					<div class="d-flex flex-column priority">
+						{{ include('components/Badge/Priority.html.twig', {'priority': task.priority}) }}
+						{{ include('components/Badge/Urgency.html.twig', {'urgency': task.urgency}) }}
+					</div>
+				</td>
 			</tr>
 			<tr>
-				<th>Order</th>
-				<td>{{ task.order }}</td>
+				<td>
+					<span class="badge fs-5" title="ETA">
+						<i class="bi bi-alarm text-muted"></i>
+						{{ (task.eta)? task.eta|date('H:i')  }}
+					</span>
+				</td>
+				<td>
+					<span class="badge fs-5" title="EST">
+						<i class="bi bi-clock text-muted"></i>
+						{{ (task.est)? task.est ~ "m"  }}
+					</span>
+				</td>
+				<td>
+					<span class="badge fs-5" title="Duration">
+						<i class="bi bi-stopwatch text-muted"></i>
+						{{ (task.duration)? task.duration ~ "m"  }}
+					</span>
+				</td>
 			</tr>
 			<tr>
-				<th>Priority - Urgency</th>
-				<td>{{ include('components/Badge/Priority.html.twig', {'priority': task.priority}) }}
-					{{ include('components/Badge/Urgency.html.twig', {'urgency': task.urgency}) }}</td>
+				<td colspan="3"></td>
 			</tr>
-			<tr>
-				<th>Duration</th>
-				<td>{{ task.duration }}</td>
-			</tr>
-			<tr>
-				<th>Est</th>
-				<td>{{ task.est }}</td>
-			</tr>
-			<tr>
-				<th>Eta</th>
-				<td>{{ task.eta ? task.eta|date('Y-m-d H:i:s') : '' }}</td>
-			</tr>
-			<tr>
-				<th>Completed</th>
-				<td>{{ task.completed ? 'Yes' : 'No' }}</td>
-			</tr>
-			<tr>
-				<th>CompletedAt</th>
-				<td>{{ task.completedAt ? task.completedAt|date('Y-m-d H:i:s') : '' }}</td>
-			</tr>
-			<tr>
-				<th>WorkLoggable</th>
-				<td>{{ task.workLoggable ? 'Yes' : 'No' }}</td>
-			</tr>
-
 		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="3">
+					{{ include('components/Badge/Timestamps.html.twig', {'entity': task}) }}
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					{{ include('components/Link/Edit.html.twig', {'name': 'tasks', 'id': task.id, 'attrs':{'data-bs-toggle':"offcanvas"} }) }}
+				</td>
+			</tr>
+		</tfoot>
 	</table>
-</div>
-<div class="card-footer text-end">
-	{{ include('components/Badge/Timestamps.html.twig', {'entity': task}) }}
 </div>

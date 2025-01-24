@@ -1,4 +1,7 @@
 <span class="badge {{ class|default('') }}" {% for attr, value in attrs|default({} ) %} {{ attr }}="{{ value }}" {% endfor %}>
+	{% if icon|default(null) %}
+		<i class="{{ icon }}"></i>
+	{% endif %}
 	{{ text|default('') }}
 	{{ content|default('')|raw }}
 </span>
