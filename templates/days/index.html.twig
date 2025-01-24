@@ -4,7 +4,6 @@
 {% endblock %}
 {% block card_actions %}
 	{{ include('components/Link/New.html.twig', {'name': 'days'}) }}
-
 {% endblock %}
 {% block body %}
 	<ul class="nav">
@@ -17,6 +16,7 @@
 	</ul>
 	<div class="days">
 		{% for day in days %}
+			{# {{ include('components/Day/Day.html.twig') }} #}
 			<div class="day card m-3 mx-auto {{ day.complete ? 'completed' : '' }} {% if day.deadline and day.deadline < 'now'|date_modify('+3 days') %}text-bg-danger{% elseif day.deadline and day.deadline < 'now'|date_modify('+2 weeks') %}text-bg-warning{% endif %}">
 				<div class="card-header d-flex justify-content-between align-items-center">
 					<h3 class="card-title">
@@ -35,7 +35,7 @@
 				</div>
 				<!-- ./card-body -->
 				<div class="card-footer d-flex justify-content-between">
-					{{ include('components/Link/Edit.html.twig', {'name': 'days', 'id': day.id}) }}
+					{{ include('components/Link/Edit.html.twig', {'name': 'days', 'id': day.id, 'attrs':{'data-bs-toggle':"offcanvas"}}) }}
 					{{ include('components/Badge/Timestamps.html.twig', {'entity': day}) }}
 				</div>
 			</div>

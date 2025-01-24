@@ -3,7 +3,7 @@
 {% endblock %}
 {% block body %}
 	<div class="card-body">
-		<div class="row">
+		{# <div class="row">
 			{% for timeSystem in currentTimeSystem %}
 				<div class="col">
 					<div class="card">
@@ -19,7 +19,7 @@
 				</div>
 			{% endfor %}
 		</div>
-		<hr/>
+		<hr/> #}
 		<div class="row">
 			{% for day in days %}
 				<div class="col">
@@ -27,6 +27,7 @@
 				</div>
 			{% endfor %}
 		</div>
+		<hr/>
 		{{ include('components/Task/Tasks.html.twig')}}
 	</div>
 	<div class="row row-cols-3 g-4">
