@@ -1,7 +1,9 @@
-<table class="w-100">
-	<tbody class="list-group tasks">
+<div class=" table-responsive">
+<table class="table table-hover">
+	<tbody class="tasks align-middle">
 		{% for task in tasks %}
 			{{ include('components/Task/Task.html.twig', { task: task }) }}
 		{% endfor %}
 	</tbody>
 </table>
+</div>

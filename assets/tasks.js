@@ -44,6 +44,7 @@ $(() => {
         connectWith: '.tasks',
         placeholder: "ui-state-highlight",
         cancel: ".completed",
+        handle: ".sortable-handle",
         update: function (event, ui) {
             var task = $(ui.item);
             var id = task.data('id');
