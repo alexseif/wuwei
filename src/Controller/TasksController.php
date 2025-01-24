@@ -142,7 +142,7 @@ final class TasksController extends AbstractController
     #[Route('/{id}/order', name: 'app_tasks_order', methods: ['GET', 'POST'])]
     public function order(Request $request, Tasks $task, EntityManagerInterface $entityManager): Response
     {
-        $order = $request->getPayload()->getInt('updatedOrder');
+        $order = $request->getPayload()->getInt('order');
         $task->setOrder($order);
 
         $entityManager->flush();

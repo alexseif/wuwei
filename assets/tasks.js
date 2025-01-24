@@ -48,15 +48,12 @@ $(() => {
         update: function (event, ui) {
             var task = $(ui.item);
             var id = task.data('id');
-            var order = $(this).sortable('toArray', { attribute: 'data-order' });
-            var updatedOrder = order.indexOf(task.data('order').toString()) + 1; // Get the new order number for the updated task
-
+            var order = ui.item.index() + 1;
             $.ajax({
                 url: '/tasks/' + id + '/order',
                 method: 'POST',
                 data: {
-                    'order': order,
-                    'updatedOrder': updatedOrder
+                    'order': order
                 },
                 success: function (response) {
                     console.log('Task order updated successfully:', response);
