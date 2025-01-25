@@ -1,0 +1,31 @@
+<div class="card-group mb-3">
+	{% for key,widget in widgets %}
+		{# <div class="col"> #}
+		<div class="card">
+			<div class="card-body">
+				<div class="d-flex justify-content-between align-items-center">
+					<div class="d-flex flex-column">
+						<h4 class="card-title mb-3">
+							{{ widget.value|default('00:00') }}
+						</h4>
+						<small>{{ widget.title }}</small>
+					</div>
+					{% if widget.valueLastYear %}
+						<div class="d-flex flex-column justify-content-between align-items-center">
+							<div>
+								<i class="bi {{ widget.trendIcon }} {{ widget.trendColor }}"></i>
+								<span class="small text-muted" title="last year">{{ widget.valueLastYear|default('00:00') }}</span>
+							</div>
+							<span class="badge {{ widget.percentageColor }}">
+								{{ widget.percentage < 0 ? '' : '+' }}{{ widget.percentage|number_format(2) }}%
+							</span>
+						</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+		<!-- /.card -->
+	{# </div> #}
+		<!-- /.col -->
+	{% endfor %}
+</div>

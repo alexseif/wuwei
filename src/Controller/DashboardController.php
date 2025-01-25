@@ -31,7 +31,7 @@ class DashboardController extends AbstractController
     DaysRepository $daysRepository,
     TasksRepository $tasksRepository
   ): Response {
-    $reportItems = ['today', 'yesterday', 'week', 'month', 'quarter', 'total'];
+    $reportItems = ['today','week', 'month', 'quarter', 'total'];
     $defaultWidget = [
       'title' => 'Time Tracking',
       'icon' => 'bi-clock',

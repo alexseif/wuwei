@@ -2,7 +2,7 @@
 	<td class="sortable-handle">
 		<i class="bi bi-grip-vertical fs-5 text-secondary"></i>
 	</td>
-	<td class="p-0">
+	<td>
 		<div class="d-flex align-items-center">
 			<div>
 				<label class="btn">
@@ -22,16 +22,23 @@
 		</div>
 	</td>
 	<td>
-		<div class="d-flex flex-column priority">
+		<div class="d-flex flex-column priority align-items-center">
 			{{ include('components/Badge/Priority.html.twig', {'priority': task.priority}) }}
 			{{ include('components/Badge/Urgency.html.twig', {'urgency': task.urgency}) }}
 		</div>
 	</td>
 	<td>
-		<span>{{ (task.completed) ? task.duration : task.est }}m</span>
-		<span>{{ (task.completed) ? task.completedAt|date : (task.eta ? task.eta|date('Y-m-d H:i:s') : '') }}</span>
+		<span class="" title="EST">
+			<i class="bi bi-clock text-muted"></i>
+			{{ (task.est)? task.est ~ "m"  }}
+		</span><br/>
+		{# <span>{{ (task.completed) ? task.duration : task.est }}m</span> #}
+		<span class="" title="ETA">
+			<i class="bi bi-alarm text-muted"></i>
+			{{ (task.eta)? task.eta|date('H:i, Y-m-d')  }}
+		</span>
 	</td>
-	<td>
+	<td class="text-end">
 		{{ include('components/Link/Edit.html.twig', {'name': 'tasks', 'id': task.id, 'attrs':{'data-bs-toggle':"offcanvas"} }) }}
 	</td>
 </tr>

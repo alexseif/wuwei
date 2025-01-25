@@ -1,68 +1,25 @@
 {% extends 'base.html.twig' %}
-{% block h1 %}Welcome to WuWei, Everyday is closer to your goal, what are you going to do today?
+
+{% block h1 %}
+	Let's Go
 {% endblock %}
 {% block body %}
 	<div class="card-body">
-		{# <div class="row">
-			{% for timeSystem in currentTimeSystem %}
-				<div class="col">
-					<div class="card">
-						<div class="card-body">
-							{{ include('components/Badge.html.twig', {'text': timeSystem.fromTime|date('H:i') ~ ' - ' ~ timeSystem.toTime|date('H:i')}) }}
-							{% for tag in timeSystem.tags %}
-								{{ include('components/Badge.html.twig', {'text': tag}) }}
-								{% if loop.index0 == 0 %}:
-								{% endif %}
-							{% endfor %}
-						</div>
-					</div>
-				</div>
-			{% endfor %}
-		</div>
-		<hr/> #}
-		<div class="row">
+		<div class="row mb-3">
 			{% for day in days %}
 				<div class="col">
 					{{ include('components/Day/Day.html.twig')}}
 				</div>
 			{% endfor %}
 		</div>
-		<hr/>
+		{% include 'tasks/_stats.html.twig' %}
 		{{ include('components/Task/Tasks.html.twig')}}
-	</div>
-	<div class="row row-cols-3 g-4">
-		{% for key,widget in widgets %}
+
+		<div class="row">
 			<div class="col">
-				<div class="card">
-					<div class="card-body">
-						<div class="d-flex justify-content-between align-items-center">
-							<h2 class="card-title">
-								{{ widget.value|default('00:00') }}
-							</h2>
-							<small>{{ widget.title }}</small>
-						</div>
-					</div>
-					{% if widget.valueLastYear %}
-						<div class="card-body">
-							<div class="d-flex justify-content-between align-items-center">
-								<i class="bi {{ widget.trendIcon }} {{ widget.trendColor }}"></i>
-								<span class="small text-muted" title="last year">{{ widget.valueLastYear|default('00:00') }}</span>
-								<span class="badge {{ widget.percentageColor }}">
-									{{ widget.percentage < 0 ? '' : '+' }}{{ widget.percentage|number_format(2) }}%
-								</span>
-							</div>
-						</div>
-					{% endif %}
-				</div>
-				<!-- /.card -->
+				{% include('goal/_goals.html.twig') %}
 			</div>
-			<!-- /.col -->
-		{% endfor %}
-	</div>
-	<hr/>
-	<div class="card-body">
-		{% include('goal/_goals.html.twig') %}
-		<hr/>
-		{% include('item_list/_item_lists.html.twig') %}
+			{% include('item_list/_item_lists.html.twig') %}
+		</div>
 	</div>
 {% endblock %}

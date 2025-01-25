@@ -1,44 +1,28 @@
 <div class="fixed-sidebars small">
-    <div class="fixed-sidebar fixed-sidebar-left">{% block sidebarLeft %} {% endblock %}</div>
-    <div class="fixed-sidebar fixed-sidebar-right">
-        {% block sidebarRight %}
-            <div class="text-end">
-                <div id="flower">
-                    <img src="{{ asset('/imgs/flower.png') }}" alt="flower for beauty and grace in what you do" width="40"/>
-                </div>
-                <div style="text-decoration: underline;">WuWei</div>
-                <div>Embrace</div>
-                <div>Imperfection</div>
-                <div>Mindfulness</div>
-            </div>
-            <hr/>
-            <div class="list-group">
-                {% set ts = time_system_service.getCurrent() %}
-                {% for tsd in ts %}
-                    <div class="list-group-item">
-                        {{ tsd.name }}
-                    </div>
-                {% endfor %}
-            </div><!-- .list-group -->
-            <hr/>
-            <div class="text-end">
-                {# TODO: Create a service to get the number of cigarretes logged today #}
-                <a href="{{ path('app_cigarette_log_new') }}" class="btn btn-outline-light">+ Cig</a>
-                {% set difference = cigarette_difference() %}
-                {% if difference > 0 %}
-                    <div class="alert alert-danger" role="alert">
-                        You have smoked {{ difference }} more cigarettes than the same time period yesterday.
-                    </div>
-                {% elseif difference < 0 %}
-                    <div class="alert alert-success" role="alert">
-                        You have smoked {{ -difference }} less cigarettes than the same time period yesterday. Keep it up!
-                    </div>
-                {% else %}
-                    <div class="alert alert-info" role="alert">
-                        You have smoked the same amount of cigarettes as the same time period yesterday.
-                    </div>
-                {% endif %}
-            </div>
-        {% endblock %}
-    </div><!-- .float-end -->
-</div>
+	<div class="fixed-sidebar fixed-sidebar-left"> {% block sidebarLeft %}{% endblock %}
+		</div>
+		<div class="fixed-sidebar fixed-sidebar-right">
+			{% block sidebarRight %}
+				<div class="text-end">
+					<div id="flower">
+						<img src="{{ asset('/imgs/flower.png') }}" alt="flower for beauty and grace in what you do" width="40"/>
+					</div>
+					<div style="text-decoration: underline;">WuWei</div>
+					<div>Embrace</div>
+					<div>Imperfection</div>
+					<div>Mindfulness</div>
+				</div>
+				<hr/>
+				<div class="list-group">
+					{% set ts = time_system_service.getCurrent() %}
+					{% for tsd in ts %}
+						<div class="list-group-item">
+							{{ tsd.name }}
+						</div>
+					{% endfor %}
+				</div>
+				<!-- .list-group -->
+			{% endblock %}
+		</div>
+		<!-- .float-end -->
+	</div>

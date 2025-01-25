@@ -1,9 +1,9 @@
 <div class="day card mx-auto {{ day.complete ? 'completed' : '' }} rounded rounded-1">
 	<div class="card-header d-flex justify-content-between align-items-center">
-		<label class="card-title">
-			<input type="checkbox" name="complete" {{ day.complete ? 'checked' : '' }} data-id="{{ day.id }}"/>
+		<div class="card-title">
+			{# <input type="checkbox" name="complete" {{ day.complete ? 'checked' : '' }} data-id="{{ day.id }}"/> #}
 			{{ include('components/Link/Entity.html.twig', {'name': 'days', 'entity': day, 'attrs': {'data-bs-toggle':"offcanvas"}}) }}
-		</label>
+		</div>
 		<div class="d-flex flex-column align-items-end">
 			{{ include('components/Badge/Deadline.html.twig', {'text': day.deadline|time_diff, "class": "badge (day.deadline and day.deadline < 'now'|date_modify('+3 days')) ? 'bg-danger' : (day.deadline and day.deadline < 'now'|date_modify('+2 weeks')) ? 'bg-warning'" }) }}
 		</div>

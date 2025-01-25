@@ -2,11 +2,6 @@
 .tasks {
     .task {
 
-        // display: flex;
-        // justify-content: space-between;
-        // flex-wrap: wrap;
-        border: 2px solid;
-
 
         .sortable-handle {
             width: 24px;
@@ -33,13 +28,6 @@
             }
         }
 
-        &.important {
-            border-color: red;
-        }
-
-        &.urgent {
-            border-color: orange;
-        }
     }
 }
 
