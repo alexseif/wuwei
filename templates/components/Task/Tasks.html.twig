@@ -1,8 +1,17 @@
 <div class="table-responsive mb-3">
 	<table class="table table-hover">
+	{% if title|default %}
+		<thead>
+			<tr>
+				<th colspan="5">
+					<h5>{{ title }}</h5>
+				</th>
+			</tr>
+		</thead>
+	{% endif %}
 		<tbody class="tasks align-middle">
 			{% for task in tasks %}
-				{{ include('components/Task/Task.html.twig', { task: task }) }}
+				{{ include('components/Task/Task.html.twig', { 'task': task }) }}
 			{% endfor %}
 		</tbody>
 	</table>

@@ -1,0 +1,2 @@
+{{ include('components/Badge.html.twig', {'text': (completedAt) ? completedAt|date('H:i Y-m-d') ~ "||" ~ completedAt|time_diff, icon: 'bi bi-calendar-check-fill', 'attrs': {'title': 'completedAt'} }) }}
+

@@ -1,8 +1,10 @@
-<span>
+<span class="">
 	{{ (entity.startedAt is defined) ?include('components/Badge.html.twig', {'text': entity.startedAt ? entity.startedAt|date('Y-m-d') : '', 'attrs': {'title': 'Started At'}}) }}
 	{{ (entity.issuedAt is defined) ?include('components/Badge.html.twig', {'text': entity.issuedAt ? entity.issuedAt|date('Y-m-d') : '', 'attrs': {'title': 'Issued At'}}) }}
-	{{ include('components/Badge.html.twig', {'text': entity.createdAt ? entity.createdAt|date('Y-m-d') : '', 'attrs': {'title': 'Created At'}}) }}
-	{{ include('components/Badge.html.twig', {'text': entity.updatedAt ? entity.updatedAt|date('Y-m-d') : '', 'attrs': {'title': 'Updated At'}}) }}
-	{{ (entity.eta is defined and entity.eta) ? include('components/Badge.html.twig', {'text': entity.eta|date('Y-m-d'), icon: 'bi bi-calendar', 'attrs': {'title': 'ETA'}}) : '' }}
-	{{ (entity.completedAt is defined and entity.completedAt) ? include('components/Badge.html.twig', {'text': entity.completedAt|date('Y-m-d'), icon: 'bi bi-calendar-check', 'attrs': {'title': 'Completed At'}}) : '' }}
+	{{ (entity.eta is defined and entity.eta) ? include('components/Badge/ETA.html.twig', {'eta': entity.eta})}}
+	{{ (entity.completedAt is defined and entity.completedAt) ? include('components/Badge/CompletedAt.html.twig', {'completedAt': entity.completedAt})}}
+	<div>
+		{{ include('components/Badge.html.twig', {'text': entity.createdAt ? entity.createdAt|date('Y-m-d') : '',  'icon': 'bi bi-calendar-plus', 'attrs': {'title': 'Created At'}}) }}
+		{{ include('components/Badge.html.twig', {'text': entity.updatedAt ? entity.updatedAt|date('Y-m-d') : '',  'icon': 'bi bi-pencil', 'attrs': {'title': 'Updated At'}}) }}
+	</div>
 </span>

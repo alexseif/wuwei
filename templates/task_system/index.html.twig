@@ -16,7 +16,9 @@
 	{{ include('components/Link/New.html.twig', {'name': 'tasks'}) }}
 {% endblock %}
 {% block body %}
-	{{ include('components/Task/Tasks.html.twig', { tasks: todayTasks }) }}
+	{{ include('components/Task/Tasks.html.twig', { 'tasks': focusTasks}) }}
 	<hr/>
-	{{ include('components/Task/Tasks.html.twig', { tasks: tasks }) }}
+	{{ include('components/Task/Tasks.html.twig', { 'tasks': tasksCompletedToday, 'title': 'Completed Today' }) }}
+	<hr/>
+	{{ include('components/Task/Tasks.html.twig', { 'tasks': tasksCreatedToday, 'title': 'Created Today' }) }}
 {% endblock %}

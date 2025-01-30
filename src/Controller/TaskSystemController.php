@@ -14,16 +14,18 @@ class TaskSystemController extends AbstractController
     public function index(TasksRepository $tasksRepository): Response
     {
         $completedTasks = $tasksRepository->getCompletedToday();
-        
+
         $totalDuration = array_reduce($completedTasks, fn($carry, $task) => $carry + $task->getDuration(), 0);
 
-        $todayTasks = $tasksRepository->getCreatedToday();
-        $tasks = $tasksRepository->getFocusDayTasks();
+        $tasksCreatedToday = $tasksRepository->getCreatedToday();
+        $focusTasks = $tasksRepository->getFocusDayTasks();
+        $tasksCompletedToday = $tasksRepository->getCompletedToday();
 
         return $this->render('task_system/index.html.twig', [
             'totalDuration' => $totalDuration,
-            'tasks' => $tasks,
-            'todayTasks' => $todayTasks
+            'focusTasks' => $focusTasks,
+            'tasksCreatedToday' => $tasksCreatedToday,
+            'tasksCompletedToday' => $tasksCompletedToday
         ]);
     }
 }

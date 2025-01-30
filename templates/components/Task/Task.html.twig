@@ -28,15 +28,11 @@
 		</div>
 	</td>
 	<td>
-		<span class="" title="EST">
-			<i class="bi bi-clock text-muted"></i>
-			{{ (task.est)? task.est ~ "m"  }}
-		</span><br/>
-		{# <span>{{ (task.completed) ? task.duration : task.est }}m</span> #}
-		<span class="" title="ETA">
-			<i class="bi bi-alarm text-muted"></i>
-			{{ (task.eta)? task.eta|date('H:i, Y-m-d')  }}
-		</span>
+		{{ include('components/Badge/EST.html.twig', {'est': task.est})}}
+		{{ include('components/Badge/ETA.html.twig', {'eta': task.eta})}}
+		<br/>
+		{{ include('components/Badge/Duration.html.twig', {'duration': task.duration})}}
+		{{ include('components/Badge/CompletedAt.html.twig', {'completedAt': task.completedAt})}}
 	</td>
 	<td class="text-end">
 		{{ include('components/Link/Edit.html.twig', {'name': 'tasks', 'id': task.id, 'attrs':{'data-bs-toggle':"offcanvas"} }) }}

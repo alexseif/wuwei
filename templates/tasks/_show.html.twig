@@ -2,7 +2,7 @@
 	<table class="table table-striped tasks">
 		<tbody>
 			<tr>
-				<td colspan="3">
+				<td colspan="2">
 					{{ include('components/Badge/Completed.html.twig', {completed: task.completed})}}
 					<span class="badge bg-secondary" title="Work Loggable">
 						{{ task.workLoggable ? 'Work Loggable' : 'NoT Work Loggable' }}
@@ -10,13 +10,13 @@
 				</td>
 			</tr>
 			<tr class="task">
-				<td colspan="2">
+				<td>
 					{{ include('components/Link/Entity.html.twig', {'name': 'task_lists', 'entity': task.taskList}) }}
 					{{ include('components/Link/Entity.html.twig', {'name': 'accounts', 'entity': task.taskList.account}) }}
 					{{ include('components/Link/Entity.html.twig', {'name': 'client', 'entity': task.taskList.account.client}) }}
 				</td>
 				<td>
-					<div class="d-flex flex-column priority">
+					<div class="d-flex flex-column priority align-items-center">
 						{{ include('components/Badge/Priority.html.twig', {'priority': task.priority}) }}
 						{{ include('components/Badge/Urgency.html.twig', {'urgency': task.urgency}) }}
 					</div>
@@ -24,36 +24,23 @@
 			</tr>
 			<tr>
 				<td>
-					<span class="badge fs-5" title="ETA">
-						<i class="bi bi-alarm text-muted"></i>
-						{{ (task.eta)? task.eta|date('H:i')  }}
-					</span>
+					{{ include('components/Badge/EST.html.twig', {est: task.est})}}
 				</td>
 				<td>
-					<span class="badge fs-5" title="EST">
-						<i class="bi bi-clock text-muted"></i>
-						{{ (task.est)? task.est ~ "m"  }}
-					</span>
+					{{ include('components/Badge/Duration.html.twig', {duration: task.duration})}}
 				</td>
-				<td>
-					<span class="badge fs-5" title="Duration">
-						<i class="bi bi-stopwatch text-muted"></i>
-						{{ (task.duration)? task.duration ~ "m"  }}
-					</span>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="3"></td>
 			</tr>
 		</tbody>
 		<tfoot>
 			<tr>
-				<td colspan="3">
+				<td colspan="2">
 					{{ include('components/Badge/Timestamps.html.twig', {'entity': task}) }}
 				</td>
 			</tr>
 			<tr>
-				<td colspan="3">
+				<td
+					colspan="3" class="text-end">
+					{# TODO: Mark Complete #}
 					{{ include('components/Link/Edit.html.twig', {'name': 'tasks', 'id': task.id, 'attrs':{'data-bs-toggle':"offcanvas"} }) }}
 				</td>
 			</tr>
