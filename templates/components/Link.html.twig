@@ -1,4 +1,4 @@
-<a href="{{ link|default('#') }}" class="{{ class|default('btn btn-sm') }}" {% for attr, value in attrs|default({} ) %} {{ attr }}="{{ value }}" {% endfor %}>
+<a href="{{ link|default('#') }}" class="{{ class|default('btn') }}" {% for attr, value in attrs|default({} ) %} {{ attr }}="{{ value }}" {% endfor %}>
 	{% if icon|default(null) %}
 		<i class="{{ icon }}"></i>
 	{% endif %}

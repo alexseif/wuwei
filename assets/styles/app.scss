@@ -3,6 +3,7 @@
 // Required
 @import "bootstrap/scss/functions";
 @import "variables";
+
 // Required
 @import "bootstrap/scss/variables";
 @import "bootstrap/scss/variables-dark";
@@ -63,6 +64,73 @@ $h3-font-size-mobile: 2.5rem;
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 @import "fixed-sidebars";
 @import './tasks.scss';
+
+
+//
+// Card groups
+//
+
+.card-group-vertical {
+
+  // The child selector allows nested `.card` within `.card-group`
+  // to display properly.
+  >.card {
+    margin-bottom: var(--#{$prefix}card-group-margin);
+  }
+
+  @include media-breakpoint-up(sm) {
+    display: flex;
+    flex-flow: column wrap;
+
+    // The child selector allows nested `.card` within `.card-group`
+    // to display properly.
+    >.card {
+      // Flexbugs #4: https://github.com/philipwalton/flexbugs#flexbug-4
+      flex: 1 0 0%;
+      margin-bottom: 0;
+
+      +.card {
+        margin-bottom: 0;
+        border-top: 0;
+      }
+
+      // Handle rounded corners
+      @if $enable-rounded {
+        &:not(:last-child) {
+          @include border-bottom-radius(0);
+
+          .card-img-top,
+          .card-header {
+            // stylelint-disable-next-line property-disallowed-list
+            // border-top-right-radius: 0;
+          }
+
+          .card-img-bottom,
+          .card-footer {
+            // stylelint-disable-next-line property-disallowed-list
+            border-bottom-right-radius: 0;
+          }
+        }
+
+        &:not(:first-child) {
+          @include border-top-radius(0);
+
+          .card-img-top,
+          .card-header {
+            // stylelint-disable-next-line property-disallowed-list
+            // border-top-left-radius: 0;
+          }
+
+          .card-img-bottom,
+          .card-footer {
+            // stylelint-disable-next-line property-disallowed-list
+            border-bottom-left-radius: 0;
+          }
+        }
+      }
+    }
+  }
+}
 
 .btn-link {
   font-weight: bold;

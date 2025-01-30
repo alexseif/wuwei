@@ -94,7 +94,9 @@
     ],
     "post-update-cmd": [
       "@auto-scripts"
-    ]
+    ],
+    "rector": "vendor/bin/rector process",
+    "rector:dry-run": "vendor/bin/rector process --dry-run"
   },
   "conflict": {
     "symfony/symfony": "*"
@@ -107,6 +109,7 @@
   },
   "require-dev": {
     "phpunit/phpunit": "^9.5",
+    "rector/rector": "^2.0",
     "roave/security-advisories": "dev-latest",
     "symfony/browser-kit": "6.4.*",
     "symfony/css-selector": "6.4.*",

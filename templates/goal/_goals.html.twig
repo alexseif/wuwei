@@ -1,10 +1,10 @@
 {% if goals %}
 	<h4>Goals</h4>
-	<div class="goals d-flex flex-wrap flex-column mb-3">
+	<div class="goals mb-3 card-group-vertical">
 		{% for goal in goals %}
-			<div class="card goal flex-fill" data-href="{{ path('app_goal_show', {'id': goal.id}) }}">
+			<div class="card goal" data-href="{{ path('app_goal_show', {'id': goal.id}) }}">
 				<div class="card-body">
-					<div class="card-title">{{ goal.name }}</div>
+					<div class="card-title mb-0">{{ goal.name }}</div>
 				</div>
 			</div>
 		{% endfor %}

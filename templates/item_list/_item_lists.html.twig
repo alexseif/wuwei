@@ -2,11 +2,11 @@
 {% for itemList in itemLists %}
 	<div class="col" {{ ("شعار المرحلة" == itemList.name)? "dir='rtl'" : "" }}>
 		<h4>{{ itemList.name }}</h4>
-		<div class="items d-flex flex-wrap flex-column">
+		<div class="items card-group-vertical">
 			{% for item in itemList.items %}
-				<div class="card goal flex-fill">
+				<div class="card goal">
 					<div class="card-body">
-						<div class="card-title">
+						<div class="card-title mb-0">
 							{% include 'item/_item.html.twig' %}
 						</div>
 					</div>

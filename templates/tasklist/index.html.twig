@@ -8,7 +8,7 @@
     <div class="row">
         {% for tasklist in tasklists %}
             <div class="col-4 text-center">
-                <a href="{{ path('app_tasklist_show', {'id': tasklist.id}) }}" class="btn btn-outline-light rounded-0 btn-lg my-2 p-4 w-100">
+                <a href="{{ path('app_tasklist_show', {'id': tasklist.id}) }}" class="btn btn-outline-light btn-lg my-2 p-4 w-100">
 {#                    <div class="d-flex">#}
                         {{ tasklist.name }}
 {#                        <div class="btn-toolbar ms-auto">#}
