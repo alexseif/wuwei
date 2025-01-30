@@ -1,8 +1,10 @@
-<div class="task-block task {{ task.completed ? 'completed' : '' }} {{ (task.priority > 0) ? 'important' : '' }} {{ (task.urgency > 0) ? 'urgent' : '' }}" data-order="{{ task.order }}" data-id="{{ task.id }}" style="top: {{ (task.eta|date_modify('-9 hours')|date('H') * 60) + task.eta|date('i') }}px; height: {{ task.est }}px;">
+{% set top = (task.completed) ? (task.completedAt|date_modify('-' ~ task.duration ~ ' mins')|date_modify('-9 hours')|date('H') * 60) + task.completedAt|date('i') : (task.eta|date_modify('-9 hours')|date('H') * 60) + task.eta|date('i') %}
+{% set height = (task.completed) ? task.duration : task.est %}
+<div class="task-block task {{ task.completed ? 'completed' : '' }} {{ (task.priority > 0) ? 'important' : '' }} {{ (task.urgency > 0) ? 'urgent' : '' }}" data-order="{{ task.order }}" data-id="{{ task.id }}" style="top: {{ top }}px; height: {{ height }}px;">
 	<div class="task-time me-2 float-end">
-		{{ task.eta|date('H:i') }}
+		{{ (task.completed) ? task.completedAt|date_modify('-' ~ task.duration ~ ' mins')|date('H:i') : task.eta|date('H:i') }}
 		-
-		{{ task.eta|date_modify('+' ~ task.est ~ ' mins')|date('H:i') }}
+		{{ (task.completed) ? task.completedAt|date('H:i') : task.eta|date_modify('+' ~ task.est ~ ' mins')|date('H:i') }}
 	</div>
 	<div class="d-flex">
 		<label class="btn">

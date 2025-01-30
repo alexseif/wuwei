@@ -38,8 +38,8 @@ class ScheduleController extends AbstractController
         $dayNumber = 0;
         foreach ($tasks as $task) {
             if ($task->isCompleted()) {
-                $task->setEta($task->getCompletedAt()->modify('-' . $task->getDuration() . ' minutes'));
-                // $totalTime += ($task->getDuration() + $breakTime);
+                // $task->setEta($task->getCompletedAt()->modify('-' . $task->getDuration() . ' minutes'));
+                $totalTime += $task->getDuration();
                 $schedule[$dayNumber][] = $task;
                 continue;
             }
