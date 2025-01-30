@@ -50,6 +50,10 @@ class DashboardController extends AbstractController
 
       if (!in_array($item, ['total', 'yesterday'])) {
         $itemValueLastYear = $taskDurationPerDayRepository->$functionNameLastYear();
+        if('today' == $item ){
+          $itemValueLastYear = $taskDurationPerDayRepository->getYesterday();
+        }
+
         $widget['valueLastYear'] = $durationReportService->formatMinutesToHours($itemValueLastYear);
         $widget['percentage'] = $durationReportService->calculatePercentageDifference($itemValue, $itemValueLastYear);
         $color = $widget['percentage'] < 0 ? 'danger' : 'success';
