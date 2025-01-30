@@ -11,6 +11,8 @@
 	-
 	{{ knp_pagination_sortable(tasks, 'Client', 'c.id') }}
 	-
+	{{ knp_pagination_sortable(tasks, 'Created At', 't.createdAt') }}
+	-
 	{{ knp_pagination_sortable(tasks, 'Completed At', 't.completedAt') }}
 </div>
 {{ include('components/Task/Tasks.html.twig', {'tasks': tasks}) }}
