@@ -23,9 +23,7 @@ class TasksType extends AbstractType
             ->add('taskList', EntityType::class, [
                 'class' => TaskLists::class,
                 'choice_label' => 'name',
-                'query_builder' => function (TaskListsRepository $taskListsRepository) {
-                    return $taskListsRepository->getActiveTaskLists();
-                },
+                'query_builder' => fn(TaskListsRepository $taskListsRepository) => $taskListsRepository->getActiveTaskLists(),
                 'group_by' => 'account.name',
                 'attr' => ['class' => 'select2'],
             ])

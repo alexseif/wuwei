@@ -99,7 +99,7 @@ class TasksRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-  
+
     public function getCompletedToday()
     {
         $today = new \DateTime('today');

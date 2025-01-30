@@ -19,11 +19,8 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 class RegistrationController extends AbstractController
 {
 
-    private EmailVerifier $emailVerifier;
-
-    public function __construct(EmailVerifier $emailVerifier)
+    public function __construct(private readonly EmailVerifier $emailVerifier)
     {
-        $this->emailVerifier = $emailVerifier;
     }
 
     #[Route('/register', name: 'app_register')]
@@ -64,7 +61,7 @@ class RegistrationController extends AbstractController
         }
 
         return $this->render('registration/register.html.twig', [
-          'registrationForm' => $form->createView(),
+          'registrationForm' => $form,
         ]);
     }
 

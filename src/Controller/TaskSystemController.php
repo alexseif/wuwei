@@ -15,9 +15,7 @@ class TaskSystemController extends AbstractController
     {
         $completedTasks = $tasksRepository->getCompletedToday();
         
-        $totalDuration = array_reduce($completedTasks, function ($carry, $task) {
-            return $carry + $task->getDuration();
-        }, 0);
+        $totalDuration = array_reduce($completedTasks, fn($carry, $task) => $carry + $task->getDuration(), 0);
 
         $todayTasks = $tasksRepository->getCreatedToday();
         $tasks = $tasksRepository->getFocusDayTasks();

@@ -11,7 +11,7 @@ class AppExtension extends AbstractExtension
     public function getFilters()
     {
         return [
-            new TwigFilter('time_diff', [$this, 'timeDiff']),
+            new TwigFilter('time_diff', $this->timeDiff(...)),
         ];
     }
 

@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: TagRepository::class)]
-class Tag
+class Tag implements \Stringable
 {
 
     use TimestampableEntity;
@@ -64,7 +64,7 @@ class Tag
 
     public function __toString(): string
     {
-        return $this->getName();
+        return (string) $this->getName();
     }
 
 

@@ -11,7 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
  */
 class TaskDurationPerDayRepository
 {
-    private Connection $connection;
+    private readonly Connection $connection;
 
     public function __construct(EntityManagerInterface $entityManager)
     {

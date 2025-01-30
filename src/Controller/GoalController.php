@@ -36,7 +36,7 @@ class GoalController extends AbstractController
             return $this->redirectToRoute('app_goal_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('goal/new.html.twig', [
+        return $this->render('goal/new.html.twig', [
             'goal' => $goal,
             'form' => $form,
         ]);
@@ -62,7 +62,7 @@ class GoalController extends AbstractController
             return $this->redirectToRoute('app_goal_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('goal/edit.html.twig', [
+        return $this->render('goal/edit.html.twig', [
             'goal' => $goal,
             'form' => $form,
         ]);

@@ -20,9 +20,7 @@ class TagAutocompleteField extends AbstractType
           'placeholder' => 'Choose a Tag',
             // 'choice_label' => 'name',
 
-          'query_builder' => function (TagRepository $tagRepository) {
-              return $tagRepository->createQueryBuilder('tag');
-          },
+          'query_builder' => fn(TagRepository $tagRepository) => $tagRepository->createQueryBuilder('tag'),
           'required' => false,
           'multiple' => true,
             // 'security' => 'ROLE_SOMETHING',

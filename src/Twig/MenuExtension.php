@@ -11,21 +11,14 @@ use Twig\TwigFunction;
 
 class MenuExtension extends AbstractExtension
 {
-    private MenuManager $menuManager;
-    private UrlGeneratorInterface $router;
-    private RequestStack $requestStack;
-
-    public function __construct(MenuManager $menuManager, UrlGeneratorInterface $router, RequestStack $requestStack)
+    public function __construct(private readonly MenuManager $menuManager, private readonly UrlGeneratorInterface $router, private readonly RequestStack $requestStack)
     {
-        $this->menuManager = $menuManager;
-        $this->router = $router;
-        $this->requestStack = $requestStack;
     }
 
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('render_menu', [$this, 'renderMenu'], ['is_safe' => ['html']]),
+            new TwigFunction('render_menu', $this->renderMenu(...), ['is_safe' => ['html']]),
         ];
     }
 

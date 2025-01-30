@@ -44,7 +44,7 @@ class TagTypeController extends AbstractController
             );
         }
 
-        return $this->renderForm('tag_type/new.html.twig', [
+        return $this->render('tag_type/new.html.twig', [
           'tag_type' => $tagType,
           'form' => $form,
         ]);
@@ -80,7 +80,7 @@ class TagTypeController extends AbstractController
             );
         }
 
-        return $this->renderForm('tag_type/edit.html.twig', [
+        return $this->render('tag_type/edit.html.twig', [
           'tag_type' => $tagType,
           'form' => $form,
         ]);

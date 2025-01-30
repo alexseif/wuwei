@@ -4,27 +4,8 @@ namespace App\Service;
 
 class MenuItem
 {
-    private ?string $path;
-    private string $icon;
-    private string $label;
-    private bool $dropdown;
-    private array $items;
-    private bool $divider;
-
-    public function __construct(
-        ?string $path,
-        string $icon,
-        string $label,
-        bool $dropdown = false,
-        array $items = [],
-        bool $divider = false
-    ) {
-        $this->path = $path;
-        $this->icon = $icon;
-        $this->label = $label;
-        $this->dropdown = $dropdown;
-        $this->items = $items;
-        $this->divider = $divider;
+    public function __construct(private readonly ?string $path, private readonly string $icon, private readonly string $label, private readonly bool $dropdown = false, private readonly array $items = [], private readonly bool $divider = false)
+    {
     }
 
     public function getPath(): ?string

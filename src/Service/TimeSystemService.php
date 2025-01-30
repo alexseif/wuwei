@@ -10,13 +10,8 @@ class TimeSystemService
 {
 
 
-    private TimeSystemRepository $timeSystemRepository;
-
-
-    public function __construct(
-      TimeSystemRepository $timeSystemRepository,
-    ) {
-        $this->timeSystemRepository = $timeSystemRepository;
+    public function __construct(private readonly TimeSystemRepository $timeSystemRepository)
+    {
     }
 
     public function getCurrent(): array

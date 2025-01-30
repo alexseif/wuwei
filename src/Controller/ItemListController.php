@@ -36,7 +36,7 @@ class ItemListController extends AbstractController
             return $this->redirectToRoute('app_item_list_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('item_list/new.html.twig', [
+        return $this->render('item_list/new.html.twig', [
             'item_list' => $itemList,
             'form' => $form,
         ]);
@@ -62,7 +62,7 @@ class ItemListController extends AbstractController
             return $this->redirectToRoute('app_item_list_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('item_list/edit.html.twig', [
+        return $this->render('item_list/edit.html.twig', [
             'item_list' => $itemList,
             'form' => $form,
         ]);

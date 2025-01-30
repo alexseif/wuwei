@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ItemListRepository::class)]
-class ItemList
+class ItemList implements \Stringable
 {
 
     #[ORM\Id]
@@ -76,7 +76,7 @@ class ItemList
 
     public function __toString(): string
     {
-        return $this->name;
+        return (string) $this->name;
     }
 
 }

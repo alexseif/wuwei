@@ -48,7 +48,7 @@ class CigaretteLogController extends AbstractController
         //Fetch the request referrer
         $referer = $request->headers->get('referer');
         //Get the symfony path for the referrer
-        $path = parse_url($referer, PHP_URL_PATH);
+        $path = parse_url((string) $referer, PHP_URL_PATH);
         //Redirect to the referrer
         return $this->redirect($path, Response::HTTP_SEE_OTHER);
         //        return $this->redirectToRoute('app_cigarette_log_index', [], Response::HTTP_SEE_OTHER);

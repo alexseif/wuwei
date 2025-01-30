@@ -43,7 +43,7 @@ class TimeSystemController extends AbstractController
             );
         }
 
-        return $this->renderForm('time_system/new.html.twig', [
+        return $this->render('time_system/new.html.twig', [
           'time_system' => $timeSystem,
           'form' => $form,
         ]);
@@ -79,7 +79,7 @@ class TimeSystemController extends AbstractController
             );
         }
 
-        return $this->renderForm('time_system/edit.html.twig', [
+        return $this->render('time_system/edit.html.twig', [
           'time_system' => $timeSystem,
           'form' => $form,
         ]);

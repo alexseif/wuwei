@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 // TODO: document items
 #[ORM\Entity(repositoryClass: ItemRepository::class)]
-class Item
+class Item implements \Stringable
 {
 
     #[ORM\Id]
@@ -55,6 +55,6 @@ class Item
 
     public function __toString(): string
     {
-        return $this->name;
+        return (string) $this->name;
     }
 }

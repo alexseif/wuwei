@@ -9,12 +9,9 @@ use Twig\TwigFunction;
 class CigaretteLogExtension extends AbstractExtension
 {
 
-    private $cigaretteLogRepository;
-
     // Inject the CigaretteLogRepository to access the cigarette log data
-    public function __construct(CigaretteLogRepository $cigaretteLogRepository)
+    public function __construct(private readonly CigaretteLogRepository $cigaretteLogRepository)
     {
-        $this->cigaretteLogRepository = $cigaretteLogRepository;
     }
 
     // Define the new Twig function
@@ -23,7 +20,7 @@ class CigaretteLogExtension extends AbstractExtension
         return [
           new TwigFunction(
             'cigarette_difference',
-            [$this, 'getCigaretteDifference']
+            $this->getCigaretteDifference(...)
           ),
         ];
     }
