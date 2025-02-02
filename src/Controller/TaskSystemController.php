@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/task/system')]
 class TaskSystemController extends AbstractController
 {
-    #[Route('/', name: 'app_task_system')]
+    #[Route('/', name: 'app_tasks_system')]
     public function index(TasksRepository $tasksRepository): Response
     {
         $completedTasks = $tasksRepository->getCompletedToday();

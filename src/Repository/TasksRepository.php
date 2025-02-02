@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\TaskLists;
 use App\Entity\Tasks;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -116,6 +117,20 @@ class TasksRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    // ... existing code ...
+
+    public function getMaxOrderNotInList(TaskLists $taskLists): ?int
+    {
+        $qb = $this->createQueryBuilder('t')
+            ->select('MAX(t.order)') // Assuming 'order' is the field for ordering tasks
+            ->where('t.taskList != :taskListId')
+            ->setParameter('taskListId', $taskLists);
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    // ... existing code ...
     //    /**
     //     * @return Tasks[] Returns an array of Tasks objects
     //     */

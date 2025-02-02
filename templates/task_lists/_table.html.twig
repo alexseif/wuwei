@@ -30,6 +30,8 @@
 				<td>{{ task_list.status }}</td>
 				<td>{{ include('components/Badge/Timestamps.html.twig', {'entity': task_list}) }}</td>
 				<td>
+					{{ include('components/Link.html.twig', {'icon': 'bi bi-arrow-up', 'class': 'btn text-success', 'link': path('app_task_lists_promote', {'id': task_list.id})}) }}
+					{{ include('components/Link.html.twig', {'icon': 'bi bi-arrow-down', 'class': 'btn text-primary', 'link': path('app_task_lists_demote', {'id': task_list.id})}) }}
 					{{ include('components/Link/Edit.html.twig', {'name':'task_lists', 'id': task_list.id}) }}
 				</td>
 			</tr>

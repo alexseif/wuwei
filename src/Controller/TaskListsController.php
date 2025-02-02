@@ -6,6 +6,7 @@ use App\Entity\TaskLists;
 use App\Form\TaskListsType;
 use App\Repository\TaskListsRepository;
 use App\Repository\TasksRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -81,5 +82,55 @@ final class TaskListsController extends AbstractController
         }
 
         return $this->redirectToRoute('app_task_lists_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    
+
+    #[Route('/{id}/demote', name: 'app_task_lists_demote')]
+    public function demoteTasks(
+        TaskLists $taskList,
+        TasksRepository $tasksRepository,
+        EntityManagerInterface $entityManager
+    ): Response {
+        // Get the maximum order number of tasks not in the specified task list
+        $maxOrder = $tasksRepository->getMaxOrderNotInList($taskList);
+
+        // Update tasks in the specified task list to have an order greater than the max order
+        if ($maxOrder !== null) {
+            $tasks = $tasksRepository->findBy(['taskList' => $taskList]);
+            foreach ($tasks as $task) {
+                $task->setOrder($maxOrder + 1); // Set new order
+                $maxOrder++; // Increment for the next task
+            }
+
+            // Persist changes
+            $entityManager->flush();
+            $this->addFlash('success', 'TaskList: '. $taskList->getName().' Demoted');
+        }
+
+        return $this->redirectToRoute('app_tasks_system'); // Redirect back to the dashboard
+    }
+
+    #[Route('/{id}/promote', name: 'app_task_lists_promote')]
+    public function promoteTasks(
+        TaskLists $taskList,
+        TasksRepository $tasksRepository,
+        EntityManagerInterface $entityManager
+    ): Response {
+        $order=0;
+        // Update tasks in the specified task list to have an order greater than the max order
+        if ($order !== null) {
+            $tasks = $tasksRepository->findBy(['taskList' => $taskList]);
+            foreach ($tasks as $task) {
+                $task->setOrder($order + 1); // Set new order
+                $order++; // Increment for the next task
+            }
+
+            // Persist changes
+            $entityManager->flush();
+            $this->addFlash('success', 'TaskList: '. $taskList->getName().' Promoted');
+        }
+
+        return $this->redirectToRoute('app_tasks_system'); // Redirect back to the dashboard
     }
 }

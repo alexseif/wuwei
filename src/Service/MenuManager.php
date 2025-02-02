@@ -8,7 +8,7 @@ class MenuManager
     {
         return [
             new MenuItem('app_dashboard', 'bi bi-house', 'Home'),
-            new MenuItem('app_task_system', 'bi bi-card-checklist', 'Tasks'),
+            new MenuItem('app_tasks_system', 'bi bi-card-checklist', 'Tasks'),
             new MenuItem('app_finance', 'bi bi-bank', 'Finance'),
             new MenuItem(
                 null,
