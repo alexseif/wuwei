@@ -53,7 +53,7 @@ final class TasksController extends AbstractController
             $entityManager->flush();
             $this->addFlash('success', 'Task created');
 
-            return $this->redirectToRoute('app_tasks_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_tasks_system', [], Response::HTTP_SEE_OTHER);
         }
 
         if ($request->isXmlHttpRequest()) {
@@ -104,7 +104,7 @@ final class TasksController extends AbstractController
             $entityManager->flush();
             $this->addFlash('success', 'Task updated');
 
-            return $this->redirectToRoute('app_tasks_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_tasks_system', [], Response::HTTP_SEE_OTHER);
         }
         if ($request->isXmlHttpRequest()) {
             $content = $this->renderView('tasks/_form.html.twig', [
@@ -158,6 +158,6 @@ final class TasksController extends AbstractController
             $this->addFlash('success', 'Task Deleted');
         }
 
-        return $this->redirectToRoute('app_tasks_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_tasks_system', [], Response::HTTP_SEE_OTHER);
     }
 }
