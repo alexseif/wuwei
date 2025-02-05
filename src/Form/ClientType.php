@@ -13,7 +13,11 @@ class ClientType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('enabled')
+            ->add('enabled', null, [
+                'label_attr' => [
+                    'class' => 'checkbox-switch',
+                ],
+            ])
             ->add('billingOption', BillingOptionsType::class)
         ;
     }

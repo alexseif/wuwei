@@ -16,7 +16,6 @@ class AccountsType extends AbstractType
         $builder
             ->add('name')
             ->add('conceal', null, [
-                'label' => 'Conceal',
                 'label_attr' => [
                     'class' => 'checkbox-switch',
                 ],

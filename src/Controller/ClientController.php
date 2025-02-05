@@ -33,6 +33,8 @@ final class ClientController extends AbstractController
             $entityManager->persist($client);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Client has been successfully created.');
+
             return $this->redirectToRoute('app_client_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -59,6 +61,8 @@ final class ClientController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $this->addFlash('success', 'Client has been successfully updated.');
+
             return $this->redirectToRoute('app_client_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -71,9 +75,17 @@ final class ClientController extends AbstractController
     #[Route('/{id}', name: 'app_client_delete', methods: ['POST'])]
     public function delete(Request $request, Client $client, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$client->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $client->getId(), $request->getPayload()->getString('_token'))) {
+            if (count($client->getAccounts()) > 0) {
+                $this->addFlash('error', 'Client has accounts please deleted them first.');
+                return $this->redirectToRoute('app_client_show', ['id' => $client->getId()], Response::HTTP_SEE_OTHER);
+            }
             $entityManager->remove($client);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Client has been successfully deleted.');
+        } else {
+            $this->addFlash('error', 'Invalid CSRF token. Client could not be deleted.');
         }
 
         return $this->redirectToRoute('app_client_index', [], Response::HTTP_SEE_OTHER);

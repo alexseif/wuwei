@@ -1,8 +1,23 @@
 {{ form_start(form) }}
 <div class="card-body">
-	{{ form_widget(form) }}
+	<div class="row">
+		<div class="col">
+			{{ form_row(form.name) }}
+		</div>
+		<div class="col-12">
+			{{ form_label(form.billingOption) }}
+			{{ form_widget(form.billingOption, {'attr': {'class': 'd-flex flex-wrap justify-content-between' } }) }}
+		</div>
+	</div>
 </div>
-<div class="card-footer d-flex justify-content-end">
-	<button class="btn btn-link text-success">{{ button_label|default('Save') }}</button>
+<div class="card-footer">
+	<div class="d-flex justify-content-between">
+		<span>{{ form_row(form.enabled) }}</span>
+		<span>
+			<span>
+				<button class="btn btn-success btn-sm">{{ button_label|default('Save') }}</button>
+			</span>
+		</span>
+	</div>
 </div>
 {{ form_end(form) }}

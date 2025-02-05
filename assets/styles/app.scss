@@ -65,6 +65,11 @@ $h3-font-size-mobile: 2.5rem;
 @import "fixed-sidebars";
 @import './tasks.scss';
 
+.text-bg-error {
+  @extend .text-bg-danger;
+}
+
+
 
 //
 // Card groups
