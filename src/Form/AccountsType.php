@@ -15,7 +15,12 @@ class AccountsType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('conceal')
+            ->add('conceal', null, [
+                'label' => 'Conceal',
+                'label_attr' => [
+                    'class' => 'checkbox-switch',
+                ],
+            ])
 
             ->add('client', EntityType::class, [
                 'class' => Client::class,

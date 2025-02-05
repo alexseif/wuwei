@@ -1,8 +1,18 @@
 {{ form_start(form) }}
 <div class="card-body">
-	{{ form_widget(form) }}
+	<div class="row">
+		<div class="col">
+			{{ form_row(form.name) }}
+		</div>
+		<div class="col">
+			{{ form_row(form.client) }}
+		</div>
+	</div>
 </div>
-<div class="card-footer text-end">
-	<button class="btn btn-link text-success">{{ button_label|default('Save') }}</button>
+<div class="card-footer">
+	<div class="d-flex justify-content-between">
+		<span>{{ form_row(form.conceal) }}</span>
+		<span><button class="btn btn-success btn-sm">{{ button_label|default('Save') }}</button></span>
+	</div>
 </div>
 {{ form_end(form) }}
