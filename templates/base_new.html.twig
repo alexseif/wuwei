@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			{% block title %}
+				{{ block('h1')|striptags }}
+			{% endblock %}
+			| myApp</title>
+		<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+		<link
+		rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+		{{ (pagination is defined) ? knp_pagination_rel_links(pagination) }}
+	</head>
+	<body>
+		{% block sidebar %}
+			{% include('_sidebars.html.twig') %}
+		{% endblock %}
+		{% block page %}
+			{% block nav %}
+				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+					{% include '_navbar.html.twig' %}
+				{% endif %}
+			{% endblock %}
+			{% block flash_messages %}
+				{% include('_flash_messages.html.twig') %}
+			{% endblock %}
+			{% block container %}
+				<div class="container">
+					<div class="card">
+						{% block card_header %}
+							<div class="card-header d-flex align-items-center justify-content-between">
+								<h1 class="card-title">
+									{% block h1 %}{% endblock %}
+								</h1>
+								<div class="card-left ms-auto">
+									{% block card_left %}{% endblock %}
+								</div>
+								<div class="card-actions btn-toolbar">
+									{% block card_actions %}{% endblock %}
+								</div>
+							</div>
+							<!-- .card-header -->
+						{% endblock %}
+						{% block body %}{% endblock %}
+						{% block card_footer %}{% endblock %}
+					</div>
+					<!-- .card -->
+				</div>
+				<!-- .container -->
+			{% endblock %}
+		{% endblock %}
+		{% block offcanvas %}
+			{% include('_offcanvas.html.twig') %}
+		{% endblock %}
+		{% block footer %}
+			<div class="container">
+				<footer>
+					<a href="https://wakatime.com/badge/user/30c62c3d-c3e8-4a3a-aa64-332bda21d67a/project/a1582e1c-bec7-45c6-bde3-85bc23d37ecc"><img src="https://wakatime.com/badge/user/30c62c3d-c3e8-4a3a-aa64-332bda21d67a/project/a1582e1c-bec7-45c6-bde3-85bc23d37ecc.svg" alt="wakatime"></a>
+				</footer>
+			</div>
+		{% endblock %}
+	</body>
+</html>

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}Milestones{% endblock %}
+
+{% block body %}
+    <h1>Milestones</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ milestone.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ milestone.title }}</td>
+            </tr>
+            <tr>
+                <th>Week</th>
+                <td>{{ milestone.week }}</td>
+            </tr>
+            <tr>
+                <th>Month</th>
+                <td>{{ milestone.month }}</td>
+            </tr>
+            <tr>
+                <th>Action_item</th>
+                <td>{{ milestone.actionItem }}</td>
+            </tr>
+            <tr>
+                <th>Remarks</th>
+                <td>{{ milestone.remarks }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_milestones_index') }}">back to list</a>
+
+    <a href="{{ path('app_milestones_edit', {'id': milestone.id}) }}">edit</a>
+
+    {{ include('milestones/_delete_form.html.twig') }}
+{% endblock %}

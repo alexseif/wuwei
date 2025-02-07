@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}
+Edit Requirements
+{% endblock %}
+{% block card_actions %}
+	{{ include('components/Link/Back.html.twig', {'name': 'requirements'}) }}
+	{{ include('requirements/_delete_form.html.twig') }}
+{% endblock %}
+{% block body %}
+	{{ include('requirements/_form.html.twig', {'button_label': 'Update'}) }}
+{% endblock %}

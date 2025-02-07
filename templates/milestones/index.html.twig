@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}Milestones{% endblock %}
+{% block card_actions %}
+	{{ include('components/Link/New.html.twig', {'name':'milestones'}) }}
+{% endblock %}
+{% block body %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Week</th>
+                <th>Month</th>
+                <th>Action_item</th>
+                <th>Remarks</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for milestone in milestones %}
+            <tr>
+                <td>
+						{{ include('components/Link/Entity.html.twig', {'name': 'milestones', 'entity': milestones}) }}
+                </td>
+                <td>{{ milestone.title }}</td>
+                <td>{{ milestone.week }}</td>
+                <td>{{ milestone.month }}</td>
+                <td>{{ milestone.actionItem }}</td>
+                <td>{{ milestone.remarks }}</td>
+                <td>
+						{{ include('components/Link/Edit.html.twig', {'name': 'milestones', 'id': milestones.id}) }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

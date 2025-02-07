@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}Transactions{% endblock %}
+{% block card_actions %}
+	{{ include('components/Link/New.html.twig', {'name':'transactions'}) }}
+{% endblock %}
+{% block body %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Type</th>
+                <th>Notes</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for transaction in transactions %}
+            <tr>
+                <td>						{{ include('components/Link/Entity.html.twig', {'name': 'transactions', 'entity': transactions}) }}
+</td>
+                <td>{{ transaction.date ? transaction.date|date('Y-m-d') : '' }}</td>
+                <td>{{ transaction.amount }}</td>
+                <td>{{ transaction.type }}</td>
+                <td>{{ transaction.notes }}</td>
+                <td>
+						{{ include('components/Link/Edit.html.twig', {'name': 'transactions', 'id': transactions.id}) }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

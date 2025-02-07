@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}
+New Requirements
+{% endblock %}
+{% block card_actions %}
+	{{ include('components/Link/Back.html.twig', {'name': 'requirements'}) }}
+{% endblock %}
+{% block body %}
+    {{ include('requirements/_form.html.twig') }}
+{% endblock %}

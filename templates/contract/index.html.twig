@@ -28,7 +28,8 @@
 					<td>{{ contract.billedOn }}</td>
 					<td>{{ include('components/Badge/Timestamps.html.twig', {'entity': contract}) }}</td>
 					<td>
-						{{ include('components/Link/Edit.html.twig', {'name': 'contract', 'id': contract.id}) }}</td>
+						{{ include('components/Link/Edit.html.twig', {'name': 'contract', 'id': contract.id}) }}
+						</td>
 				</tr>
 			{% else %}
 				<tr>

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}Requirements{% endblock %}
+{% block card_actions %}
+	{{ include('components/Link/New.html.twig', {'name':'requirements'}) }}
+{% endblock %}
+{% block body %}
+    <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Priority</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for requirement in requirements %}
+                <tr>
+                    <td>						{{ include('components/Link/Entity.html.twig', {'name': 'requirements', 'entity': requirements}) }}
+</td>
+                    <td>{{ requirement.description }}</td>
+                    <td>{{ requirement.category }}</td>
+                    <td>{{ requirement.priority }}</td>
+                    <td>
+                        						{{ include('components/Link/Edit.html.twig', {'name': 'requirements', 'id': requirements.id}) }}
+
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}
