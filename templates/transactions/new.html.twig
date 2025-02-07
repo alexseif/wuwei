@@ -1,11 +1,5 @@
-{% extends 'base.html.twig' %}
-
-{% block h1 %}New Transactions{% endblock %}
-
-{% block body %}
-    <h1>Create new Transactions</h1>
-
-    {{ include('transactions/_form.html.twig') }}
-
-    <a href="{{ path('app_transactions_index') }}">back to list</a>
-{% endblock %}
+{{ include('components/Crud/New.html.twig', {
+    'entity_name': entity_name,
+    'entity_title': entity_title
+    }) }}
+    

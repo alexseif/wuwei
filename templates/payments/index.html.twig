@@ -1,13 +1,5 @@
-{% extends 'base.html.twig' %}
-
-{% block h1 %}Payments{% endblock %}
-{% block card_actions %}
-	{{ include('components/Link/New.html.twig', {'name':'payments'}) }}
-{% endblock %}
-{% block body %}
-    <table class="table">
-        <thead>
-            <tr>
+{% set table_head %}
+         <tr>
                 <th>Id</th>
                 <th>Description</th>
                 <th>Due_date</th>
@@ -15,18 +7,18 @@
                 <th>Status</th>
                 <th>actions</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for payment in payments %}
+    {% endset %} 
+    {% set table_body %}
+       {% for payment in payments %}
             <tr>
-                <td>						{{ include('components/Link/Entity.html.twig', {'name': 'payments', 'entity': payments}) }}
+                <td>						{{ include('components/Link/Entity.html.twig', {'name': entity_name, 'entity': payment}) }}
 </td>
                 <td>{{ payment.description }}</td>
                 <td>{{ payment.dueDate ? payment.dueDate|date('Y-m-d') : '' }}</td>
                 <td>{{ payment.amount }}</td>
                 <td>{{ payment.status }}</td>
                 <td>
-                                        						{{ include('components/Link/Edit.html.twig', {'name': 'requirements', 'id': requirements.id}) }}
+                                        						{{ include('components/Link/Edit.html.twig', {'name': entity_name, 'id': payment.id}) }}
 
                 </td>
             </tr>
@@ -35,7 +27,11 @@
                 <td colspan="6">no records found</td>
             </tr>
         {% endfor %}
-        </tbody>
-    </table>
-
-{% endblock %}
+    {% endset %} 
+{{ include('components/Crud/Index.html.twig', {
+    'entity_name': entity_name,
+    'entity_title': entity_title,
+    'table_head': table_head,
+    'table_body': table_body
+    }) }}
+    

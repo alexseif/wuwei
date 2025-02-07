@@ -1,34 +1,32 @@
-{% extends 'base.html.twig' %}
-
-{% block h1 %}Requirements{% endblock %}
-{% block card_actions %}
-	{{ include('components/Link/New.html.twig', {'name':'requirements'}) }}
-{% endblock %}
-{% block body %}
-    <table class="table">
-            <thead>
-                <tr>
+{% set table_head %}
+     <tr>
                     <th>Title</th>
                     <th>Description</th>
                     <th>Category</th>
                     <th>Priority</th>
                     <th>Actions</th>
                 </tr>
-            </thead>
-            <tbody>
-                {% for requirement in requirements %}
+    {% endset %} 
+    {% set table_body %}
+       {% for requirement in requirements %}
                 <tr>
-                    <td>						{{ include('components/Link/Entity.html.twig', {'name': 'requirements', 'entity': requirements}) }}
+                    <td>		
+                    				{{ include('components/Link/Entity.html.twig', {'name': 'requirements', 'entity': requirement}) }}
 </td>
                     <td>{{ requirement.description }}</td>
                     <td>{{ requirement.category }}</td>
                     <td>{{ requirement.priority }}</td>
                     <td>
-                        						{{ include('components/Link/Edit.html.twig', {'name': 'requirements', 'id': requirements.id}) }}
+                        						{{ include('components/Link/Edit.html.twig', {'name': 'requirements', 'id': requirement.id}) }}
 
                     </td>
                 </tr>
                 {% endfor %}
-            </tbody>
-        </table>
-{% endblock %}
+    {% endset %} 
+{{ include('components/Crud/Index.html.twig', {
+    'entity_name': entity_name,
+    'entity_title': entity_title,
+    'table_head': table_head,
+    'table_body': table_body
+    }) }}
+    

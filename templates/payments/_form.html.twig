@@ -1,4 +1,5 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+{{ include('components/Crud/Form.html.twig', {
+    'entity_name': entity_name,
+    'entity_title': entity_title
+    }) }}
+    

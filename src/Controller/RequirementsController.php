@@ -13,6 +13,11 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/requirements')]
 final class RequirementsController extends AbstractController
 {
+    private array $twigParts = [
+        'entity_name' => 'requirements',
+        'entity_title' => 'Requirement'
+    ];
+
     #[Route(name: 'app_requirements_index', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
@@ -20,9 +25,16 @@ final class RequirementsController extends AbstractController
             ->getRepository(Requirements::class)
             ->findAll();
 
-        return $this->render('requirements/index.html.twig', [
-            'requirements' => $requirements,
-        ]);
+
+        return $this->render(
+            'requirements/index.html.twig',
+            array_merge(
+                [
+                    'requirements' => $requirements,
+                ],
+                $this->twigParts
+            )
+        );
     }
 
     #[Route('/new', name: 'app_requirements_new', methods: ['GET', 'POST'])]
@@ -39,18 +51,18 @@ final class RequirementsController extends AbstractController
             return $this->redirectToRoute('app_requirements_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('requirements/new.html.twig', [
-            'requirement' => $requirement,
+        return $this->render('requirements/new.html.twig', array_merge([
+            'entity' => $requirement,
             'form' => $form,
-        ]);
+        ], $this->twigParts));
     }
 
     #[Route('/{id}', name: 'app_requirements_show', methods: ['GET'])]
     public function show(Requirements $requirement): Response
     {
-        return $this->render('requirements/show.html.twig', [
+        return $this->render('requirements/show.html.twig', array_merge([
             'requirement' => $requirement,
-        ]);
+        ], $this->twigParts));
     }
 
     #[Route('/{id}/edit', name: 'app_requirements_edit', methods: ['GET', 'POST'])]
@@ -65,16 +77,16 @@ final class RequirementsController extends AbstractController
             return $this->redirectToRoute('app_requirements_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('requirements/edit.html.twig', [
-            'requirement' => $requirement,
+        return $this->render('requirements/edit.html.twig', array_merge([
+            'entity' => $requirement,
             'form' => $form,
-        ]);
+        ], $this->twigParts));
     }
 
     #[Route('/{id}', name: 'app_requirements_delete', methods: ['POST'])]
     public function delete(Request $request, Requirements $requirement, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$requirement->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $requirement->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($requirement);
             $entityManager->flush();
         }

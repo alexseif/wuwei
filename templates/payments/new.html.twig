@@ -1,11 +1,5 @@
-{% extends 'base.html.twig' %}
-
-{% block h1 %}New Payments{% endblock %}
-
-{% block body %}
-    <h1>Create new Payments</h1>
-
-    {{ include('payments/_form.html.twig') }}
-
-    <a href="{{ path('app_payments_index') }}">back to list</a>
-{% endblock %}
+{{ include('components/Crud/New.html.twig', {
+    'entity_name': entity_name,
+    'entity_title': entity_title
+    }) }}
+    

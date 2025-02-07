@@ -1,13 +1,7 @@
-{% extends 'base.html.twig' %}
-
-{% block h1 %}Edit Payments{% endblock %}
-
-{% block body %}
-    <h1>Edit Payments</h1>
-
-    {{ include('payments/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('app_payments_index') }}">back to list</a>
-
-    {{ include('payments/_delete_form.html.twig') }}
-{% endblock %}
+{{ include('components/Crud/Edit.html.twig', {
+    'entity_name': entity_name,
+    'entity_title': entity_title,
+    'entity': entity,
+	'form': form
+    }) }}
+    

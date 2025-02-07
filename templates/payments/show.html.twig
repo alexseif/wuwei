@@ -1,10 +1,4 @@
-{% extends 'base.html.twig' %}
-
-{% block h1 %}Payments{% endblock %}
-
-{% block body %}
-    <h1>Payments</h1>
-
+{% set body %}
     <table class="table">
         <tbody>
             <tr>
@@ -29,10 +23,11 @@
             </tr>
         </tbody>
     </table>
-
-    <a href="{{ path('app_payments_index') }}">back to list</a>
-
-    <a href="{{ path('app_payments_edit', {'id': payment.id}) }}">edit</a>
-
-    {{ include('payments/_delete_form.html.twig') }}
-{% endblock %}
+{% endset %}
+{{ include('components/Crud/Show.html.twig', {
+    'entity_name': entity_name,
+    'entity_title': entity_title,
+    'entity': payment,
+    'body': body
+    }) }}
+    

@@ -13,6 +13,11 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/proposals')]
 final class ProposalsController extends AbstractController
 {
+    private array $twigParts = [
+        'entity_name' => 'proposals',
+        'entity_title' => 'Proposal'
+    ];
+
     #[Route(name: 'app_proposals_index', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
@@ -20,9 +25,9 @@ final class ProposalsController extends AbstractController
             ->getRepository(Proposals::class)
             ->findAll();
 
-        return $this->render('proposals/index.html.twig', [
-            'proposals' => $proposals,
-        ]);
+        $this->twigParts['proposals'] = $proposals;
+
+        return $this->render('proposals/index.html.twig', $this->twigParts);
     }
 
     #[Route('/new', name: 'app_proposals_new', methods: ['GET', 'POST'])]
@@ -39,18 +44,19 @@ final class ProposalsController extends AbstractController
             return $this->redirectToRoute('app_proposals_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('proposals/new.html.twig', [
-            'proposal' => $proposal,
-            'form' => $form,
-        ]);
+        $this->twigParts['proposal'] = $proposal;
+        $this->twigParts['entity'] = $proposal;
+        $this->twigParts['form'] = $form;
+        return $this->render('proposals/new.html.twig', $this->twigParts);
     }
 
     #[Route('/{id}', name: 'app_proposals_show', methods: ['GET'])]
     public function show(Proposals $proposal): Response
     {
-        return $this->render('proposals/show.html.twig', [
-            'proposal' => $proposal,
-        ]);
+        $this->twigParts['proposal'] = $proposal;
+        $this->twigParts['entity'] = $proposal;
+        
+        return $this->render('proposals/show.html.twig', $this->twigParts);
     }
 
     #[Route('/{id}/edit', name: 'app_proposals_edit', methods: ['GET', 'POST'])]
@@ -64,17 +70,16 @@ final class ProposalsController extends AbstractController
 
             return $this->redirectToRoute('app_proposals_index', [], Response::HTTP_SEE_OTHER);
         }
-
-        return $this->render('proposals/edit.html.twig', [
-            'proposal' => $proposal,
-            'form' => $form,
-        ]);
+        $this->twigParts['proposal'] = $proposal;
+        $this->twigParts['entity'] = $proposal;
+        $this->twigParts['form'] = $form;
+        return $this->render('proposals/edit.html.twig', $this->twigParts);
     }
 
     #[Route('/{id}', name: 'app_proposals_delete', methods: ['POST'])]
     public function delete(Request $request, Proposals $proposal, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$proposal->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $proposal->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($proposal);
             $entityManager->flush();
         }

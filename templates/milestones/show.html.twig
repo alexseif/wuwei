@@ -1,11 +1,5 @@
-{% extends 'base.html.twig' %}
-
-{% block h1 %}Milestones{% endblock %}
-
-{% block body %}
-    <h1>Milestones</h1>
-
-    <table class="table">
+{% set body %}
+       <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -33,10 +27,11 @@
             </tr>
         </tbody>
     </table>
-
-    <a href="{{ path('app_milestones_index') }}">back to list</a>
-
-    <a href="{{ path('app_milestones_edit', {'id': milestone.id}) }}">edit</a>
-
-    {{ include('milestones/_delete_form.html.twig') }}
-{% endblock %}
+{% endset %}
+{{ include('components/Crud/Show.html.twig', {
+    'entity_name': entity_name,
+    'entity_title': entity_title,
+    'entity': entity,
+    'body': body
+    }) }}
+    

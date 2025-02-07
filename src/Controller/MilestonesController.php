@@ -13,6 +13,11 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/milestones')]
 final class MilestonesController extends AbstractController
 {
+    private array $twigParts = [
+        'entity_name' => 'milestones',
+        'entity_title' => 'Milestone'
+    ];
+
     #[Route(name: 'app_milestones_index', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
@@ -20,9 +25,8 @@ final class MilestonesController extends AbstractController
             ->getRepository(Milestones::class)
             ->findAll();
 
-        return $this->render('milestones/index.html.twig', [
-            'milestones' => $milestones,
-        ]);
+        $this->twigParts['milestones'] = $milestones;
+        return $this->render('milestones/index.html.twig', $this->twigParts);
     }
 
     #[Route('/new', name: 'app_milestones_new', methods: ['GET', 'POST'])]
@@ -39,18 +43,18 @@ final class MilestonesController extends AbstractController
             return $this->redirectToRoute('app_milestones_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('milestones/new.html.twig', [
-            'milestone' => $milestone,
-            'form' => $form,
-        ]);
+        $this->twigParts['milestone'] = $milestone;
+        $this->twigParts['entity'] = $milestone;
+        $this->twigParts['form'] = $form;
+     return $this->render('milestones/new.html.twig', $this->twigParts);
     }
 
     #[Route('/{id}', name: 'app_milestones_show', methods: ['GET'])]
     public function show(Milestones $milestone): Response
     {
-        return $this->render('milestones/show.html.twig', [
-            'milestone' => $milestone,
-        ]);
+        $this->twigParts['milestone'] = $milestone;
+        $this->twigParts['entity'] = $milestone;
+       return $this->render('milestones/show.html.twig', $this->twigParts);
     }
 
     #[Route('/{id}/edit', name: 'app_milestones_edit', methods: ['GET', 'POST'])]
@@ -65,10 +69,10 @@ final class MilestonesController extends AbstractController
             return $this->redirectToRoute('app_milestones_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('milestones/edit.html.twig', [
-            'milestone' => $milestone,
-            'form' => $form,
-        ]);
+        $this->twigParts['milestone'] = $milestone;
+        $this->twigParts['entity'] = $milestone;
+        $this->twigParts['form'] = $form;
+     return $this->render('milestones/edit.html.twig', $this->twigParts);
     }
 
     #[Route('/{id}', name: 'app_milestones_delete', methods: ['POST'])]

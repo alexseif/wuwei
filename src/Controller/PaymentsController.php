@@ -13,6 +13,11 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/payments')]
 final class PaymentsController extends AbstractController
 {
+    private array $twigParts = [
+        'entity_name' => 'payments',
+        'entity_title' => 'Payment'
+    ];
+
     #[Route(name: 'app_payments_index', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
@@ -20,9 +25,8 @@ final class PaymentsController extends AbstractController
             ->getRepository(Payments::class)
             ->findAll();
 
-        return $this->render('payments/index.html.twig', [
-            'payments' => $payments,
-        ]);
+        $this->twigParts['payments'] = $payments;
+        return $this->render('payments/index.html.twig', $this->twigParts);
     }
 
     #[Route('/new', name: 'app_payments_new', methods: ['GET', 'POST'])]
@@ -39,18 +43,18 @@ final class PaymentsController extends AbstractController
             return $this->redirectToRoute('app_payments_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('payments/new.html.twig', [
-            'payment' => $payment,
-            'form' => $form,
-        ]);
+        $this->twigParts['payment'] = $payment;
+        $this->twigParts['entity'] = $payment;
+        $this->twigParts['form'] = $form;
+        return $this->render('payments/new.html.twig', $this->twigParts);
     }
 
     #[Route('/{id}', name: 'app_payments_show', methods: ['GET'])]
     public function show(Payments $payment): Response
     {
-        return $this->render('payments/show.html.twig', [
-            'payment' => $payment,
-        ]);
+        $this->twigParts['payment'] = $payment;
+        $this->twigParts['entity'] = $payment;
+        return $this->render('payments/show.html.twig', $this->twigParts);
     }
 
     #[Route('/{id}/edit', name: 'app_payments_edit', methods: ['GET', 'POST'])]
@@ -65,16 +69,16 @@ final class PaymentsController extends AbstractController
             return $this->redirectToRoute('app_payments_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('payments/edit.html.twig', [
-            'payment' => $payment,
-            'form' => $form,
-        ]);
+        $this->twigParts['payment'] = $payment;
+        $this->twigParts['entity'] = $payment;
+        $this->twigParts['form'] = $form;
+        return $this->render('payments/edit.html.twig', $this->twigParts);
     }
 
     #[Route('/{id}', name: 'app_payments_delete', methods: ['POST'])]
     public function delete(Request $request, Payments $payment, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$payment->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $payment->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($payment);
             $entityManager->flush();
         }

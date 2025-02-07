@@ -1,9 +1,5 @@
-{% extends 'base.html.twig' %}
-
-{% block h1 %}New Milestones{% endblock %}
-
-{% block body %}
-      {{ include('milestones/_form.html.twig') }}
-
-    <a href="{{ path('app_milestones_index') }}">back to list</a>
-{% endblock %}
+{{ include('components/Crud/New.html.twig', {
+    'entity_name': entity_name,
+    'entity_title': entity_title
+    }) }}
+    
