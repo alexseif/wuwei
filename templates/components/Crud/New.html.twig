@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}
+New {{ entity_title }}
+{% endblock %}
+{% block card_actions %}
+	{{ include('components/Link/Back.html.twig', {'name': entity_name }) }}
+{% endblock %}
+{% block body %}
+    {{ include(entity_name ~ '/_form.html.twig') }}
+{% endblock %}

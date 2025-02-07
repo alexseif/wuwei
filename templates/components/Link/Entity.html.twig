@@ -1,1 +1,1 @@
-{{ include('components/Link.html.twig', {'link': path('app_'~name~'_show', {'id': entity.id}),'text': entity.name, 'class':  class|default('btn btn-sm btn-link') , 'attrs': attrs|default({'title': name|capitalize}) }) }}
+{{ include('components/Link.html.twig', {'link': path('app_'~name~'_show', {'id': entity.id}),'text': (entity.name is defined ? entity.name : (entity.title is defined ? entity.title : entity.id )), 'class':  class|default('btn btn-sm btn-link') , 'attrs': attrs|default({'title': name|capitalize}) }) }}
