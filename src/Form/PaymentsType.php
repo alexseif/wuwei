@@ -7,6 +7,7 @@ use App\Entity\Payments;
 use App\Entity\Proposals;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -19,7 +20,7 @@ class PaymentsType extends AbstractType
             ->add('due_date', null, [
                 'widget' => 'single_text',
             ])
-            ->add('amount')
+            ->add('amount', MoneyType::class)
             ->add('status')
             ->add('proposal', EntityType::class, [
                 'class' => Proposals::class,
