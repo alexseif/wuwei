@@ -17,12 +17,18 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/tasklists')]
 final class TaskListsController extends AbstractController
 {
+    private array $twigParts = [
+        'entity_name' => 'task_lists',
+        'entity_title' => 'Task List'
+    ];
+
     #[Route(name: 'app_task_lists_index', methods: ['GET'])]
     public function index(TaskListsRepository $taskListsRepository): Response
     {
-        return $this->render('task_lists/index.html.twig', [
-            'task_lists' => $taskListsRepository->findAll(),
-        ]);
+        $this->twigParts['task_lists'] = $taskListsRepository->findAll();
+
+
+        return $this->render('task_lists/index.html.twig', $this->twigParts);
     }
 
     #[Route('/new', name: 'app_task_lists_new', methods: ['GET', 'POST'])]
@@ -39,20 +45,20 @@ final class TaskListsController extends AbstractController
             return $this->redirectToRoute('app_task_lists_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('task_lists/new.html.twig', [
-            'task_list' => $taskList,
-            'form' => $form,
-        ]);
+        $this->twigParts['task_list'] = $taskList;
+        $this->twigParts['entity'] = $taskList;
+        $this->twigParts['form'] = $form;
+        return $this->render('task_lists/new.html.twig', $this->twigParts);
     }
 
     #[Route('/{id}', name: 'app_task_lists_show', methods: ['GET'])]
     public function show(Request $request, TaskLists $taskList, TasksRepository $tasksRepository, PaginatorInterface $paginator): Response
     {
         $tasks  = $paginator->paginate($tasksRepository->getPaginatorQuery(['t.taskList' => $taskList]), $request->query->getInt('page', 1));
-        return $this->render('task_lists/show.html.twig', [
-            'task_list' => $taskList,
-            'tasks' => $tasks,
-        ]);
+        $this->twigParts['task_list'] = $taskList;
+        $this->twigParts['entity'] = $taskList;
+        $this->twigParts['tasks'] = $tasks;
+        return $this->render('task_lists/show.html.twig', $this->twigParts);
     }
 
     #[Route('/{id}/edit', name: 'app_task_lists_edit', methods: ['GET', 'POST'])]
@@ -66,11 +72,10 @@ final class TaskListsController extends AbstractController
 
             return $this->redirectToRoute('app_task_lists_index', [], Response::HTTP_SEE_OTHER);
         }
-
-        return $this->render('task_lists/edit.html.twig', [
-            'task_list' => $taskList,
-            'form' => $form,
-        ]);
+        $this->twigParts['task_list'] = $taskList;
+        $this->twigParts['entity'] = $taskList;
+        $this->twigParts['form'] = $form;
+        return $this->render('task_lists/edit.html.twig', $this->twigParts);
     }
 
     #[Route('/{id}', name: 'app_task_lists_delete', methods: ['POST'])]
@@ -84,7 +89,7 @@ final class TaskListsController extends AbstractController
         return $this->redirectToRoute('app_task_lists_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    
+
 
     #[Route('/{id}/demote', name: 'app_task_lists_demote')]
     public function demoteTasks(
@@ -105,7 +110,7 @@ final class TaskListsController extends AbstractController
 
             // Persist changes
             $entityManager->flush();
-            $this->addFlash('success', 'TaskList: '. $taskList->getName().' Demoted');
+            $this->addFlash('success', 'TaskList: ' . $taskList->getName() . ' Demoted');
         }
 
         return $this->redirectToRoute('app_tasks_system'); // Redirect back to the dashboard
@@ -117,7 +122,7 @@ final class TaskListsController extends AbstractController
         TasksRepository $tasksRepository,
         EntityManagerInterface $entityManager
     ): Response {
-        $order=0;
+        $order = 0;
         // Update tasks in the specified task list to have an order greater than the max order
         if ($order !== null) {
             $tasks = $tasksRepository->findBy(['taskList' => $taskList]);
@@ -128,7 +133,7 @@ final class TaskListsController extends AbstractController
 
             // Persist changes
             $entityManager->flush();
-            $this->addFlash('success', 'TaskList: '. $taskList->getName().' Promoted');
+            $this->addFlash('success', 'TaskList: ' . $taskList->getName() . ' Promoted');
         }
 
         return $this->redirectToRoute('app_tasks_system'); // Redirect back to the dashboard
