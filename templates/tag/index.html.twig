@@ -1,10 +1,11 @@
-{% extends 'base.html.twig' %}
-
-{% block h1 %}{{ tags|length }} Tags
-{% endblock %}
-{% block card_actions %}
-	{{ include('components/Link/New.html.twig', {'name':'tag'})}}
-{% endblock %}
-{% block body %}
-	{% include'tag/_tags.html.twig' %}
-{% endblock %}
+{% set table_head %}
+{% endset %}
+{% set table_body %}
+{% include'tag/_tags.html.twig' %}
+{% endset %}
+{{ include('components/Crud/Index.html.twig', {
+    'entity_name': entity_name,
+    'entity_title': entity_title,
+    'table_head': table_head,
+    'table_body': table_body
+    }) }}

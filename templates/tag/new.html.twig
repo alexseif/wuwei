@@ -1,10 +1,4 @@
-{% extends 'base.html.twig' %}
-
-{% block h1 %}New Tag
-{% endblock %}
-{% block card_actions %}
-	{{ include('components/Link/Back.html.twig', {'name':'tag'})}}
-{% endblock %}
-{% block body %}
-	{{ include('tag/_form.html.twig') }}
-{% endblock %}
+{{ include('components/Crud/New.html.twig', {
+    'entity_name': entity_name,
+    'entity_title': entity_title
+    }) }}
