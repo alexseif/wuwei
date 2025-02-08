@@ -1,36 +1,28 @@
-{% extends 'base.html.twig' %}
-
-{% block h1 %}
-	{{ tag_types|length }}
-	Tag Types
-{% endblock %}
-{% block card_actions %}
-	{{ include('components/Link/New.html.twig', {'name': 'tag_type'}) }}
-{% endblock %}
-{% block body %}
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for tag_type in tag_types %}
-				<tr>
-					<td>
-						{{ include('components/Link/Entity.html.twig', {'name': 'tag_type', 'entity':tag_type }) }}
-					</td>
-					<td>
-						{{ include('components/Link/Edit.html.twig', {'name': 'tag_type', 'id':tag_type.id }) }}
-					</td>
-				</tr>
-			{% else %}
-				<tr>
-					<td colspan="5">no records found</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
-
-{% endblock %}
+{% set table_head %}
+<tr>
+	<th>Name</th>
+	<th>actions</th>
+</tr>
+{% endset %}
+{% set table_body %}
+{% for tag_type in tag_types %}
+	<tr>
+		<td>
+			{{ include('components/Link/Entity.html.twig', {'name': 'tag_type', 'entity':tag_type }) }}
+		</td>
+		<td>
+			{{ include('components/Link/Edit.html.twig', {'name': 'tag_type', 'id':tag_type.id }) }}
+		</td>
+	</tr>
+{% else %}
+	<tr>
+		<td colspan="5">no records found</td>
+	</tr>
+{% endfor %}
+{% endset %}
+{{ include('components/Crud/Index.html.twig', {
+    'entity_name': entity_name,
+    'entity_title': entity_title,
+    'table_head': table_head,
+    'table_body': table_body
+    }) }}
