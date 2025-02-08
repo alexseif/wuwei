@@ -11,15 +11,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/work/log')]
+#[Route('/work_log')]
 final class WorkLogController extends AbstractController
 {
+    private array $twigParts = [
+        'entity_name' => 'work_log',
+        'entity_title' => 'Work Log'
+    ];
+
     #[Route(name: 'app_work_log_index', methods: ['GET'])]
     public function index(WorkLogRepository $workLogRepository): Response
     {
-        return $this->render('work_log/index.html.twig', [
-            'work_logs' => $workLogRepository->findAll(),
-        ]);
+        $this->twigParts['work_logs'] = $workLogRepository->findAll();
+        return $this->render('work_log/index.html.twig', $this->twigParts);
     }
 
     #[Route('/new', name: 'app_work_log_new', methods: ['GET', 'POST'])]
@@ -36,18 +40,19 @@ final class WorkLogController extends AbstractController
             return $this->redirectToRoute('app_work_log_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('work_log/new.html.twig', [
-            'work_log' => $workLog,
-            'form' => $form,
-        ]);
+        $this->twigParts['work_log'] = $workLog;
+        $this->twigParts['entity'] = $workLog;
+        $this->twigParts['form'] = $form;
+        return $this->render('work_log/new.html.twig', $this->twigParts);
     }
 
     #[Route('/{id}', name: 'app_work_log_show', methods: ['GET'])]
     public function show(WorkLog $workLog): Response
     {
-        return $this->render('work_log/show.html.twig', [
-            'work_log' => $workLog,
-        ]);
+        $this->twigParts['work_log'] = $workLog;
+        $this->twigParts['entity'] = $workLog;
+
+        return $this->render('work_log/show.html.twig', $this->twigParts);
     }
 
     #[Route('/{id}/edit', name: 'app_work_log_edit', methods: ['GET', 'POST'])]
@@ -61,17 +66,16 @@ final class WorkLogController extends AbstractController
 
             return $this->redirectToRoute('app_work_log_index', [], Response::HTTP_SEE_OTHER);
         }
-
-        return $this->render('work_log/edit.html.twig', [
-            'work_log' => $workLog,
-            'form' => $form,
-        ]);
+        $this->twigParts['work_log'] = $workLog;
+        $this->twigParts['entity'] = $workLog;
+        $this->twigParts['form'] = $form;
+        return $this->render('work_log/edit.html.twig', $this->twigParts);
     }
 
     #[Route('/{id}', name: 'app_work_log_delete', methods: ['POST'])]
     public function delete(Request $request, WorkLog $workLog, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$workLog->getId(), $request->getPayload()->getString('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $workLog->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($workLog);
             $entityManager->flush();
         }

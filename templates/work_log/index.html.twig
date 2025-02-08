@@ -1,46 +1,38 @@
-{% extends 'base.html.twig' %}
-
-{% block h1 %}WorkLog index
-{% endblock %}
-{% block card_actions %}
-	<div>
-		<a href="{{ path('app_work_log_new') }}">Create new</a>
-	</div>
-{% endblock %}
-{% block body %}
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th>Id</th>
-				<th>Name</th>
-				<th>Duration</th>
-				<th>PricePerUnit</th>
-				<th>Total</th>
-				<th>CreatedAt</th>
-				<th>UpdatedAt</th>
-				<th>actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for work_log in work_logs %}
-				<tr>
-					<td>{{ work_log.id }}</td>
-					<td>{{ work_log.name }}</td>
-					<td>{{ work_log.duration }}</td>
-					<td>{{ work_log.pricePerUnit }}</td>
-					<td>{{ work_log.total }}</td>
-					<td>{{ work_log.createdAt ? work_log.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-					<td>{{ work_log.updatedAt ? work_log.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-					<td>
-						<a href="{{ path('app_work_log_show', {'id': work_log.id}) }}">show</a>
-						<a href="{{ path('app_work_log_edit', {'id': work_log.id}) }}">edit</a>
-					</td>
-				</tr>
-			{% else %}
-				<tr>
-					<td colspan="8">no records found</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
-{% endblock %}
+{% set table_head %}
+<tr>
+	<th class="w-25">Name</th>
+	<th>Duration</th>
+	<th>PricePerUnit</th>
+	<th>Total</th>
+	<th>CreatedAt</th>
+	<th>UpdatedAt</th>
+	<th>actions</th>
+</tr>
+{% endset %}
+{% set table_body %}
+{% for work_log in work_logs %}
+	<tr>
+		<td class="w-25">
+			{{ include('components/Link/Entity.html.twig', {'name': entity_name, 'entity': work_log}) }}
+		</td>
+		<td>{{ work_log.duration }}</td>
+		<td>{{ work_log.pricePerUnit }}</td>
+		<td>{{ work_log.total }}</td>
+		<td>{{ work_log.createdAt ? work_log.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+		<td>{{ work_log.updatedAt ? work_log.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+		<td>
+			{{ include('components/Link/Edit.html.twig', {'name': entity_name, 'id': work_log.id}) }}
+		</td>
+	</tr>
+{% else %}
+	<tr>
+		<td colspan="8">no records found</td>
+	</tr>
+{% endfor %}
+{% endset %}
+{{ include('components/Crud/Index.html.twig', {
+    'entity_name': entity_name,
+    'entity_title': entity_title,
+    'table_head': table_head,
+    'table_body': table_body
+    }) }}

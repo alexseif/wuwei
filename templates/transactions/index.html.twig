@@ -1,36 +1,36 @@
 {% set table_head %}
 <tr>
-                <th>Id</th>
-                <th>Date</th>
-                <th>Amount</th>
-                <th>Type</th>
-                <th>Notes</th>
-                <th>actions</th>
-            </tr>
-                {% endset %} 
-    {% set table_body %}
-      {% for transaction in transactions %}
-            <tr>
-                <td>						{{ include('components/Link/Entity.html.twig', {'name': 'transactions', 'entity': transaction}) }}
-</td>
-                <td>{{ transaction.date ? transaction.date|date('Y-m-d') : '' }}</td>
-                <td>{{ transaction.amount }}</td>
-                <td>{{ transaction.type }}</td>
-                <td>{{ transaction.notes }}</td>
-                <td>
-						{{ include('components/Link/Edit.html.twig', {'name': 'transactions', 'id': transaction.id}) }}
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-    {% endset %} 
+	<th>Id</th>
+	<th>Date</th>
+	<th>Amount</th>
+	<th>Type</th>
+	<th>Notes</th>
+	<th>actions</th>
+</tr>
+{% endset %}
+{% set table_body %}
+{% for transaction in transactions %}
+	<tr>
+		<td>
+			{{ include('components/Link/Entity.html.twig', {'name': 'transactions', 'entity': transaction}) }}
+		</td>
+		<td>{{ transaction.date ? transaction.date|date('Y-m-d') : '' }}</td>
+		<td>{{ transaction.amount }}</td>
+		<td>{{ transaction.type }}</td>
+		<td>{{ transaction.notes }}</td>
+		<td>
+			{{ include('components/Link/Edit.html.twig', {'name': 'transactions', 'id': transaction.id}) }}
+		</td>
+	</tr>
+{% else %}
+	<tr>
+		<td colspan="6">no records found</td>
+	</tr>
+{% endfor %}
+{% endset %}
 {{ include('components/Crud/Index.html.twig', {
     'entity_name': entity_name,
     'entity_title': entity_title,
     'table_head': table_head,
     'table_body': table_body
     }) }}
-    
