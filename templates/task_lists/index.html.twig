@@ -18,7 +18,9 @@
 							{{ include('components/Link.html.twig', {'icon': 'bi bi-arrow-up', 'class': 'btn btn-sm text-success', 'link': path('app_task_lists_promote', {'id': task_list.id})}) }}
 							{{ include('components/Link.html.twig', {'icon': 'bi bi-arrow-down', 'class': 'btn btn-sm text-primary', 'link': path('app_task_lists_demote', {'id': task_list.id})}) }}
 							{{ include('components/Link/Edit.html.twig', {'name':'task_lists', 'id': task_list.id, 'class': 'btn btn-sm'}) }}
-							{{ include ('components/Link/New.html.twig', {'name': 'tasks', 'icon': 'bi bi-plus fs-5', 'attrs':{'title': 'New Task', 'id': 'add-task', 'data-ext': {'tasklist':  task_list.id }|json_encode()|raw , 'data-bs-toggle':"offcanvas"}, 'link': path('app_tasks_new')}) }}
+							{% if task_list.status != 'archive' %}
+								{{ include ('components/Link/New.html.twig', {'name': 'tasks', 'icon': 'bi bi-plus fs-5', 'attrs':{'title': 'New Task', 'id': 'add-task', 'data-ext': {'tasklist':  task_list.id }|json_encode()|raw , 'data-bs-toggle':"offcanvas"}, 'link': path('app_tasks_new')}) }}
+							{% endif %}
 						</div>
 					</div>
 				</li>
