@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Tasks;
 use App\Entity\TaskLists;
 use App\Form\TasksType;
+use App\Repository\TaskListsRepository;
 use App\Repository\TasksRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\Paginator;
@@ -39,9 +40,14 @@ final class TasksController extends AbstractController
     }
 
     #[Route('/new', name: 'app_tasks_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, TaskListsRepository $taskListsRepository): Response
     {
+        $tasklistId = $request->get('tasklist');
         $task = new Tasks();
+        if ($tasklistId) {
+            $taskList = $taskListsRepository->find($tasklistId);
+            $task->setTaskList($taskList);
+        }
         $form = $this->createForm(TasksType::class, $task, [
             'action' => $this->generateUrl('app_tasks_new')
         ]);

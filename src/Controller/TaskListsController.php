@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -55,9 +56,16 @@ final class TaskListsController extends AbstractController
     public function show(Request $request, TaskLists $taskList, TasksRepository $tasksRepository, PaginatorInterface $paginator): Response
     {
         $tasks  = $paginator->paginate($tasksRepository->getPaginatorQuery(['t.taskList' => $taskList]), $request->query->getInt('page', 1));
+
         $this->twigParts['task_list'] = $taskList;
         $this->twigParts['entity'] = $taskList;
         $this->twigParts['tasks'] = $tasks;
+
+        if ($request->isXmlHttpRequest()) {
+            $content = $this->renderView('task_lists/_show.html.twig', $this->twigParts);
+            return new JsonResponse($content);
+        }
+
         return $this->render('task_lists/show.html.twig', $this->twigParts);
     }
 

@@ -26,6 +26,7 @@ import './item';
 import './goals';
 import './cigaretteLog';
 import './tasks.js';
+import './task_lists.js';
 
 $.fn.select2.defaults.set("theme", "bootstrap-5");
 
@@ -101,11 +102,16 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('[data-bs-toggle="offcanvas"]').forEach(function (button) {
         button.addEventListener('click', function (event) {
             event.preventDefault();
-            fetch(button.href, {
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest'
-                }
-            })
+            const jsonData = JSON.parse(button.getAttribute('data-ext'));
+            const url = new URL(button.href);
+            Object.keys(jsonData).forEach(key => url.searchParams.append(key, jsonData[key]));
+            console.log(url);
+            // url.searchParams.append('data', JSON.stringify(jsonData));
+            fetch(url, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
                 .then(response => response.json())
                 .then(data => {
                     if (data.content) {

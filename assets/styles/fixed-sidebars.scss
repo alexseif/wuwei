@@ -4,8 +4,7 @@
   .fixed-sidebar {
     //position: fixed;
     font-family: monospace;
-    top: 10rem;
-    max-width: 15rem;
+    max-width: 19rem;
     margin: 0 auto;
     text-align: center;
 
@@ -17,10 +16,22 @@
 
   .fixed-sidebar-left {
     left: 0;
+    height: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
   }
 
   .fixed-sidebar-right {
+    top: 10rem;
+    max-width: 15rem;
     right: 0;
   }
 
+  ul.nav{
+    li{
+      max-width: 100%;
+    }
+  }
 }

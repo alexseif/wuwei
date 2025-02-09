@@ -1,48 +1,45 @@
-{% set table_head %}
-<tr>
-	<th>Name</th>
-	<th>Account</th>
-	<th>Client</th>
-	<th>Status</th>
-	<th>Timestamps</th>
-	<th>actions</th>
-</tr>
-{% endset %}
-{% set table_body %}
-{% for task_list in task_lists %}
-	<tr class='{{ task_list.status }}'>
-		<td>
-			{{ include('components/Link/Entity.html.twig', {'name': 'task_lists', 'entity': task_list}) }}
-		</td>
-		<td>
-			{{ (task_list.account is not null) ? include('components/Link/Entity.html.twig', {
-						'name': 'accounts',
-						'entity': task_list.account
-					}) : '' }}
-		</td>
-		<td>
-			{{ (task_list.account is not null) ? include('components/Link/Entity.html.twig', {
-						'name': 'client',
-						'entity': task_list.account.client
-					}) : '' }}
-		</td>
-		<td>{{ task_list.status }}</td>
-		<td>{{ include('components/Badge/Timestamps.html.twig', {'entity': task_list}) }}</td>
-		<td>
-			{{ include('components/Link.html.twig', {'icon': 'bi bi-arrow-up', 'class': 'btn text-success', 'link': path('app_task_lists_promote', {'id': task_list.id})}) }}
-			{{ include('components/Link.html.twig', {'icon': 'bi bi-arrow-down', 'class': 'btn text-primary', 'link': path('app_task_lists_demote', {'id': task_list.id})}) }}
-			{{ include('components/Link/Edit.html.twig', {'name':'task_lists', 'id': task_list.id}) }}
-		</td>
-	</tr>
-{% else %}
-	<tr>
-		<td colspan="5">no records found</td>
-	</tr>
-{% endfor %}
-{% endset %}
-{{ include('components/Crud/Index.html.twig', {
-    'entity_name': entity_name,
-    'entity_title': entity_title,
-    'table_head': table_head,
-    'table_body': table_body
-    }) }}
+{% extends 'base.html.twig' %}
+
+{% block h1 %}
+	{{ entity_title }}
+{% endblock %}
+
+{% block sidebar_left %}
+	<div class="card">
+		<div class="card-header">
+			<h1 class="card-title">{{ entity_title }}</h1>
+		</div>
+		<ul class="nav flex-column mb-3 list-group">
+			{% for task_list in task_lists %}
+				<li class='{{ task_list.status }} list-group-item' data-tasklist="">
+					<div class="d-flex justify-content-between flex-wrap">
+						{{ include('components/Link/Entity.html.twig', {'name': 'task_lists', 'entity': task_list, 'class': 'nav-link', 'attrs': {'data-wuwei-load':"tasklist-card"} }) }}
+						<div class="btn-toolbar">
+							{{ include('components/Link.html.twig', {'icon': 'bi bi-arrow-up', 'class': 'btn btn-sm text-success', 'link': path('app_task_lists_promote', {'id': task_list.id})}) }}
+							{{ include('components/Link.html.twig', {'icon': 'bi bi-arrow-down', 'class': 'btn btn-sm text-primary', 'link': path('app_task_lists_demote', {'id': task_list.id})}) }}
+							{{ include('components/Link/Edit.html.twig', {'name':'task_lists', 'id': task_list.id, 'class': 'btn btn-sm'}) }}
+							{{ include ('components/Link/New.html.twig', {'name': 'tasks', 'icon': 'bi bi-plus fs-5', 'attrs':{'title': 'New Task', 'id': 'add-task', 'data-ext': {'tasklist':  task_list.id }|json_encode()|raw , 'data-bs-toggle':"offcanvas"}, 'link': path('app_tasks_new')}) }}
+						</div>
+					</div>
+				</li>
+			{% else %}
+				<tr>
+					<div colspan="5">no records found</div>
+				</tr>
+			{% endfor %}
+		</ul>
+	</div>
+{% endblock %}
+
+{% block card_actions %}
+	{{ include('components/Link/New.html.twig', {'name': entity_name }) }}
+{% endblock %}
+
+{% block container %}
+	{% set task_list = task_lists[0] %}
+	{% set entity = task_lists[0] %}
+	<div class="container">
+		<div class="card" id="tasklist-card"></div>
+		<!-- .card -->
+	</div>
+{% endblock %}
