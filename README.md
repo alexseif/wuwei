@@ -24,18 +24,18 @@ Wu Wei offers the following key features:
 - Notifications: Stay updated with browser and email notifications.
 - Chinese Clock Methodology: Correlate task completion with Chinese Zodiac periods for productivity analysis.
 
-## How We Came Up With the Name
+## How I Came Up With the Name
 
 The name "Wu Wei" was chosen to reflect the essence of effortless action and aligning tasks with natural rhythms. In
 Taoism, "Wu Wei" refers to the practice of non-doing, or taking action without force or resistance. By embracing the
-concept of Wu Wei, we aim to provide users with a task management approach that emphasizes ease, flow, and harmony.
+concept of Wu Wei, I aim to provide users with a task management approach that emphasizes ease, flow, and harmony.
 
-## How We Incorporated Cultural Methodologies
+## How I Incorporated Cultural Methodologies
 
 Wu Wei integrates concepts from different cultural methodologies to enhance task management. These methodologies
 include:
 
-- [Chinese Clock](docs/chinese-clock.md): Correlates task completion with Chinese Zodiac periods to optimize
+- [Chinese Clock](docs/chinese-organ-clock.md): Correlates task completion with Chinese Zodiac periods to optimize
   productivity.
 - [Ayurvedic Dosha Clock](docs/Ayurvedic-Dosha-Clock.md): Considers the user's dosha type to schedule tasks in alignment
   with energy patterns.
