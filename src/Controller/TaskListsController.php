@@ -23,15 +23,6 @@ final class TaskListsController extends AbstractController
         'entity_title' => 'Task List'
     ];
 
-    #[Route(name: 'app_task_lists_index', methods: ['GET'])]
-    public function index(TaskListsRepository $taskListsRepository): Response
-    {
-        $this->twigParts['task_lists'] = $taskListsRepository->findAll();
-
-
-        return $this->render('task_lists/index.html.twig', $this->twigParts);
-    }
-
     #[Route('/new', name: 'app_task_lists_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -43,6 +34,7 @@ final class TaskListsController extends AbstractController
             $entityManager->persist($taskList);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Task List added');
             return $this->redirectToRoute('app_task_lists_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -52,7 +44,38 @@ final class TaskListsController extends AbstractController
         return $this->render('task_lists/new.html.twig', $this->twigParts);
     }
 
+
     #[Route('/{id}', name: 'app_task_lists_show', methods: ['GET'])]
+    #[Route(name: 'app_task_lists_index', methods: ['GET'])]
+    public function index(
+        Request $request,
+        TaskListsRepository $taskListsRepository,
+        TasksRepository $tasksRepository,
+        PaginatorInterface $paginator,
+        TaskLists $taskList = null
+    ): Response {
+
+        $this->twigParts['task_lists'] = $taskListsRepository->findAll();
+
+        if ($taskList) {
+            $tasks  = $paginator->paginate($tasksRepository->getPaginatorQuery(['t.taskList' => $taskList]), $request->query->getInt('page', 1));
+            $progress = $tasksRepository->getProgressByTasklist($taskList);
+
+            $this->twigParts['task_list'] = $taskList;
+            $this->twigParts['entity'] = $taskList;
+            $this->twigParts['tasks'] = $tasks;
+            $this->twigParts['progress'] = $progress;
+        }
+        if ($request->isXmlHttpRequest()) {
+            $content = $this->renderView('task_lists/_show.html.twig', $this->twigParts);
+            return new JsonResponse($content);
+        }
+
+
+        return $this->render('task_lists/index.html.twig', $this->twigParts);
+    }
+
+    #[Route('/{id}', name: 'app_task_lists_show_back', methods: ['GET'])]
     public function show(Request $request, TaskLists $taskList, TasksRepository $tasksRepository, PaginatorInterface $paginator): Response
     {
         $tasks  = $paginator->paginate($tasksRepository->getPaginatorQuery(['t.taskList' => $taskList]), $request->query->getInt('page', 1));
@@ -77,6 +100,7 @@ final class TaskListsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
+            $this->addFlash('success', 'Task List Updated');
 
             return $this->redirectToRoute('app_task_lists_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -92,6 +116,7 @@ final class TaskListsController extends AbstractController
         if ($this->isCsrfTokenValid('delete' . $taskList->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($taskList);
             $entityManager->flush();
+            $this->addFlash('success', 'Task List Deleted');
         }
 
         return $this->redirectToRoute('app_task_lists_index', [], Response::HTTP_SEE_OTHER);

@@ -37,6 +37,7 @@ class TasksRepository extends ServiceEntityRepository
             }
         }
         $query
+            ->orderBy('t.completed', 'ASC')
             ->addOrderBy('t.urgency', 'DESC')
             ->addOrderBy('t.priority', 'DESC')
             ->addOrderBy('t.order', 'ASC')
@@ -130,6 +131,21 @@ class TasksRepository extends ServiceEntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
+    public function getProgressByTasklist(TaskLists $taskList): ?float
+    {
+        $qb = $this->createQueryBuilder('t')
+            ->select('COUNT(t.id) as totalTasks, SUM(CASE WHEN t.completed = 1 THEN 1 ELSE 0 END) as completedTasks')
+            ->where('t.taskList = :taskList')
+            ->setParameter('taskList', $taskList)
+            ->getQuery()
+            ->getSingleResult();
+
+        if ($qb['totalTasks'] == 0) {
+            return 0;
+        }
+
+        return ($qb['completedTasks'] / $qb['totalTasks']) * 100;
+    }
     // ... existing code ...
     //    /**
     //     * @return Tasks[] Returns an array of Tasks objects

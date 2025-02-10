@@ -5,24 +5,32 @@
 {% endblock %}
 
 {% block container %}
-	{% set task_list = task_lists[0] %}
-	{% set entity = task_lists[0] %}
-
 	<div class="d-flex">
 		<div class="card">
-			<div class="card-header">
+			<div class="card-header  d-flex align-items-center justify-content-between">
 				<h1 class="card-title">{{ entity_title }}</h1>
+				<div class="card-left">
+					{{ include('components/Link/New.html.twig', {'name': 'task_lists'}) }}
+				</div>
 			</div>
 			<ul class="nav flex-column mb-3 list-group">
 				{% for task_list in task_lists %}
-					<li class='{{ task_list.status }} list-group-item' data-tasklist="">
+					<li class='{{ task_list.status.name }} list-group-item' data-tasklist="">
 						<div class="d-flex justify-content-between flex-wrap">
 							{{ include('components/Link/Entity.html.twig', {'name': 'task_lists', 'entity': task_list, 'class': 'nav-link', 'attrs': {'data-wuwei-load':"tasklist-card"} }) }}
 							<div class="btn-toolbar">
-								{{ include('components/Link.html.twig', {'icon': 'bi bi-arrow-up', 'class': 'btn btn-sm text-success', 'link': path('app_task_lists_promote', {'id': task_list.id})}) }}
-								{{ include('components/Link.html.twig', {'icon': 'bi bi-arrow-down', 'class': 'btn btn-sm text-primary', 'link': path('app_task_lists_demote', {'id': task_list.id})}) }}
+								{{ include('components/Link.html.twig', {
+									'icon': 'bi bi-arrow-up', 
+									'class': 'btn btn-sm text-success', 
+									'link': path('app_task_lists_promote', {'id': task_list.id}), 
+									'attrs': {'onclick':"return confirm('Are you sure you want to promote this item?');"}}) }}
+								{{ include('components/Link.html.twig', {
+									'icon': 'bi bi-arrow-down', 
+									'class': 'btn btn-sm text-primary',
+									'link': path('app_task_lists_demote', {'id': task_list.id}),
+									 'attrs': {'onclick':"return confirm('Are you sure you want to demote this item?');" }}) }}
 								{{ include('components/Link/Edit.html.twig', {'name':'task_lists', 'id': task_list.id, 'class': 'btn btn-sm'}) }}
-								{% if task_list.status != 'archive' %}
+								{% if not task_list.isArchive  %}
 									{{ include ('components/Link/New.html.twig', {'name': 'tasks', 'icon': 'bi bi-plus fs-5', 'attrs':{'title': 'New Task', 'id': 'add-task', 'data-ext': {'tasklist':  task_list.id }|json_encode()|raw , 'data-bs-toggle':"offcanvas"}, 'link': path('app_tasks_new')}) }}
 								{% endif %}
 							</div>
@@ -37,7 +45,11 @@
 		</div>
 		<!-- .card -->
 		<div class="container-fluid">
-			<div class="card" id="tasklist-card"></div>
+			<div class="card" id="tasklist-card">
+				{% if tasks is defined %}
+					{% include 'task_lists/_show.html.twig' %}
+				{% endif %}
+			</div>
 			<!-- .card -->
 		</div>
 		<!-- .container -->

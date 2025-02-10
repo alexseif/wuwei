@@ -2,44 +2,40 @@
 	<h1 class="card-title">
 		{{ task_list.name }}
 	</h1>
-	<div class="card-left ms-auto">
-		<div>{{ include('components/Badge.html.twig', {'attrs': {'title': 'Status'},'text':  task_list.status }) }}</div>
-		{{ include('components/Link/Entity.html.twig', {'name': 'accounts', 'entity': task_list.account}) }}
-		{{ include('components/Link/Entity.html.twig', {'name': 'client', 'entity': task_list.account.client}) }}
-
-	</div>
-	<div class="card-actions btn-toolbar">
-		{{ include('components/Link/Back.html.twig', {'name': 'task_lists'}) }}
-		{{ include('components/Link.html.twig', {'icon': 'bi bi-arrow-up', 'class': 'btn text-success', 'link': path('app_task_lists_promote', {'id': task_list.id})}) }}
-		{{ include('components/Link.html.twig', {'icon': 'bi bi-arrow-down', 'class': 'btn text-primary', 'link': path('app_task_lists_demote', {'id': task_list.id})}) }}
-		{{ include('components/Link/Edit.html.twig', {'name': 'task_lists', 'id': task_list.id}) }}
-		{{ include('task_lists/_delete_form.html.twig') }}
-		{{ include ('components/Link.html.twig', {'icon': 'bi bi-plus fs-5', 'attrs':{'title': 'New Task', 'id': 'add-task', 'data-bs-toggle':"offcanvas"}, 'link': path('app_tasks_new')}) }}
-
+	<div class="card-left d-flex flex-column">
+		<div class="d-flex align-items-center">
+			{{ include('components/Badge.html.twig', {'attrs': {'title': 'Status'},'text':  task_list.status.name }) }}
+			{{ include('components/Link/Entity.html.twig', {'name': 'accounts', 'entity': task_list.account}) }}
+			{{ include('components/Link/Entity.html.twig', {'name': 'client', 'entity': task_list.account.client}) }}
+			<div class="card-actions btn-toolbar">
+				{{ include('components/Link/Back.html.twig', {'name': 'task_lists'}) }}
+				{{ include('components/Link.html.twig', {'icon': 'bi bi-arrow-up', 'class': 'btn text-success', 'link': path('app_task_lists_promote', {'id': task_list.id})}) }}
+				{{ include('components/Link.html.twig', {'icon': 'bi bi-arrow-down', 'class': 'btn text-primary', 'link': path('app_task_lists_demote', {'id': task_list.id})}) }}
+				{{ include('components/Link/Edit.html.twig', {'name': 'task_lists', 'id': task_list.id}) }}
+				{{ include('task_lists/_delete_form.html.twig') }}
+				{{ include ('components/Link.html.twig', {'icon': 'bi bi-plus fs-5', 'attrs':{'title': 'New Task', 'id': 'add-task', 'data-bs-toggle':"offcanvas"}, 'link': path('app_tasks_new')}) }}
+			</div>
+		</div>
+		{{ include('components/ProgressBar.html.twig', {
+			'class': 'flex-grow-1',
+			'label': 'Info example',
+			'value': progress
+		}
+		) }}
 	</div>
 </div>
 <!-- .card-header -->
-{# <div class="card-body"> #}
-{# <h2>Tasks</h2> #}
-	<div class="d-flex"> {{ knp_pagination_sortable(tasks, 'Task', 't.id') }}
-	-
-	{{ knp_pagination_sortable(tasks, 'Urgency', 't.urgency') }}
-	-
-	{{ knp_pagination_sortable(tasks, 'Priority', 't.priority') }}
-	-
-	{{ knp_pagination_sortable(tasks, 'TaskList', 'tl.id') }}
-	-
-	{{ knp_pagination_sortable(tasks, 'Account', 'a.id') }}
-	-
-	{{ knp_pagination_sortable(tasks, 'Client', 'c.id') }}
-	-
-	{{ knp_pagination_sortable(tasks, 'Created At', 't.createdAt') }}
-	-
-	{{ knp_pagination_sortable(tasks, 'Completed At', 't.completedAt') }}
+<div class="card-body">
+	<div class="d-flex paginator">
+		{{ knp_pagination_sortable(tasks, 'Task', 't.id') }}
+		{{ knp_pagination_sortable(tasks, 'Urgency', 't.urgency') }}
+		{{ knp_pagination_sortable(tasks, 'Priority', 't.priority') }}
+		{{ knp_pagination_sortable(tasks, 'Created At', 't.createdAt') }}
+		{{ knp_pagination_sortable(tasks, 'Completed At', 't.completedAt') }}
+	</div>
 </div>
 {{ include('components/Task/Tasks.html.twig', {'tasks': tasks}) }}
 
-{# </div> #}
 <div class="card-footer">
 	<div class="navigation d-flex justify-content-between">
 		<div class="count">
