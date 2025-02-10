@@ -172,7 +172,7 @@ header {
 
 .progress-stacked,
 .progress {
-  height: 40px;
+  // height: 40px;
 }
 
 .select2-container--bootstrap-5 {
@@ -272,4 +272,15 @@ footer {
   margin-bottom: 1rem;
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+.paginator {
+  a {
+    padding: 0 1rem;
+    border-right: 1px solid $table-border-color;
+
+    &:last-child {
+      border-right: 0;
+    }
+  }
 }
