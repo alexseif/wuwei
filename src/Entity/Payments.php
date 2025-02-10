@@ -34,10 +34,12 @@ class Payments
     #[ORM\Column(type: 'decimal', scale: 2)]
     private float $amount;
 
-    #[ORM\Column(type: 'string', columnDefinition: "ENUM('Pending', 'Paid', 'Overdue')")]
+    #[ORM\Column(type: 'string', length: 255)]
     private string $status;
 
-    // Getters and Setters...
+    public const STATUS_PENDING = 'Pending';
+    public const STATUS_PAID = 'Paid';
+    public const STATUS_OVERDUE = 'Overdue';
 
     /**
      * Get the value of id

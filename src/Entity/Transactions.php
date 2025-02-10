@@ -27,12 +27,14 @@ class Transactions
     #[ORM\Column(type: 'decimal', scale: 2)]
     private float $amount;
 
-    #[ORM\Column(type: 'string', columnDefinition: "ENUM('Income', 'Expense')")]
+    #[ORM\Column(type: 'string', length: 255)]
     private string $type;
+
+    public const TYPE_INCOME = 'Income';
+    public const TYPE_EXPENSE = 'Expense';
 
     #[ORM\Column(type: 'text', nullable: true)]
     private ?string $notes;
-
 
 
     /**

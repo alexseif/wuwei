@@ -30,8 +30,12 @@ class Requirements
     #[ORM\Column(type: 'string', length: 255)]
     private string $category;
 
-    #[ORM\Column(type: 'string', columnDefinition: "ENUM('High', 'Medium', 'Low')")]
+    #[ORM\Column(type: 'string', length: 255)]
     private string $priority;
+
+    public const PRIORITY_HIGH = 'High';
+    public const PRIORITY_MEDIUM = 'Medium';
+    public const PRIORITY_LOW = 'Low';
 
     /**
      * @return int
