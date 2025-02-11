@@ -116,7 +116,6 @@ class TaskLists
 
     public function isArchive()
     {
-        dump($this->status);
         return ($this->status == 'archive');
     }
 }
