@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('calendar') }}
+{% endblock %}
+{% block h1 %}Calendar
+{% endblock %}
+
+{% block body %}
+	<div id="calendar"></div>
+	<!-- #calendar -->
+	 <script id="events-data" type="application/json">{{ calendarEvents|raw }}</script>
+  
+{% endblock %}

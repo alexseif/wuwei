@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Task;
 use App\Repository\TasksRepository;
+use App\Service\CalendarService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -86,5 +87,20 @@ class ScheduleController extends AbstractController
         }
 
         return $schedule;
+    }
+
+    #[Route('/calendar', name: 'app_schedule_calendar')]
+    public function calendar(
+        TasksRepository $tasksRepository,
+        CalendarService $calendarService
+    ): Response {
+        $tasks = $tasksRepository->getPaginatorResult(['t.completed' => false]);
+        $calendarEvents = $calendarService->getCalendarEvents($tasks);
+
+        return $this->render('schedule/calendar.html.twig', [
+            'calendarEvents' => json_encode($calendarEvents),
+            // 'calendarEvents' => $calendarEvents,
+            'now' => new \DateTime()
+        ]);
     }
 }
