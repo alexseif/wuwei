@@ -15,7 +15,7 @@
 			</div>
 			<ul class="nav flex-column mb-3 list-group">
 				{% for task_list in task_lists %}
-					<li class='{{ task_list.status.name }} list-group-item' data-tasklist="">
+					<li class='{{ task_list.status }} list-group-item' data-tasklist="">
 						<div class="d-flex justify-content-between flex-wrap">
 							{{ include('components/Link/Entity.html.twig', {'name': 'task_lists', 'entity': task_list, 'class': 'nav-link', 'attrs': {'data-wuwei-load':"tasklist-card"} }) }}
 							<div class="btn-toolbar">
