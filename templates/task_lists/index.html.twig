@@ -13,23 +13,29 @@
 					{{ include('components/Link/New.html.twig', {'name': 'task_lists'}) }}
 				</div>
 			</div>
-			<ul class="nav flex-column mb-3 list-group">
+			<ul class="nav flex-column mb-3">
 				{% for task_list in task_lists %}
-					<li class='{{ task_list.status }} list-group-item' data-tasklist="">
-						<div class="d-flex justify-content-between flex-wrap">
-							{{ include('components/Link/Entity.html.twig', {'name': 'task_lists', 'entity': task_list, 'class': 'nav-link', 'attrs': {'data-wuwei-load':"tasklist-card"} }) }}
-							<div class="btn-toolbar">
-								{{ include('components/Link.html.twig', {
+					<li class='{{ task_list.status }} w-100' data-tasklist="">
+						<div class="d-flex flex-column">
+							<div class="d-flex justify-content-between">
+								{{ include('components/Link/Entity.html.twig', {'name': 'task_lists', 'entity': task_list, 'class': 'nav-link', 'attrs': {'data-wuwei-load':"tasklist-card"} }) }}
+								{# {{ include('components/Link/Edit.html.twig', {'name':'task_lists', 'id': task_list.id, 'class': 'btn btn-sm'}) }} #}
+							</div>
+							<div class="d-flex justify-content-between">
+								{{ include('components/Link/Entity.html.twig', {'name': 'accounts', 'entity': task_list.account, 'class': 'nav-link text-secondary	text-sm' }) }}
+								<div>
+									{{ include('components/Link.html.twig', {
 									'icon': 'bi bi-arrow-up', 
 									'class': 'btn btn-sm text-success', 
 									'link': path('app_task_lists_promote', {'id': task_list.id}), 
 									'attrs': {'onclick':"return confirm('Are you sure you want to promote this item?');"}}) }}
-								{{ include('components/Link.html.twig', {
+
+									{{ include('components/Link.html.twig', {
 									'icon': 'bi bi-arrow-down', 
 									'class': 'btn btn-sm text-primary',
 									'link': path('app_task_lists_demote', {'id': task_list.id}),
 									 'attrs': {'onclick':"return confirm('Are you sure you want to demote this item?');" }}) }}
-								{{ include('components/Link/Edit.html.twig', {'name':'task_lists', 'id': task_list.id, 'class': 'btn btn-sm'}) }}
+								</div>
 								{% if not task_list.isArchive  %}
 									{{ include ('components/Link/New.html.twig', {'name': 'tasks', 'icon': 'bi bi-plus fs-5', 'attrs':{'title': 'New Task', 'id': 'add-task', 'data-ext': {'tasklist':  task_list.id }|json_encode()|raw , 'data-bs-toggle':"offcanvas"}, 'link': path('app_tasks_new')}) }}
 								{% endif %}

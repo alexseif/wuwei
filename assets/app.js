@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
             event.preventDefault();
             const jsonData = JSON.parse(button.getAttribute('data-ext'));
             const url = new URL(button.href);
-            if (jsonData | length) {
+            if (jsonData) {
                 Object.keys(jsonData).forEach(key => url.searchParams.append(key, jsonData[key]));
             }
             console.log(url);

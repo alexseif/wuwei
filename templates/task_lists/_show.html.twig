@@ -4,7 +4,7 @@
 	</h1>
 	<div class="card-left d-flex flex-column">
 		<div class="d-flex align-items-center">
-			{{ include('components/Badge.html.twig', {'attrs': {'title': 'Status'},'text':  task_list.status.name }) }}
+			{{ include('components/Badge.html.twig', {'attrs': {'title': 'Status'},'text':  task_list.status}) }}
 			{{ include('components/Link/Entity.html.twig', {'name': 'accounts', 'entity': task_list.account}) }}
 			{{ include('components/Link/Entity.html.twig', {'name': 'client', 'entity': task_list.account.client}) }}
 			<div class="card-actions btn-toolbar">
