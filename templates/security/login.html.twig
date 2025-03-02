@@ -13,14 +13,13 @@
 						{% if app.user %}
 							{# You are logged in as #}
 							{# {{ app.user.userIdentifier }} #}
-                            {{ include('components/Link.html.twig', {'text': 'Logout', 'link': path('app_logout')})}}
-						{% endif %}
-					</div>
+						{{ include('components/Link.html.twig', {'text': 'Logout', 'link': path('app_logout')})}}
+					{% endif %}
+				</div>
 				</div>
 				<!-- .card-header -->
 
-				<form method="post">
-					<div class="card-body">
+					<form method="post" action="{{ path('app_login') }}"> <div class="card-body">
 						{% if error %}
 							<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 						{% endif %}
@@ -38,7 +37,7 @@
 						<div>
 							<label class="form-check form-switch">
 								<span class="btn btn-link text-white">
-									<input class="form-check-input" type="checkbox" name="_remember_me" checked>
+									<input class="form-check-input" type="checkbox" name="_remember_me" checked value="on">
 									<span class="form-check-label">Remember me</span>
 								</span>
 							</label>

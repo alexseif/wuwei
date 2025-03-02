@@ -33,3 +33,7 @@ services:
 
   App\Twig\MenuExtension:
     tags: ["twig.extension"]
+
+  App\Security\RememberMe\CustomTokenProvider:
+    arguments:
+      $em: "@doctrine.orm.entity_manager"
