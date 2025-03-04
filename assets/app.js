@@ -24,7 +24,7 @@ import 'select2';
 import './bootstrap';
 import './item';
 import './goals';
-import './cigaretteLog';
+// import './cigaretteLog';
 import './tasks.js';
 import './task_lists.js';
 
