@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\TaskLists;
 use App\Form\TaskListsType;
+use App\Repository\AccountsRepository;
 use App\Repository\TaskListsRepository;
 use App\Repository\TasksRepository;
 use Doctrine\ORM\EntityManager;
@@ -24,9 +25,14 @@ final class TaskListsController extends AbstractController
     ];
 
     #[Route('/new', name: 'app_task_lists_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, AccountsRepository $accountsRepository): Response
     {
         $taskList = new TaskLists();
+        $accountId = $request->get('account') ?? null;
+        if ($accountId) {
+            $account = $accountsRepository->find($accountId);
+            $taskList->setAccount($account);
+        }
         $form = $this->createForm(TaskListsType::class, $taskList);
         $form->handleRequest($request);
 
@@ -35,6 +41,9 @@ final class TaskListsController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'Task List added');
+            if ($accountId) {
+                return $this->redirectToRoute('app_accounts_show', ['id' => $accountId]);
+            }
             return $this->redirectToRoute('app_task_lists_index', [], Response::HTTP_SEE_OTHER);
         }
 

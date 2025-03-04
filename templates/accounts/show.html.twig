@@ -12,10 +12,16 @@
 {% endblock %}
 {% block body %}
 	<div class="card-body">
-		<h2>Task Lists</h2>
+		<div class="d-flex justify-content-between">
+			<h2>Task Lists</h2>
+			{{ include('components/Link/New.html.twig', {name: 'task_lists', link_parameters: {'account': account.id}}) }}
+		</div>
 		{% include 'task_lists/_table.html.twig' with {'task_lists': account.taskLists} %}</div>
 	<div class="card-body">
-		<h2>Transactions</h2>
+		<div class="d-flex justify-content-between">
+			<h2>Transactions</h2>
+			{{ include('components/Link/New.html.twig', {name: 'transactions', link_parameters: {'account': account.id}}) }}
+		</div>
 		{% include 'account_transactions/_table.html.twig' with {'account_transactions': transactions} %}</div>
 	<div class="card-footer text-end">
 		{{ include('components/Badge/Timestamps.html.twig', {'entity': account}) }}</div>

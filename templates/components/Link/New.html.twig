@@ -1,1 +1,1 @@
-{{ include('components/Link.html.twig', {link: path('app_' ~ name ~ '_new'), icon: 'bi bi-plus'}) }}
+{{ include('components/Link.html.twig', {link: path('app_' ~ name ~ '_new', link_parameters|default({})), icon: 'bi bi-plus'}) }}

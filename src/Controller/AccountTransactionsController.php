@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\AccountTransactions;
 use App\Form\AccountTransactionsType;
+use App\Repository\AccountsRepository;
 use App\Repository\AccountTransactionsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -31,16 +32,25 @@ final class AccountTransactionsController extends AbstractController
     }
 
     #[Route('/new', name: 'app_transactions_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, AccountsRepository $accountsRepository): Response
     {
         $accountTransaction = new AccountTransactions();
+        $accountId = $request->get('account') ?? null;
+        if ($accountId) {
+            $account = $accountsRepository->find($accountId);
+            $accountTransaction->setAccount($account);
+        }
         $form = $this->createForm(AccountTransactionsType::class, $accountTransaction);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($accountTransaction);
             $entityManager->flush();
+            $this->addFlash('success', 'Transaction created successfully');
 
+            if ($accountId) {
+                return $this->redirectToRoute('app_accounts_show', ['id' => $accountId]);
+            }
             return $this->redirectToRoute('app_transactions_index', [], Response::HTTP_SEE_OTHER);
         }
 
