@@ -95,9 +95,14 @@ class ScheduleController extends AbstractController
         CalendarService $calendarService
     ): Response {
         $tasks = $tasksRepository->getPaginatorResult(['t.completed' => false]);
+        $taskArrays = [];
+        foreach ($tasks as $task) {
+            $taskArrays[] = $task->toArray();
+        }
         $calendarEvents = $calendarService->getCalendarEvents($tasks);
 
         return $this->render('schedule/calendar.html.twig', [
+            'tasks' => json_encode($taskArrays),
             'calendarEvents' => json_encode($calendarEvents),
             // 'calendarEvents' => $calendarEvents,
             'now' => new \DateTime()
