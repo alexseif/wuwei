@@ -21,16 +21,50 @@
 					<td>
 						{{ include('components/Link/Entity.html.twig', {'name': 'cost_of_life', 'entity': cost_of_life}) }}
 					</td>
-					<td>{{ (cost_of_life.value/100)|format_currency(cost_of_life.currency.code) }}</td>
+					<td class="text-end">{{ (cost_of_life.value/100)|format_currency(cost_of_life.currency.code) }}</td>
 					<td>{{ include('components/Badge/Timestamps.html.twig', {'entity': cost_of_life}) }}</td>
 					<td>
 						{{ include('components/Link/Edit.html.twig', {'name': 'cost_of_life', 'id': cost_of_life.id}) }}</td>
 				</tr>
 			{% else %}
 				<tr>
-					<td colspan="6">no records found</td>
+					<td colspan="4">no records found</td>
 				</tr>
 			{% endfor %}
+		</tbody>
+		{# <tfoot>
+											<tr>
+												<th class="text-end">Total</th>
+												<td>
+													{{ (total)|format_currency('EGP') }}
+												</td>
+												<td>
+													{{ (total/USD.EGP/100)|format_currency('USD')}}
+												</td>
+												<td>
+													{{ (total/EUR.EGP/100)|format_currency('EUR')}}
+												</td>
+											</tr>
+										</tfoot> #}
+	</table>
+	<hr/>
+	<table class="table table-striped">
+		<tbody>
+			{% for key,cost in costs %}
+				<tr>
+					<th class="text-end">{{ key|capitalize }}</th>
+					<td>
+						{{ cost.EGP|format_currency('EGP') }}
+					</td>
+					<td>
+						{{ cost.USD|format_currency('USD')}}
+					</td>
+					<td>
+						{{ cost.EUR|format_currency('EUR')}}
+					</td>
+				</tr>
+			{% endfor %}
+
 		</tbody>
 	</table>
 {% endblock %}

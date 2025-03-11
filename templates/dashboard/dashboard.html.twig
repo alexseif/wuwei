@@ -13,8 +13,33 @@
 			{% endfor %}
 		</div>
 		{% include 'tasks/_stats.html.twig' %}
-		{{ include('components/Task/Tasks.html.twig')}}
+		<div class="row">
+			<div class="col-8">
+				{{ include('components/Task/Tasks.html.twig')}}
+			</div>
+			<div class="col">
+				<table class="table table-striped">
+					<tbody>
+						{% for key,cost in costs %}
+							<tr>
+								<th class="text-end">{{ key|capitalize }}</th>
+								<td>
+									{{ cost.EGP|format_currency('EGP') }}
+								</td>
+								<td>
+									{{ cost.USD|format_currency('USD')}}
+								</td>
+								<td>
+									{{ cost.EUR|format_currency('EUR')}}
+								</td>
+							</tr>
+						{% endfor %}
 
+					</tbody>
+				</table>
+
+			</div>
+		</div>
 		<div class="row">
 			<div class="col">
 				{% include('goal/_goals.html.twig') %}

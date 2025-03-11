@@ -10,6 +10,7 @@ use App\Repository\ItemRepository;
 use App\Repository\TagTypeRepository;
 use App\Repository\TaskDurationPerDayRepository;
 use App\Repository\TasksRepository;
+use App\Service\CostService;
 use App\Service\DurationReportService;
 use App\Service\TimeSystemService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,7 +22,6 @@ class DashboardController extends AbstractController
 
   #[Route('/', name: 'app_dashboard')]
   public function home(
-    ItemRepository $itemRepository,
     ItemListRepository $itemListRepository,
     TimeSystemService $timeSystemService,
     GoalRepository $goalRepository,
@@ -29,9 +29,10 @@ class DashboardController extends AbstractController
     TaskDurationPerDayRepository $taskDurationPerDayRepository,
     DurationReportService $durationReportService,
     DaysRepository $daysRepository,
-    TasksRepository $tasksRepository
+    TasksRepository $tasksRepository,
+    CostService $costService
   ): Response {
-    $reportItems = ['today','week', 'month', 'quarter', 'total'];
+    $reportItems = ['today', 'week', 'month', 'quarter', 'total'];
     $defaultWidget = [
       'title' => 'Time Tracking',
       'icon' => 'bi-clock',
@@ -50,7 +51,7 @@ class DashboardController extends AbstractController
 
       if (!in_array($item, ['total', 'yesterday'])) {
         $itemValueLastYear = $taskDurationPerDayRepository->$functionNameLastYear();
-        if('today' == $item ){
+        if ('today' == $item) {
           $itemValueLastYear = $taskDurationPerDayRepository->getYesterday();
         }
 
@@ -79,7 +80,8 @@ class DashboardController extends AbstractController
         'widgets' => $durationWidgets,
         'currentTimeSystem' => $currentTimeSystem,
         'days' => $days,
-        'tasks' => $tasks
+        'tasks' => $tasks,
+        'costs' => $costService->getCosts()
       ]
     );
   }

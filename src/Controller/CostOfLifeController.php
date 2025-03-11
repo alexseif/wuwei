@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\CostOfLife;
 use App\Form\CostOfLifeType;
 use App\Repository\CostOfLifeRepository;
+use App\Service\CostService;
+use App\Service\CurrencyService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,10 +17,13 @@ use Symfony\Component\Routing\Attribute\Route;
 final class CostOfLifeController extends AbstractController
 {
     #[Route(name: 'app_cost_of_life_index', methods: ['GET'])]
-    public function index(CostOfLifeRepository $costOfLifeRepository): Response
+    public function index(CostOfLifeRepository $costOfLifeRepository, CostService $costService): Response
     {
+        $costOfLife = $costOfLifeRepository->findAll();
+        $costs = $costService->getCosts();
         return $this->render('cost_of_life/index.html.twig', [
-            'cost_of_lives' => $costOfLifeRepository->findAll(),
+            'cost_of_lives' => $costOfLife,
+            'costs' => $costs
         ]);
     }
 
