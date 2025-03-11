@@ -4,11 +4,11 @@
 {% endblock %}
 
 {% block card_left %}
-	<div class="progress" title="{{ totalDuration / 60 }} / 4 hrs">
-		{% set progress = (totalDuration / 240) * 100 %}
-		<div class="progress-bar d-flex align-items-center justify-content-center" role="progressbar" style="width: {{ progress }}%;" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">
-			<span>{{ totalDuration / 60 }}
-				/ 4 hrs</span>
+	<div class="progress" title="{{ (totalDuration / 60)|round }} / 4 hrs">
+		{% set progress = ((totalDuration / 240) * 100)|round %}
+		<div class="progress-bar overflow-visible" role="progressbar" style="width: {{ progress }}%;" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">
+			{{ (totalDuration / 60)|round }}
+				/ 4 hrs
 		</div>
 	</div>
 {% endblock %}
