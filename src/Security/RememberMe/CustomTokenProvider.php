@@ -59,7 +59,7 @@ class CustomTokenProvider implements TokenProviderInterface
     {
         $rememberMeToken = new RememberMeToken();
         $rememberMeToken->setClass($token->getClass());
-        $rememberMeToken->setUsername($token->getUserIdentifier());
+        $rememberMeToken->setUsername($token->getUserIdentifier()); // Updated
         $rememberMeToken->setSeries($token->getSeries());
         $rememberMeToken->setTokenValue($token->getTokenValue());
         $rememberMeToken->setLastUsed($token->getLastUsed());
