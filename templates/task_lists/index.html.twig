@@ -18,7 +18,8 @@
 					<li class='{{ task_list.status }} w-100' data-tasklist="">
 						<div class="d-flex flex-column">
 							<div class="d-flex justify-content-between">
-								{{ include('components/Link/Entity.html.twig', {'name': 'task_lists', 'entity': task_list, 'class': 'nav-link', 'attrs': {'data-wuwei-load':"tasklist-card"} }) }}
+								{# {{ include('components/Link/Entity.html.twig', {'name': 'task_lists', 'entity': task_list, 'class': 'nav-link', 'attrs': {'data-wuwei-load':"tasklist-card"} }) }} #}
+								{{ include('components/Link/Entity.html.twig', {'name': 'task_lists', 'entity': task_list, 'class': 'nav-link', 'attrs': {} }) }}
 								{# {{ include('components/Link/Edit.html.twig', {'name':'task_lists', 'id': task_list.id, 'class': 'btn btn-sm'}) }} #}
 							</div>
 							<div class="d-flex justify-content-between">
