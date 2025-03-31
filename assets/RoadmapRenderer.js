@@ -244,6 +244,9 @@ export default class RoadmapRenderer {
 
         const totalHeight = this.manager.data.steps.length * (STEP_HEIGHT + STEP_SPACING) - STEP_SPACING;
         let currentTop = (roadmapHeight - totalHeight) / 2;
+        if (currentTop < this.minPositionPx) {
+            currentTop = this.minPositionPx;
+        }
 
         this.manager.data.steps.forEach((step) => {
             step.left = (roadmapWidth - STEP_WIDTH) / 2;

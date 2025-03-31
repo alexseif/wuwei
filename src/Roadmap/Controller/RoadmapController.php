@@ -13,7 +13,7 @@ use Symfony\Component\Yaml\Yaml;
 
 final class RoadmapController extends AbstractController
 {
-    #[Route('/', name: 'app_roadmap_home')]
+    #[Route('/', name: 'app_roadmap_index')]
     public function index(): Response
     {
         // Parse YAML file

@@ -55,7 +55,7 @@
 		{% endblock %}
 		{% block page %}
 			{% block nav %}
-				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+				{% if is_granted('IS_AUTHENTICATED_FULLY') or is_granted('IS_AUTHENTICATED_REMEMBERED') %}
 					{% include '_navbar.html.twig' %}
 				{% endif %}
 			{% endblock %}

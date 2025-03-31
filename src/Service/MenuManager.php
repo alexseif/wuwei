@@ -56,6 +56,7 @@ class MenuManager
                 ]
             ),
             new MenuItem('app_schedule_index', 'bi bi-calendar', 'Schedule'),
+            new MenuItem('app_roadmap_index', 'bi bi-map', 'Roadmap'),
         ];
     }
 }

@@ -3,24 +3,39 @@ roadmap:
   steps:
     - title: "Start here"
       start: true
-      top: 165
+      top: 16
       left: 499
     - title: "NSCE"
-      top: 241
-      left: 499
+      top: 19
+      left: 803
     - title: "EKA"
-      top: 317
-      left: 499
+      top: 148
+      left: 806
     - title: "Mission Eminence"
-      top: 393
-      left: 499
+      top: 148
+      left: 171
     - title: "EKK"
-      top: 469
-      left: 499
+      top: 259
+      left: 172
     - title: "Wordpress Optimize"
-      top: 545
-      left: 499
+      top: 259
+      left: 813
+    - title: "Alex Seif"
+      top: 384
+      left: 813
+    - title: "Wuwei"
+      top: 389
+      left: 173
+    - title: "Cairo Bars"
+      top: 538
+      left: 173
+    - title: "Music"
+      top: 540
+      left: 821
+    - title: "Netherlands"
+      top: 671
+      left: 825
     - title: "End here"
       end: true
-      top: 621
-      left: 499
+      top: 677
+      left: 454
