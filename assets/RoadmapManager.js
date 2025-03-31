@@ -28,8 +28,10 @@ export default class RoadmapManager {
      */
     resetStepsToOriginalPositions() {
         this.data.steps.forEach((step) => {
+            step.title = step.originalTitle;
             step.top = step.originalTop;
             step.left = step.originalLeft;
+
         });
     }
 }

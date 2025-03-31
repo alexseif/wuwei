@@ -3,6 +3,8 @@ import RoadmapManager from './RoadmapManager.js';
 // Define constants for step dimensions
 const STEP_WIDTH = 200; // Width of each step in pixels
 const STEP_HEIGHT = 56; // Height of each step in pixels
+const STEP_SPACING = 20; // Vertical spacing between steps
+const MIN_POSITION_REM = 1; // Minimum position in rem
 
 export default class RoadmapRenderer {
     constructor(containerId, roadmapManager, sidebarSelector = '.sidebar.panel:last-child', svgId = 'roadmap-lines') {
@@ -10,6 +12,9 @@ export default class RoadmapRenderer {
         this.manager = roadmapManager;
         this.sidebarSelector = sidebarSelector;
         this.svgId = svgId;
+
+        // Convert 1rem to pixels
+        this.minPositionPx = parseFloat(getComputedStyle(document.documentElement).fontSize) * MIN_POSITION_REM;
     }
 
     /**
@@ -36,7 +41,7 @@ export default class RoadmapRenderer {
 
     addButtonsToSidebar(sidebar, yamlContent) {
         sidebar.appendChild(this.createButton('Save', 'btn btn-primary', () => this.saveRoadmapToServer(yamlContent)));
-        sidebar.appendChild(this.createButton('Reset', 'btn btn-secondary', () => this.resetRoadmap())); // Correct reference
+        sidebar.appendChild(this.createButton('Reset', 'btn btn-secondary', () => this.resetRoadmap()));
         sidebar.appendChild(this.createButton('Center and Stack', 'btn btn-success', () => this.centerAndStackSteps()));
     }
 
@@ -49,19 +54,11 @@ export default class RoadmapRenderer {
     }
 
     /**
-     * Resets the roadmap to its initial state.
+     * Resets the roadmap to its last saved state.
      */
     resetRoadmap() {
-        // Reset step positions using the manager
         this.manager.resetStepsToOriginalPositions();
-
-        // Clear and re-render the roadmap
-        this.container.innerHTML = '';
-        const svg = document.getElementById(this.svgId);
-        svg.innerHTML = '';
-
-        this.renderSteps();
-        this.updateSidebar();
+        this.reRenderRoadmap();
     }
 
     /**
@@ -72,52 +69,41 @@ export default class RoadmapRenderer {
 
         this.manager.data.steps.forEach((step, index) => {
             const stepElement = this.createStepElement(step, index, previousStep);
-
-            // Append to the roadmap container
             this.container.appendChild(stepElement);
 
-            // Add connection line to the previous step
             if (previousStep) {
                 this.drawLineBetweenSteps(previousStep, step);
             }
 
-            // Update the previous step reference
             previousStep = step;
         });
     }
 
     createStepElement(step, index, prevStep) {
-        const stepDiv = document.createElement("div");
-        stepDiv.className = `box step 
-            ${step.start ? 'start' : ''} 
-            ${step.end ? 'end' : ''}`;
+        const stepDiv = document.createElement('div');
+        stepDiv.className = `box step ${step.start ? 'start' : ''} ${step.end ? 'end' : ''}`;
 
-        if (prevStep) stepDiv.classList.add("has-before");
-        if (index < this.manager.data.steps.length - 1) stepDiv.classList.add("has-after");
+        if (prevStep) stepDiv.classList.add('has-before');
+        if (index < this.manager.data.steps.length - 1) stepDiv.classList.add('has-after');
 
-        const top = step.top ?? (prevStep ? prevStep.top + 150 : 0); // Vertical offset
-        const left = step.left ?? (prevStep ? prevStep.left : 0);    // Horizontal position
-        step.originalTop = step.originalTop ?? step.top; // Store original top
-        step.originalLeft = step.originalLeft ?? step.left; // Store original left
+        const top = step.top ?? (prevStep ? prevStep.top + STEP_HEIGHT + STEP_SPACING : 0);
+        const left = step.left ?? (prevStep ? prevStep.left : 0);
+
+
+        step.originalTitle = step.title;
+        step.originalTop = step.originalTop ?? top;
+        step.originalLeft = step.originalLeft ?? left;
 
         stepDiv.style.top = `${top}px`;
         stepDiv.style.left = `${left}px`;
-
         stepDiv.style.width = `${STEP_WIDTH}px`;
         stepDiv.style.height = `${STEP_HEIGHT}px`;
-
         stepDiv.textContent = step.title;
 
-        // Attach position back to the step data for reference
         step.top = top;
         step.left = left;
-        step.width = STEP_WIDTH; // Store width for connections
-        step.height = STEP_HEIGHT; // Store height for connections
 
-        // Make the step draggable
         this.makeDraggable(stepDiv, step);
-
-        // Add double-click event listener for editing the title
         stepDiv.addEventListener('dblclick', () => this.editStepTitle(step, stepDiv));
 
         return stepDiv;
@@ -127,17 +113,14 @@ export default class RoadmapRenderer {
         let isDragging = false;
         let offsetX, offsetY;
 
-        // Convert 1rem to pixels (default is 16px)
-        const remToPx = parseFloat(getComputedStyle(document.documentElement).fontSize);
-
         const onMouseMove = (event) => {
             if (isDragging) {
                 let newLeft = event.clientX - offsetX;
                 let newTop = event.clientY - offsetY;
 
-                // Ensure top and left are not less than 1rem
-                newLeft = Math.max(newLeft, remToPx);
-                newTop = Math.max(newTop, remToPx);
+                // Ensure top and left are not less than the minimum position
+                newLeft = Math.max(newLeft, this.minPositionPx);
+                newTop = Math.max(newTop, this.minPositionPx);
 
                 element.style.left = `${newLeft}px`;
                 element.style.top = `${newTop}px`;
@@ -145,7 +128,7 @@ export default class RoadmapRenderer {
                 step.left = newLeft;
                 step.top = newTop;
 
-                this.updateLines(); // Update lines when the step is moved
+                this.updateLines();
             }
         };
 
@@ -171,15 +154,38 @@ export default class RoadmapRenderer {
     }
 
     /**
+     * Allows the user to edit the title of a step.
+     */
+    editStepTitle(step, stepDiv) {
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.value = step.title;
+        input.className = 'step-title-input';
+
+        stepDiv.textContent = '';
+        stepDiv.appendChild(input);
+        input.focus();
+
+        const saveTitle = () => {
+            step.title = input.value.trim() || step.title;
+            stepDiv.textContent = step.title;
+            input.remove();
+            this.updateSidebar();
+        };
+
+        input.addEventListener('blur', saveTitle);
+        input.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') saveTitle();
+        });
+    }
+
+    /**
      * Draws a line between two steps in the roadmap.
-     * @param {Object} step1 - The first step.
-     * @param {Object} step2 - The second step.
      */
     drawLineBetweenSteps(step1, step2) {
         const svg = document.getElementById(this.svgId);
-
-        // Create a new line element
         const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+
         line.setAttribute('x1', step1.left + STEP_WIDTH / 2);
         line.setAttribute('y1', step1.top + STEP_HEIGHT / 2);
         line.setAttribute('x2', step2.left + STEP_WIDTH / 2);
@@ -187,7 +193,6 @@ export default class RoadmapRenderer {
         line.setAttribute('stroke', '#E040FB');
         line.setAttribute('stroke-width', '2');
 
-        // Append the line to the SVG container
         svg.appendChild(line);
     }
 
@@ -196,11 +201,8 @@ export default class RoadmapRenderer {
      */
     updateLines() {
         const svg = document.getElementById(this.svgId);
-
-        // Clear existing lines
         svg.innerHTML = '';
 
-        // Redraw lines between steps
         const steps = this.manager.data.steps;
         for (let i = 0; i < steps.length - 1; i++) {
             this.drawLineBetweenSteps(steps[i], steps[i + 1]);
@@ -208,9 +210,8 @@ export default class RoadmapRenderer {
     }
 
     /**
- * Saves the roadmap data to the server.
- * @param {string} yamlContent - The YAML content to save.
- */
+     * Saves the roadmap data to the server.
+     */
     saveRoadmapToServer(yamlContent) {
         fetch('/roadmap/save', {
             method: 'POST',
@@ -218,12 +219,10 @@ export default class RoadmapRenderer {
             body: JSON.stringify({ yaml: yamlContent }),
         })
             .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
-                // Update the original positions to the current positions
                 this.manager.data.steps.forEach((step) => {
+                    step.originalTitle = step.title;
                     step.originalTop = step.top;
                     step.originalLeft = step.left;
                 });
@@ -237,63 +236,33 @@ export default class RoadmapRenderer {
     }
 
     /**
- * Centers and stacks the steps in the roadmap.
- */
+     * Centers and stacks the steps in the roadmap.
+     */
     centerAndStackSteps() {
         const roadmapWidth = this.container.offsetWidth;
         const roadmapHeight = this.container.offsetHeight;
 
-        // Calculate vertical spacing
-        const totalHeight = this.manager.data.steps.length * (STEP_HEIGHT + 20) - 20;
+        const totalHeight = this.manager.data.steps.length * (STEP_HEIGHT + STEP_SPACING) - STEP_SPACING;
         let currentTop = (roadmapHeight - totalHeight) / 2;
 
         this.manager.data.steps.forEach((step) => {
-            step.left = (roadmapWidth - STEP_WIDTH) / 2; // Center horizontally
-            step.top = currentTop; // Stack vertically
-            currentTop += STEP_HEIGHT + 20; // Add spacing
+            step.left = (roadmapWidth - STEP_WIDTH) / 2;
+            step.top = currentTop;
+            currentTop += STEP_HEIGHT + STEP_SPACING;
         });
 
-        // Clear and re-render the roadmap
+        this.reRenderRoadmap();
+    }
+
+    /**
+     * Clears and re-renders the roadmap.
+     */
+    reRenderRoadmap() {
         this.container.innerHTML = '';
         const svg = document.getElementById(this.svgId);
         svg.innerHTML = '';
 
         this.renderSteps();
         this.updateSidebar();
-    }
-
-    /**
- * Allows the user to edit the title of a step.
- * @param {Object} step - The step object.
- * @param {HTMLElement} stepDiv - The step's DOM element.
- */
-    editStepTitle(step, stepDiv) {
-        // Create an input field
-        const input = document.createElement('input');
-        input.type = 'text';
-        input.value = step.title;
-        input.className = 'step-title-input';
-
-        // Replace the step's title with the input field
-        stepDiv.textContent = '';
-        stepDiv.appendChild(input);
-
-        // Focus the input field
-        input.focus();
-
-        // Save the new title when the user presses "Enter" or loses focus
-        const saveTitle = () => {
-            step.title = input.value.trim() || step.title; // Keep the old title if input is empty
-            stepDiv.textContent = step.title; // Update the step's title in the DOM
-            input.remove(); // Remove the input field
-            this.updateSidebar(); // Update the sidebar to reflect the new title
-        };
-
-        input.addEventListener('blur', saveTitle); // Save on blur
-        input.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter') {
-                saveTitle(); // Save on Enter key
-            }
-        });
     }
 }
