@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Entity;
+namespace App\User\Entity;
 
-use App\Repository\ProfileRepository;
+use App\User\Repository\ProfileRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProfileRepository::class)]

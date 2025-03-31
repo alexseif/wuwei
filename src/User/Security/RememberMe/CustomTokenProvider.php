@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Security\RememberMe;
+namespace App\User\Security\RememberMe;
 
+use App\User\Entity\RememberMeToken;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Authentication\RememberMe\PersistentToken;
 use Symfony\Component\Security\Core\Authentication\RememberMe\PersistentTokenInterface;
 use Symfony\Component\Security\Core\Authentication\RememberMe\TokenProviderInterface;
-use App\Entity\RememberMeToken;
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 class CustomTokenProvider implements TokenProviderInterface

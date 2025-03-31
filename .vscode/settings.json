@@ -8,5 +8,14 @@
     },
     "docwriter.progress.trackFunctions": false,
     "docwriter.progress.trackClasses": true,
-    "docwriter.progress.trackMethods": false
+    "docwriter.progress.trackMethods": false,
+    "files.exclude": {
+        "**/var/cache": true
+    },
+    "files.watcherExclude": {
+        "**/var/cache": true
+    },
+    "search.exclude": {
+        "**/var/cache": true
+    }
 }

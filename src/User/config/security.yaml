@@ -1,0 +1,36 @@
+# # src/User/config/security.yaml
+# security:
+#     password_hashers:
+#         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: "auto"
+#     providers:
+#         app_user_provider:
+#             entity:
+#                 class: App\User\Entity\User
+#                 property: email
+#     firewalls:
+#         user:
+#             login_path: app_login
+#             logout_path: app_logout
+#             remember_me: true
+
+#         main:
+#             lazy: true
+#             provider: app_user_provider
+#             custom_authenticator: App\User\Security\AppAuthenticator
+#             logout:
+#                 path: app_logout
+#                 target: app_login
+#             remember_me:
+#                 secret: "%kernel.secret%"
+#                 lifetime: 604800
+#                 path: /
+#                 always_remember_me: true
+#                 token_provider: 'App\User\Security\RememberMe\CustomTokenProvider'
+
+#     access_control:
+#         - { path: ^/login, roles: PUBLIC_ACCESS }
+#         - { path: ^/register, roles: PUBLIC_ACCESS }
+#         - { path: ^/reset-password, roles: PUBLIC_ACCESS }
+#         - { path: ^/, roles: [IS_AUTHENTICATED_FULLY, IS_AUTHENTICATED_REMEMBERED] }
+
+

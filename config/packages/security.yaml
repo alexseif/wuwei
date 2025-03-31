@@ -5,10 +5,10 @@ security:
     Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: "auto"
   # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
   providers:
-    # used to reload user from session & other features (e.g. switch_user)
+    #   # used to reload user from session & other features (e.g. switch_user)
     app_user_provider:
       entity:
-        class: App\Entity\User
+        class: App\User\Entity\User
         property: email
   firewalls:
     dev:
@@ -17,7 +17,7 @@ security:
     main:
       lazy: true
       provider: app_user_provider
-      custom_authenticator: App\Security\AppAuthenticator
+      custom_authenticator: App\User\Security\AppAuthenticator
       logout:
         path: app_logout
         # where to redirect after logout
@@ -28,7 +28,7 @@ security:
         lifetime: 604800
         path: /
         always_remember_me: true
-        token_provider: 'App\Security\RememberMe\CustomTokenProvider'
+        token_provider: 'App\User\Security\RememberMe\CustomTokenProvider'
 
       # activate different ways to authenticate
       # https://symfony.com/doc/current/security.html#the-firewall
@@ -40,10 +40,11 @@ security:
   # Note: Only the *first* access control that matches will be used
   access_control:
     - { path: ^/login, roles: PUBLIC_ACCESS }
+    - { path: /user/login, roles: PUBLIC_ACCESS }
     - { path: ^/register, roles: PUBLIC_ACCESS }
     - { path: ^/reset-password, roles: PUBLIC_ACCESS }
     - { path: ^/cigarette_log, roles: PUBLIC_ACCESS }
-    - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
+    - { path: ^/, roles: [IS_AUTHENTICATED_FULLY, IS_AUTHENTICATED_REMEMBERED] }
 
 when@test:
   security:

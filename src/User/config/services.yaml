@@ -1,0 +1,12 @@
+# src/User/config/services.yaml
+services:
+  App\User\Security\RememberMe\CustomTokenProvider:
+    arguments:
+      $em: "@doctrine.orm.entity_manager"
+  App\User\EventListener\LogoutEventListener:
+    tags:
+      - {
+          name: kernel.event_listener,
+          event: security.logout,
+          method: onLogout,
+        }
