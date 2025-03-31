@@ -27,11 +27,17 @@ import './goals';
 // import './cigaretteLog';
 import './tasks.js';
 import './task_lists.js';
+import Roadmap from './roadmap'; // Path to your roadmap.js file
 
 $.fn.select2.defaults.set("theme", "bootstrap-5");
 
 //TODO: Revise the future need for this and classify it
 document.addEventListener('DOMContentLoaded', function () {
+
+
+    const roadmapData = JSON.parse(document.getElementById('roadmap-data').textContent);
+    const roadmap = new Roadmap("roadmap", roadmapData);
+    roadmap.initialize();
 
     const modeSwitch = document.querySelector('.mode-switch');
     if (modeSwitch) {
@@ -110,10 +116,10 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log(url);
             // url.searchParams.append('data', JSON.stringify(jsonData));
             fetch(url, {
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest'
-                    }
-                })
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
                 .then(response => response.json())
                 .then(data => {
                     if (data.content) {

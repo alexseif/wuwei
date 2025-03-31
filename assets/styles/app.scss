@@ -64,7 +64,7 @@ $h3-font-size-mobile: 2.5rem;
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 @import "fixed-sidebars";
 @import './tasks.scss';
-
+@import './roadmap.scss';
 .text-bg-error {
   @extend .text-bg-danger;
 }

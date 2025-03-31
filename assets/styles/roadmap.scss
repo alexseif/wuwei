@@ -1,0 +1,130 @@
+#roadmap-section {
+    display: flex;
+
+    div.panel {
+        border: 2px solid rgba(255, 255, 255, 0.6);
+        padding: 1rem;
+        z-index: 100;
+        background-color: #212529;
+    }
+
+    .sidebar {
+        min-width: 20rem;
+    }
+
+    #roadmap-container {
+        flex-grow: 1;
+        z-index: 100;
+        overflow: hidden;
+    }
+}
+
+#roadmap {
+    scroll-behavior: smooth;
+    overflow: auto;
+    position: relative;
+    height: calc(100vh - 10rem);
+
+    >* {
+        position: absolute;
+    }
+
+    .box {
+        padding: 1rem;
+        border: 1px solid rgba(255, 255, 255, 1);
+        border-radius: 4px;
+        // display: inline-block;
+        width: 200px;
+        height: 56px;
+        padding: 1rem;
+        text-align: center;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s, box-shadow 0.3s;
+        cursor: grab;
+
+        &:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+    }
+
+    .primary {
+        background-color: #FF6F61;
+    }
+
+    .secondary {
+        background-color: #FFD700;
+    }
+
+    .accent-primary {
+        background-color: #4CAF50;
+    }
+
+    .accent-secondary {
+        background-color: #40C4FF;
+    }
+
+    .highlight {
+        background-color: #E040FB;
+    }
+
+    .step {
+        transition: transform 0.3s, box-shadow 0.3s;
+
+        &:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        color: #000;
+        @extend .secondary;
+
+
+        &.start,
+        &.end {
+            @extend .primary;
+        }
+
+        &.has-before::before {
+            // content: '';
+            position: absolute;
+            width: 2px;
+            height: 20px;
+            @extend .accent-secondary;
+            top: -20px;
+            left: calc(50% - 1px); // Adjust as necessary
+        }
+
+        &.has-after::after {
+            // content: '';
+            position: absolute;
+            width: 2px;
+            height: 20px;
+            @extend .accent-secondary;
+            top: 100%;
+            left: calc(50% - 1px);
+        }
+    }
+
+
+
+}
+
+@media (max-width: 768px) {
+    #roadmap .step {
+        position: relative;
+        margin-bottom: 20px;
+        top: auto;
+    }
+}
+
+#roadmap-lines {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    /* Prevent interference with mouse events */
+    transform: translate(0, 0);
+    /* Initial translation */
+}

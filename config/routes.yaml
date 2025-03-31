@@ -3,3 +3,6 @@
 #    controller: App\Controller\DefaultController::index
 user:
     resource: '../src/User/config/routes.yaml'
+
+roadmap::
+    resource: '../src/Roadmap/config/routes.yaml'

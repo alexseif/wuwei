@@ -1,0 +1,4 @@
+roadmap:
+    resource: '../../../src/Roadmap/Controller'
+    type: attribute
+    prefix: /roadmap

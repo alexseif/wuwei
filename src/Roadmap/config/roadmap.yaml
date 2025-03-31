@@ -1,0 +1,26 @@
+roadmap:
+  title: "My Roadmap"
+  steps:
+    - title: "Start here"
+      start: true
+      top: 165
+      left: 499
+    - title: "Step 1"
+      top: 241
+      left: 499
+    - title: "Step 2"
+      top: 317
+      left: 499
+    - title: "Step 3"
+      top: 393
+      left: 499
+    - title: "Step 4"
+      top: 469
+      left: 499
+    - title: "Step 5"
+      top: 545
+      left: 499
+    - title: "End here"
+      end: true
+      top: 621
+      left: 499
