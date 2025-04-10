@@ -34,10 +34,16 @@ $.fn.select2.defaults.set("theme", "bootstrap-5");
 //TODO: Revise the future need for this and classify it
 document.addEventListener('DOMContentLoaded', function () {
 
+    const roadmapDataElement = document.getElementById('roadmap-data');
 
-    const roadmapData = JSON.parse(document.getElementById('roadmap-data').textContent);
-    const roadmap = new Roadmap("roadmap", roadmapData);
-    roadmap.initialize();
+    // Check if the roadmap-data element exists
+    if (roadmapDataElement) {
+        const roadmapData = JSON.parse(roadmapDataElement.textContent);
+        const roadmap = new Roadmap("roadmap", roadmapData);
+        roadmap.initialize();
+    } else {
+        console.warn('Element with id "roadmap-data" not found. Skipping roadmap initialization.');
+    }
 
     const modeSwitch = document.querySelector('.mode-switch');
     if (modeSwitch) {
