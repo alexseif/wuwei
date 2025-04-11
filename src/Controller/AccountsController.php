@@ -6,6 +6,7 @@ use App\Entity\Accounts;
 use App\Form\AccountsType;
 use App\Repository\AccountsRepository;
 use App\Repository\AccountTransactionsRepository;
+use App\Repository\TaskListsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -45,13 +46,14 @@ final class AccountsController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_accounts_show', methods: ['GET'])]
-    public function show(Accounts $account, AccountTransactionsRepository $accountTransactionsRepository, PaginatorInterface $paginator): Response
+    public function show(Accounts $account, AccountTransactionsRepository $accountTransactionsRepository, PaginatorInterface $paginator, TaskListsRepository $taskListsRepository): Response
     {
-
+        $taskLists = $taskListsRepository->findBy(['account' => $account]);
         $transactions  = $paginator->paginate($accountTransactionsRepository->getPaginatorQuery(['at.account' => $account]), 1);
 
         return $this->render('accounts/show.html.twig', [
             'account' => $account,
+            'taskLists' => $taskLists,
             'transactions' => $transactions,
         ]);
     }
