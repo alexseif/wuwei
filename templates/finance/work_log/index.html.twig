@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}
+	Finance - WorkLog
+{% endblock %}
+
+{% block body %}
+	<div class="card-body">
+		<div class="filters">
+			{{ form_start(filter_form)}}
+			<div class="row row-cols-4">
+				{% for item in filter_form %}
+					<div class="col">
+						{{ form_row(item) }}
+					</div>
+				{% endfor %}
+			</div>
+			{{ form_end(filter_form)}}
+		</div>
+		{% set table_head %}
+		<tr>
+			<th class="w-25">Name</th>
+			<th>Duration</th>
+			<th>PricePerUnit</th>
+			<th>Total</th>
+			<th>CreatedAt</th>
+			<th>UpdatedAt</th>
+			<th>actions</th>
+		</tr>
+		{% endset %}
+		{% set table_body %}
+		{% for work_log in work_logs %}
+			<tr>
+				<td class="w-25">
+					{{ include('components/Link/Entity.html.twig', {'name': entity_name, 'entity': work_log}) }}
+				</td>
+				<td>{{ work_log.duration }}</td>
+				<td>{{ work_log.pricePerUnit }}</td>
+				<td>{{ work_log.total }}</td>
+				<td>{{ work_log.createdAt ? work_log.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+				<td>{{ work_log.updatedAt ? work_log.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+				<td>
+					{{ include('components/Link/Edit.html.twig', {'name': entity_name, 'id': work_log.id}) }}
+				</td>
+			</tr>
+		{% else %}
+			<tr>
+				<td colspan="8">no records found</td>
+			</tr>
+		{% endfor %}
+		{% endset %}
+		{{ include('components/Crud/Index.html.twig', {
+    'entity_name': entity_name,
+    'entity_title': entity_title,
+    'table_head': table_head,
+    'table_body': table_body
+    }) }}
+
+	</div>
+{% endblock %}

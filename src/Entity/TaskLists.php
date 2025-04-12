@@ -118,4 +118,9 @@ class TaskLists
     {
         return ($this->status == 'archive');
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }
