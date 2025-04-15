@@ -51,7 +51,7 @@ class TasksRepository extends ServiceEntityRepository
         return $this->getPaginatorQuery($criteria)->getResult();
     }
 
-    public function getFocusTasks()
+    public function getFocusTasks($limit = 6)
     {
         return  $this->createQueryBuilder('t')
             ->select('t, tl, a, c')
@@ -62,7 +62,7 @@ class TasksRepository extends ServiceEntityRepository
             ->orderBy('t.urgency', 'DESC')
             ->addOrderBy('t.priority', 'DESC')
             ->addOrderBy('t.order', 'ASC')
-            ->setMaxResults(3)
+            ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
     }

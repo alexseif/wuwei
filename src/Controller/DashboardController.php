@@ -68,7 +68,7 @@ class DashboardController extends AbstractController
     }, $reportItems);
 
     $currentTimeSystem = $timeSystemService->getCurrent();
-    $days = $daysRepository->findBy(['complete' => false], ['deadline' => 'ASC'], 3);
+    $days = $daysRepository->findBy(['complete' => false], ['deadline' => 'ASC'], 5);
     $tasks = $tasksRepository->getFocusTasks();
 
     return $this->render(
