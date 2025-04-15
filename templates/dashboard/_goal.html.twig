@@ -1,0 +1,59 @@
+<div class="card">
+	<div class="card-header">
+		Weekly Work Hours (% of Goal)
+	</div>
+	<div class="card-body">
+		<canvas id="weeklyWorkChart"></canvas>
+	</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('weeklyWorkChart').getContext('2d');
+    const weeklyWorkHours = {{ weeklyWorkHours|json_encode|raw }};
+    const labels = Object.keys(weeklyWorkHours); // Days of the week
+    const today = new Date().toLocaleDateString('en-US', { weekday: 'long' }); // Get today's day name
+    const data = labels.map(label => label === today || labels.indexOf(label) < labels.indexOf(today) ? weeklyWorkHours[label] : null); // Stop after today
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: '% of Daily Goal Achieved',
+                data: data,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1, // Thinner line
+                fill: false, // No fill under the line
+                tension: 0.3, // Smooth curve
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false, // Allow custom height
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 150, // Allow for surpassing the goal
+                    title: {
+                        display: true,
+                        text: 'Percentage (%)'
+                    }
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false // Hide the legend to save space
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            return context.raw + '%';
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>

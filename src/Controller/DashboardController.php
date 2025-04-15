@@ -70,6 +70,7 @@ class DashboardController extends AbstractController
     $currentTimeSystem = $timeSystemService->getCurrent();
     $days = $daysRepository->findBy(['complete' => false], ['deadline' => 'ASC'], 5);
     $tasks = $tasksRepository->getFocusTasks();
+    $weeklyWorkHours = $tasksRepository->getWeeklyWorkHours();
 
     return $this->render(
       'dashboard/dashboard.html.twig',
@@ -81,7 +82,8 @@ class DashboardController extends AbstractController
         'currentTimeSystem' => $currentTimeSystem,
         'days' => $days,
         'tasks' => $tasks,
-        'costs' => $costService->getCosts()
+        'costs' => $costService->getCosts(),
+        'weeklyWorkHours' => $weeklyWorkHours,
       ]
     );
   }

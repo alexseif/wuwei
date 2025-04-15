@@ -146,6 +146,53 @@ class TasksRepository extends ServiceEntityRepository
 
         return ($qb['completedTasks'] / $qb['totalTasks']) * 100;
     }
+
+    public function getWeeklyWorkHours(): array
+    {
+        $startOfWeek = new \DateTime('last sunday');
+        $startOfWeek->setTime(0, 0, 0);
+
+        $endOfWeek = new \DateTime('next saturday');
+        $endOfWeek->setTime(23, 59, 59);
+
+        $qb = $this->createQueryBuilder('t')
+            ->select('DATE(t.completedAt) as day, SUM(t.duration) as totalMinutes')
+            ->where('t.completed = true')
+            ->andWhere('t.completedAt BETWEEN :startOfWeek AND :endOfWeek')
+            ->setParameter('startOfWeek', $startOfWeek)
+            ->setParameter('endOfWeek', $endOfWeek)
+            ->groupBy('day')
+            ->orderBy('day', 'ASC');
+
+        $results = $qb->getQuery()->getResult();
+
+        // Define daily goals (in minutes)
+        $dailyGoals = [
+            'Sunday' => 240,
+            'Monday' => 240,
+            'Tuesday' => 240,
+            'Wednesday' => 240,
+            'Thursday' => 240,
+            'Friday' => 0,
+            'Saturday' => 0,
+        ];
+
+        // Format the results into percentages
+        $weekData = [];
+        foreach ($dailyGoals as $day => $goal) {
+            $weekData[$day] = 0; // Default to 0%
+        }
+
+        foreach ($results as $result) {
+            $date = new \DateTime($result['day']);
+            $dayName = $date->format('l'); // Get the day name (e.g., "Sunday")
+            $totalMinutes = $result['totalMinutes'];
+            $goal = $dailyGoals[$dayName];
+            $weekData[$dayName] = $goal > 0 ? round(($totalMinutes / $goal) * 100, 2) : 0;
+        }
+
+        return $weekData;
+    }
     // ... existing code ...
     //    /**
     //     * @return Tasks[] Returns an array of Tasks objects
