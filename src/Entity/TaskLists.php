@@ -37,6 +37,9 @@ class TaskLists
     #[ORM\OrderBy(['completed' => 'ASC', 'order' => 'ASC'])]
     private Collection $tasks;
 
+    #[ORM\Column(name: 'torder')]
+    private ?int $order = null;
+
     public function __construct()
     {
         $this->tasks = new ArrayCollection();
@@ -117,6 +120,18 @@ class TaskLists
     public function isArchive()
     {
         return ($this->status == 'archive');
+    }
+    
+    public function getOrder(): ?int
+    {
+        return $this->order;
+    }
+
+    public function setOrder(int $order): static
+    {
+        $this->order = $order;
+
+        return $this;
     }
 
     public function __toString()

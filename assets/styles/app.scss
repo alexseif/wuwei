@@ -65,6 +65,7 @@ $h3-font-size-mobile: 2.5rem;
 @import "fixed-sidebars";
 @import './tasks.scss';
 @import './roadmap.scss';
+
 .text-bg-error {
   @extend .text-bg-danger;
 }
@@ -281,6 +282,24 @@ footer {
 
     &:last-child {
       border-right: 0;
+    }
+  }
+}
+
+.sortable-task-lists {
+  li {
+    // position: relative;
+  }
+
+  .handlebar {
+    // position: absolute;
+    // right: 0;
+    font-size: 1.2rem;
+    // color: #6c757d;
+    cursor: grab;
+
+    &:hover {
+      // color: #495057;
     }
   }
 }

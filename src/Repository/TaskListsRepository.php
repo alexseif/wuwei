@@ -23,6 +23,7 @@ class TaskListsRepository extends ServiceEntityRepository
             ->leftJoin('tl.account', 'a')
             ->leftJoin('a.client', 'c')
             ->orderBy('tl.status', 'DESC')
+            ->addOrderBy('tl.order', 'ASC')
             ->addOrderBy('tl.updatedAt', 'DESC')
             ->getQuery()
             ->getResult();

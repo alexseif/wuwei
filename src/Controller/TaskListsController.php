@@ -53,6 +53,43 @@ final class TaskListsController extends AbstractController
         return $this->render('task_lists/new.html.twig', $this->twigParts);
     }
 
+    #[Route('/update-order', name: 'app_task_lists_update_order', methods: ['POST'])]
+    public function updateOrder(Request $request, TaskListsRepository $taskListsRepository, EntityManagerInterface $entityManager): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+
+        if (!isset($data['order']) || !is_array($data['order'])) {
+            return new JsonResponse(['error' => 'Invalid data'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $caseStatements = [];
+        $ids = []; // Collect IDs for the WHERE clause
+
+        foreach ($data['order'] as $index => $id) {
+            $caseStatements[] = "WHEN tl.id = :id{$index} THEN {$index}";
+            $ids[] = $id; // Collect IDs
+        }
+
+        $caseSql = implode(' ', $caseStatements);
+
+        // Build the query
+        $query = $entityManager->createQuery(
+            "UPDATE App\Entity\TaskLists tl
+             SET tl.order = CASE {$caseSql} ELSE tl.order END
+             WHERE tl.id IN (:ids)"
+        );
+
+        // Bind parameters
+        foreach ($data['order'] as $index => $id) {
+            $query->setParameter("id{$index}", $id);
+        }
+        $query->setParameter('ids', $ids);
+
+        // Execute the query
+        $query->execute();
+
+        return new JsonResponse(['success' => true]);
+    }
 
     #[Route('/{id}', name: 'app_task_lists_show', methods: ['GET'])]
     #[Route(name: 'app_task_lists_index', methods: ['GET'])]
