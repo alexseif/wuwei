@@ -38,6 +38,7 @@ class TasksRepository extends ServiceEntityRepository
         }
         $query
             ->orderBy('t.completed', 'ASC')
+            ->orderBy('tl.order', 'ASC')
             ->addOrderBy('t.urgency', 'DESC')
             ->addOrderBy('t.priority', 'DESC')
             ->addOrderBy('t.order', 'ASC')
@@ -59,6 +60,7 @@ class TasksRepository extends ServiceEntityRepository
             ->leftJoin('tl.account', 'a')
             ->leftJoin('a.client', 'c')
             ->where('t.completed = false')
+            ->orderBy('tl.order', 'ASC')
             ->orderBy('t.urgency', 'DESC')
             ->addOrderBy('t.priority', 'DESC')
             ->addOrderBy('t.order', 'ASC')
@@ -75,6 +77,7 @@ class TasksRepository extends ServiceEntityRepository
             ->leftJoin('tl.account', 'a')
             ->leftJoin('a.client', 'c')
             ->where('t.completed = false')
+            ->orderBy('tl.order', 'ASC')
             ->orderBy('t.urgency', 'DESC')
             ->addOrderBy('t.priority', 'DESC')
             ->addOrderBy('t.order', 'ASC')
@@ -95,6 +98,7 @@ class TasksRepository extends ServiceEntityRepository
             ->leftJoin('a.client', 'c')
             ->where('t.createdAt >= :today')
             ->setParameter('today', $today)
+            ->orderBy('tl.order', 'ASC')
             ->orderBy('t.urgency', 'DESC')
             ->addOrderBy('t.priority', 'DESC')
             ->addOrderBy('t.order', 'ASC')
