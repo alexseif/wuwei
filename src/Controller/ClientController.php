@@ -14,12 +14,17 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/client')]
 final class ClientController extends AbstractController
 {
+
+    private array $twigParts = [
+        'entity_name' => 'client',
+        'entity_title' => 'Client'
+    ];
+
     #[Route(name: 'app_client_index', methods: ['GET'])]
     public function index(ClientRepository $clientRepository): Response
     {
-        return $this->render('client/index.html.twig', [
-            'clients' => $clientRepository->findAll(),
-        ]);
+        $this->twigParts['clients'] = $clientRepository->findAll();
+        return $this->render('client/index.html.twig', $this->twigParts);
     }
 
     #[Route('/new', name: 'app_client_new', methods: ['GET', 'POST'])]
@@ -38,18 +43,18 @@ final class ClientController extends AbstractController
             return $this->redirectToRoute('app_client_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('client/new.html.twig', [
-            'client' => $client,
-            'form' => $form,
-        ]);
+        $this->twigParts['client'] = $client;
+        $this->twigParts['entity'] = $client;
+        $this->twigParts['form'] = $form;
+        return $this->render('client/new.html.twig', $this->twigParts);
     }
 
     #[Route('/{id}', name: 'app_client_show', methods: ['GET'])]
     public function show(Client $client): Response
     {
-        return $this->render('client/show.html.twig', [
-            'client' => $client,
-        ]);
+        $this->twigParts['entity'] = $client;
+        $this->twigParts['client'] = $client;
+        return $this->render('client/show.html.twig', $this->twigParts);
     }
 
     #[Route('/{id}/edit', name: 'app_client_edit', methods: ['GET', 'POST'])]
@@ -65,11 +70,11 @@ final class ClientController extends AbstractController
 
             return $this->redirectToRoute('app_client_index', [], Response::HTTP_SEE_OTHER);
         }
+        $this->twigParts['client'] = $client;
+        $this->twigParts['entity'] = $client;
+        $this->twigParts['form'] = $form;
 
-        return $this->render('client/edit.html.twig', [
-            'client' => $client,
-            'form' => $form,
-        ]);
+        return $this->render('client/edit.html.twig', $this->twigParts);
     }
 
     #[Route('/{id}', name: 'app_client_delete', methods: ['POST'])]

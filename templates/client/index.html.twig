@@ -1,47 +1,41 @@
-{% extends 'base.html.twig' %}
-
-{% block h1 %}
-	{{ clients|length }}
-	Clients
-{% endblock %}
-{% block card_actions %}
-	{{ include('components/Link/New.html.twig', {'name': 'client'}) }}
-{% endblock %}
-{% block body %}
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>Enabled</th>
-				<th>BillingOption</th>
-				<th>Timestamps</th>
-				<th>actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for client in clients %}
-				<tr class="{{ client.enabled ? 'enabled' : 'disabled' }}">
-					<td>
-						{{ include('components/Link/Entity.html.twig', {'name': 'client', 'entity': client}) }}
-					</td>
-					<td>
-						{{ include('components/Badge/Enabled.html.twig', {'enabled': client.enabled})}}
-					</td>
-					<td>
-						{% for name,option in client.billingOption %}
-							{{ include('components/Badge.html.twig', {'text': name ~ ': ' ~ option, 'attrs':{'title': name}}) }}
-						{% endfor %}
-					</td>
-					<td>{{ include('components/Badge/Timestamps.html.twig', {'entity': client}) }}</td>
-					<td>
-						{{ include('components/Link/Edit.html.twig', {'name': 'client', 'id': client.id}) }}
-					</td>
-				</tr>
-			{% else %}
-				<tr>
-					<td colspan="5">no records found</td>
-				</tr>
+{% set table_head %}
+<tr>
+	<th>Name</th>
+	<th>Enabled</th>
+	<th>BillingOption</th>
+	<th>Timestamps</th>
+	<th>actions</th>
+</tr>
+{% endset %}
+{% set table_body %}
+{% for client in clients %}
+	<tr class="{{ client.enabled ? 'enabled' : 'disabled' }}">
+		<td>
+			{{ include('components/Link/Entity.html.twig', {'name': 'client', 'entity': client}) }}
+		</td>
+		<td>
+			{{ include('components/Badge/Enabled.html.twig', {'enabled': client.enabled})}}
+		</td>
+		<td>
+			{% for name,option in client.billingOption %}
+				{{ include('components/Badge.html.twig', {'text': name ~ ': ' ~ option, 'attrs':{'title': name}}) }}
 			{% endfor %}
-		</tbody>
-	</table>
-{% endblock %}
+		</td>
+		<td>{{ include('components/Badge/Timestamps.html.twig', {'entity': client}) }}</td>
+		<td>
+			{{ include('components/Link/Edit.html.twig', {'name': 'client', 'id': client.id}) }}
+		</td>
+	</tr>
+{% else %}
+	<tr>
+		<td colspan="5">no records found</td>
+	</tr>
+{% endfor %}
+{% endset %}
+{{ include('components/Crud/Index.html.twig', {
+    'entity_name': entity_name,
+    'entity_title': entity_title,
+    'table_head': table_head,
+    'table_body': table_body
+    }) }}
+

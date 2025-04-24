@@ -1,31 +1,25 @@
-{% extends 'base.html.twig' %}
-{% block h1 %}
-	Client: #{{ client.id }}
-	{{ client.name }}
-{% endblock %}
-{% block card_actions %}
+{% set body %}
+{# TODO: Display client rate #}
+<div class="card-body">
 	<span>
-		{{ include('components/Badge/Enabled.html.twig', {'enabled': client.enabled}) }}
+		{% for name,option in client.billingOption %}
+			{% if option %}
+				{{ include('components/Badge.html.twig', {'text': name ~ ': ' ~ option, 'attrs':{'title': name}}) }}
+			{% endif %}
+		{% endfor %}
 	</span>
-	{{ include('components/Link/Back.html.twig', {'name': 'client'}) }}
-	{{ include('components/Link/Edit.html.twig', {'name': 'client', 'id': client.id}) }}
-	{{ include('client/_delete_form.html.twig') }}
-{% endblock %}
-{% block body %}
-	{# TODO: Display client rate #}
-	<div class="card-body">
-		<span>
-			{% for name,option in client.billingOption %}
-				{% if option %}
-					{{ include('components/Badge.html.twig', {'text': name ~ ': ' ~ option, 'attrs':{'title': name}}) }}
-				{% endif %}
-			{% endfor %}
-		</span>
-		<hr/>
-		<h2>Accounts</h2>
-		{% include 'accounts/_table.html.twig' with {'accounts': client.accounts} %}
-	</div>
-	<div class="card-footer text-end">
-		{{ include('components/Badge/Timestamps.html.twig', {'entity': client}) }}
-	</div>
-{% endblock %}
+	<hr/>
+	<h2>Accounts</h2>
+	{% include 'accounts/_table.html.twig' with {'accounts': client.accounts} %}
+</div>
+<div class="card-footer text-end">
+	{{ include('components/Badge/Timestamps.html.twig', {'entity': client}) }}
+</div>
+{% endset %}
+{{ include('components/Crud/Show.html.twig', {
+    'entity_name': entity_name,
+    'entity_title': entity_title ~ ': ' ~ client.name,
+    'entity': client,
+    'body': body
+    }) }}
+
