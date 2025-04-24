@@ -303,3 +303,30 @@ footer {
     }
   }
 }
+
+
+#task-system.funny-colors {
+  .tasks {
+    .task {
+      position: relative;
+      border-right: 0;
+      border-top: 0.5em solid #0055A4;
+      border-bottom: 0.5em solid #0055A4;
+      border-left: 1em solid #0055A4;
+
+      td {
+        position: relative;
+        background-color: #000000;
+
+
+        >*,
+        a {
+          color: #FC4C2F;
+          // text-transform: uppercase;
+          // font-size: large;
+        }
+
+      }
+    }
+  }
+}

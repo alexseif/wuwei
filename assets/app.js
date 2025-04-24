@@ -140,4 +140,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    $('#funny-colors').on('click', function () {
+        $('#task-system').toggleClass('funny-colors');
+    });
 });
