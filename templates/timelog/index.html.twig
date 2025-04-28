@@ -25,7 +25,7 @@
 		</td>
 		<td>{{ timelog.log }}</td>
 		<td>
-			{{ include('components/Link/Edit.html.twig', {'name': 'timelog', 'id': timelog.id}) }}
+			{{ include('components/Link/Edit.html.twig', {'name': 'timelog',  'attrs':{'title': 'NeEditw Timelog', 'id': 'edit-timelog', 'data-bs-toggle':"offcanvas"}, 'id': timelog.id}) }}
 		</td>
 	</tr>
 </td></tr>{% else %}<tr>

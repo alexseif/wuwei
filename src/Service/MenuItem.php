@@ -4,9 +4,7 @@ namespace App\Service;
 
 class MenuItem
 {
-    public function __construct(private readonly ?string $path, private readonly string $icon, private readonly string $label, private readonly bool $dropdown = false, private readonly array $items = [], private readonly bool $divider = false)
-    {
-    }
+    public function __construct(private readonly ?string $path, private readonly string $icon, private readonly string $label, private readonly bool $dropdown = false, private readonly array $items = [], private readonly bool $divider = false) {}
 
     public function getPath(): ?string
     {

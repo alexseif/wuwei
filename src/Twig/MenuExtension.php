@@ -11,9 +11,7 @@ use Twig\TwigFunction;
 
 class MenuExtension extends AbstractExtension
 {
-    public function __construct(private readonly MenuManager $menuManager, private readonly UrlGeneratorInterface $router, private readonly RequestStack $requestStack)
-    {
-    }
+    public function __construct(private readonly MenuManager $menuManager, private readonly UrlGeneratorInterface $router, private readonly RequestStack $requestStack) {}
 
     public function getFunctions(): array
     {

@@ -7,6 +7,7 @@ use App\Form\TimelogType;
 use App\Repository\TimelogRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -32,7 +33,9 @@ final class TimelogController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $timelog = new Timelog();
-        $form = $this->createForm(TimelogType::class, $timelog);
+        $form = $this->createForm(TimelogType::class, $timelog, [
+            'action' => $this->generateUrl('app_timelog_new')
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -40,10 +43,17 @@ final class TimelogController extends AbstractController
             $entityManager->flush();
             return $this->redirectToRoute('app_timelog_index', [], Response::HTTP_SEE_OTHER);
         }
-
         $this->twigParts['timelog'] = $timelog;
         $this->twigParts['entity'] = $timelog;
         $this->twigParts['form'] = $form;
+
+        if ($request->isXmlHttpRequest()) {
+            $content = $this->renderView('timelog/_form.html.twig', $this->twigParts);
+            return new JsonResponse([
+                'content' => $content,
+                'label' => 'New Timelog'
+            ]);
+        }
 
         return $this->render('timelog/new.html.twig', $this->twigParts);
     }
@@ -59,7 +69,9 @@ final class TimelogController extends AbstractController
     #[Route('/{id}/edit', name: 'app_timelog_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Timelog $timelog, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(TimelogType::class, $timelog);
+        $form = $this->createForm(TimelogType::class, $timelog, [
+            'action' => $this->generateUrl('app_timelog_edit', ['id' => $timelog->getId()]),
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -70,7 +82,13 @@ final class TimelogController extends AbstractController
         $this->twigParts['timelog'] = $timelog;
         $this->twigParts['entity'] = $timelog;
         $this->twigParts['form'] = $form;
-
+        if ($request->isXmlHttpRequest()) {
+            $content = $this->renderView('timelog/_form.html.twig', $this->twigParts);
+            return new JsonResponse([
+                'content' => $content,
+                'label' => 'Edit Task'
+            ]);
+        }
         return $this->render('timelog/edit.html.twig', $this->twigParts);
     }
 

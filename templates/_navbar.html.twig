@@ -7,6 +7,7 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				{{ render_menu() }}
+				{{ include ('components/Link.html.twig', {'icon': 'bi bi-stopwatch-fill fs-5', 'attrs':{'title': 'New Timelog', 'id': 'add-timelog', 'data-bs-toggle':"offcanvas"}, 'link': path('app_timelog_new')}) }}
 				{{ include ('components/Link.html.twig', {'icon': 'bi bi-plus fs-5', 'attrs':{'title': 'New Task', 'id': 'add-task', 'data-bs-toggle':"offcanvas"}, 'link': path('app_tasks_new')}) }}
 				{# <form class="d-flex" role="search">
 					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
