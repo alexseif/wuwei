@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}
+	Log Your Time
+{% endblock %}
+
+{% block body %}
+	{{ form_start(form) }}
+	<div class="card-body">
+		<div class="row">
+			<div class="col">
+				{{ form_row(form.log) }}
+			</div>
+			<div class="col">
+				{{ last_timelog.start|date('Y-m-d H:i:s T') }}
+				{% if last_timelog %}
+					<p>
+						<strong>Start:</strong>
+						{{ last_timelog.start|date('Y-m-d H:i:s') }}
+						{{ form_row(form.start) }}
+					</p>
+					<p>
+						<strong>Duration:</strong>
+						{% if last_timelog.duration %}
+							{{ last_timelog.duration.h }}
+							hour(s)
+							{{ last_timelog.duration.i }}
+							minute(s)
+						{% else %}
+							In Progress
+						{% endif %}
+						{{ form_row(form.duration) }}
+					</p>
+				{% else %}
+					<p>No previous timelog found.</p>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+	<div class="card-footer text-end">
+		<button class="btn btn-link text-success">{{ button_label|default('Save') }}</button>
+	</div>
+	{{ form_end(form) }}
+{% endblock %}

@@ -28,6 +28,10 @@ class Timelog
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $log = null;
 
+    public function __construct()
+    {
+        $this->start = new \DateTime();
+    }
 
     public function getId(): ?int
     {

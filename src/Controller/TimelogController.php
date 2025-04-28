@@ -29,6 +29,47 @@ final class TimelogController extends AbstractController
         return $this->render('timelog/index.html.twig', $this->twigParts);
     }
 
+    #[Route('/log', name: 'app_timelog_log', methods: ['GET', 'POST'])]
+    public function log(Request $request, EntityManagerInterface $entityManager, TimelogRepository $timelogRepository): Response
+    {
+        // Fetch the last Timelog record
+        $lastTimelog = $timelogRepository->findOneBy([], ['start' => 'DESC']);
+        date_default_timezone_set('Africa/Cairo');
+        // If there is a previous record, calculate its duration
+        if ($lastTimelog && $lastTimelog->getDuration() === null) {
+            $now = new \DateTime();
+            $duration = $lastTimelog->getStart()->diff($now);
+            $lastTimelog->setDuration($duration);
+        } else {
+            $lastTimelog = new Timelog();
+        }
+
+        // Create a form for the last Timelog record (to update the log)
+        $form = $this->createForm(TimelogType::class, $lastTimelog, [
+            'action' => $this->generateUrl('app_timelog_log')
+        ]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+            if ($lastTimelog->getDuration() !== null) {
+                // Create a new Timelog record with the current time
+                $newTimelog = new Timelog();
+                $entityManager->persist($newTimelog);
+                $entityManager->flush();
+            }
+
+            // Redirect to the same page to continue logging
+            return $this->redirectToRoute('app_timelog_log', [], Response::HTTP_SEE_OTHER);
+        }
+
+        $this->twigParts['form'] = $form;
+        $this->twigParts['last_timelog'] = $lastTimelog;
+
+        return $this->render('timelog/log.html.twig', $this->twigParts);
+    }
+
     #[Route('/new', name: 'app_timelog_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {

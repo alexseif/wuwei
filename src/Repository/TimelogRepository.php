@@ -16,28 +16,8 @@ class TimelogRepository extends ServiceEntityRepository
         parent::__construct($registry, Timelog::class);
     }
 
-    //    /**
-    //     * @return Timelog[] Returns an array of Timelog objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('t')
-    //            ->andWhere('t.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('t.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Timelog
-    //    {
-    //        return $this->createQueryBuilder('t')
-    //            ->andWhere('t.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    public function findLastTimelog(): ?Timelog
+    {
+        return $this->findOneBy([], ['start' => 'DESC']);
+    }
 }

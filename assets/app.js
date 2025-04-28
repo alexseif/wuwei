@@ -1,4 +1,5 @@
 import './bootstrap.js';
+
 /*
  * Welcome to your app's main JavaScript file!
  *
@@ -28,6 +29,11 @@ import './goals';
 import './tasks.js';
 import './task_lists.js';
 import Roadmap from './roadmap'; // Path to your roadmap.js file
+import tinymce from 'tinymce';
+import 'tinymce/themes/silver/theme'; // Import the default theme
+import 'tinymce/icons/default/icons'; // Import the default icons
+
+
 
 $.fn.select2.defaults.set("theme", "bootstrap-5");
 
@@ -143,4 +149,17 @@ document.addEventListener('DOMContentLoaded', function () {
     $('#funny-colors').on('click', function () {
         $('#task-system').toggleClass('funny-colors');
     });
+
+
+    tinymce.init({
+        selector: '.wysiwyg-editor', // Target the textarea with the class
+        menubar: false, // Disable the menu bar
+        toolbar: 'undo redo | bold italic underline | bullist numlist | link image table', // Customize the toolbar
+        height: 300, // Set the editor height
+        skin: false, // Disable the default skin (we'll use the copied assets)
+        content_css: false, // Disable the default content CSS
+        base_url: '/build', // Tell TinyMCE where to find its assets
+        // suffix: '.min', // Use minified versions of the assets
+    });
+
 });
