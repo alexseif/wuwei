@@ -38,7 +38,8 @@ class MenuExtension extends AbstractExtension
             if ($item->isDropdown()) {
                 $html .= '<li class="nav-item dropdown">';
                 $html .= sprintf(
-                    '<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><span class="%s"></span> %s</a>',
+                    '<a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false" title="%s"><span class="%s"></span> %s</a>',
+                    $item->getLabel(),
                     $item->getIcon(),
                     $item->getLabel()
                 );
@@ -50,9 +51,10 @@ class MenuExtension extends AbstractExtension
                         $url = $this->router->generate($subItem->getPath());
                         $subIsActive = $this->isActive($subItem, $currentRoute);
                         $html .= sprintf(
-                            '<li><a class="dropdown-item %s" href="%s"><span class="%s"></span> %s</a></li>',
+                            '<li><a class="dropdown-item %s" href="%s" title="%s"><span class="%s"></span> %s</a></li>',
                             $subIsActive ? 'active' : '',
                             $url,
+                            $subItem->getLabel(),
                             $subItem->getIcon(),
                             $subItem->getLabel()
                         );
@@ -63,9 +65,10 @@ class MenuExtension extends AbstractExtension
             } else {
                 $url = $this->router->generate($item->getPath());
                 $html .= sprintf(
-                    '<li class="nav-item"><a class="nav-link %s" href="%s"><span class="%s"></span> %s</a></li>',
+                    '<li class="nav-item"><a class="nav-link %s" href="%s" title="%s"><span class="%s"></span> %s</a></li>',
                     $isActive ? 'active' : '',
                     $url,
+                    $item->getLabel(),
                     $item->getIcon(),
                     $item->getLabel()
                 );

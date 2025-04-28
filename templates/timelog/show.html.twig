@@ -1,0 +1,36 @@
+{% set body %}
+
+<div class="card-body">
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ timelog.id }}</td>
+			</tr>
+			<tr>
+				<th>Start</th>
+				<td>{{ timelog.start ? timelog.start|date('Y-m-d H:i:s') : '' }}</td>
+			</tr>
+			<tr>
+				<th>Duration</th>
+				<td>{{ timelog.duration ? timelog.duration.format('%y year(s), %m month(s), %d day(s)') : '' }}</td>
+			</tr>
+			<tr>
+				<th>Log</th>
+				<td>{{ timelog.log }}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div class="card-footer text-end">
+	{{ include('components/Badge/Timestamps.html.twig', {'entity': timelog}) }}
+</div>
+{% endset %}
+{{ include('components/Crud/Show.html.twig', {
+    'entity_name': entity_name,
+    'entity_title': entity_title ~ ': ' ~ timelog.start|date('Y-m-d H:i:s'),
+    'entity': timelog,
+    'body': body
+    }) }}
+
+

@@ -8,10 +8,10 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				{{ render_menu() }}
 				{{ include ('components/Link.html.twig', {'icon': 'bi bi-plus fs-5', 'attrs':{'title': 'New Task', 'id': 'add-task', 'data-bs-toggle':"offcanvas"}, 'link': path('app_tasks_new')}) }}
-				<form class="d-flex" role="search">
+				{# <form class="d-flex" role="search">
 					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
 					<button class="btn btn-outline-light" type="submit">Search</button>
-				</form>
+				</form> #}
 				<div class="navbar-nav d-none d-lg-block">
 					<div class="nav-item text-nowrap">
 						<a class="nav-link px-3 text-secondary" href="{{ path('mobizel_markdown_docs_main_index') }}">Docs</a>

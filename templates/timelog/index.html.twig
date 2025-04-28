@@ -1,0 +1,37 @@
+{% set table_head %}
+<tr>
+
+	<th>Start</th>
+	<th>Duration</th>
+	<th>Log</th>
+	<th>actions</th>
+</tr>
+{% endset %}
+{% set table_body %}
+{% for timelog in timelogs %}
+	<tr>
+		<td>
+			{{ include('components/Link/Entity.html.twig', {'name': 'timelog', 'entity': timelog}) }}
+		</td>
+		<td>
+			{% if timelog.duration %}
+				{{ timelog.duration.h }}
+				hour(s)
+				{{ timelog.duration.i }}
+				minute(s)
+			{% else %}
+				''
+			{% endif %}
+		</td>
+		<td>{{ timelog.log }}</td>
+		<td>
+			{{ include('components/Link/Edit.html.twig', {'name': 'timelog', 'id': timelog.id}) }}
+		</td>
+	</tr>
+</td></tr>{% else %}<tr>
+<td colspan="5">no records found</td></tr>{% endfor %}{% endset %}{{ include('components/Crud/Index.html.twig', {
+    'entity_name': entity_name,
+    'entity_title': entity_title,
+    'table_head': table_head,
+    'table_body': table_body
+    }) }}

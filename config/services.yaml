@@ -36,3 +36,5 @@ services:
 
   User\:
     resource: "../src/User/config/services.yaml"
+
+  App\Form\DataTransformer\MinutesToDateIntervalTransformer: ~
