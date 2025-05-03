@@ -153,11 +153,9 @@ class TasksRepository extends ServiceEntityRepository
 
     public function getWeeklyWorkHours(): array
     {
-        $startOfWeek = new \DateTime('last sunday');
-        $startOfWeek->setTime(0, 0, 0);
+        $startOfWeek = new \DateTime('last sunday 0:0:0');
 
-        $endOfWeek = new \DateTime('next saturday');
-        $endOfWeek->setTime(23, 59, 59);
+        $endOfWeek = new \DateTime('next sunday 0:0:0');
 
         $qb = $this->createQueryBuilder('t')
             ->select('DATE(t.completedAt) as day, SUM(t.duration) as totalMinutes')
@@ -169,7 +167,7 @@ class TasksRepository extends ServiceEntityRepository
             ->orderBy('day', 'ASC');
 
         $results = $qb->getQuery()->getResult();
-
+        dump($results);
         // Define daily goals (in minutes)
         $dailyGoals = [
             'Sunday' => 240,
@@ -192,7 +190,7 @@ class TasksRepository extends ServiceEntityRepository
             $dayName = $date->format('l'); // Get the day name (e.g., "Sunday")
             $totalMinutes = $result['totalMinutes'];
             $goal = $dailyGoals[$dayName];
-            $weekData[$dayName] = $goal > 0 ? round(($totalMinutes / $goal) * 100, 2) : 0;
+            $weekData[$dayName] =  round(($totalMinutes / (($goal) ? $goal : 240)) * 100, 2);
         }
 
         return $weekData;
