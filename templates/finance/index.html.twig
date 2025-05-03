@@ -9,20 +9,26 @@
 				EGP/hour</span>
 		</div>
 		<div>
-			<div class="progress">
-				{% set progress = (totalIncome / totalCostOfLife) * 100 %}
+			{% set progress = ((totalIncome / totalCostOfLife) * 100)|round %}
+			<div class="progress" title="{{ progress }}%">
 				<div class="progress-bar" role="progressbar" style="width: {{ progress }}%;" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">
 					{{ progress }}%
 				</div>
 			</div>
 			<span class="badge">
-				<span title="Total Income This Month">{{ totalIncome|number_format }}
+				<span title="Total Income This Month">
 					EGP
+					{{ totalIncome|number_format }}
 				</span>
 				/
-				<span title="Cost of life">{{ totalCostOfLife|number_format }}
-					EGP</span>
+				<span title="Cost of life">
+					EGP
+					{{ totalCostOfLife|number_format }}
+				</span>
 			</span>
+		</div>
+		<div>
+			{{ include('components/Link/New.html.twig', {'name': 'transactions'}) }}
 		</div>
 	</div>
 {% endblock %}
@@ -33,21 +39,21 @@
 				<div class="card mb-3">
 					<div class="card-body">
 						<h5 class="card-title">Transactions This Month</h5>
-						{# {% include 'account_transactions/_table.html.twig' with {'account_transactions': transactions} %} #}
+						{# {% include 'transactions/_table.html.twig' with {'transactions': transactions} %} #}
 						<ul class="list-group">
 							{% for transaction in transactions %}
 								<li class="list-group-item">
-									<div class="d-flex justify-content-between">
-										<strong>{{ transaction.issuedAt|date('Y-m-d') }}</strong>
-										<strong class="mx-5">{{ transaction.account.name }}</strong>
+									<div class="d-flex justify-content-between align-items-center">
+										{{ include('components/Link/Entity.html.twig', {'name': 'transactions', 'entity': transaction}) }}
+										{{ (transaction.account)? include('components/Link/Entity.html.twig', {'name': 'accounts', 'entity': transaction.account}) }}
+										{{ (transaction.account)? include('components/Link/Entity.html.twig', {'name': 'client', 'entity': transaction.account.client}) }}
 										{% if transaction.note %}
 											<small class="flex-grow-1">{{ transaction.note }}</small>
 										{% endif %}
 										<span>
-											{{ transaction.amount|number_format }}
 											EGP
-										</span>craft.app.request.getQueryParam("queryStringName")
-
+											{{ transaction.amount|number_format }}
+										</span>
 									</div>
 								</li>
 

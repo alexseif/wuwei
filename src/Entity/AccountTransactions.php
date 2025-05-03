@@ -50,7 +50,7 @@ class AccountTransactions
         return $this;
     }
     public function getName(){
-        return $this->amount;
+        return $this->issuedAt->format('Y-m-d');
     }
 
     public function getNote(): ?string

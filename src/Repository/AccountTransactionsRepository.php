@@ -36,7 +36,7 @@ class AccountTransactionsRepository extends ServiceEntityRepository
 
     public function getTotalIncomeForCurrentMonth(): int
     {
-        $startOfMonth = new \DateTime('first day of this month');
+        $startOfMonth = new \DateTime('first day of this month 0:0:0');
         // $startOfMonth = new \DateTime('first day of last year');
         $endOfMonth = new \DateTime('last day of this month 23:59:59');
         // $endOfMonth = new \DateTime('last year 23:59:59');
@@ -52,7 +52,7 @@ class AccountTransactionsRepository extends ServiceEntityRepository
 
     public function getTransactionsForCurrentMonth(): array
     {
-        $startOfMonth = new \DateTime('first day of this month');
+        $startOfMonth = new \DateTime('first day of this month 0:0:0');
         // $startOfMonth = new \DateTime('first day of last year');
         $endOfMonth = new \DateTime('last day of this month 23:59:59');
         // $endOfMonth = new \DateTime('last year 23:59:59');

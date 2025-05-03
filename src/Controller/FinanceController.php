@@ -14,7 +14,7 @@ class FinanceController extends AbstractController
     #[Route('/', name: 'app_finance')]
     public function index(AccountTransactionsRepository $accountTransactionsRepository, CostOfLifeRepository $costOfLifeRepository): Response
     {
-        $totalIncome = $accountTransactionsRepository->getTotalIncomeForCurrentMonth() * -1;
+        $totalIncome = abs($accountTransactionsRepository->getTotalIncomeForCurrentMonth());
         $totalCostOfLife = $costOfLifeRepository->getTotalCostOfLifeForCurrentMonth() / 100;
 
         // Calculate the hourly rate
