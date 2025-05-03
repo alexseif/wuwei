@@ -167,7 +167,6 @@ class TasksRepository extends ServiceEntityRepository
             ->orderBy('day', 'ASC');
 
         $results = $qb->getQuery()->getResult();
-        dump($results);
         // Define daily goals (in minutes)
         $dailyGoals = [
             'Sunday' => 240,
@@ -195,6 +194,7 @@ class TasksRepository extends ServiceEntityRepository
 
         return $weekData;
     }
+
     // ... existing code ...
     //    /**
     //     * @return Tasks[] Returns an array of Tasks objects

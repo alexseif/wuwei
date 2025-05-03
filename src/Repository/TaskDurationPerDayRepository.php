@@ -67,6 +67,10 @@ class TaskDurationPerDayRepository
         return $this->fetchSingleValue('SELECT SUM(durationSum) as durationSum FROM task_duration_per_day WHERE YEAR(completedDate) = YEAR(CURDATE() - INTERVAL 1 YEAR) AND QUARTER(completedDate) = QUARTER(CURDATE())');
     }
 
+    public function getAverageDurationPerDay()
+    {
+        return $this->fetchSingleValue('SELECT AVG(durationSum) as durationSum FROM task_duration_per_day');
+    }
     private function fetchSingleValue(string $sql): float|int|null
     {
         $stmt = $this->connection->prepare($sql);
