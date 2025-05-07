@@ -15,6 +15,9 @@
     const today = new Date().toLocaleDateString('en-US', { weekday: 'long' }); // Get today's day name
     const data = labels.map(label => label === today || labels.indexOf(label) < labels.indexOf(today) ? weeklyWorkHours[label] : null); // Stop after today
 
+    const maxWorkHours = Math.max(...Object.values(weeklyWorkHours)); // Find the highest value
+    const maxYScale = Math.ceil(maxWorkHours / 50) * 50; 
+
     new Chart(ctx, {
         type: 'line',
         data: {
@@ -35,7 +38,7 @@
             scales: {
                 y: {
                     beginAtZero: true,
-                    max: 150, // Allow for surpassing the goal
+                    max: maxYScale, // Allow for surpassing the goal
                     title: {
                         display: true,
                         text: 'Percentage (%)'
