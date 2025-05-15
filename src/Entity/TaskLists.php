@@ -37,7 +37,7 @@ class TaskLists
     #[ORM\OrderBy(['completed' => 'ASC', 'order' => 'ASC'])]
     private Collection $tasks;
 
-    #[ORM\Column(name: 'torder')]
+    #[ORM\Column(name: 'torder', nullable: true)]
     private ?int $order = null;
 
     public function __construct()
