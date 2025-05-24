@@ -71,10 +71,12 @@ class DashboardController extends AbstractController
     $days = $daysRepository->findBy(['complete' => false], ['deadline' => 'ASC'], 4);
     $tasks = $tasksRepository->getFocusTasks();
     $weeklyWorkHours = $tasksRepository->getWeeklyWorkHours();
+    $yearlyWorkHours = $tasksRepository->getYearlyWorkHours();
     $averageWorkHoursPerDay = $taskDurationPerDayRepository->getAverageDurationPerDay();
     $hours = intdiv((int) $averageWorkHoursPerDay, 60); // Calculate hours
     $remainingMinutes = (int) $averageWorkHoursPerDay % 60; // Calculate remaining minutes
     $averageWorkHoursPerDay = sprintf('%02d:%02d', $hours, $remainingMinutes); // Format as HH:MM
+
     return $this->render(
       'dashboard/dashboard.html.twig',
       [
@@ -87,6 +89,7 @@ class DashboardController extends AbstractController
         'tasks' => $tasks,
         'costs' => $costService->getCosts(),
         'weeklyWorkHours' => $weeklyWorkHours,
+        'yearlyWorkHours' => $yearlyWorkHours,
         'averageWorkHoursPerDay' => $averageWorkHoursPerDay,
       ]
     );

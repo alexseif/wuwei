@@ -1,0 +1,66 @@
+<div class="card">
+	<div class="card-header">
+		Yearly Progress
+	</div>
+	<div class="card-body">
+		<canvas id="yearlyWorkChart"></canvas>
+	</div>
+</div>
+
+
+<script>
+	const ytx = document.getElementById('yearlyWorkChart').getContext('2d');
+const yearlyWorkHours = {{ yearlyWorkHours|json_encode|raw }};
+const yearlyLabels = Object.keys(yearlyWorkHours);
+// Days of the week
+// const yearlyData = yearlyLabels.map(label => label === today || yearlyLabels.indexOf(label) < yearlyLabels.indexOf(today) ? yearlyWorkHours[label] : null);
+const yearlyData = yearlyWorkHours;
+// Stop after today
+
+const maxWorkHoursYearly = Math.max(...Object.values(yearlyWorkHours)); // Find the highest value
+const maxYScaleYearly = Math.ceil(maxWorkHoursYearly / 50) * 50;
+
+new Chart(ytx, {
+type: 'line',
+data: {
+labels: yearlyLabels,
+datasets: [
+{
+label: '% of Daily Goal Achieved',
+data: yearlyData,
+backgroundColor: 'rgba(75, 192, 192, 0.2)',
+borderColor: 'rgba(75, 192, 192, 1)',
+borderWidth: 1, // Thinner line
+fill: true, // No fill under the line
+tension: 0, // Smooth curve
+}
+]
+},
+options: {
+responsive: true,
+maintainAspectRatio: false, // Allow custom height
+scales: {
+y: {
+// beginAtZero: true,
+// max: maxYScaleYearly, // Allow for surpassing the goal
+title: {
+display: true,
+text: 'Minutes'
+}
+}
+},
+plugins: {
+legend: {
+display: false // Hide the legend to save space
+},
+tooltip: {
+callbacks: {
+label: function (context) {
+return context.raw + '%';
+}
+}
+}
+}
+}
+});
+</script>

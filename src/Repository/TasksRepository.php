@@ -194,30 +194,34 @@ class TasksRepository extends ServiceEntityRepository
 
         return $weekData;
     }
+    public function getYearlyWorkHours(): array
+    {
+        $startOfWeek = new \DateTime('last year 0:0:0');
 
-    // ... existing code ...
-    //    /**
-    //     * @return Tasks[] Returns an array of Tasks objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('t')
-    //            ->andWhere('t.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('t.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+        $endOfWeek = new \DateTime('next sunday 0:0:0');
 
-    //    public function findOneBySomeField($value): ?Tasks
-    //    {
-    //        return $this->createQueryBuilder('t')
-    //            ->andWhere('t.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+        $qb = $this->createQueryBuilder('t')
+            ->select('DATE(t.completedAt) as day, SUM(t.duration) as totalMinutes')
+            ->where('t.completed = true')
+            ->andWhere('t.completedAt BETWEEN :startOfWeek AND :endOfWeek')
+            ->setParameter('startOfWeek', $startOfWeek)
+            ->setParameter('endOfWeek', $endOfWeek)
+            ->groupBy('day')
+            ->orderBy('day', 'ASC');
+
+        $results = $qb->getQuery()->getResult();
+        // Define daily goals (in minutes)
+
+        // Format the results into percentages
+        $yearData = [];
+
+        foreach ($results as $result) {
+            $date = new \DateTime($result['day']);
+            $dayName = $date->format('Y-m-d'); // Get the day name (e.g., "Sunday")
+            $totalMinutes = $result['totalMinutes'];
+            $yearData[$dayName] =  $totalMinutes;
+        }
+
+        return $yearData;
+    }
 }
