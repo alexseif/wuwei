@@ -38,3 +38,12 @@ services:
     resource: "../src/User/config/services.yaml"
 
   App\Form\DataTransformer\MinutesToDateIntervalTransformer: ~
+
+  maker.maker.make_crud:
+    alias: 'App\Maker\MakeCrud'
+
+  Symfony\Bundle\MakerBundle\Doctrine\DoctrineHelper:
+    alias: "maker.doctrine_helper"
+
+  Symfony\Bundle\MakerBundle\Renderer\FormTypeRenderer:
+    alias: "maker.renderer.form_type_renderer"
