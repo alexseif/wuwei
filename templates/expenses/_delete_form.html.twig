@@ -1,0 +1,1 @@
+{{ include('components/Crud/Delete.html.twig', {'entity_name': entity_name, 'entity_id':  entity.id }) }}

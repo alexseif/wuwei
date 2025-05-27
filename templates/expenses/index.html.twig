@@ -1,0 +1,30 @@
+{% set table_head %}
+<tr>
+	<th>Name</th>
+	<th>Amount</th>
+	<th>actions</th>
+</tr>
+{% endset %}
+{% set table_body %}
+{% for expense in expenses %}
+	<tr>
+
+		<td>{{ expense.name }}</td>
+
+		<td>{{ expense.amount }}</td>
+		<td>
+			{{ include('components/Link/Edit.html.twig', {'name': 'expenses', 'id': expense.id}) }}
+		</td>
+	</tr>
+{% else %}
+	<tr>
+		<td colspan="4">no records found</td>
+	</tr>
+{% endfor %}
+{% endset %}
+{{ include('components/Crud/Index.html.twig', {
+    'entity_name': entity_name,
+    'entity_title': entity_title,
+    'table_head': table_head,
+    'table_body': table_body
+    }) }}

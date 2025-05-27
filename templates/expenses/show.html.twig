@@ -1,0 +1,24 @@
+{% set body %}
+<table class="table">
+	<tbody>
+		<tr>
+			<th>Id</th>
+			<td>{{ expense.id }}</td>
+		</tr>
+		<tr>
+			<th>Name</th>
+			<td>{{ expense.name }}</td>
+		</tr>
+		<tr>
+			<th>Amount</th>
+			<td>{{ expense.amount }}</td>
+		</tr>
+	</tbody>
+</table>
+{% endset %}
+{{ include('components/Crud/Show.html.twig', {
+    'entity_name': entity_name,
+    'entity_title': entity_title,
+    'entity': entity,
+    'body': body
+}) }}
