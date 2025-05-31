@@ -18,7 +18,7 @@ class ExpensesType extends AbstractType
             ->add('amount')
             ->add('currency', EntityType::class, [
                 'class' => Currency::class,
-                'choice_label' => 'id',
+                'choice_label' => 'code',
             ])
         ;
     }

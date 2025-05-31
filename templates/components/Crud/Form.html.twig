@@ -1,9 +1,9 @@
 {{ form_start(form) }}
 <div class="card-body">
-	{{ form_widget(form) }}
+	{{ form_widget(form, {'attr':{'class': form_wrapper_class|default('')}}) }}
+
 </div>
 <div class="card-footer text-end">
 	<button class="btn btn-link text-success">{{ button_label|default('Save') }}</button>
 </div>
 {{ form_end(form) }}
-
