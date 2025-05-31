@@ -1,0 +1,50 @@
+<div class="card">
+	<div class="card-header">
+		Year Progress
+	</div>
+	<div class="card-body">
+		<canvas id="yearWorkChart"></canvas>
+	</div>
+</div>
+
+<script>
+	const ytx = document.getElementById('yearWorkChart').getContext('2d');
+const yearWorkHours = {{ yearWorkHours|json_encode|raw }};
+const yearLabels = Object.keys(yearWorkHours);
+const yearData = yearWorkHours;
+
+new Chart(ytx, {
+type: 'line',
+data: {
+labels: yearLabels,
+datasets: [
+{
+label: 'Mins',
+data: yearData,
+backgroundColor: 'rgba(75, 192, 192, 0.2)',
+borderColor: 'rgba(75, 192, 192, 1)',
+borderWidth: 1, // Thinner line
+fill: true, // No fill under the line
+tension: 0, // Smooth curve
+}
+]
+},
+options: {
+responsive: true,
+maintainAspectRatio: false, // Allow custom height
+scales: {
+y: { // beginAtZero: true,
+title: {
+display: true,
+text: 'Minutes'
+}
+}
+},
+plugins: {
+legend: {
+display: false // Hide the legend to save space
+}
+}
+}
+});
+</script>

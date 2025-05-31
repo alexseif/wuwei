@@ -1,27 +1,27 @@
 <div class="card">
 	<div class="card-header">
-		Yearly Progress
+		Month Work Hours (% of Goal)
 	</div>
 	<div class="card-body">
-		<canvas id="yearlyWorkChart"></canvas>
+		<canvas id="monthWorkChart"></canvas>
 	</div>
 </div>
 
-
 <script>
-	const ytx = document.getElementById('yearlyWorkChart').getContext('2d');
-const yearlyWorkHours = {{ yearlyWorkHours|json_encode|raw }};
-const yearlyLabels = Object.keys(yearlyWorkHours);
-const yearlyData = yearlyWorkHours;
+	const mtx = document.getElementById('monthWorkChart').getContext('2d');
+const monthWorkHours = {{ monthWorkHours|json_encode|raw }};
+const monthLabels = Object.keys(monthWorkHours); // Days of the month
+const monthData = monthWorkHours;
 
-new Chart(ytx, {
+
+new Chart(mtx, {
 type: 'line',
 data: {
-labels: yearlyLabels,
+labels: monthLabels,
 datasets: [
 {
 label: 'Mins',
-data: yearlyData,
+data: monthData,
 backgroundColor: 'rgba(75, 192, 192, 0.2)',
 borderColor: 'rgba(75, 192, 192, 1)',
 borderWidth: 1, // Thinner line

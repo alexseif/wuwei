@@ -1,0 +1,65 @@
+<div class="card">
+	<div class="card-header">
+		Week Work Hours (% of Goal)
+		<strong class="float-end">{{ averageWorkHoursPerDay }}</strong>
+	</div>
+	<div class="card-body">
+		<canvas id="weekWorkChart"></canvas>
+	</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+	const ctx = document.getElementById('weekWorkChart').getContext('2d');
+const weekWorkHours = {{ weekWorkHours|json_encode|raw }};
+const labels = Object.keys(weekWorkHours); // Days of the week
+const today = new Date().toLocaleDateString('en-US', {weekday: 'long'}); // Get today's day name
+const data = labels.map(label => label === today || labels.indexOf(label) < labels.indexOf(today) ? weekWorkHours[label] : null); // Stop after today
+
+const maxWorkHours = Math.max(...Object.values(weekWorkHours)); // Find the highest value
+const maxYScale = Math.ceil(maxWorkHours / 50) * 50;
+
+new Chart(ctx, {
+type: 'line',
+data: {
+labels: labels,
+datasets: [
+{
+label: '% of Daily Goal Achieved',
+data: data,
+backgroundColor: 'rgba(75, 192, 192, 0.2)',
+borderColor: 'rgba(75, 192, 192, 1)',
+borderWidth: 1, // Thinner line
+fill: false, // No fill under the line
+tension: 0.3, // Smooth curve
+}
+]
+},
+options: {
+responsive: true,
+maintainAspectRatio: false, // Allow custom height
+scales: {
+y: {
+beginAtZero: true,
+max: maxYScale, // Allow for surpassing the goal
+title: {
+display: true,
+text: 'Percentage (%)'
+}
+}
+},
+plugins: {
+legend: {
+display: false // Hide the legend to save space
+},
+tooltip: {
+callbacks: {
+label: function (context) {
+return context.raw + '%';
+}
+}
+}
+}
+}
+});
+</script>

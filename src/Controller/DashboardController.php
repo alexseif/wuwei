@@ -70,8 +70,6 @@ class DashboardController extends AbstractController
     $currentTimeSystem = $timeSystemService->getCurrent();
     $days = $daysRepository->findBy(['complete' => false], ['deadline' => 'ASC'], 4);
     $tasks = $tasksRepository->getFocusTasks();
-    $weeklyWorkHours = $tasksRepository->getWeeklyWorkHours();
-    $yearlyWorkHours = $tasksRepository->getYearlyWorkHours();
     $averageWorkHoursPerDay = $taskDurationPerDayRepository->getAverageDurationPerDay();
     $hours = intdiv((int) $averageWorkHoursPerDay, 60); // Calculate hours
     $remainingMinutes = (int) $averageWorkHoursPerDay % 60; // Calculate remaining minutes
@@ -88,8 +86,9 @@ class DashboardController extends AbstractController
         'days' => $days,
         'tasks' => $tasks,
         'costs' => $costService->getCosts(),
-        'weeklyWorkHours' => $weeklyWorkHours,
-        'yearlyWorkHours' => $yearlyWorkHours,
+        'weekWorkHours' => $taskDurationPerDayRepository->getTotalPerDayForAWeek(),
+        'monthWorkHours' => $taskDurationPerDayRepository->getTotalPerDayForAMonth(),
+        'yearWorkHours' => $taskDurationPerDayRepository->getTotalPerDayForAYear(),
         'averageWorkHoursPerDay' => $averageWorkHoursPerDay,
       ]
     );
