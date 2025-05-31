@@ -16,14 +16,29 @@ class TasksRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Tasks::class);
     }
-
-    public function getPaginatorQuery(?array $criteria = [])
+    public function getOrder($query)
     {
-        $query = $this->createQueryBuilder('t')
+        $query->orderBy('t.completed', 'ASC')
+            ->addOrderBy('t.urgency', 'DESC')
+            ->addOrderBy('t.priority', 'DESC')
+            ->addOrderBy('tl.order', 'ASC')
+            ->addOrderBy('t.order', 'ASC');
+
+        return $query;
+    }
+    public function getSelect()
+    {
+        return $this->createQueryBuilder('t')
             ->select('t, tl, a, c')
             ->leftJoin('t.taskList', 'tl')
             ->leftJoin('tl.account', 'a')
-            ->leftJoin('a.client', 'c');
+            ->leftJoin('a.client', 'c')
+        ;
+    }
+
+    public function getPaginatorQuery(?array $criteria = [])
+    {
+        $query = $this->getSelect();
 
         foreach ($criteria as $key => $value) {
             $parameterName = str_replace('.', '', $key);
@@ -36,13 +51,7 @@ class TasksRepository extends ServiceEntityRepository
                 }
             }
         }
-        $query
-            ->orderBy('t.completed', 'ASC')
-            ->addOrderBy('tl.order', 'ASC')
-            ->addOrderBy('t.urgency', 'DESC')
-            ->addOrderBy('t.priority', 'DESC')
-            ->addOrderBy('t.order', 'ASC')
-        ;
+        $query = $this->getOrder($query);
 
         return $query->getQuery();
     }
@@ -54,76 +63,42 @@ class TasksRepository extends ServiceEntityRepository
 
     public function getFocusTasks($limit = 6)
     {
-        return  $this->createQueryBuilder('t')
-            ->select('t, tl, a, c')
-            ->leftJoin('t.taskList', 'tl')
-            ->leftJoin('tl.account', 'a')
-            ->leftJoin('a.client', 'c')
-            ->where('t.completed = false')
-            ->orderBy('tl.order', 'ASC')
-            ->addOrderBy('t.urgency', 'DESC')
-            ->addOrderBy('t.priority', 'DESC')
-            ->addOrderBy('t.order', 'ASC')
-            ->setMaxResults($limit)
-            ->getQuery()
-            ->getResult();
+        $query = $this->getSelect();
+        $query->where('t.completed = false');
+        $query = $this->getOrder($query);
+        $query->setMaxResults($limit);
+        return $query->getQuery()->getResult();
     }
 
     public function getFocusDayTasks()
     {
-        return  $this->createQueryBuilder('t')
-            ->select('t, tl, a, c')
-            ->leftJoin('t.taskList', 'tl')
-            ->leftJoin('tl.account', 'a')
-            ->leftJoin('a.client', 'c')
-            ->where('t.completed = false')
-            ->orderBy('tl.order', 'ASC')
-            ->addOrderBy('t.urgency', 'DESC')
-            ->addOrderBy('t.priority', 'DESC')
-            ->addOrderBy('t.order', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult();
+        return $this->getFocusTasks(10);
     }
 
     public function getCreatedToday()
     {
         $today = new \DateTime('today');
         $today->setTime(0, 0, 0);
-
-        return $this->createQueryBuilder('t')
-            ->select('t, tl, a, c')
-            ->leftJoin('t.taskList', 'tl')
-            ->leftJoin('tl.account', 'a')
-            ->leftJoin('a.client', 'c')
-            ->where('t.createdAt >= :today')
-            ->setParameter('today', $today)
-            ->orderBy('tl.order', 'ASC')
-            ->addOrderBy('t.urgency', 'DESC')
-            ->addOrderBy('t.priority', 'DESC')
-            ->addOrderBy('t.order', 'ASC')
-            ->getQuery()
-            ->getResult();
+        $query = $this->getSelect();
+        $query->where('t.createdAt >= :today')
+            ->setParameter('today', $today);
+        $query = $this->getOrder($query);
+        return $query->getQuery()->getResult();
     }
 
     public function getCompletedToday()
     {
         $today = new \DateTime('today');
         $today->setTime(0, 0, 0);
-
-        return $this->createQueryBuilder('t')
-            ->select('t, tl, a, c')
-            ->leftJoin('t.taskList', 'tl')
-            ->leftJoin('tl.account', 'a')
-            ->leftJoin('a.client', 'c')
-            ->where('t.completed = true')
-            ->where('t.completedAt >= :today')
+        $query = $this->getSelect();
+        $query->where('t.completed = true')
+            ->andWhere('t.completedAt >= :today')
             ->setParameter('today', $today)
-            ->getQuery()
-            ->getResult();
+        ;
+        $query = $this->getOrder($query);
+        return $query->getQuery()->getResult();
     }
 
-    // ... existing code ...
 
     public function getMaxOrderNotInList(TaskLists $taskLists): ?int
     {
