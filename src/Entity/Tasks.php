@@ -29,11 +29,13 @@ class Tasks
     #[ORM\Column(name: 'torder')]
     private ?int $order = null;
 
+    //The default priority is set to HIGH_PRIORITY (1)
     #[ORM\Column]
-    private ?int $priority = null;
+    private ?int $priority = 1;
 
+    //The default urgency is set to NORMAL_URGENCY (0)
     #[ORM\Column]
-    private ?int $urgency = null;
+    private ?int $urgency = 0;
 
     #[ORM\Column(nullable: true)]
     private ?int $duration = null;
@@ -74,11 +76,10 @@ class Tasks
     public function __construct()
     {
         $this->order = 0;
-        $this->priority = self::NORMAL_PRIORITY;
+        $this->priority = self::HIGH_PRIORITY;
         $this->urgency = self::NORMAL_URGENCY;
         $this->workLoggable = true;
         $this->priorityName = [
-            -1 => 'Low',
             0 => 'Normal',
             1 => 'Important',
         ];
