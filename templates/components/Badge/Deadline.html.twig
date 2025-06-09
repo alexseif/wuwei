@@ -1,2 +1,6 @@
-{{ include('components/Badge.html.twig', {'text': day.deadline|time_diff, 'class': class|default("badge" ~ (day.deadline and day.deadline < 'now'|date_modify('+3 days')) ? 'bg-danger' : (day.deadline and day.deadline < 'now'|date_modify('+2 weeks')) ? 'bg-warning' : 'bg-secondary') }) }}
-{{ include('components/Badge.html.twig', {'text': day.deadline|date('Y-m-d'), 'class': class|default("badge " ~ (day.deadline and day.deadline < 'now'|date_modify('+3 days')) ? 'text-danger' : (day.deadline and day.deadline < 'now'|date_modify('+2 weeks')) ? 'text-warning' : 'text-secondary') }) }}
+{{ include('components/Badge.html.twig', {'text': day.deadline|time_diff, 'class': class|default("badge " ~ (day.deadline <= 'now'|date_modify('+3 days') ? 'bg-danger' : (day.deadline <= 'now'|date_modify('+2 weeks') ? 'bg-warning' : 'bg-secondary'))) }) }}
+<label class="custom-checkbox">
+	<input type="checkbox" name="complete" {{day.complete?'checked':''}} data-id="{{day.id}}" class="day-check" id="btn-check-{{ day.id }}">
+	<span class="checkmark"></span>
+</label>
+{{ include('components/Badge.html.twig', {'text': day.deadline|date('Y-m-d'), 'class': class|default("badge " ~ (day.deadline <= 'now'|date_modify('+3 days') ? 'text-danger' : (day.deadline <= 'now'|date_modify('+2 weeks') ? 'text-warning' : 'text-secondary'))) }) }}

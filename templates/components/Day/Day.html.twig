@@ -1,7 +1,6 @@
-<div class="day card mx-auto {{ day.complete ? 'completed' : '' }}">
-	<div class="card-header">
-		<div class="card-title">
-			{# <input type="checkbox" name="complete" {{ day.complete ? 'checked' : '' }} data-id="{{ day.id }}"/> #}
+<div class="day card mx-auto h-100 {{ day.complete ? 'completed' : '' }}">
+	<div class="card-header h-100 d-flex flex-column">
+		<div class="card-title flex-grow-1">
 			{{ include('components/Link/Entity.html.twig', {'name': 'days', 'entity': day, 'attrs': {'data-bs-toggle':"offcanvas"}}) }}
 		</div>
 		<div class="d-flex justify-content-between">

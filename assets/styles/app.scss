@@ -64,6 +64,7 @@ $h3-font-size-mobile: 2.5rem;
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 @import "fixed-sidebars";
 @import './tasks.scss';
+@import './day.scss';
 @import './roadmap.scss';
 // @import 'tinymce/tinymce';
 
@@ -331,4 +332,12 @@ footer {
       }
     }
   }
+}
+
+.outlined-text {
+  text-shadow:
+    -1px -1px 0 black,
+    1px -1px 0 black,
+    -1px 1px 0 black,
+    1px 1px 0 black;
 }

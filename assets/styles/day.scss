@@ -1,0 +1,50 @@
+@import "bootstrap/scss/variables-dark";
+
+.day {
+
+    .day-check {}
+
+    .custom-checkbox {
+        position: relative;
+        display: inline-block;
+        padding-left: 30px; // Space for checkmark
+        cursor: pointer;
+
+        input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .checkmark {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 25px;
+            height: 25px;
+            border: 2px solid var(--bs-border-color);
+            border-radius: var(--bs-border-radius);
+            background: var(--bs-body-bg);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: transparent; // Hide checkmark initially
+        }
+
+        // Checked state with success color
+        input:checked+.checkmark {
+            border-color: var(--bs-success);
+            background: var(--bs-success);
+            color: var(--bs-white); // White checkmark on success background
+
+            &::before {
+                content: "\2713"; // Checkmark character
+            }
+        }
+    }
+
+}
