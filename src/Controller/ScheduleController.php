@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Task;
+use App\Repository\TaskDurationPerDayRepository;
 use App\Repository\TasksRepository;
 use App\Service\CalendarService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -92,14 +93,27 @@ class ScheduleController extends AbstractController
     #[Route('/calendar', name: 'app_schedule_calendar')]
     public function calendar(
         TasksRepository $tasksRepository,
-        CalendarService $calendarService
+        CalendarService $calendarService,
+        TaskDurationPerDayRepository $taskDurationPerDayRepository
     ): Response {
-        $tasks = $tasksRepository->getPaginatorResult(['t.completed' => false]);
+        $averagePerDay = $taskDurationPerDayRepository->getAverageDurationPerDay();
+
+        // $tasks = $tasksRepository->getPaginatorResult(['t.completed' => false]);
+        $tasks = $tasksRepository->getClientTasks(100);
         $taskArrays = [];
+
         foreach ($tasks as $task) {
-            $taskArrays[] = $task->toArray();
+            $taskArray = $task->toArray();
+            $taskArrays[] = $taskArray;
         }
-        $calendarEvents = $calendarService->getCalendarEvents($tasks);
+
+        $startDateTime = new \DateTime();
+        $startDateTime->setTime(9, 0); // Start at 9 AM
+        $endDateTime = new \DateTime();
+        $endDateTime->setTime(9, 0);
+        $endDateTime->modify('+' . ceil($averagePerDay) . ' minutes'); // Set end time to 6 PM the next day
+        $endDateTime->setTime(18, 0);
+        $calendarEvents = $calendarService->getCalendarEvents($tasks, $startDateTime->format('H:i'), $endDateTime->format('H:i'));
 
         return $this->render('schedule/calendar.html.twig', [
             'tasks' => json_encode($taskArrays),

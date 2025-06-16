@@ -27,15 +27,29 @@ document.addEventListener('DOMContentLoaded', function () {
         initialDate: formattedDate,
         initialView: 'timeGridWeek',
         events: events,
-        navLinks: true, // can click day/week names to navigate views
+        navLinks: true,
         editable: true,
         selectable: true,
         droppable: true,
-        dayMaxEvents: true, // allow "more" link when too many events
-        navLinkDayClick: function (date, jsEvent) {
-            this.changeView('timeGridDay', date);
+        dayMaxEvents: true,
+        businessHours: {
+            // days of week. an array of zero-based day of week integers (0=Sunday)
+            daysOfWeek: [0, 1, 2, 3, 4], // Monday - Thursday
+
+            startTime: '09:00', // a start time (10am in this example)
+            endTime: '18:00', // an end time (6pm in this example)
         },
+
+
+        // Handle double-click (open task URL directly)
+        eventClick: function (info) {
+            let eventUrl = info.event.extendedProps.url;
+            if (eventUrl) {
+                window.open(eventUrl, "_blank");
+            }
+        }
     });
 
     calendar.render();
+
 });

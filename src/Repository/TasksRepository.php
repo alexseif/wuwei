@@ -70,6 +70,17 @@ class TasksRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
     }
 
+    public function getClientTasks($limit = 6)
+    {
+        $query = $this->getSelect();
+        $query->where('t.completed = false')
+            ->andWhere('c.id <> 28')
+        ;
+        $query = $this->getOrder($query);
+        $query->setMaxResults($limit);
+        return $query->getQuery()->getResult();
+    }
+
     public function getFocusDayTasks()
     {
         return $this->getFocusTasks(10);

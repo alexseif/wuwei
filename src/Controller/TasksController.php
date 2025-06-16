@@ -100,8 +100,7 @@ final class TasksController extends AbstractController
     public function edit(Request $request, Tasks $task, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(TasksType::class, $task, [
-            'action' => $this->generateUrl('app_tasks_edit', ['id' => $task->getId()])
-
+            'action' => $this->generateUrl('app_tasks_edit', ['id' => $task->getId(), 'returnUrl' => $request->get('returnUrl')])
         ]);
         $form->handleRequest($request);
 
@@ -109,7 +108,9 @@ final class TasksController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
             $this->addFlash('success', 'Task updated');
-
+            if ($request->get('returnUrl')) {
+                return $this->redirect($request->get('returnUrl'));
+            }
             return $this->redirectToRoute('app_tasks_system', [], Response::HTTP_SEE_OTHER);
         }
         if ($request->isXmlHttpRequest()) {
