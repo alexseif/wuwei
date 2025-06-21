@@ -6,7 +6,6 @@ class CalendarService
 {
 
     //TODO: set variables for start and end time of workday
-
     public function getCalendarEvents(array $tasks, string $startTime = '09:00', string $endTime = '18:00'): array
     {
         $events = [];
@@ -44,7 +43,7 @@ class CalendarService
 
             // **Ensure we don't schedule tasks on Friday or Saturday**
             while (in_array($currentDay->format('N'), [5, 6])) { // 5 = Friday, 6 = Saturday
-                $currentDay->modify('+1 day');
+                $currentDay->modify('+1 day')->setTime(9, 0);
                 $currentTime = (clone $currentDay)->setTime((int)explode(':', $startTime)[0], (int)explode(':', $startTime)[1]);
             }
 
