@@ -6,36 +6,39 @@ roadmap:
       top: 16
       left: 499
     - title: "NSCE"
-      top: 19
-      left: 803
+      top: 16
+      left: 767
     - title: "EKA"
-      top: 148
-      left: 806
-    - title: "Mission Eminence"
-      top: 148
-      left: 171
-    - title: "EKK"
-      top: 259
-      left: 172
+      top: 95
+      left: 768
+    - title: "Svelto"
+      top: 95
+      left: 280
+    - title: "Syria"
+      top: 185
+      left: 280
     - title: "Wordpress Optimize"
-      top: 259
-      left: 813
+      top: 183
+      left: 763
     - title: "Alex Seif"
-      top: 384
-      left: 813
+      top: 271
+      left: 765
+    - title: "Social Media"
+      top: 270
+      left: 282
+    - title: "AirBnb"
+      top: 356
+      left: 283
+    - title: "LDC"
+      top: 359
+      left: 767
+    - title: "Finances"
+      top: 449
+      left: 769
     - title: "Wuwei"
-      top: 389
-      left: 173
-    - title: "Cairo Bars"
-      top: 538
-      left: 173
-    - title: "Music"
-      top: 540
-      left: 821
-    - title: "Netherlands"
-      top: 671
-      left: 825
+      top: 532
+      left: 768
     - title: "End here"
       end: true
-      top: 677
-      left: 454
+      top: 532
+      left: 506
