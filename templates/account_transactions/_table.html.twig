@@ -1,34 +1,40 @@
 <table class="table table-striped">
-	<thead>
-		<tr>
-			<th>{{ knp_pagination_sortable(account_transactions, 'Amount', 'at.id') }}</th>
-			<th>{{ knp_pagination_sortable(account_transactions, 'Account', 'a.id') }}</th>
-			<th>{{ knp_pagination_sortable(account_transactions, 'Client', 'c.id') }}</th>
-			<th>Note</th>
-			<th>Timestamps</th>
-			<th>actions</th>
-		</tr>
-	</thead>
-	<tbody>
-		{% for account_transaction in account_transactions %}
-			<tr>
-				<td>
-					{{ include('components/Link/Entity.html.twig', {'name': 'transactions', 'entity': account_transaction}) }}
-				</td>
-				<td>{{ (account_transaction.account)? include('components/Link/Entity.html.twig', {'name': 'accounts', 'entity': account_transaction.account}) }}</td>
-				<td>{{ (account_transaction.account)? include('components/Link/Entity.html.twig', {'name': 'client', 'entity': account_transaction.account.client}) }}</td>
-				<td>{{ account_transaction.note }}</td>
-				<td>
-					{{ include('components/Badge/Timestamps.html.twig', {'entity': account_transaction}) }}
-				</td>
-				<td>
-					{{ include('components/Link/Edit.html.twig', {'name': 'transactions', 'id': account_transaction.id}) }}
-				</td>
-			</tr>
-		{% else %}
-			<tr>
-				<td colspan="6">no records found</td>
-			</tr>
-		{% endfor %}
-	</tbody>
+    <thead>
+    <tr>
+        <th>{{ knp_pagination_sortable(transactions, 'Date', 'at.id') }}</th>
+        <th>{{ knp_pagination_sortable(transactions, 'Amount', 'at.id') }}</th>
+        <th>{{ knp_pagination_sortable(transactions, 'Account', 'a.id') }}</th>
+        <th>{{ knp_pagination_sortable(transactions, 'Client', 'c.id') }}</th>
+        <th>Note</th>
+        <th>Timestamps</th>
+        <th>actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for transaction in transactions %}
+        <tr>
+            <td>
+                {{ include('components/Link/Entity.html.twig', {'name': 'transactions', 'entity': transaction}) }}
+            </td>
+            <td>
+                <span class="amount {{ transaction.amount <0 ? 'text-success':'text-primary' }}">
+                {{ transaction.amount|format_currency('EGP') }}
+                </span>
+            </td>
+            <td>{{ (transaction.account)? include('components/Link/Entity.html.twig', {'name': 'accounts', 'entity': transaction.account}) }}</td>
+            <td>{{ (transaction.account)? include('components/Link/Entity.html.twig', {'name': 'client', 'entity': transaction.account.client}) }}</td>
+            <td>{{ transaction.note }}</td>
+            <td>
+                {{ include('components/Badge/Timestamps.html.twig', {'entity': transaction}) }}
+            </td>
+            <td>
+                {{ include('components/Link/Edit.html.twig', {'name': 'transactions', 'id': transaction.id}) }}
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="6">no records found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
 </table>

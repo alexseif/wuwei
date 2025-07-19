@@ -1,25 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block h1 %}Transaction: #{{ account_transaction.id}}
-	{{ account_transaction.amount|format_currency('EGP') }}
-	{% if account_transaction.account %}
-		{{ include('components/Link/Entity.html.twig', {'name': 'accounts', 'entity': account_transaction.account }) }}
-		{{ include('components/Link/Entity.html.twig', {'name': 'client', 'entity': account_transaction.account.client }) }}
-	{% endif %}
+{% block h1 %}Transaction: #{{ account_transaction.id }}
+    {{ account_transaction.amount|format_currency('EGP') }}
+    {% if account_transaction.account %}
+        {{ include('components/Link/Entity.html.twig', {'name': 'accounts', 'entity': account_transaction.account }) }}
+        {{ include('components/Link/Entity.html.twig', {'name': 'client', 'entity': account_transaction.account.client }) }}
+    {% endif %}
 {% endblock %}
 {% block card_actions %}
-	{{ include('components/Link/Back.html.twig', {'name': 'transactions'}) }}
-	{{ include('components/Link/Edit.html.twig', {'name': 'transactions', 'id': account_transaction.id}) }}
-	{{ include('account_transactions/_delete_form.html.twig') }}
+    {{ include('components/Link/Back.html.twig', {'name': 'transactions'}) }}
+    {{ include('components/Link/Edit.html.twig', {'name': 'transactions', 'id': account_transaction.id}) }}
+    {{ include('account_transactions/_delete_form.html.twig') }}
 {% endblock %}
 {% block body %}
-	{% if account_transaction.note %}
-		<div class="card-body">
-			Note
-			{{ account_transaction.note }}
-		</div>
-	{% endif %}
-	<div class="card-footer text-end">
-		{{ include('components/Badge/Timestamps.html.twig', {'entity': account_transaction}) }}
-	</div>
+    {% if account_transaction.note %}
+        <div class="card-body">
+            Note
+            {{ account_transaction.note }}
+        </div>
+    {% endif %}
+    <div class="card-footer text-end">
+        {{ include('components/Badge/Timestamps.html.twig', {'entity': account_transaction}) }}
+    </div>
 {% endblock %}

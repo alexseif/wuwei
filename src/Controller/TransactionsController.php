@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/transactions')]
-final class AccountTransactionsController extends AbstractController
+final class TransactionsController extends AbstractController
 {
     #[Route(name: 'app_transactions_index', methods: ['GET'])]
     public function index(
@@ -27,7 +27,7 @@ final class AccountTransactionsController extends AbstractController
             $request->query->getInt('page', 1)
         );
         return $this->render('account_transactions/index.html.twig', [
-            'account_transactions' => $pagination,
+            'transactions' => $pagination,
         ]);
     }
 

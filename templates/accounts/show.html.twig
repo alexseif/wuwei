@@ -23,7 +23,7 @@
 			<h2>Transactions</h2>
 			{{ include('components/Link/New.html.twig', {name: 'transactions', link_parameters: {'account': account.id}}) }}
 		</div>
-		{% include 'account_transactions/_table.html.twig' with {'account_transactions': transactions} %}</div>
+		{% include 'account_transactions/_table.html.twig' with {'transactions': transactions} %}</div>
 	<div class="card-footer text-end">
 		{{ include('components/Badge/Timestamps.html.twig', {'entity': account}) }}</div>
 {% endblock %}

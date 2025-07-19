@@ -3,24 +3,24 @@
 {% block h1 %}Transactions
 {% endblock %}
 {% block card_actions %}
-	{{ include('components/Link/New.html.twig', {'name': 'transactions'}) }}
+    {{ include('components/Link/New.html.twig', {'name': 'transactions'}) }}
 {% endblock %}
 {% block body %}
-	<div class="card-footer">
-		<div class="navigation d-flex justify-content-between">
-			<div class="count">
-				{{ account_transactions.getTotalItemCount() }}
-			</div>
-			{{ knp_pagination_render(account_transactions) }}
-		</div>
-	</div>
-	{% include('account_transactions/_table.html.twig') %}
-	<div class="card-footer">
-		<div class="navigation d-flex justify-content-between">
-			<div class="count">
-				{{ account_transactions.getTotalItemCount() }}
-			</div>
-			{{ knp_pagination_render(account_transactions) }}
-		</div>
-	</div>
+    <div class="card-footer">
+        <div class="navigation d-flex justify-content-between">
+            <div class="count">
+                {{ transactions.getTotalItemCount() }}
+            </div>
+            {{ knp_pagination_render(transactions) }}
+        </div>
+    </div>
+    {% include('account_transactions/_table.html.twig') %}
+    <div class="card-footer">
+        <div class="navigation d-flex justify-content-between">
+            <div class="count">
+                {{ transactions.getTotalItemCount() }}
+            </div>
+            {{ knp_pagination_render(transactions) }}
+        </div>
+    </div>
 {% endblock %}
