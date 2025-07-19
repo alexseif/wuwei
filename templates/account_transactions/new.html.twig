@@ -1,10 +1,6 @@
-{% extends 'base.html.twig' %}
+{{ include('components/Crud/New.html.twig', {
+    'entity_name': entity_name,
+    'route_prefix': route_prefix,
+    'entity_title': entity_title
+}) }}
 
-{% block h1 %}New AccountTransactions
-{% endblock %}
-{% block card_actions %}
-    {{ include('components/Link/Back.html.twig', {'name': 'transactions'}) }}
-{% endblock %}
-{% block body %}
-    {{ include('account_transactions/_form.html.twig') }}
-{% endblock %}

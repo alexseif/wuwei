@@ -1,12 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block h1 %}
-Edit {{ entity_title }}
+    Edit {{ entity_title }}
 {% endblock %}
+{% block card_left %}{{ card_left|default }}{%  endblock %}
 {% block card_actions %}
-	{{ include('components/Link/Back.html.twig', {'name': entity_name }) }}
-	{{ include(entity_name ~ '/_delete_form.html.twig') }}
+    {{ include('components/Link/Back.html.twig', {'name': route_prefix ?? entity_name }) }}
+    {{ include(entity_name ~ '/_delete_form.html.twig') }}
 {% endblock %}
 {% block body %}
-	{{ include(entity_name ~ '/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include(entity_name ~ '/_form.html.twig', {'button_label': 'Update'}) }}
 {% endblock %}

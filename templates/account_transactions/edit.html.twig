@@ -1,11 +1,8 @@
-{% extends 'base.html.twig' %}
+{{ include('components/Crud/Edit.html.twig', {
+    'entity_name': entity_name,
+    'entity_title': entity_title,
+    'route_prefix': route_prefix,
+    'entity': entity,
+    'form': form
+}) }}
 
-{% block h1 %}Edit Transaction
-{% endblock %}
-{% block card_actions %}
-    {{ include('components/Link/Back.html.twig', {'name': 'transactions'}) }}
-    {{ include('account_transactions/_delete_form.html.twig') }}
-{% endblock %}
-{% block body %}
-    {{ include('account_transactions/_form.html.twig', {'button_label': 'Update'}) }}
-{% endblock %}

@@ -1,25 +1,64 @@
-{% extends 'base.html.twig' %}
+{% set card_left %}
+    {{ include('components/Data/Money.html.twig', {amount: entity.amount}) }}
+{% endset %}
 
-{% block h1 %}Transaction: #{{ account_transaction.id }}
-    {{ account_transaction.amount|format_currency('EGP') }}
-    {% if account_transaction.account %}
-        {{ include('components/Link/Entity.html.twig', {'name': 'accounts', 'entity': account_transaction.account }) }}
-        {{ include('components/Link/Entity.html.twig', {'name': 'client', 'entity': account_transaction.account.client }) }}
-    {% endif %}
-{% endblock %}
-{% block card_actions %}
-    {{ include('components/Link/Back.html.twig', {'name': 'transactions'}) }}
-    {{ include('components/Link/Edit.html.twig', {'name': 'transactions', 'id': account_transaction.id}) }}
-    {{ include('account_transactions/_delete_form.html.twig') }}
-{% endblock %}
-{% block body %}
+{% set body %}
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Issued At</th>
+            <td>{{ account_transaction.issuedAt ? account_transaction.issuedAt|date('Y-m-d') : '' }}</td>
+            <th>Amount</th>
+            <td>
+                {{ include('components/Data/Money.html.twig', {amount: entity.amount}) }}
+            </td>
+            {% if account_transaction.account %}
+                <th>Account</th>
+                <td>{{ include('components/Link/Entity.html.twig', {'name': 'accounts', 'entity': account_transaction.account }) }}</td>
+                <th>Client</th>
+                <td>{{ include('components/Link/Entity.html.twig', {'name': 'client', 'entity': account_transaction.account.client }) }}</td>
+            {% endif %}
+        </tr>
+        </tbody>
+    </table>
     {% if account_transaction.note %}
         <div class="card-body">
-            Note
+            <strong>Note:</strong>
             {{ account_transaction.note }}
         </div>
     {% endif %}
-    <div class="card-footer text-end">
-        {{ include('components/Badge/Timestamps.html.twig', {'entity': account_transaction}) }}
-    </div>
-{% endblock %}
+
+{% endset %}
+{{ include('components/Crud/Show.html.twig', {
+    'entity_name': entity_name,
+    'entity_title': entity_title,
+    'entity': entity,
+    'body': body
+}) }}
+
+
+{# {% extends 'base.html.twig' %} #}
+
+{# {% block h1 %}Transaction: #{{ account_transaction.id }} #}
+{#    {{ account_transaction.amount|format_currency('EGP') }} #}
+{#    {% if account_transaction.account %} #}
+{#        {{ include('components/Link/Entity.html.twig', {'name': 'accounts', 'entity': account_transaction.account }) }} #}
+{#        {{ include('components/Link/Entity.html.twig', {'name': 'client', 'entity': account_transaction.account.client }) }} #}
+{#    {% endif %} #}
+{# {% endblock %} #}
+{# {% block card_actions %} #}
+{#    {{ include('components/Link/Back.html.twig', {'name': 'transactions'}) }} #}
+{#    {{ include('components/Link/Edit.html.twig', {'name': 'transactions', 'id': account_transaction.id}) }} #}
+{#    {{ include('account_transactions/_delete_form.html.twig') }} #}
+{# {% endblock %} #}
+{# {% block body %} #}
+{#    {% if account_transaction.note %} #}
+{#        <div class="card-body"> #}
+{#            Note #}
+{#            {{ account_transaction.note }} #}
+{#        </div> #}
+{#    {% endif %} #}
+{#    <div class="card-footer text-end"> #}
+{#        {{ include('components/Badge/Timestamps.html.twig', {'entity': account_transaction}) }} #}
+{#    </div> #}
+{# {% endblock %} #}

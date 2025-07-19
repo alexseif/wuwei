@@ -1,20 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block h1 %}
-	{{ entity_title }}
+    {{ entity_title }}
 {% endblock %}
+{% block card_left %}{{ card_left|default }}{%  endblock %}
 {% block card_actions %}
-	{{ include('components/Link/New.html.twig', {'name': entity_name }) }}
+    {{ include('components/Link/New.html.twig', {'name': route_prefix ?? entity_name }) }}
 {% endblock %}
 {% block body %}
-	<div class="table-responsive">
-		<table class="table">
-			<thead>
-				{{ table_head|raw }}
-			</thead>
-			<tbody>
-				{{ table_body|raw }}
-			</tbody>
-		</table>
-	</div>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            {{ table_head|raw }}
+            </thead>
+            <tbody>
+            {{ table_body|raw }}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

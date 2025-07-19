@@ -1,12 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block h1 %}
-	New
-	{{ entity_title }}
+    New
+    {{ entity_title }}
 {% endblock %}
+{% block card_left %}{{ card_left|default }}{%  endblock %}
 {% block card_actions %}
-	{{ include('components/Link/Back.html.twig', {'name': entity_name }) }}
+    {{ include('components/Link/Back.html.twig', {'name': route_prefix ?? entity_name }) }}
 {% endblock %}
 {% block body %}
-	{{ include(entity_name ~ '/_form.html.twig') }}
+    {{ include(entity_name ~ '/_form.html.twig') }}
 {% endblock %}

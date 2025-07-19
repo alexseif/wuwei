@@ -1,26 +1,44 @@
-{% extends 'base.html.twig' %}
+{% set table_head %}
+    <tr>
+        <th>{{ knp_pagination_sortable(transactions, 'Date', 'at.id') }}</th>
+        <th>{{ knp_pagination_sortable(transactions, 'Amount', 'at.id') }}</th>
+        <th>{{ knp_pagination_sortable(transactions, 'Account', 'a.id') }}</th>
+        <th>{{ knp_pagination_sortable(transactions, 'Client', 'c.id') }}</th>
+        <th>Note</th>
+        <th>Timestamps</th>
+        <th>actions</th>
+    </tr>
+{% endset %}
+{% set table_body %}
+    {% for transaction in transactions %}
+        <tr>
+            <td>
+                {{ include('components/Link/Entity.html.twig', {'name': 'transactions', 'entity': transaction}) }}
+            </td>
+            <td>
+                {{ include('components/Data/Money.html.twig', {amount: transaction.amount}) }}
 
-{% block h1 %}Transactions
-{% endblock %}
-{% block card_actions %}
-    {{ include('components/Link/New.html.twig', {'name': 'transactions'}) }}
-{% endblock %}
-{% block body %}
-    <div class="card-footer">
-        <div class="navigation d-flex justify-content-between">
-            <div class="count">
-                {{ transactions.getTotalItemCount() }}
-            </div>
-            {{ knp_pagination_render(transactions) }}
-        </div>
-    </div>
-    {% include('account_transactions/_table.html.twig') %}
-    <div class="card-footer">
-        <div class="navigation d-flex justify-content-between">
-            <div class="count">
-                {{ transactions.getTotalItemCount() }}
-            </div>
-            {{ knp_pagination_render(transactions) }}
-        </div>
-    </div>
-{% endblock %}
+            </td>
+            <td>{{ (transaction.account)? include('components/Link/Entity.html.twig', {'name': 'accounts', 'entity': transaction.account}) }}</td>
+            <td>{{ (transaction.account)? include('components/Link/Entity.html.twig', {'name': 'client', 'entity': transaction.account.client}) }}</td>
+            <td>{{ transaction.note }}</td>
+            <td>
+                {{ include('components/Badge/Timestamps.html.twig', {'entity': transaction}) }}
+            </td>
+            <td>
+                {{ include('components/Link/Edit.html.twig', {'name': 'transactions', 'id': transaction.id}) }}
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="6">no records found</td>
+        </tr>
+    {% endfor %}
+{% endset %}
+{{ include('components/Crud/Index.html.twig', {
+    'entity_name': entity_name,
+    'entity_title': entity_title,
+    'table_head': table_head,
+    'table_body': table_body
+}) }}
+
