@@ -1,0 +1,152 @@
+{% set table_head %}
+<tr>
+    <th>Account</th>
+    <th>Product/Service</th>
+    <th>Price</th>
+    <th>Renewal Date</th>
+    <th>Status</th>
+    <th>Actions</th>
+</tr>
+{% endset %}
+
+{% set table_body %}
+{% for assignment in assignments %}
+    <tr>
+        <td>{{ assignment.account.name }}</td>
+        <td>{{ assignment.productService.name }}</td>
+        <td>{{ assignment.price }}</td>
+        <td>{{ assignment.renewalDate ? assignment.renewalDate|date('Y-m-d') : '' }}</td>
+        <td>
+            {% if assignment.isComplete %}
+                <span class="badge bg-success">Completed</span>
+            {% else %}
+                <span class="badge bg-primary">Active</span>
+            {% endif %}
+        </td>
+        <td>
+            {{ include('components/Link/Show.html.twig', {'name': entity_name, 'id': assignment.id}) }}
+            {{ include('components/Link/Edit.html.twig', {'name': entity_name, 'id': assignment.id}) }}
+        </td>
+    </tr>
+{% else %}
+    <tr>
+        <td colspan="6">No service assignments found</td>
+    </tr>
+{% endfor %}
+{% endset %}
+
+{% extends 'base.html.twig' %}
+
+{% block h1 %}
+    {{ entity_title }}
+{% endblock %}
+
+{% block card_actions %}
+    {{ include('components/Link/New.html.twig', {'name': route_prefix ?? entity_name }) }}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3>All Service Assignments</h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                {{ table_head|raw }}
+                            </thead>
+                            <tbody>
+                                {{ table_body|raw }}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3>Upcoming Renewals</h3>
+                </div>
+                <div class="card-body">
+                    {% if upcoming_renewals|length > 0 %}
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Account</th>
+                                    <th>Service</th>
+                                    <th>Due Date</th>
+                                    <th>Price</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for renewal in upcoming_renewals %}
+                                    <tr>
+                                        <td>{{ renewal.assignment.account.name }}</td>
+                                        <td>{{ renewal.assignment.productService.name }}</td>
+                                        <td>{{ renewal.renewalDate|date('Y-m-d') }}</td>
+                                        <td>{{ renewal.assignment.price }}</td>
+                                        <td>
+                                            <a href="{{ path('app_account_service_assignment_show', {'id': renewal.assignment.id}) }}" class="btn btn-sm btn-outline-primary">View</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <p>No upcoming renewals found.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3>Overdue Renewals</h3>
+                </div>
+                <div class="card-body">
+                    {% if overdue_renewals|length > 0 %}
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Account</th>
+                                    <th>Service</th>
+                                    <th>Due Date</th>
+                                    <th>Price</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for renewal in overdue_renewals %}
+                                    <tr class="table-danger">
+                                        <td>{{ renewal.assignment.account.name }}</td>
+                                        <td>{{ renewal.assignment.productService.name }}</td>
+                                        <td>{{ renewal.renewalDate|date('Y-m-d') }}</td>
+                                        <td>{{ renewal.assignment.price }}</td>
+                                        <td>
+                                            <a href="{{ path('app_account_service_assignment_show', {'id': renewal.assignment.id}) }}" class="btn btn-sm btn-outline-primary">View</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <p>No overdue renewals found.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

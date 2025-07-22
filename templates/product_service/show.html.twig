@@ -1,0 +1,87 @@
+{% set body %}
+    <div class="table-responsive">
+        <table class="table">
+            <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ product_service.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ product_service.name }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ product_service.type }}</td>
+            </tr>
+            <tr>
+                <th>Billing Cycle</th>
+                <td>{{ product_service.billingCycle }}</td>
+            </tr>
+            <tr>
+                <th>Created At</th>
+                <td>{{ product_service.createdAt ? product_service.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Updated At</th>
+                <td>{{ product_service.updatedAt ? product_service.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-body">
+        <h3 class="mt-4">Assigned Accounts</h3>
+        {% if product_service.accountServiceAssignments|length > 0 %}
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Account</th>
+                        <th>Price</th>
+                        <th>Renewal Date</th>
+                        <th>Frequency</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for assignment in product_service.accountServiceAssignments %}
+                        <tr>
+                            <td>{{ assignment.account.name }}</td>
+                            <td>{{ assignment.price }}</td>
+                            <td>{{ assignment.renewalDate ? assignment.renewalDate|date('Y-m-d') : '' }}</td>
+                            <td>
+                                {% if assignment.rrule %}
+                                    {% if 'FREQ=MONTHLY;INTERVAL=1' in assignment.rrule %}
+                                        Monthly
+                                    {% elseif 'FREQ=MONTHLY;INTERVAL=3' in assignment.rrule %}
+                                        Quarterly
+                                    {% elseif 'FREQ=YEARLY;INTERVAL=1' in assignment.rrule %}
+                                        Yearly
+                                    {% else %}
+                                        Custom
+                                    {% endif %}
+                                {% else %}
+                                    None
+                                {% endif %}
+                            </td>
+                            <td>{{ assignment.isComplete ? 'Completed' : 'Active' }}</td>
+                            <td>
+                                <a href="{{ path('app_account_service_assignment_show', {'id': assignment.id}) }}" class="btn btn-sm btn-outline-primary">View</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p>No accounts assigned to this product/service yet.</p>
+        {% endif %}
+    </div>
+{% endset %}
+{{ include('components/Crud/Show.html.twig', {
+    'entity_name': entity_name,
+    'entity_title': entity_title,
+    'entity': entity,
+    'body': body
+}) }}

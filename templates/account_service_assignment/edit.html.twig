@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block h1 %}
+    Edit {{ entity_title }}
+{% endblock %}
+
+{% block card_actions %}
+    {{ include('components/Link/Back.html.twig', {'name': entity_name }) }}
+    {{ include('components/Link/Show.html.twig', {'name': entity_name, 'id': assignment.id }) }}
+{% endblock %}
+
+{% block body %}
+    {{ include('account_service_assignment/_form.html.twig', {'button_label': 'Update'}) }}
+{% endblock %}

@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('app_account_service_assignment_delete', {'id': assignment.id}) }}" onsubmit="return confirm('Are you sure you want to delete this assignment?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ assignment.id) }}">
+    <button class="btn btn-danger">Delete</button>
+</form>

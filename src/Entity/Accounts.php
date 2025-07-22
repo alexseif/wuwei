@@ -39,10 +39,17 @@ class Accounts
     #[ORM\OneToMany(mappedBy: 'account', targetEntity: TaskLists::class)]
     private Collection $taskLists;
 
+    /**
+     * @var Collection<int, AccountServiceAssignment>
+     */
+    #[ORM\OneToMany(mappedBy: 'account', targetEntity: AccountServiceAssignment::class)]
+    private Collection $accountServiceAssignments;
+
     public function __construct()
     {
         $this->transactions = new ArrayCollection();
         $this->taskLists = new ArrayCollection();
+        $this->accountServiceAssignments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -149,5 +156,35 @@ class Accounts
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * @return Collection<int, AccountServiceAssignment>
+     */
+    public function getAccountServiceAssignments(): Collection
+    {
+        return $this->accountServiceAssignments;
+    }
+
+    public function addAccountServiceAssignment(AccountServiceAssignment $accountServiceAssignment): static
+    {
+        if (!$this->accountServiceAssignments->contains($accountServiceAssignment)) {
+            $this->accountServiceAssignments->add($accountServiceAssignment);
+            $accountServiceAssignment->setAccount($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAccountServiceAssignment(AccountServiceAssignment $accountServiceAssignment): static
+    {
+        if ($this->accountServiceAssignments->removeElement($accountServiceAssignment)) {
+            // set the owning side to null (unless already changed)
+            if ($accountServiceAssignment->getAccount() === $this) {
+                $accountServiceAssignment->setAccount(null);
+            }
+        }
+
+        return $this;
     }
 }

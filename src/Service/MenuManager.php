@@ -10,6 +10,7 @@ class MenuManager
             new MenuItem('app_dashboard', 'bi bi-house', 'Home'),
             new MenuItem('app_tasks_system', 'bi bi-card-checklist', 'Tasks'),
             new MenuItem('app_finance', 'bi bi-bank', 'Finance'),
+          new MenuItem('app_product_service_index', 'bi bi-box', 'Products'),
             new MenuItem(
                 null,
                 'bi bi-briefcase',
@@ -41,6 +42,7 @@ class MenuManager
                     new MenuItem('app_time_tracking', 'bi bi-clock-history', 'Time Tracking'),
                     new MenuItem(null, '', '', false, [], true), // Divider
                     new MenuItem('app_transactions_index', 'bi bi-receipt', 'Transactions'),
+                    new MenuItem('app_account_service_assignment_index', 'bi bi-arrow-repeat', 'Service Renewals'),
                     new MenuItem('app_contract_index', 'bi bi-file-earmark', 'Contract'),
                     new MenuItem(null, '', '', false, [], true), // Divider
                     new MenuItem('app_cost_of_life_index', 'bi bi-currency-exchange', 'Cost Of Life'),
