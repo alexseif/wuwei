@@ -5,17 +5,11 @@ roadmap:
       start: true
       top: 16
       left: 499
-    - title: "NSCE"
-      top: 16
-      left: 767
     - title: "EKA"
       top: 95
       left: 768
     - title: "Svelto"
       top: 95
-      left: 280
-    - title: "Syria"
-      top: 185
       left: 280
     - title: "Wordpress Optimize"
       top: 183
