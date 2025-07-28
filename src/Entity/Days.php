@@ -10,7 +10,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 #[ORM\Entity(repositoryClass: DaysRepository::class)]
 class Days
 {
- 
+
     use TimestampableEntity;
 
     #[ORM\Id]
@@ -66,5 +66,19 @@ class Days
         $this->complete = $complete;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->name . ' (' . $this->deadline->format('Y-m-d') . ')';
+    }
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'deadline' => $this->getDeadline()->format('Y-m-d'),
+            'complete' => $this->isComplete(),
+        ];
     }
 }

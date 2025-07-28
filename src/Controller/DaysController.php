@@ -93,6 +93,23 @@ final class DaysController extends AbstractController
         ]);
     }
 
+    #[Route('/{id}/update_complete', name: 'app_days_update_complete', methods: ['GET', 'POST'])]
+    public function updateComplete(Request $request, Days $day, EntityManagerInterface $entityManager): Response
+    {
+        if ($request->isXmlHttpRequest()) {
+            dump($request->getPayload()->getString('complete'));
+            $day->setComplete($request->getPayload()->getString('complete') === 'true');
+            $entityManager->flush();
+            $this->addFlash('success', 'Day Updated');
+
+            return new JsonResponse([
+                'day' => $day->toArray(),
+                'success' => true,
+            ], Response::HTTP_OK);
+        }
+        return new JsonResponse([], Response::HTTP_BAD_REQUEST);
+    }
+
     #[Route('/{id}', name: 'app_days_delete', methods: ['POST'])]
     public function delete(Request $request, Days $day, EntityManagerInterface $entityManager): Response
     {

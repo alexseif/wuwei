@@ -27,6 +27,7 @@ import './item';
 import './goals';
 // import './cigaretteLog';
 import './tasks.js';
+import './days.js';
 import './task_lists.js';
 import Roadmap from './roadmap'; // Path to your roadmap.js file
 import tinymce from 'tinymce';
