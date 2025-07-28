@@ -19,8 +19,9 @@ final class DaysController extends AbstractController
     public function index(Request $request, DaysRepository $daysRepository): Response
     {
         $complete = $request->query->get('complete') ?? false;
+        $deadline = ($complete) ? 'DESC' : 'ASC';
         return $this->render('days/index.html.twig', [
-            'days' => $daysRepository->findBy(['complete' => $complete], ['deadline' => 'ASC']),
+            'days' => $daysRepository->findBy(['complete' => $complete], ['deadline' => $deadline]),
             'complete' => $complete
         ]);
     }
