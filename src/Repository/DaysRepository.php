@@ -16,6 +16,16 @@ class DaysRepository extends ServiceEntityRepository
         parent::__construct($registry, Days::class);
     }
 
+    public function findUpcoming(): array
+    {
+        $qb = $this->createQueryBuilder('d')
+            ->where('d.deadline <= :start')
+            ->andWhere('d.complete = false')
+            ->setParameter('start', new \DateTime('last day of next month'))
+            ->orderBy('d.deadline', 'ASC');
+
+        return $qb->getQuery()->getResult();
+    }
     //    /**
     //     * @return Days[] Returns an array of Days objects
     //     */

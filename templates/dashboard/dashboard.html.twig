@@ -5,9 +5,9 @@
 {% endblock %}
 {% block body %}
 	<div class="card-body">
-		<div class="row mb-3">
+		<div class="row days">
 			{% for day in days %}
-				<div class="col">
+				<div class="col mb-3">
 					{{ include('components/Day/Day.html.twig')}}
 				</div>
 			{% endfor %}

@@ -14,10 +14,12 @@
 			<a href="{{ path('app_days_index', {'complete': 1}) }}" class="{{ complete ? 'active' : '' }}">Completed</a>
 		</li>
 	</ul>
-	<div class="days">
+	<div class="days row">
 		{% for day in days %}
-			{# {{ include('components/Day/Day.html.twig') }} #}
-			<div class="day card m-3 mx-auto {{ day.complete ? 'completed' : '' }} {% if day.deadline and day.deadline < 'now'|date_modify('+3 days') %}text-bg-danger{% elseif day.deadline and day.deadline < 'now'|date_modify('+2 weeks') %}text-bg-warning{% endif %}">
+			<div class="col mb-3">
+				{{ include('components/Day/Day.html.twig') }}
+			</div>
+			<div class="d-none day card m-3 mx-auto {{ day.complete ? 'completed' : '' }} {% if day.deadline and day.deadline < 'now'|date_modify('+3 days') %}text-bg-danger{% elseif day.deadline and day.deadline < 'now'|date_modify('+2 weeks') %}text-bg-warning{% endif %}">
 				<div class="card-header d-flex justify-content-between align-items-center">
 					<h3 class="card-title">
 						{{ include('components/Link/Entity.html.twig', {'name': 'days', 'entity': day}) }}
@@ -40,10 +42,6 @@
 				</div>
 			</div>
 			<!-- ./card -->
-		{% else %}
-			<div>
-				<td colspan="5">no records found</td>
-			</div>
 		{% endfor %}
 	</div>
 	<!-- ./days -->
