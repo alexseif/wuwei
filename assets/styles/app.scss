@@ -341,3 +341,16 @@ footer {
     -1px 1px 0 black,
     1px 1px 0 black;
 }
+
+.list-inline {
+  margin-top: $spacer;
+  margin-bottom: $spacer;
+
+  &.list-group {
+    flex-direction: row;
+  }
+
+  li {
+    display: inline-block;
+  }
+}

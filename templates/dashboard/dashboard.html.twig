@@ -5,6 +5,11 @@
 {% endblock %}
 {% block body %}
 	<div class="card-body">
+		<ul class="list-group list-inline">
+			{% for item in motivation %}
+				<li class="list-group-item">{{ item }}</li>
+			{% endfor %}
+		</ul>
 		<div class="row days">
 			{% for day in days %}
 				<div class="col mb-3">

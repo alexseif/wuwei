@@ -32,6 +32,7 @@ class DashboardController extends AbstractController
     TasksRepository $tasksRepository,
     CostService $costService
   ): Response {
+    $motivation = ['Social Incentive', 'Immediate Reward', 'Progress Monitoring', 'Sense of Control'];
     $reportItems = ['today', 'week', 'month', 'quarter', 'total'];
     $defaultWidget = [
       'title' => 'Time Tracking',
@@ -79,6 +80,7 @@ class DashboardController extends AbstractController
     return $this->render(
       'dashboard/dashboard.html.twig',
       [
+        'motivation' => $motivation,
         'sections' => $tagTypeRepository->findAll(),
         'itemLists' => $itemListRepository->findAllWithItems(),
         'goals' => $goalRepository->findAll(),
