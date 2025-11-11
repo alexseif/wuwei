@@ -3,36 +3,32 @@ roadmap:
   steps:
     - title: "Start here"
       start: true
-      top: 16
-      left: 499
-    - title: "EKA"
-      top: 95
-      left: 768
-    - title: "Svelto"
-      top: 95
-      left: 280
-    - title: "Wordpress Optimize"
-      top: 183
-      left: 763
-    - title: "Alex Seif"
-      top: 271
-      left: 765
-    - title: "Social Media"
-      top: 270
-      left: 282
+    - title: "3S"
+      # left: 220
+    - title: "EKA design"
+      # left: 440
+    - title: "Alex Seif (Wp Optimize) (Social Media)"
+      # top: 70
+      # left: 440
     - title: "AirBnb"
-      top: 356
-      left: 283
+      # top: 70
+      # left: 220
     - title: "LDC"
-      top: 359
-      left: 767
+      # top: 140
+      # left: 220
     - title: "Finances"
-      top: 449
-      left: 769
+      # top: 140
+      left: 220
     - title: "Wuwei"
-      top: 532
-      left: 768
+      # top: 210
+      # left: 440
+    - title: "EKK (Renewal)"
+    - title: "Delimore"
+    - title: "Renewals"
+    - title: "Toqa"
+      # top: 210
+      # left: 440
     - title: "End here"
       end: true
-      top: 532
-      left: 506
+      # top: 210
+      # left: 220
