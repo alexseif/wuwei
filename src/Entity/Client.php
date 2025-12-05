@@ -174,6 +174,6 @@ class Client
 
     public function __toString()
     {
-        return $this->name;
+        return $this->name ?? 'New Client'; // Return the field you want displayed
     }
 }
