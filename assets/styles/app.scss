@@ -13,53 +13,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
 
-// 3. Variables
-// $theme-colors: (
-//   'gold': #AB973E,
-//   'green': #176C73,
-//   'black': #000000,
-//   'white': #ffffff,
-//   'delete': #ee0000,
-//   'red': #ee0000,
-// );
-
-// 3. Base configuration
-// $font-size-base: 1rem;
-// $font-size-lg: 1.875rem;
-
-
-// $font-family-base: 'Beautifully Delicious Script', sans-serif;
-// $dark: map-get($theme-colors, 'black');
-// $body-bg-dark: map-get($theme-colors, 'black');
-// $navbar-color: map-get($theme-colors, 'white');
-// $navbar-dark-color: map-get($theme-colors, 'white');
-// $navbar-dark-hover-color: map-get($theme-colors, 'gold');
-// $navbar-dark-active-color: map-get($theme-colors, 'gold');
-$nav-link-font-weight: 600;
-// $navbar-nav-link-padding-x: 2rem;
-// $card-cap-bg: transparent;
-// $card-border-width: 0;
-// $input-border-color: gold;
-// $input-focus-border-color: map-get($theme-colors, 'gold');
-// $input-focus-box-shadow: 0 0 0 0.25r em rgba(171, 151, 62, 0.25);
-// $input-placeholder-color: map-get($theme-colors, 'gold');
-
-$h3-font-size-mobile: 2.5rem;
-// 5. Navbar configuration
-// $navbar: (
-// outline // 'brand-height': 5rem,
-// 'brand-padding-y': 1.875rem,
-// 'color': map-get($theme-colors, 'white'),
-// 'dark-color': map-get($theme-colors, 'white'),
-// 'nav-link-padding-x': 2rem
-// );
 @import "bootstrap/scss/maps";
 @import "bootstrap/scss/mixins";
 @import "bootstrap/scss/root";
 @import '~bootstrap/scss/bootstrap';
-//@import "bootstrap/dist/css/bootstrap-grid.rtl.min.css";
-//@import "~bootstrap-dark/src/bootstrap-dark";
-
 // Import Font Awesome CSS
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 @import "fixed-sidebars";
