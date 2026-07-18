@@ -19,6 +19,7 @@ services:
       - "../src/DependencyInjection/"
       - "../src/Entity/"
       - "../src/Kernel.php"
+      - "../src/Maker/"
 
   # add more service definitions when explicit configuration is needed
   # please note that last definitions always *replace* previous ones
@@ -39,11 +40,16 @@ services:
 
   App\Form\DataTransformer\MinutesToDateIntervalTransformer: ~
 
-  maker.maker.make_crud:
-    alias: 'App\Maker\MakeCrud'
+when@dev:
+  services:
+    App\Maker\:
+      resource: "../src/Maker/"
 
-  Symfony\Bundle\MakerBundle\Doctrine\DoctrineHelper:
-    alias: "maker.doctrine_helper"
+    maker.maker.make_crud:
+      alias: 'App\Maker\MakeCrud'
 
-  Symfony\Bundle\MakerBundle\Renderer\FormTypeRenderer:
-    alias: "maker.renderer.form_type_renderer"
+    Symfony\Bundle\MakerBundle\Doctrine\DoctrineHelper:
+      alias: "maker.doctrine_helper"
+
+    Symfony\Bundle\MakerBundle\Renderer\FormTypeRenderer:
+      alias: "maker.renderer.form_type_renderer"
