@@ -56,12 +56,43 @@ class TimeSystemRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    public function getActiveForTime(?string $timeString = null): array
+    {
+        if ($timeString === null) {
+            $timeString = date('H:i:s');
+        }
+
+        $qb = $this->createQueryBuilder('ts');
+
+        return $qb->leftJoin('ts.tags', 't')
+            ->leftJoin('t.tagType', 'tt')
+            ->addSelect('t', 'tt')
+            ->andWhere('ts.from_time IS NOT NULL')
+            ->andWhere('ts.to_time IS NOT NULL')
+            ->andWhere(
+                $qb->expr()->orX(
+                    $qb->expr()->andX(
+                        'ts.from_time <= ts.to_time',
+                        ':time >= ts.from_time',
+                        ':time <= ts.to_time'
+                    ),
+                    $qb->expr()->andX(
+                        'ts.from_time > ts.to_time',
+                        $qb->expr()->orX(
+                            ':time >= ts.from_time',
+                            ':time <= ts.to_time'
+                        )
+                    )
+                )
+            )
+            ->setParameter('time', $timeString)
+            ->getQuery()
+            ->getResult();
+    }
+
     public function getCurrent()
     {
-        return $this->createQueryBuilder('ts')
-          ->where('CURRENT_TIMESTAMP() BETWEEN ts.from_time AND ts.to_time')
-          ->getQuery()
-          ->getResult();
+        return $this->getActiveForTime();
     }
 
 }
