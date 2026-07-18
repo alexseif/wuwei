@@ -43,6 +43,7 @@ security:
     - { path: ^/register, roles: PUBLIC_ACCESS }
     - { path: ^/reset-password, roles: PUBLIC_ACCESS }
     - { path: ^/cigarette_log, roles: PUBLIC_ACCESS }
+    - { path: ^/api/v1/temporal-blocks, roles: PUBLIC_ACCESS }
     - { path: ^/, roles: [IS_AUTHENTICATED_FULLY, IS_AUTHENTICATED_REMEMBERED] }
 
 when@test:
