@@ -43,6 +43,20 @@
 - [ ] Deploy the app to a live server
 - [ ] Continuously update and maintain documentation
 
+## Phase 6: Ecosystem Decoupling & Headless API (Strangler Fig)
+*Implementing isolated API boundaries to serve decoupled React/TypeScript "Faces".*
+
+- [x] **Task 1: Core Temporal Retrieval API** - [x] Fix midnight wrap-around logic in `TimeSystemRepository`.
+  - [x] Expose `GET /api/v1/temporal-blocks` endpoint accepting dynamic timezone queries.
+  - [x] Serialize output to clean JSON for decoupled frontend consumption.
+- [ ] **Task 2: Contextual Enrichment (Database Architecture Pending)**
+  - [ ] *Requires Architectural Decision:* Determine whether to expand the existing EAV NAV system (mapping 'Pitta' to 'High Focus') or build a new holistic bridging table.
+  - [ ] Design the schema to map ancient terminology to actionable modern work categories.
+  - [ ] Update API payloads to include secondary contextual strings based on the new schema.
+- [ ] **Task 3: Temporal Ecosystem Expansion**
+  - [ ] Design seeder/admin interface to ingest macro-rhythms (Days, Months) from markdown files.
+  - [ ] Expand the API endpoint to dynamically loop through and return *all* active `TimeSystem` overlapping blocks.
+
 ## Acknowledgements
 - [Symfony](https://symfony.com) - The PHP framework used for development.
 - [Chinese Zodiac](https://en.wikipedia.org/wiki/Chinese_zodiac) - The basis for the Chinese clock methodology.
